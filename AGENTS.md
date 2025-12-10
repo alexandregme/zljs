@@ -430,19 +430,38 @@ import { Button } from '@zljs/core';
 <Button onClick={handleClick}>Submit</Button>
 ```
 
-## Versioning & Releases
+## CI/CD Workflows
 
-Create a new release by pushing a tag:
+| Workflow      | Trigger              | Purpose                                |
+| ------------- | -------------------- | -------------------------------------- |
+| `ci.yml`      | Pull Request to main | Validate code (lint, test, commitlint) |
+| `deploy.yml`  | Push to main         | Build Storybook & deploy               |
+| `release.yml` | Tag push (v\*)       | Create GitHub Release                  |
+
+**IMPORTANT: Never commit directly to main. Always use feature branches and PRs.**
+
+### Development Flow
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+# 1. Create feature branch
+git checkout -b feat/add-chip-component
+
+# 2. Develop with TDD, commit frequently
+git commit -m "feat(chip): add chip component"
+
+# 3. Push and create PR
+git push -u origin feat/add-chip-component
+gh pr create --title "feat(chip): add chip component"
+
+# 4. Wait for CI to pass, get code review
+
+# 5. Squash and merge via GitHub
+
+# 6. Release when ready
+git checkout main && git pull
+npm version minor
+git push origin main --follow-tags
 ```
-
-This triggers the release workflow which:
-
-1. Runs lint, type check, and tests
-2. Creates a GitHub Release with auto-generated notes
 
 ---
 
@@ -453,7 +472,7 @@ This triggers the release workflow which:
 3. **100% coverage** - All components must have full test coverage
 4. **Accessibility first** - Use Radix UI for complex interactions
 5. **Type everything** - Explicit interfaces for all props
-6. **Don't edit quality configs** - They are auto-generated
+6. **Never commit to main** - Always use feature branches and PRs
 7. **Update this file** - Add new patterns as they emerge
 
 ---
