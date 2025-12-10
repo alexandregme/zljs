@@ -12,8 +12,8 @@
     "test:coverage": "jest --coverage",
     "eslint": "eslint ./ --color --fix",
     "prettier": "prettier --write .",
-    "stylelint": "stylelint '**/*.{js,jsx,ts,tsx,html,mdx,css,scss}' --allow-empty-input",
-    "lint": "pnpm eslint && pnpm prettier && pnpm stylelint",
+    "stylelint": "stylelint '**/*.{css,scss}' --allow-empty-input",
+    "lint": "pnpm eslint && pnpm prettier",
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
     "prepare": "husky"
   },
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
+    "@eslint/js": "^9.39.1",
     "@storybook/react-vite": "^10.1.6",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -32,6 +33,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.1",
+    "globals": "^16.5.0",
     "husky": "^9.1.7",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
@@ -40,6 +42,7 @@
     "stylelint": "^16.26.1",
     "ts-jest": "^29.4.6",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0",
     "vite": "^7.2.7"
   },
   "peerDependencies": {

@@ -5,4 +5,3 @@
 - Need to ensure scripts are copied/adjusted during install.
 - Keep this document updated with decisions/outstanding tasks to preserve context across sessions.
 - Pending: audit `bin/zl-quality-sync.mjs` to understand copy process and identify changes required.
-

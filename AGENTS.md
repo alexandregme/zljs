@@ -38,6 +38,7 @@ React TypeScript UI component library built with accessibility-first approach us
 ### Target Users
 
 Enterprise developers who need to:
+
 - Build pages quickly with consistent UI
 - Focus on business logic, not styling decisions
 - Ship reliable, accessible interfaces
@@ -47,21 +48,25 @@ Enterprise developers who need to:
 ## API Design Rules
 
 ### Rule 1: `children` is for text only
+
 ```tsx
 // ✅ Correct
 interface ButtonProps {
-  children: string;  // Text only
+  children: string; // Text only
 }
-<Button>Save</Button>
+<Button>Save</Button>;
 
 // ❌ Wrong
 interface ButtonProps {
-  children: React.ReactNode;  // Too flexible
+  children: React.ReactNode; // Too flexible
 }
-<Button><Icon /> Save</Button>  // Not allowed
+<Button>
+  <Icon /> Save
+</Button>; // Not allowed
 ```
 
 ### Rule 2: Icons are props, not children
+
 ```tsx
 // ✅ Correct
 <Button icon="save">Save</Button>
@@ -72,6 +77,7 @@ interface ButtonProps {
 ```
 
 ### Rule 3: Variants are predefined, not customizable
+
 ```tsx
 // ✅ Correct - use predefined variants
 <Button variant="primary">Save</Button>
@@ -83,18 +89,19 @@ interface ButtonProps {
 ```
 
 ### Rule 4: All props are typed with literal unions
+
 ```tsx
 // ✅ Correct
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-  icon?: IconName;  // Union of valid icon names
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
+  icon?: IconName; // Union of valid icon names
 }
 
 // ❌ Wrong
 interface ButtonProps {
-  variant?: string;  // Too loose
-  icon?: string;     // Not type-safe
+  variant?: string; // Too loose
+  icon?: string; // Not type-safe
 }
 ```
 
@@ -128,6 +135,7 @@ zljs/
 ## Component Pattern
 
 ### Structure
+
 ```typescript
 // core/button/button.tsx
 interface ButtonProps {
@@ -151,6 +159,7 @@ export const Button = ({
 ```
 
 ### Rules
+
 - **children is `string`** - Text only, not ReactNode (enforces strict API)
 - **Props added on demand** - Only add props when tests require them
 - **Interface defined in same file** - Keep it simple until complexity grows
@@ -162,6 +171,7 @@ export const Button = ({
 ## Component Testing
 
 ### Test File Structure
+
 ```typescript
 // core/button/button.test.tsx
 import React from "react";
@@ -214,6 +224,7 @@ describe("<Button /> - Custom Props", () => {
 ```
 
 ### Test Pattern Rules
+
 - **Two describe blocks**: `Default Props` and `Custom Props`
 - **Default Props**: Test with minimal required props only
 - **Custom Props**: Test overriding defaults and interactions
@@ -248,7 +259,7 @@ import { Button } from "./button";
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
-  tags: ["autodocs"],  // Auto-generate docs
+  tags: ["autodocs"], // Auto-generate docs
 };
 
 export default meta;
@@ -269,6 +280,7 @@ export const Submit: Story = {
 ```
 
 ### Story Rules
+
 - **Use CSF3 format** - `StoryObj` type, `args` object
 - **Add `tags: ["autodocs"]`** - Auto-generates documentation
 - **One story per variant** - Default, Submit, Reset, WithOnClick, etc.
@@ -279,6 +291,7 @@ export const Submit: Story = {
 ## Creating New Components (TDD Flow)
 
 ### Step 1: Create folder structure
+
 ```bash
 mkdir -p core/[component-name]
 touch core/[component-name]/index.ts
@@ -288,6 +301,7 @@ touch core/[component-name]/[component].stories.tsx
 ```
 
 ### Step 2: Write test first (RED)
+
 ```typescript
 // core/chip/chip.test.tsx
 import React from "react";
@@ -304,6 +318,7 @@ describe("<Chip /> - Default Props", () => {
 ```
 
 ### Step 3: Create placeholder (still RED)
+
 ```typescript
 // core/chip/chip.tsx
 export const Chip = () => {
@@ -312,11 +327,13 @@ export const Chip = () => {
 ```
 
 ### Step 4: Run tests - verify RED
+
 ```bash
 pnpm test  # Should fail
 ```
 
 ### Step 5: Implement minimum to pass (GREEN)
+
 ```typescript
 // core/chip/chip.tsx
 interface ChipProps {
@@ -329,26 +346,32 @@ export const Chip = ({ children }: ChipProps) => {
 ```
 
 ### Step 6: Run tests - verify GREEN
+
 ```bash
 pnpm test           # Should pass
 pnpm test:coverage  # Must be 100%
 ```
 
 ### Step 7: Export
+
 ```typescript
 // core/chip/index.ts
 export { Chip } from "./chip";
 ```
 
 ### Step 8: Add more props on demand
+
 Repeat RED → GREEN cycle for each new prop:
+
 1. Write failing test for new prop
 2. Add prop to interface
 3. Implement in component
 4. Verify tests pass
 
 ### Step 9: Add stories when stable
+
 Only write stories after the component API is stable:
+
 ```typescript
 // core/chip/chip.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react";
@@ -371,13 +394,15 @@ export const Default: Story = {
 ```
 
 ### Step 10: Export from barrel
+
 ```typescript
 // core/index.ts
 export { Button } from "./button";
-export { Chip } from "./chip";  // Add new component
+export { Chip } from "./chip"; // Add new component
 ```
 
 **When is a component "stable"?**
+
 - All required props are implemented
 - API is unlikely to change
 - Ready for consumers to use
@@ -395,7 +420,7 @@ pnpm link ../../zljs
 
 ```typescript
 // In ruralissima-diagnostico next.config.js
-transpilePackages: ['@zljs/core']
+transpilePackages: ["@zljs/core"];
 ```
 
 ```typescript
@@ -415,6 +440,7 @@ git push origin v0.1.0
 ```
 
 This triggers the release workflow which:
+
 1. Runs lint, type check, and tests
 2. Creates a GitHub Release with auto-generated notes
 
@@ -432,4 +458,4 @@ This triggers the release workflow which:
 
 ---
 
-*Last updated: 2025-12-10*
+_Last updated: 2025-12-10_

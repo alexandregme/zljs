@@ -20,6 +20,7 @@ pnpm add -D @alexandregme/zl_js_lint
    This copies the canonical configs into your project and injects useful npm scripts.
 
 The sync step sets up:
+
 - `.editorconfig`
 - `.eslintrc.js` (re-exporting the toolkit's ESLint preset)
 - `package.json` scripts:
@@ -59,4 +60,4 @@ If your project already has a `postinstall` script, the sync command appends its
 - Publish the package under the new name.
 - Add more templates (Stylelint, Prettier) as needed.
 - Provide `extends`-friendly configs for projects that prefer not to copy files.
-"EOF"], 
+  "EOF"],
