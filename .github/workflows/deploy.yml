@@ -1,19 +1,17 @@
-name: CI
+name: Deploy
 
 on:
-  pull_request:
+  push:
     branches: [main]
 
 jobs:
-  validate:
-    name: Validate PR
+  build-and-deploy:
+    name: Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -29,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Validate commit messages
-        run: pnpm exec commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
-
       - name: Lint
         run: pnpm lint
 
@@ -40,3 +35,13 @@ jobs:
 
       - name: Test with coverage
         run: pnpm test:coverage
+
+      - name: Build Storybook
+        run: pnpm storybook:build
+
+      # TODO: Add deployment step (e.g., GitHub Pages, Vercel, Netlify)
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./storybook-static
