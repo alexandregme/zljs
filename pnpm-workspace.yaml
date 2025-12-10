@@ -1,0 +1,7 @@
+ignoredBuiltDependencies:
+  - '@alexandregme/zl_js_lint'
+  - esbuild
+
+overrides:
+  '@alexandregme/zl_js_lint': link:../../../Library/pnpm/global/5/node_modules/@alexandregme/zljs-lint
+  zl_js_lint: link:../../../Library/pnpm/global/5/node_modules/@alexandregme/zl_js_lint
