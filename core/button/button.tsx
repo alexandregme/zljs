@@ -1,8 +1,4 @@
-interface ButtonProps {
-  children: string;
-  type?: "button" | "submit" | "reset";
-  onClick?: () => void;
-}
+import type { ButtonProps } from "./button.interface";
 
 export const Button = ({ children, type = "button", onClick }: ButtonProps) => {
   return (
