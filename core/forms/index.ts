@@ -1,3 +1,5 @@
+export { Checkbox } from "./checkbox";
+export type { CheckboxProps } from "./checkbox";
 export { Error } from "./error";
 export type { ErrorProps } from "./error";
 export { Input } from "./input";
