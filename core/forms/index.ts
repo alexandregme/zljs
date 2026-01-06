@@ -6,3 +6,5 @@ export { Input } from "./input";
 export type { InputProps } from "./input";
 export { Radio } from "./radio";
 export type { RadioProps } from "./radio";
+export { Select } from "./select";
+export type { SelectProps, SelectOption } from "./select";
