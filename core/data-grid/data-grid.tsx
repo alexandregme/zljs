@@ -4,7 +4,7 @@ import { DataGridProps } from "./data-grid.interface";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-export const DataGrid = ({ columns, data }: DataGridProps): JSX.Element => {
+export const DataGrid = ({ columns, data }: DataGridProps) => {
   const columnDefs: ColDef[] = columns.map((col) => ({
     field: col.field,
     headerName: col.header,
