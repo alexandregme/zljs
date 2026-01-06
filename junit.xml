@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="1.069">
+  <testsuite name="iconNames" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:35:25" time="0.452" tests="3">
+    <testcase classname="iconNames exports an array of icon names" name="iconNames exports an array of icon names" time="0.002">
+    </testcase>
+    <testcase classname="&lt;Icon /&gt; - Default Props renders icon correctly" name="&lt;Icon /&gt; - Default Props renders icon correctly" time="0.016">
+    </testcase>
+    <testcase classname="&lt;Icon /&gt; - Custom Props renders different icon when name changes" name="&lt;Icon /&gt; - Custom Props renders different icon when name changes" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Button /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:35:25" time="0.476" tests="5">
+    <testcase classname="&lt;Button /&gt; - Default Props renders Button correctly" name="&lt;Button /&gt; - Default Props renders Button correctly" time="0.04">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Default Props renders Button with type button by default" name="&lt;Button /&gt; - Default Props renders Button with type button by default" time="0.005">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type submit" name="&lt;Button /&gt; - Custom Props renders Button with type submit" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type reset" name="&lt;Button /&gt; - Custom Props renders Button with type reset" time="0.003">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Custom Props calls onClick when clicked" name="&lt;Button /&gt; - Custom Props calls onClick when clicked" time="0.008">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -2,6 +2,24 @@
 
 > **Extends:** `../agents/frontend.md`, `../agents/testing.md`
 
+---
+
+## ⚠️ IMPORTANT: Read These Files First
+
+**AI agents MUST read ALL files in `../agents/*.md` at the start of every session before doing any work.**
+
+Then read this file (`AGENTS.md`) for project-specific configuration.
+
+**Commit Rules:**
+
+- Follow conventional commits format (see `../agents/git.md`)
+- NO co-author lines
+- NO "Generated with Claude Code" footers
+- Clean, simple commit messages only
+- Always use `git add .` to stage ALL files (including new files) before committing
+
+---
+
 ## Project Overview
 
 React TypeScript UI component library built with accessibility-first approach using Radix UI primitives.
