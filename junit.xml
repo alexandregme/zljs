@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="8" failures="0" errors="0" time="1.069">
-  <testsuite name="iconNames" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:35:25" time="0.452" tests="3">
-    <testcase classname="iconNames exports an array of icon names" name="iconNames exports an array of icon names" time="0.002">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.395">
+  <testsuite name="iconNames" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:54:13" time="0.516" tests="3">
+    <testcase classname="iconNames exports an array of icon names" name="iconNames exports an array of icon names" time="0.003">
     </testcase>
-    <testcase classname="&lt;Icon /&gt; - Default Props renders icon correctly" name="&lt;Icon /&gt; - Default Props renders icon correctly" time="0.016">
+    <testcase classname="&lt;Icon /&gt; - Default Props renders icon correctly" name="&lt;Icon /&gt; - Default Props renders icon correctly" time="0.017">
     </testcase>
     <testcase classname="&lt;Icon /&gt; - Custom Props renders different icon when name changes" name="&lt;Icon /&gt; - Custom Props renders different icon when name changes" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;Button /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:35:25" time="0.476" tests="5">
-    <testcase classname="&lt;Button /&gt; - Default Props renders Button correctly" name="&lt;Button /&gt; - Default Props renders Button correctly" time="0.04">
+  <testsuite name="&lt;Button /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:54:13" time="0.542" tests="5">
+    <testcase classname="&lt;Button /&gt; - Default Props renders Button correctly" name="&lt;Button /&gt; - Default Props renders Button correctly" time="0.042">
     </testcase>
     <testcase classname="&lt;Button /&gt; - Default Props renders Button with type button by default" name="&lt;Button /&gt; - Default Props renders Button with type button by default" time="0.005">
     </testcase>
-    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type submit" name="&lt;Button /&gt; - Custom Props renders Button with type submit" time="0.004">
+    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type submit" name="&lt;Button /&gt; - Custom Props renders Button with type submit" time="0.005">
     </testcase>
-    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type reset" name="&lt;Button /&gt; - Custom Props renders Button with type reset" time="0.003">
+    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type reset" name="&lt;Button /&gt; - Custom Props renders Button with type reset" time="0.005">
     </testcase>
-    <testcase classname="&lt;Button /&gt; - Custom Props calls onClick when clicked" name="&lt;Button /&gt; - Custom Props calls onClick when clicked" time="0.008">
+    <testcase classname="&lt;Button /&gt; - Custom Props calls onClick when clicked" name="&lt;Button /&gt; - Custom Props calls onClick when clicked" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;DataGrid /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T18:54:13" time="0.693" tests="5">
+    <testcase classname="&lt;DataGrid /&gt; - Default Props renders DataGrid correctly" name="&lt;DataGrid /&gt; - Default Props renders DataGrid correctly" time="0.024">
+    </testcase>
+    <testcase classname="&lt;DataGrid /&gt; - Default Props renders column headers correctly" name="&lt;DataGrid /&gt; - Default Props renders column headers correctly" time="0.005">
+    </testcase>
+    <testcase classname="&lt;DataGrid /&gt; - Default Props renders data rows correctly" name="&lt;DataGrid /&gt; - Default Props renders data rows correctly" time="0.003">
+    </testcase>
+    <testcase classname="&lt;DataGrid /&gt; - Edge Cases renders empty grid when data is empty" name="&lt;DataGrid /&gt; - Edge Cases renders empty grid when data is empty" time="0.002">
+    </testcase>
+    <testcase classname="&lt;DataGrid /&gt; - Edge Cases renders grid with single column" name="&lt;DataGrid /&gt; - Edge Cases renders grid with single column" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>
