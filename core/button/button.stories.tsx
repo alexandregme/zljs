@@ -36,3 +36,25 @@ export const WithOnClick: Story = {
     onClick: () => alert("Clicked!"),
   },
 };
+
+export const IconOnly: Story = {
+  args: {
+    icon: "BiX",
+    "aria-label": "Close",
+  },
+};
+
+export const IconLeft: Story = {
+  args: {
+    icon: "BiPlus",
+    children: "Add Item",
+  },
+};
+
+export const IconRight: Story = {
+  args: {
+    icon: "BiChevronRight",
+    iconPosition: "right",
+    children: "Next",
+  },
+};
