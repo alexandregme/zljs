@@ -6,6 +6,7 @@ import { Input } from "./input";
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 import { Select } from "./select";
+import { TextArea } from "./text-area";
 
 const meta: Meta<typeof Form> = {
   title: "Forms/Examples",
@@ -256,6 +257,7 @@ const ContactFormExample = () => {
     name: "",
     email: "",
     subject: "",
+    message: "",
     contactMethod: "email",
   });
 
@@ -296,6 +298,16 @@ const ContactFormExample = () => {
           ]}
           onChange={(e) =>
             setFormData({ ...formData, subject: e.target.value })
+          }
+        />
+
+        <TextArea
+          label="Message"
+          placeholder="Enter your message"
+          value={formData.message}
+          rows={5}
+          onChange={(e) =>
+            setFormData({ ...formData, message: e.target.value })
           }
         />
 
