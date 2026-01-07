@@ -1,10 +1,11 @@
 export { Button } from "./button";
 export { DataGrid } from "./data-grid";
 export type { DataGridColumn, DataGridProps } from "./data-grid";
-export { Checkbox, Error, Input, Radio, Select } from "./forms";
+export { Checkbox, Error, Form, Input, Radio, Select } from "./forms";
 export type {
   CheckboxProps,
   ErrorProps,
+  FormProps,
   InputProps,
   RadioProps,
   SelectOption,
