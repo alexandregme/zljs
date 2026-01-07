@@ -1,4 +1,5 @@
 import type { FormProps } from "./form.interface";
+import { fieldset } from "./form.styles";
 
 export const Form = ({ children, onSubmit, disabled }: FormProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -8,7 +9,7 @@ export const Form = ({ children, onSubmit, disabled }: FormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset disabled={disabled} style={{ border: "none", padding: 0 }}>
+      <fieldset disabled={disabled} className={fieldset()}>
         {children}
       </fieldset>
     </form>
