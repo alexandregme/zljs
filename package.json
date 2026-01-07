@@ -6,7 +6,7 @@
   "types": "core/index.ts",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
+    "build": "storybook build",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
