@@ -5,6 +5,7 @@ import { button } from "./button.styles";
 export const Button = ({
   children,
   type = "button",
+  color = "primary",
   icon,
   iconPosition = "left",
   "aria-label": ariaLabel,
@@ -42,7 +43,7 @@ export const Button = ({
       type={type}
       onClick={onClick}
       aria-label={ariaLabel}
-      className={button({ variant })}
+      className={button({ variant, color: isIconOnly ? "none" : color })}
     >
       {renderContent()}
     </button>

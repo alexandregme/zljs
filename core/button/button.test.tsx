@@ -85,4 +85,25 @@ describe("<Button /> - Custom Props", () => {
 
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
+
+  it("renders Button with success color", () => {
+    render(<Button color="success">Success</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("bg-green-600");
+  });
+
+  it("renders Button with danger color", () => {
+    render(<Button color="danger">Danger</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("bg-red-600");
+  });
+
+  it("renders Button with warning color", () => {
+    render(<Button color="warning">Warning</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("bg-yellow-500");
+  });
 });

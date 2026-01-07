@@ -37,24 +37,25 @@ export const WithOnClick: Story = {
   },
 };
 
-export const IconOnly: Story = {
-  args: {
-    icon: "BiX",
-    "aria-label": "Close",
-  },
+export const Icons: Story = {
+  render: () => (
+    <div className="flex gap-2 items-center">
+      <Button icon="BiX" aria-label="Close" />
+      <Button icon="BiPlus">Add Item</Button>
+      <Button icon="BiChevronRight" iconPosition="right">
+        Next
+      </Button>
+    </div>
+  ),
 };
 
-export const IconLeft: Story = {
-  args: {
-    icon: "BiPlus",
-    children: "Add Item",
-  },
-};
-
-export const IconRight: Story = {
-  args: {
-    icon: "BiChevronRight",
-    iconPosition: "right",
-    children: "Next",
-  },
+export const Colors: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <Button color="primary">Primary</Button>
+      <Button color="success">Success</Button>
+      <Button color="danger">Danger</Button>
+      <Button color="warning">Warning</Button>
+    </div>
+  ),
 };
