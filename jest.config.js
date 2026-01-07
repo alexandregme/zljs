@@ -31,7 +31,7 @@ module.exports = {
   testPathIgnorePatterns: EXCLUDED_FOLDERS,
   modulePathIgnorePatterns: EXCLUDED_FOLDERS,
   //report
-  reporters: ["default", "jest-junit", "<rootDir>/jest.reporter.js"],
+  reporters: ["default", "<rootDir>/jest.reporter.js"],
   coverageReporters: ["json-summary", "json", "lcov", "text", "clover"],
   //transform
   moduleNameMapper: {
