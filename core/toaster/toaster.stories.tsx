@@ -56,11 +56,16 @@ export const Promise: Story = {
         <Button
           color="success"
           onClick={() =>
-            toast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
-              loading: "Saving...",
-              success: "Saved successfully!",
-              error: "Failed to save",
-            })
+            toast.promise(
+              new globalThis.Promise<void>((resolve) =>
+                setTimeout(resolve, 2000),
+              ),
+              {
+                loading: "Saving...",
+                success: "Saved successfully!",
+                error: "Failed to save",
+              },
+            )
           }
         >
           Promise Success
@@ -69,7 +74,7 @@ export const Promise: Story = {
           color="danger"
           onClick={() =>
             toast.promise(
-              new Promise((_, reject) =>
+              new globalThis.Promise<void>((_, reject) =>
                 setTimeout(() => reject(new Error("Network error")), 2000),
               ),
               {
