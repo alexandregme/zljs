@@ -11,7 +11,8 @@ export const button = tv({
       primary: "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500",
       success: "bg-green-600 hover:bg-green-700 focus:ring-green-500",
       danger: "bg-red-600 hover:bg-red-700 focus:ring-red-500",
-      warning: "bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500",
+      warning:
+        "bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500 text-gray-900",
       none: "",
     },
   },
