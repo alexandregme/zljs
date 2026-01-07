@@ -1,81 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="33" failures="0" errors="0" time="1.38">
-  <testsuite name="iconNames" errors="0" failures="0" skipped="0" timestamp="2026-01-06T19:10:22" time="0.523" tests="3">
-    <testcase classname="iconNames exports an array of icon names" name="iconNames exports an array of icon names" time="0.003">
+<testsuites name="jest tests" tests="65" failures="0" errors="0" time="1.728">
+  <testsuite name="iconNames" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.541" tests="3">
+    <testcase classname="iconNames exports an array of icon names" name="iconNames exports an array of icon names" time="0.004">
     </testcase>
-    <testcase classname="&lt;Icon /&gt; - Default Props renders icon correctly" name="&lt;Icon /&gt; - Default Props renders icon correctly" time="0.019">
+    <testcase classname="&lt;Icon /&gt; - Default Props renders icon correctly" name="&lt;Icon /&gt; - Default Props renders icon correctly" time="0.017">
     </testcase>
     <testcase classname="&lt;Icon /&gt; - Custom Props renders different icon when name changes" name="&lt;Icon /&gt; - Custom Props renders different icon when name changes" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;Error /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T19:10:22" time="0.527" tests="3">
-    <testcase classname="&lt;Error /&gt; - Default Props renders Error correctly" name="&lt;Error /&gt; - Default Props renders Error correctly" time="0.018">
-    </testcase>
-    <testcase classname="&lt;Error /&gt; - Default Props renders Error with error role" name="&lt;Error /&gt; - Default Props renders Error with error role" time="0.022">
-    </testcase>
-    <testcase classname="&lt;Error /&gt; - Edge Cases renders nothing when message is empty" name="&lt;Error /&gt; - Edge Cases renders nothing when message is empty" time="0.003">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;Button /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T19:10:22" time="0.547" tests="5">
-    <testcase classname="&lt;Button /&gt; - Default Props renders Button correctly" name="&lt;Button /&gt; - Default Props renders Button correctly" time="0.044">
-    </testcase>
-    <testcase classname="&lt;Button /&gt; - Default Props renders Button with type button by default" name="&lt;Button /&gt; - Default Props renders Button with type button by default" time="0.004">
-    </testcase>
-    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type submit" name="&lt;Button /&gt; - Custom Props renders Button with type submit" time="0.005">
-    </testcase>
-    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type reset" name="&lt;Button /&gt; - Custom Props renders Button with type reset" time="0.003">
-    </testcase>
-    <testcase classname="&lt;Button /&gt; - Custom Props calls onClick when clicked" name="&lt;Button /&gt; - Custom Props calls onClick when clicked" time="0.009">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;DataGrid /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T19:10:22" time="0.552" tests="5">
-    <testcase classname="&lt;DataGrid /&gt; - Default Props renders DataGrid correctly" name="&lt;DataGrid /&gt; - Default Props renders DataGrid correctly" time="0.025">
+  <testsuite name="&lt;DataGrid /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.567" tests="5">
+    <testcase classname="&lt;DataGrid /&gt; - Default Props renders DataGrid correctly" name="&lt;DataGrid /&gt; - Default Props renders DataGrid correctly" time="0.023">
     </testcase>
     <testcase classname="&lt;DataGrid /&gt; - Default Props renders column headers correctly" name="&lt;DataGrid /&gt; - Default Props renders column headers correctly" time="0.004">
     </testcase>
-    <testcase classname="&lt;DataGrid /&gt; - Default Props renders data rows correctly" name="&lt;DataGrid /&gt; - Default Props renders data rows correctly" time="0.002">
+    <testcase classname="&lt;DataGrid /&gt; - Default Props renders data rows correctly" name="&lt;DataGrid /&gt; - Default Props renders data rows correctly" time="0.004">
     </testcase>
-    <testcase classname="&lt;DataGrid /&gt; - Edge Cases renders empty grid when data is empty" name="&lt;DataGrid /&gt; - Edge Cases renders empty grid when data is empty" time="0.005">
+    <testcase classname="&lt;DataGrid /&gt; - Edge Cases renders empty grid when data is empty" name="&lt;DataGrid /&gt; - Edge Cases renders empty grid when data is empty" time="0.007">
     </testcase>
-    <testcase classname="&lt;DataGrid /&gt; - Edge Cases renders grid with single column" name="&lt;DataGrid /&gt; - Edge Cases renders grid with single column" time="0.003">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;Input /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T19:10:22" time="0.57" tests="10">
-    <testcase classname="&lt;Input /&gt; - Default Props renders Input correctly" name="&lt;Input /&gt; - Default Props renders Input correctly" time="0.047">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Default Props renders Input with label" name="&lt;Input /&gt; - Default Props renders Input with label" time="0.003">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Default Props renders Input with type text by default" name="&lt;Input /&gt; - Default Props renders Input with type text by default" time="0.007">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with placeholder" name="&lt;Input /&gt; - Custom Props renders Input with placeholder" time="0.004">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with value" name="&lt;Input /&gt; - Custom Props renders Input with value" time="0.007">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with type password" name="&lt;Input /&gt; - Custom Props renders Input with type password" time="0.002">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with type email" name="&lt;Input /&gt; - Custom Props renders Input with type email" time="0.003">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with error message" name="&lt;Input /&gt; - Custom Props renders Input with error message" time="0.003">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props renders Input as disabled" name="&lt;Input /&gt; - Custom Props renders Input as disabled" time="0.004">
-    </testcase>
-    <testcase classname="&lt;Input /&gt; - Custom Props calls onChange when input value changes" name="&lt;Input /&gt; - Custom Props calls onChange when input value changes" time="0.005">
+    <testcase classname="&lt;DataGrid /&gt; - Edge Cases renders grid with single column" name="&lt;DataGrid /&gt; - Edge Cases renders grid with single column" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;Radio /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-06T19:10:23" time="0.263" tests="7">
-    <testcase classname="&lt;Radio /&gt; - Default Props renders Radio correctly" name="&lt;Radio /&gt; - Default Props renders Radio correctly" time="0.027">
+  <testsuite name="&lt;Form /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.589" tests="7">
+    <testcase classname="&lt;Form /&gt; - Default Props renders Form correctly" name="&lt;Form /&gt; - Default Props renders Form correctly" time="0.021">
+    </testcase>
+    <testcase classname="&lt;Form /&gt; - Default Props renders children correctly" name="&lt;Form /&gt; - Default Props renders children correctly" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Form /&gt; - Default Props prevents default form submission" name="&lt;Form /&gt; - Default Props prevents default form submission" time="0.005">
+    </testcase>
+    <testcase classname="&lt;Form /&gt; - Custom Props calls onSubmit when form is submitted" name="&lt;Form /&gt; - Custom Props calls onSubmit when form is submitted" time="0.031">
+    </testcase>
+    <testcase classname="&lt;Form /&gt; - Custom Props disables all form elements when disabled prop is true" name="&lt;Form /&gt; - Custom Props disables all form elements when disabled prop is true" time="0.013">
+    </testcase>
+    <testcase classname="&lt;Form /&gt; - Custom Props does not disable form elements when disabled prop is false" name="&lt;Form /&gt; - Custom Props does not disable form elements when disabled prop is false" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Form /&gt; - Custom Props does not call onSubmit when form is disabled" name="&lt;Form /&gt; - Custom Props does not call onSubmit when form is disabled" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Select /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.769" tests="8">
+    <testcase classname="&lt;Select /&gt; - Default Props renders Select correctly" name="&lt;Select /&gt; - Default Props renders Select correctly" time="0.05">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Default Props renders Select with label" name="&lt;Select /&gt; - Default Props renders Select with label" time="0.013">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Default Props renders all options" name="&lt;Select /&gt; - Default Props renders all options" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Custom Props renders Select with placeholder" name="&lt;Select /&gt; - Custom Props renders Select with placeholder" time="0.002">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Custom Props renders Select with selected value" name="&lt;Select /&gt; - Custom Props renders Select with selected value" time="0.007">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Custom Props renders Select as disabled" name="&lt;Select /&gt; - Custom Props renders Select as disabled" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Custom Props calls onChange when selection changes" name="&lt;Select /&gt; - Custom Props calls onChange when selection changes" time="0.005">
+    </testcase>
+    <testcase classname="&lt;Select /&gt; - Custom Props renders Select with error message" name="&lt;Select /&gt; - Custom Props renders Select with error message" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Button /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.178" tests="5">
+    <testcase classname="&lt;Button /&gt; - Default Props renders Button correctly" name="&lt;Button /&gt; - Default Props renders Button correctly" time="0.014">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Default Props renders Button with type button by default" name="&lt;Button /&gt; - Default Props renders Button with type button by default" time="0.005">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type submit" name="&lt;Button /&gt; - Custom Props renders Button with type submit" time="0.009">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Custom Props renders Button with type reset" name="&lt;Button /&gt; - Custom Props renders Button with type reset" time="0.003">
+    </testcase>
+    <testcase classname="&lt;Button /&gt; - Custom Props calls onClick when clicked" name="&lt;Button /&gt; - Custom Props calls onClick when clicked" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;TextArea /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.765" tests="10">
+    <testcase classname="&lt;TextArea /&gt; - Default Props renders TextArea correctly" name="&lt;TextArea /&gt; - Default Props renders TextArea correctly" time="0.049">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Default Props renders TextArea with label" name="&lt;TextArea /&gt; - Default Props renders TextArea with label" time="0.004">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Default Props renders TextArea as textarea element" name="&lt;TextArea /&gt; - Default Props renders TextArea as textarea element" time="0.012">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props renders TextArea with placeholder" name="&lt;TextArea /&gt; - Custom Props renders TextArea with placeholder" time="0.003">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props renders TextArea with value" name="&lt;TextArea /&gt; - Custom Props renders TextArea with value" time="0.004">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props renders TextArea with custom rows" name="&lt;TextArea /&gt; - Custom Props renders TextArea with custom rows" time="0.002">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props renders TextArea with default rows of 3" name="&lt;TextArea /&gt; - Custom Props renders TextArea with default rows of 3" time="0.002">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props renders TextArea with error message" name="&lt;TextArea /&gt; - Custom Props renders TextArea with error message" time="0.003">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props renders TextArea as disabled" name="&lt;TextArea /&gt; - Custom Props renders TextArea as disabled" time="0.004">
+    </testcase>
+    <testcase classname="&lt;TextArea /&gt; - Custom Props calls onChange when textarea value changes" name="&lt;TextArea /&gt; - Custom Props calls onChange when textarea value changes" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Radio /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.222" tests="7">
+    <testcase classname="&lt;Radio /&gt; - Default Props renders Radio correctly" name="&lt;Radio /&gt; - Default Props renders Radio correctly" time="0.031">
     </testcase>
     <testcase classname="&lt;Radio /&gt; - Default Props renders Radio with label" name="&lt;Radio /&gt; - Default Props renders Radio with label" time="0.002">
     </testcase>
     <testcase classname="&lt;Radio /&gt; - Default Props renders Radio unchecked by default" name="&lt;Radio /&gt; - Default Props renders Radio unchecked by default" time="0.005">
     </testcase>
-    <testcase classname="&lt;Radio /&gt; - Custom Props renders Radio as checked" name="&lt;Radio /&gt; - Custom Props renders Radio as checked" time="0.004">
+    <testcase classname="&lt;Radio /&gt; - Custom Props renders Radio as checked" name="&lt;Radio /&gt; - Custom Props renders Radio as checked" time="0.012">
     </testcase>
     <testcase classname="&lt;Radio /&gt; - Custom Props renders Radio as disabled" name="&lt;Radio /&gt; - Custom Props renders Radio as disabled" time="0.003">
     </testcase>
-    <testcase classname="&lt;Radio /&gt; - Custom Props calls onChange when clicked" name="&lt;Radio /&gt; - Custom Props calls onChange when clicked" time="0.009">
+    <testcase classname="&lt;Radio /&gt; - Custom Props calls onChange when clicked" name="&lt;Radio /&gt; - Custom Props calls onChange when clicked" time="0.006">
     </testcase>
-    <testcase classname="&lt;Radio /&gt; - Custom Props renders multiple radios with same name" name="&lt;Radio /&gt; - Custom Props renders multiple radios with same name" time="0.005">
+    <testcase classname="&lt;Radio /&gt; - Custom Props renders multiple radios with same name" name="&lt;Radio /&gt; - Custom Props renders multiple radios with same name" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Input /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.429" tests="10">
+    <testcase classname="&lt;Input /&gt; - Default Props renders Input correctly" name="&lt;Input /&gt; - Default Props renders Input correctly" time="0.032">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Default Props renders Input with label" name="&lt;Input /&gt; - Default Props renders Input with label" time="0.003">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Default Props renders Input with type text by default" name="&lt;Input /&gt; - Default Props renders Input with type text by default" time="0.006">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with placeholder" name="&lt;Input /&gt; - Custom Props renders Input with placeholder" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with value" name="&lt;Input /&gt; - Custom Props renders Input with value" time="0.012">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with type password" name="&lt;Input /&gt; - Custom Props renders Input with type password" time="0.003">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with type email" name="&lt;Input /&gt; - Custom Props renders Input with type email" time="0.003">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props renders Input with error message" name="&lt;Input /&gt; - Custom Props renders Input with error message" time="0.005">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props renders Input as disabled" name="&lt;Input /&gt; - Custom Props renders Input as disabled" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Input /&gt; - Custom Props calls onChange when input value changes" name="&lt;Input /&gt; - Custom Props calls onChange when input value changes" time="0.013">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Error /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.208" tests="3">
+    <testcase classname="&lt;Error /&gt; - Default Props renders Error correctly" name="&lt;Error /&gt; - Default Props renders Error correctly" time="0.006">
+    </testcase>
+    <testcase classname="&lt;Error /&gt; - Default Props renders Error with error role" name="&lt;Error /&gt; - Default Props renders Error with error role" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Error /&gt; - Custom Props renders nothing when message is empty" name="&lt;Error /&gt; - Custom Props renders nothing when message is empty" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Checkbox /&gt; - Default Props" errors="0" failures="0" skipped="0" timestamp="2026-01-07T18:52:25" time="0.249" tests="7">
+    <testcase classname="&lt;Checkbox /&gt; - Default Props renders Checkbox correctly" name="&lt;Checkbox /&gt; - Default Props renders Checkbox correctly" time="0.011">
+    </testcase>
+    <testcase classname="&lt;Checkbox /&gt; - Default Props renders Checkbox with label" name="&lt;Checkbox /&gt; - Default Props renders Checkbox with label" time="0.001">
+    </testcase>
+    <testcase classname="&lt;Checkbox /&gt; - Default Props renders Checkbox unchecked by default" name="&lt;Checkbox /&gt; - Default Props renders Checkbox unchecked by default" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Checkbox /&gt; - Custom Props renders Checkbox as checked" name="&lt;Checkbox /&gt; - Custom Props renders Checkbox as checked" time="0.003">
+    </testcase>
+    <testcase classname="&lt;Checkbox /&gt; - Custom Props renders Checkbox as disabled" name="&lt;Checkbox /&gt; - Custom Props renders Checkbox as disabled" time="0.002">
+    </testcase>
+    <testcase classname="&lt;Checkbox /&gt; - Custom Props calls onChange when clicked" name="&lt;Checkbox /&gt; - Custom Props calls onChange when clicked" time="0.004">
+    </testcase>
+    <testcase classname="&lt;Checkbox /&gt; - Custom Props renders Checkbox with error message" name="&lt;Checkbox /&gt; - Custom Props renders Checkbox with error message" time="0.003">
     </testcase>
   </testsuite>
 </testsuites>

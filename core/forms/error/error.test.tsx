@@ -17,7 +17,7 @@ describe("<Error /> - Default Props", () => {
   });
 });
 
-describe("<Error /> - Edge Cases", () => {
+describe("<Error /> - Custom Props", () => {
   it("renders nothing when message is empty", () => {
     const { container } = render(<Error message="" />);
 

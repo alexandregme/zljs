@@ -1,17 +1,17 @@
 import { useId } from "react";
-import type { InputProps } from "./input.interface";
+import type { TextAreaProps } from "./text-area.interface";
 import { Error } from "../error";
-import { wrapper, label, input } from "./input.styles";
+import { wrapper, label, textarea } from "./text-area.styles";
 
-export const Input = ({
+export const TextArea = ({
   label: labelText,
-  type = "text",
   placeholder,
   value,
+  rows = 3,
   error,
   disabled,
   onChange,
-}: InputProps) => {
+}: TextAreaProps) => {
   const id = useId();
 
   return (
@@ -19,14 +19,14 @@ export const Input = ({
       <label htmlFor={id} className={label()}>
         {labelText}
       </label>
-      <input
+      <textarea
         id={id}
-        type={type}
         placeholder={placeholder}
         value={value}
+        rows={rows}
         disabled={disabled}
         onChange={onChange}
-        className={input()}
+        className={textarea()}
       />
       {error && <Error message={error} />}
     </div>

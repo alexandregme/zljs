@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Button } from "./button";
@@ -18,6 +17,13 @@ describe("<Button /> - Default Props", () => {
 
     expect(button).toHaveAttribute("type", "button");
   });
+
+  it("renders Button with default variant by default", () => {
+    render(<Button>Click me</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("bg-blue-600");
+  });
 });
 
 describe("<Button /> - Custom Props", () => {
@@ -33,6 +39,41 @@ describe("<Button /> - Custom Props", () => {
     const button = screen.getByRole("button");
 
     expect(button).toHaveAttribute("type", "reset");
+  });
+
+  it("renders Button with icon only", () => {
+    render(<Button icon="BiX" aria-label="Close" />);
+    const button = screen.getByRole("button", { name: "Close" });
+
+    expect(button).toHaveClass("bg-transparent");
+    expect(screen.getByTestId("BiX")).toBeInTheDocument();
+  });
+
+  it("renders Button with icon on left", () => {
+    render(<Button icon="BiPlus">Add Item</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveTextContent("Add Item");
+    expect(screen.getByTestId("BiPlus")).toBeInTheDocument();
+  });
+
+  it("renders Button with icon on right", () => {
+    render(
+      <Button icon="BiChevronRight" iconPosition="right">
+        Next
+      </Button>,
+    );
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveTextContent("Next");
+    expect(screen.getByTestId("BiChevronRight")).toBeInTheDocument();
+  });
+
+  it("renders Button with aria-label", () => {
+    render(<Button icon="BiX" aria-label="Close" />);
+    const button = screen.getByRole("button", { name: "Close" });
+
+    expect(button).toBeInTheDocument();
   });
 
   it("calls onClick when clicked", () => {
