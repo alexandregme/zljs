@@ -1,8 +1,9 @@
 import { useId } from "react";
 import type { RadioProps } from "./radio.interface";
+import { wrapper, radio, label } from "./radio.styles";
 
 export const Radio = ({
-  label,
+  label: labelText,
   name,
   value,
   checked,
@@ -12,7 +13,7 @@ export const Radio = ({
   const id = useId();
 
   return (
-    <div>
+    <div className={wrapper()}>
       <input
         id={id}
         type="radio"
@@ -21,8 +22,11 @@ export const Radio = ({
         checked={checked}
         disabled={disabled}
         onChange={onChange}
+        className={radio()}
       />
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className={label()}>
+        {labelText}
+      </label>
     </div>
   );
 };

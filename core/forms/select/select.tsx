@@ -1,9 +1,10 @@
 import { useId } from "react";
 import type { SelectProps } from "./select.interface";
 import { Error } from "../error";
+import { wrapper, label, select } from "./select.styles";
 
 export const Select = ({
-  label,
+  label: labelText,
   options,
   value,
   placeholder,
@@ -14,9 +15,17 @@ export const Select = ({
   const id = useId();
 
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <select id={id} value={value} disabled={disabled} onChange={onChange}>
+    <div className={wrapper()}>
+      <label htmlFor={id} className={label()}>
+        {labelText}
+      </label>
+      <select
+        id={id}
+        value={value}
+        disabled={disabled}
+        onChange={onChange}
+        className={select()}
+      >
         {placeholder && (
           <option value="" disabled>
             {placeholder}

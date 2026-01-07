@@ -1,9 +1,10 @@
 import { useId } from "react";
 import type { InputProps } from "./input.interface";
 import { Error } from "../error";
+import { wrapper, label, input } from "./input.styles";
 
 export const Input = ({
-  label,
+  label: labelText,
   type = "text",
   placeholder,
   value,
@@ -14,8 +15,10 @@ export const Input = ({
   const id = useId();
 
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
+    <div className={wrapper()}>
+      <label htmlFor={id} className={label()}>
+        {labelText}
+      </label>
       <input
         id={id}
         type={type}
@@ -23,6 +26,7 @@ export const Input = ({
         value={value}
         disabled={disabled}
         onChange={onChange}
+        className={input()}
       />
       {error && <Error message={error} />}
     </div>
