@@ -37,7 +37,7 @@ jobs:
         run: pnpm test:coverage
 
       - name: Build Storybook
-        run: pnpm storybook:build
+        run: pnpm build
 
       # TODO: Add deployment step (e.g., GitHub Pages, Vercel, Netlify)
       # - name: Deploy to GitHub Pages
