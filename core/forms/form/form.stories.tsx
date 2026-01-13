@@ -54,8 +54,8 @@ export const Disabled: Story = {
 
 export const CompleteExample: Story = {
   args: {
-    onSubmit: (e) => {
-      console.log("Form submitted!", e);
+    onSubmit: () => {
+      alert("Form submitted!");
     },
     children: (
       <div className="flex flex-col gap-4">

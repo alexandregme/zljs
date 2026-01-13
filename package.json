@@ -18,16 +18,19 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-dialog": "^1.1.15",
     "ag-grid-community": "^35.0.0",
     "ag-grid-react": "^35.0.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "react-hook-form": "^7.70.0",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.7",
     "storybook": "^10.1.11",
     "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.2.2"
+    "tailwind-variants": "^3.2.2",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
@@ -48,7 +51,6 @@
     "husky": "^9.1.7",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
-    "jest-junit": "^16.0.0",
     "jest-sonar": "^0.2.16",
     "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",

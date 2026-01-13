@@ -64,7 +64,6 @@ const RegistrationFormExample = () => {
   const handleSubmit = () => {
     if (validate()) {
       setIsSubmitting(true);
-      console.log("Form submitted:", formData);
       setTimeout(() => {
         setIsSubmitting(false);
         alert("Registration successful!");
@@ -209,7 +208,7 @@ const LoginFormExample = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log("Login submitted:", { email, password, rememberMe });
+      alert("Login successful!");
     }
   };
 
@@ -262,7 +261,6 @@ const ContactFormExample = () => {
   });
 
   const handleSubmit = () => {
-    console.log("Contact form submitted:", formData);
     alert("Message sent!");
   };
 

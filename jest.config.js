@@ -16,6 +16,7 @@ const COVERAGE = [
   "!<rootDir>/jest.env.js",
   "!<rootDir>/jest.reporter.js",
   "!<rootDir>/**/utils/**/*.{jsx,ts,tsx}",
+  "!<rootDir>/**/examples/**/*.{jsx,ts,tsx}",
 ];
 
 module.exports = {
@@ -35,6 +36,8 @@ module.exports = {
   coverageReporters: ["json-summary", "json", "lcov", "text", "clover"],
   //transform
   moduleNameMapper: {
+    "^@zljs/core$": "<rootDir>/core",
+    "^@zljs/rhf$": "<rootDir>/core/rhf",
     "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
     "\\.(jpg|jpeg|png)$": "<rootDir>/__mocks__/imageMock.js",
   },

@@ -16,7 +16,12 @@
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",
-    "rootDir": "."
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@zljs/core": ["core/index.ts"],
+      "@zljs/rhf": ["core/rhf/index.ts"]
+    }
   },
   "include": ["core/**/*", "jest.setup.ts"],
   "exclude": ["node_modules", "dist"]
