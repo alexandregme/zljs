@@ -75,4 +75,31 @@ describe("<Input /> - Custom Props", () => {
 
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
+
+  it("calls onKeyDown when key is pressed", () => {
+    const handleKeyDown = jest.fn();
+    render(<Input label="Username" onKeyDown={handleKeyDown} />);
+    const input = screen.getByRole("textbox");
+
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    expect(handleKeyDown).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders Input with aria-label for accessibility", () => {
+    render(<Input aria-label="Search field" placeholder="Search..." />);
+    const input = screen.getByRole("textbox");
+
+    expect(input).toHaveAttribute("aria-label", "Search field");
+  });
+
+  it("renders Input without visible label", () => {
+    render(<Input aria-label="Hidden label" />);
+
+    expect(screen.queryByRole("label")).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox")).toHaveAttribute(
+      "aria-label",
+      "Hidden label",
+    );
+  });
 });

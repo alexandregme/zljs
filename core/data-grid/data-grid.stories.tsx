@@ -11,10 +11,10 @@ export default meta;
 type Story = StoryObj<typeof DataGrid>;
 
 const sampleColumns = [
-  { field: "id", header: "ID" },
-  { field: "name", header: "Name" },
-  { field: "email", header: "Email" },
-  { field: "role", header: "Role" },
+  { field: "id", headerName: "ID" },
+  { field: "name", headerName: "Name" },
+  { field: "email", headerName: "Email" },
+  { field: "role", headerName: "Role" },
 ];
 
 const sampleData = [
@@ -46,7 +46,7 @@ export const EmptyGrid: Story = {
 
 export const SingleColumn: Story = {
   args: {
-    columns: [{ field: "name", header: "Name" }],
+    columns: [{ field: "name", headerName: "Name" }],
     data: sampleData,
   },
 };

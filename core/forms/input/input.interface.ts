@@ -1,7 +1,8 @@
-import { ChangeEvent, FocusEvent } from "react";
+import { ChangeEvent, FocusEvent, KeyboardEvent } from "react";
 
 export interface InputProps {
-  label: string;
+  label?: string;
+  "aria-label"?: string;
   name?: string;
   type?: "text" | "password" | "email";
   placeholder?: string;
@@ -10,4 +11,5 @@ export interface InputProps {
   disabled?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }

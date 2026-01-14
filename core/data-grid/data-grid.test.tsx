@@ -1,43 +1,58 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { useEffect } from "react";
 import { DataGrid } from "./data-grid";
 import { DataGridColumn } from "./data-grid.interface";
 
+const mockGridApi = {
+  setGridOption: jest.fn(),
+};
+
 jest.mock("ag-grid-react", () => ({
-  AgGridReact: ({
-    columnDefs,
-    rowData,
-  }: {
+  AgGridReact: (props: {
     columnDefs: { field: string; headerName: string }[];
     rowData: Record<string, unknown>[];
-  }) => (
-    <div data-testid="ag-grid-mock">
-      <div data-testid="columns">
-        {columnDefs.map((col) => (
-          <span key={col.field} data-testid={`header-${col.field}`}>
-            {col.headerName}
-          </span>
-        ))}
-      </div>
-      <div data-testid="rows">
-        {rowData.map((row, idx) => (
-          <div key={idx} data-testid={`row-${idx}`}>
-            {columnDefs.map((col) => (
-              <span key={col.field} data-testid={`cell-${idx}-${col.field}`}>
-                {String(row[col.field])}
+    onGridReady?: (params: { api: unknown }) => void;
+  }) => {
+    const MockGrid = () => {
+      useEffect(() => {
+        props.onGridReady?.({ api: mockGridApi });
+      }, []);
+
+      return (
+        <div data-testid="ag-grid-mock">
+          <div data-testid="columns">
+            {props.columnDefs.map((col) => (
+              <span key={col.field} data-testid={`header-${col.field}`}>
+                {col.headerName}
               </span>
             ))}
           </div>
-        ))}
-      </div>
-    </div>
-  ),
+          <div data-testid="rows">
+            {props.rowData.map((row, idx) => (
+              <div key={idx} data-testid={`row-${idx}`}>
+                {props.columnDefs.map((col) => (
+                  <span
+                    key={col.field}
+                    data-testid={`cell-${idx}-${col.field}`}
+                  >
+                    {String(row[col.field])}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+    return <MockGrid />;
+  },
 }));
 
 const mockColumns: DataGridColumn[] = [
-  { field: "id", header: "ID" },
-  { field: "name", header: "Name" },
-  { field: "email", header: "Email" },
+  { field: "id", headerName: "ID" },
+  { field: "name", headerName: "Name" },
+  { field: "email", headerName: "Email" },
 ];
 
 const mockData = [
@@ -70,6 +85,12 @@ describe("<DataGrid /> - Default Props", () => {
       "jane@example.com",
     );
   });
+
+  it("renders toolbar by default", () => {
+    render(<DataGrid columns={mockColumns} data={mockData} />);
+
+    expect(screen.getByTestId("data-grid-toolbar")).toBeInTheDocument();
+  });
 });
 
 describe("<DataGrid /> - Edge Cases", () => {
@@ -83,10 +104,20 @@ describe("<DataGrid /> - Edge Cases", () => {
   });
 
   it("renders grid with single column", () => {
-    const singleColumn: DataGridColumn[] = [{ field: "name", header: "Name" }];
+    const singleColumn: DataGridColumn[] = [
+      { field: "name", headerName: "Name" },
+    ];
     render(<DataGrid columns={singleColumn} data={mockData} />);
 
     expect(screen.getByTestId("header-name")).toHaveTextContent("Name");
     expect(screen.getByTestId("cell-0-name")).toHaveTextContent("John Doe");
+  });
+
+  it("hides toolbar when showSearch is false", () => {
+    render(
+      <DataGrid columns={mockColumns} data={mockData} showSearch={false} />,
+    );
+
+    expect(screen.queryByTestId("data-grid-toolbar")).not.toBeInTheDocument();
   });
 });

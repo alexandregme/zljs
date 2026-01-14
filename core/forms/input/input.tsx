@@ -7,6 +7,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label: labelText,
+      "aria-label": ariaLabel,
       name,
       type = "text",
       placeholder,
@@ -15,6 +16,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled,
       onChange,
       onBlur,
+      onKeyDown,
     },
     ref,
   ) => {
@@ -22,9 +24,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={wrapper()}>
-        <label htmlFor={id} className={label()}>
-          {labelText}
-        </label>
+        {labelText && (
+          <label htmlFor={id} className={label()}>
+            {labelText}
+          </label>
+        )}
         <input
           ref={ref}
           id={id}
@@ -35,6 +39,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={disabled}
           onChange={onChange}
           onBlur={onBlur}
+          onKeyDown={onKeyDown}
+          aria-label={ariaLabel}
           className={input()}
         />
         {error && <Error message={error} />}

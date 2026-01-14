@@ -11,4 +11,9 @@ export const iconNames = [
   "BiChevronUp",
   "BiChevronLeft",
   "BiChevronRight",
+  "BiLogoWhatsapp",
+  "BiEdit",
+  "BiTrash",
+  "BiSave",
+  "BiRefresh",
 ] as const;
