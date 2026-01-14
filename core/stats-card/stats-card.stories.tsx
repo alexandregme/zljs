@@ -42,12 +42,30 @@ export const Green: Story = {
   },
 };
 
+export const Gray: Story = {
+  args: {
+    label: "Total",
+    value: 200,
+    color: "gray",
+  },
+};
+
+export const Orange: Story = {
+  args: {
+    label: "Pagamento Pendente",
+    value: 25,
+    color: "orange",
+  },
+};
+
 export const AllColors: Story = {
   render: () => (
-    <div className="grid grid-cols-4 gap-4">
-      <StatsCard label="Total" value={150} color="blue" />
-      <StatsCard label="Errors" value={12} color="red" />
+    <div className="grid grid-cols-6 gap-4">
+      <StatsCard label="Total" value={200} color="gray" />
+      <StatsCard label="Info" value={150} color="blue" />
       <StatsCard label="Warnings" value={8} color="yellow" />
+      <StatsCard label="Pending" value={25} color="orange" />
+      <StatsCard label="Errors" value={12} color="red" />
       <StatsCard label="Success" value={130} color="green" />
     </div>
   ),

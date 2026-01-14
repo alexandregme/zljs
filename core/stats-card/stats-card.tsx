@@ -21,6 +21,16 @@ const colorClasses = {
     label: "text-green-800",
     value: "text-green-900",
   },
+  gray: {
+    card: "bg-gray-100",
+    label: "text-gray-600",
+    value: "text-gray-900",
+  },
+  orange: {
+    card: "bg-orange-100",
+    label: "text-orange-800",
+    value: "text-orange-900",
+  },
 };
 
 export const StatsCard = ({ label, value, color }: StatsCardProps) => {

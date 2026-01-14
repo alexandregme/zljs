@@ -51,6 +51,20 @@ describe("<StatsCard /> - Custom Props", () => {
     expect(card).toHaveClass("bg-green-100");
   });
 
+  it("renders with gray color", () => {
+    render(<StatsCard label="Total" value={50} color="gray" />);
+    const card = screen.getByTestId("stats-card");
+
+    expect(card).toHaveClass("bg-gray-100");
+  });
+
+  it("renders with orange color", () => {
+    render(<StatsCard label="Pending" value={15} color="orange" />);
+    const card = screen.getByTestId("stats-card");
+
+    expect(card).toHaveClass("bg-orange-100");
+  });
+
   it("renders string value", () => {
     render(<StatsCard label="Status" value="OK" color="green" />);
 
