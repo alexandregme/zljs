@@ -20,12 +20,6 @@ importers:
       ag-grid-react:
         specifier: ^35.0.0
         version: 35.0.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
-      react:
-        specifier: ^19.2.1
-        version: 19.2.1
-      react-dom:
-        specifier: ^19.2.1
-        version: 19.2.1(react@19.2.1)
       react-hook-form:
         specifier: ^7.70.0
         version: 7.70.0(react@19.2.1)
@@ -114,6 +108,12 @@ importers:
       prettier:
         specifier: ^3.7.4
         version: 3.7.4
+      react:
+        specifier: ^19.2.1
+        version: 19.2.1
+      react-dom:
+        specifier: ^19.2.1
+        version: 19.2.1(react@19.2.1)
       stylelint:
         specifier: ^16.26.1
         version: 16.26.1(typescript@5.9.3)
