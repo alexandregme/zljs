@@ -9,6 +9,13 @@ const levelStyles = {
   6: "text-sm font-medium",
 };
 
+const colorStyles = {
+  primary: "text-blue-600",
+  success: "text-green-600",
+  danger: "text-red-600",
+  warning: "text-yellow-600",
+};
+
 const tags = {
   1: "h1",
   2: "h2",
@@ -18,9 +25,9 @@ const tags = {
   6: "h6",
 } as const;
 
-export const Heading = ({ children, level = 1 }: HeadingProps) => {
+export const Heading = ({ children, level = 1, color }: HeadingProps) => {
   const Tag = tags[level];
-  const className = levelStyles[level];
+  const className = `${levelStyles[level]}${color ? ` ${colorStyles[color]}` : ""}`;
 
   return <Tag className={className}>{children}</Tag>;
 };

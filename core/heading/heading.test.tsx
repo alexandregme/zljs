@@ -58,4 +58,32 @@ describe("<Heading /> - Custom Props", () => {
 
     expect(screen.getByRole("heading", { level: 6 })).toBeInTheDocument();
   });
+
+  it("renders with primary color", () => {
+    render(<Heading color="primary">Primary</Heading>);
+    const heading = screen.getByRole("heading");
+
+    expect(heading).toHaveClass("text-blue-600");
+  });
+
+  it("renders with success color", () => {
+    render(<Heading color="success">Success</Heading>);
+    const heading = screen.getByRole("heading");
+
+    expect(heading).toHaveClass("text-green-600");
+  });
+
+  it("renders with danger color", () => {
+    render(<Heading color="danger">Danger</Heading>);
+    const heading = screen.getByRole("heading");
+
+    expect(heading).toHaveClass("text-red-600");
+  });
+
+  it("renders with warning color", () => {
+    render(<Heading color="warning">Warning</Heading>);
+    const heading = screen.getByRole("heading");
+
+    expect(heading).toHaveClass("text-yellow-600");
+  });
 });
