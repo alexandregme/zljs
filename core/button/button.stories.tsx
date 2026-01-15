@@ -59,3 +59,10 @@ export const Colors: Story = {
     </div>
   ),
 };
+
+export const Disabled: Story = {
+  args: {
+    children: "Disabled",
+    disabled: true,
+  },
+};
