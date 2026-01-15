@@ -8,9 +8,26 @@ export const WhatsAppButton = ({
   onClick,
 }: WhatsAppButtonProps) => {
   const handleClick = () => {
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
-    window.open(whatsappUrl, "_blank");
+    const userAgent = navigator?.userAgent ?? "";
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(userAgent);
+    const hasMessage = Boolean(message);
+    const encodedMessage = hasMessage ? encodeURIComponent(message) : "";
+    const whatsappUrl = hasMessage
+      ? `https://wa.me/${phone}?text=${encodedMessage}`
+      : `https://wa.me/${phone}`;
+    const whatsappBusinessUrl = hasMessage
+      ? `whatsapp-business://send?phone=${phone}&text=${encodedMessage}`
+      : `whatsapp-business://send?phone=${phone}`;
+
+    if (isMobile) {
+      if (window.location?.assign) {
+        window.location.assign(whatsappBusinessUrl);
+      } else {
+        window.location.href = whatsappBusinessUrl;
+      }
+    } else {
+      window.open(whatsappUrl, "_blank");
+    }
     onClick?.();
   };
 

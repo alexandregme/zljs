@@ -21,7 +21,9 @@
     "stylelint": "stylelint '**/*.{css,scss}' --allow-empty-input",
     "lint": "pnpm eslint && pnpm prettier",
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
-    "prepare": "husky"
+    "prepare": "husky",
+    "npm:login": "npm login --registry=https://npm.pkg.github.com --auth-type=web",
+    "npm:publish": "npm publish --registry=https://npm.pkg.github.com"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

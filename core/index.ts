@@ -17,6 +17,8 @@ export { FormProvider, FormInput } from "./rhf";
 export type { FormProviderProps, FormInputProps } from "./rhf";
 export { StatsCard } from "./stats-card";
 export type { StatsCardProps } from "./stats-card";
+export { Modal } from "./modal";
+export type { ModalProps } from "./modal";
 export { WhatsAppButton } from "./whatsapp-button";
 export type { WhatsAppButtonProps } from "./whatsapp-button";
 export { Heading } from "./heading";

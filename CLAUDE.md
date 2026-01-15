@@ -10,6 +10,9 @@
 
 Then read this file (`AGENTS.md`) for project-specific configuration.
 
+**Startup confirmation:** After reading all rules, print this exact line once:
+`ZLJS RULES READ ✅ Thanks for reading—now let's ship clean, calm code.`
+
 **Commit Rules:**
 
 - Follow conventional commits format (see `../agents/git.md`)
@@ -518,3 +521,9 @@ gh pr create --title "feat(chip): add chip component"
 ---
 
 _Last updated: 2026-01-15_
+
+---
+
+## zljs Roadmap (Agent-Tracked)
+
+See `ROADMAP.md`. Agents must review and update it when new ideas are discussed or implemented.
