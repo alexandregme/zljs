@@ -64,3 +64,23 @@ export const AllLevels: Story = {
     </div>
   ),
 };
+
+export const Colors: Story = {
+  render: () => (
+    <div className="space-y-4">
+      <Heading level={2}>Default</Heading>
+      <Heading level={2} color="primary">
+        Primary
+      </Heading>
+      <Heading level={2} color="success">
+        Success
+      </Heading>
+      <Heading level={2} color="danger">
+        Danger
+      </Heading>
+      <Heading level={2} color="warning">
+        Warning
+      </Heading>
+    </div>
+  ),
+};
