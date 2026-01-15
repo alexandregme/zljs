@@ -427,34 +427,59 @@ export { Chip } from "./chip"; // Add new component
 
 ---
 
-## Consumer Usage (Ruralissima)
+## Versioning & Releases
 
-This library is consumed by `ruralissima-diagnostico` via pnpm link:
+### Package Distribution
+
+zljs is published to **GitHub Packages** (npm registry). Releases are automatic when tags are pushed.
+
+### Release Process
 
 ```bash
-# Link the library
-pnpm link ../../zljs
+# 1. Ensure you're on main with latest changes
+git checkout main && git pull
+
+# 2. Bump version (choose one)
+npm version patch   # Bug fixes (0.1.0 -> 0.1.1)
+npm version minor   # New features (0.1.0 -> 0.2.0)
+npm version major   # Breaking changes (0.1.0 -> 1.0.0)
+
+# 3. Push with tags (triggers release workflow)
+git push origin main --follow-tags
 ```
 
-```typescript
-// In ruralissima-diagnostico next.config.js
-transpilePackages: ["@zljs/core"];
+### Consumer Setup
+
+**First-time setup** - Create `.npmrc` in project root:
+
+```
+@zljs:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
+**Install the package:**
+
+```bash
+pnpm add @zljs/core
+```
+
+**Usage:**
+
 ```typescript
-// Usage
 import { Button } from '@zljs/core';
 
 <Button onClick={handleClick}>Submit</Button>
 ```
 
+---
+
 ## CI/CD Workflows
 
-| Workflow      | Trigger              | Purpose                                |
-| ------------- | -------------------- | -------------------------------------- |
-| `ci.yml`      | Pull Request to main | Validate code (lint, test, commitlint) |
-| `deploy.yml`  | Push to main         | Build Storybook & deploy               |
-| `release.yml` | Tag push (v\*)       | Create GitHub Release                  |
+| Workflow      | Trigger              | Purpose                                        |
+| ------------- | -------------------- | ---------------------------------------------- |
+| `ci.yml`      | Pull Request to main | Validate code (lint, test, commitlint)         |
+| `deploy.yml`  | Push to main         | Build Storybook & deploy                       |
+| `release.yml` | Tag push (v\*)       | Publish to GitHub Packages & create GH Release |
 
 **IMPORTANT: Never commit directly to main. Always use feature branches and PRs.**
 
@@ -475,10 +500,7 @@ gh pr create --title "feat(chip): add chip component"
 
 # 5. Squash and merge via GitHub
 
-# 6. Release when ready
-git checkout main && git pull
-npm version minor
-git push origin main --follow-tags
+# 6. Release when ready (see Release Process above)
 ```
 
 ---
@@ -495,4 +517,4 @@ git push origin main --follow-tags
 
 ---
 
-_Last updated: 2025-12-10_
+_Last updated: 2026-01-15_
