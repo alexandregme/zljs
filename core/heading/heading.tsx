@@ -27,7 +27,9 @@ const tags = {
 
 export const Heading = ({ children, level = 1, color }: HeadingProps) => {
   const Tag = tags[level];
-  const className = `${levelStyles[level]}${color ? ` ${colorStyles[color]}` : ""}`;
+  const className = [levelStyles[level], color && colorStyles[color]]
+    .filter(Boolean)
+    .join(" ");
 
   return <Tag className={className}>{children}</Tag>;
 };
