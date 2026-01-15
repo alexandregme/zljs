@@ -106,4 +106,25 @@ describe("<Button /> - Custom Props", () => {
 
     expect(button).toHaveClass("bg-yellow-500");
   });
+
+  it("renders Button as disabled", () => {
+    render(<Button disabled>Disabled</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toBeDisabled();
+  });
+
+  it("does not call onClick when disabled", () => {
+    const handleClick = jest.fn();
+    render(
+      <Button disabled onClick={handleClick}>
+        Disabled
+      </Button>,
+    );
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(handleClick).not.toHaveBeenCalled();
+  });
 });

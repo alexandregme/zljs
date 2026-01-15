@@ -8,6 +8,7 @@ export const Button = ({
   color = "primary",
   icon,
   iconPosition = "left",
+  disabled = false,
   "aria-label": ariaLabel,
   onClick,
 }: ButtonProps) => {
@@ -41,6 +42,7 @@ export const Button = ({
   return (
     <button
       type={type}
+      disabled={disabled}
       onClick={onClick}
       aria-label={ariaLabel}
       className={button({ variant, color: isIconOnly ? "none" : color })}

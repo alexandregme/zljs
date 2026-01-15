@@ -1,5 +1,7 @@
+import type { DataColor } from "../types";
+
 export interface StatsCardProps {
   label: string;
   value: string | number;
-  color: "blue" | "red" | "yellow" | "green";
+  color: DataColor;
 }
