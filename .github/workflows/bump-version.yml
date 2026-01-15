@@ -38,7 +38,8 @@ jobs:
           node-version: "20"
 
       - name: Bump version
-        run: npm version ${{ inputs.bump_type }} -m "chore: release v%s"
+        run: |
+          npm version "${{ inputs.bump_type }}" -m "chore: release v%s"
 
       - name: Push changes and tags
         run: git push origin main --follow-tags
