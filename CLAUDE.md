@@ -10,6 +10,9 @@
 
 Then read this file (`AGENTS.md`) for project-specific configuration.
 
+**Startup confirmation:** After reading all rules, print this exact line once:
+`ZLJS RULES READ ✅ Thanks for reading—now let's ship clean, calm code.`
+
 **Commit Rules:**
 
 - Follow conventional commits format (see `../agents/git.md`)
@@ -505,6 +508,195 @@ gh pr create --title "feat(chip): add chip component"
 
 ---
 
+## Consumer Patterns (Using zljs in Apps)
+
+When using zljs components in consumer applications, organize by component type:
+
+### Rule 1: Organize components by type
+
+```
+features/
+└── [feature]/
+    └── components/
+        ├── index.ts           # Barrel exports
+        ├── page/              # Page components (composition only)
+        │   └── FeaturePage.tsx
+        ├── grid/              # Grid components (self-contained)
+        │   └── [listname]/
+        │       ├── [listname].tsx           # Grid implementation
+        │       ├── [listname].interface.tsx # Row type & props
+        │       └── [listname].columns.tsx   # Column definitions
+        └── modal/             # Modal components
+            └── FeatureModal.tsx
+```
+
+### Rule 2: Page components - composition only, no domain logic
+
+Pages only compose components. No data fetching, no transformations:
+
+```typescript
+// page/TinyCrmPage.tsx
+import { useState } from "react";
+import { Heading } from "@alexandregme/zljs";
+import type { TinyCrmContact } from "../../types";
+import { ContactsGrid } from "../grid/contacts/contacts";
+import { ConversationsModal } from "../modal/ConversationsModal";
+
+const TinyCrmPage = () => {
+  const [selectedContact, setSelectedContact] = useState<TinyCrmContact | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenConversations = (contact: TinyCrmContact) => {
+    setSelectedContact(contact);
+    setIsModalOpen(true);
+  };
+
+  return (
+    <div>
+      <Heading level={2}>CRM</Heading>
+      <ContactsGrid onOpenConversations={handleOpenConversations} />
+      <ConversationsModal contact={selectedContact} open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </div>
+  );
+};
+```
+
+### Rule 3: Grid folder - self-contained with own data logic
+
+Each grid gets its own folder named after the list. The grid handles its own data:
+
+```
+grid/
+└── contacts/                      # List name
+    ├── contacts.tsx               # Grid implementation (fetches own data)
+    ├── contacts.interface.tsx     # Row type & props interfaces
+    └── contacts.columns.tsx       # Column definitions
+```
+
+**Grid implementation** - fetches and transforms its own data:
+
+```typescript
+// grid/contacts/contacts.tsx
+import { useSelector } from "react-redux";
+import { DataGrid } from "@alexandregme/zljs";
+import { selectors } from "../../../store";
+import type { ContactsRow, ContactsColumnsProps } from "./contacts.interface";
+import { getContactsColumns } from "./contacts.columns";
+
+export const ContactsGrid = ({ onOpenConversations }: ContactsColumnsProps) => {
+  const contacts = useSelector(selectors.getContacts);
+
+  const rows: ContactsRow[] = contacts.map((contact) => ({
+    id: contact.id,
+    name: contact.name,
+    // ... transform data
+  }));
+
+  const columns = getContactsColumns({ onOpenConversations });
+
+  return <DataGrid<ContactsRow> columns={columns} data={rows} />;
+};
+```
+
+**Interface file** - types and interfaces:
+
+```typescript
+// grid/contacts/contacts.interface.tsx
+import type { Contact } from "../../../types";
+
+export interface ContactsRow {
+  [key: string]: unknown;
+  id: string;
+  name: string;
+  contactData: Contact;
+}
+
+export interface ContactsColumnsProps {
+  onOpenConversations: (contact: Contact) => void;
+}
+```
+
+**Columns file** - column definitions:
+
+```typescript
+// grid/contacts/contacts.columns.tsx
+import { Button, type DataGridColumn } from "@alexandregme/zljs";
+import type { ContactsRow, ContactsColumnsProps } from "./contacts.interface";
+
+export const getContactsColumns = ({
+  onOpenConversations,
+}: ContactsColumnsProps): DataGridColumn<ContactsRow>[] => [
+  { field: "name", headerName: "Name" },
+  {
+    field: "action",
+    headerName: "Action",
+    cellRenderer: ({ data }) =>
+      data ? <Button onClick={() => onOpenConversations(data.contactData)}>Open</Button> : null,
+  },
+];
+```
+
+### Rule 4: State Management
+
+**Current approach: Redux** (established, team familiar)
+
+- Each feature has its own store slice in `[feature]/store/`
+- Grids fetch their own data via `useSelector`
+- Pages don't manage data state, only UI state (modal open/close)
+
+```
+features/
+└── [feature]/
+    ├── store/
+    │   ├── index.ts        # exports actions, selectors, reducer
+    │   ├── slice.ts        # Redux slice
+    │   └── selectors.ts    # Memoized selectors
+    └── components/
+        └── grid/
+            └── [listname]/
+                └── [listname].tsx  # Uses useSelector internally
+```
+
+**Guidelines:**
+
+- Don't switch to Zustand unless starting a new project with simpler needs
+- Keep Redux for existing projects - migration cost not worth it
+- Grids own their data fetching, not pages
+- UI state (modals, tabs) can use local `useState`
+
+### Rule 5: Modals in `modal/` folder
+
+Modal components go in the `modal/` folder:
+
+```typescript
+// modal/CheckoutModal.tsx
+import { Modal } from "@alexandregme/zljs";
+
+interface CheckoutModalProps {
+  data: CheckoutRow | null;
+  open: boolean;
+  onClose: () => void;
+}
+
+export const CheckoutModal = ({ data, open, onClose }: CheckoutModalProps) => {
+  return (
+    <Modal open={open} onClose={onClose} title="Details">
+      {data && <div>{data.customerName}</div>}
+    </Modal>
+  );
+};
+```
+
+### Rule 5: Barrel exports from index.ts
+
+```typescript
+// components/index.ts
+export { default as CheckoutList } from "./page/CheckoutList";
+export { default as AbandonedPage } from "./AbandonedPage";
+```
+
+---
+
 ## Instructions for AI Agents
 
 1. **Read base agents first** - `../agents/frontend.md` and `../agents/testing.md`
@@ -513,8 +705,24 @@ gh pr create --title "feat(chip): add chip component"
 4. **Accessibility first** - Use Radix UI for complex interactions
 5. **Type everything** - Explicit interfaces for all props
 6. **Never commit to main** - Always use feature branches and PRs
-7. **Update this file** - Add new patterns as they emerge
+7. **ALWAYS update this file** - This file is the source of truth. When new patterns emerge, rules change, or conventions are established during a session, update this file immediately. Do not wait until the end of the session.
+
+### Source of Truth Policy
+
+**This CLAUDE.md file and related agent files are the single source of truth for all project conventions.**
+
+- If a pattern is not documented here, document it when you discover or create it
+- If a rule changes, update it here first
+- If you're unsure about a convention, check this file
+- If you establish a new convention with the user, add it here before moving on
+- Consumer patterns, component structures, and coding standards all belong here
 
 ---
 
 _Last updated: 2026-01-15_
+
+---
+
+## zljs Roadmap (Agent-Tracked)
+
+See `ROADMAP.md`. Agents must review and update it when new ideas are discussed or implemented.

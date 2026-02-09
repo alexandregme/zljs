@@ -29,6 +29,7 @@ export default tseslint.config(
       "jest.reporter.js",
       "jest.env.js",
       "__mocks__/",
+      "agent/",
     ],
   },
   storybook.configs["flat/recommended"],

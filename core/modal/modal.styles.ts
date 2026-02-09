@@ -5,7 +5,19 @@ export const overlay = tv({
 });
 
 export const content = tv({
-  base: "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-6 w-full max-w-md focus:outline-none",
+  base: "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-6 w-full focus:outline-none max-h-[90vh] overflow-y-auto",
+  variants: {
+    size: {
+      sm: "max-w-sm",
+      md: "max-w-md",
+      lg: "max-w-2xl",
+      xl: "max-w-4xl",
+      full: "max-w-6xl",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
 });
 
 export const header = tv({

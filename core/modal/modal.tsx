@@ -16,13 +16,14 @@ export const Modal = ({
   title,
   description,
   children,
+  size = "md",
 }: ModalProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <Dialog.Portal>
         <Dialog.Overlay className={overlay()} />
         <Dialog.Content
-          className={content()}
+          className={content({ size })}
           {...(!description && { "aria-describedby": undefined })}
         >
           <div className={header()}>

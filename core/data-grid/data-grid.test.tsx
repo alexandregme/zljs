@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useEffect } from "react";
+import type { ReactNode } from "react";
 import { DataGrid } from "./data-grid";
 import { DataGridColumn } from "./data-grid.interface";
 
@@ -10,7 +11,11 @@ const mockGridApi = {
 
 jest.mock("ag-grid-react", () => ({
   AgGridReact: (props: {
-    columnDefs: { field: string; headerName: string }[];
+    columnDefs: {
+      field: string;
+      headerName: string;
+      cellRenderer?: (params: { data?: Record<string, unknown> }) => ReactNode;
+    }[];
     rowData: Record<string, unknown>[];
     onGridReady?: (params: { api: unknown }) => void;
   }) => {
@@ -36,7 +41,9 @@ jest.mock("ag-grid-react", () => ({
                     key={col.field}
                     data-testid={`cell-${idx}-${col.field}`}
                   >
-                    {String(row[col.field])}
+                    {col.cellRenderer
+                      ? col.cellRenderer({ data: row })
+                      : String(row[col.field])}
                   </span>
                 ))}
               </div>
@@ -119,5 +126,25 @@ describe("<DataGrid /> - Edge Cases", () => {
     );
 
     expect(screen.queryByTestId("data-grid-toolbar")).not.toBeInTheDocument();
+  });
+});
+
+describe("<DataGrid /> - Custom Columns", () => {
+  it("renders custom cell content when cellRenderer is provided", () => {
+    const columns: DataGridColumn[] = [
+      { field: "name", headerName: "Name" },
+      {
+        field: "action",
+        headerName: "Action",
+        cellRenderer: ({ data }) => (
+          <span>{`Contact ${String(data?.name)}`}</span>
+        ),
+      },
+    ];
+    const data = [{ name: "John Doe", action: "whatsapp" }];
+
+    render(<DataGrid columns={columns} data={data} />);
+
+    expect(screen.getByText("Contact John Doe")).toBeInTheDocument();
   });
 });
