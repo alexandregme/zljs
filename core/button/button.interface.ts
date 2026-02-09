@@ -8,7 +8,7 @@ export interface ButtonProps {
   children?: ReactNode;
   type?: "button" | "submit" | "reset";
   variant?: ButtonVariant;
-  color?: SemanticColor | "none";
+  color?: SemanticColor;
   icon?: IconName;
   iconPosition?: "left" | "right";
   disabled?: boolean;

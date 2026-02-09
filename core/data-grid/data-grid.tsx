@@ -38,7 +38,7 @@ const customTheme = themeAlpine.withParams({
   rowHoverColor: tailwind.sky[100],
   selectedRowBackgroundColor: tailwind.blue[100],
   borderColor: tailwind.slate[200],
-  headerColumnBorder: { color: tailwind.slate[600] },
+  headerColumnBorderColor: tailwind.slate[600],
   fontSize: 13,
   headerHeight: 36,
   rowHeight: 32,
