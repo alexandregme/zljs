@@ -1,4 +1,5 @@
 export { Button } from "./button";
+export type { ButtonProps, ButtonVariant } from "./button";
 export { DataGrid } from "./data-grid";
 export type { DataGridColumn, DataGridProps } from "./data-grid";
 export { Checkbox, Error, Form, Input, Radio, Select, TextArea } from "./forms";
@@ -23,3 +24,5 @@ export { WhatsAppButton } from "./whatsapp-button";
 export type { WhatsAppButtonProps } from "./whatsapp-button";
 export { Heading } from "./heading";
 export type { HeadingProps } from "./heading";
+export { Tag } from "./tag";
+export type { TagProps } from "./tag";

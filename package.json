@@ -1,6 +1,6 @@
 {
-  "name": "@zljs/core",
-  "version": "0.2.0",
+  "name": "@alexandregme/zljs",
+  "version": "0.2.1",
   "main": "core/index.ts",
   "types": "core/index.ts",
   "repository": {
@@ -22,8 +22,8 @@
     "lint": "pnpm eslint && pnpm prettier",
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
     "prepare": "husky",
-    "npm:login": "npm login --registry=https://npm.pkg.github.com --auth-type=web",
-    "npm:publish": "npm publish --registry=https://npm.pkg.github.com"
+    "npm:login": "echo \"//npm.pkg.github.com/:_authToken=$(gh auth token)\" >> ~/.npmrc && echo 'Logged in to GitHub Packages'",
+    "npm:publish": "GITHUB_TOKEN=$(gh auth token) npm publish --registry=https://npm.pkg.github.com"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

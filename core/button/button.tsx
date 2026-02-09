@@ -5,6 +5,7 @@ import { button } from "./button.styles";
 export const Button = ({
   children,
   type = "button",
+  variant: variantProp,
   color = "primary",
   icon,
   iconPosition = "left",
@@ -13,7 +14,7 @@ export const Button = ({
   onClick,
 }: ButtonProps) => {
   const isIconOnly = icon && !children;
-  const variant = isIconOnly ? "icon" : "default";
+  const variant = variantProp ?? (isIconOnly ? "icon" : "default");
 
   const renderContent = () => {
     if (!icon) {
@@ -45,7 +46,10 @@ export const Button = ({
       disabled={disabled}
       onClick={onClick}
       aria-label={ariaLabel}
-      className={button({ variant, color: isIconOnly ? "none" : color })}
+      className={button({
+        variant,
+        color: variant === "icon" ? "none" : color,
+      })}
     >
       {renderContent()}
     </button>
