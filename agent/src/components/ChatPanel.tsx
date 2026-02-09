@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import type { Message } from "../hooks/useAgent";
 
 const SUGGESTED_PROMPTS = [
-  "Create a login page with email and password",
-  "Build a dashboard with sidebar and data table",
-  "Design a settings page with profile form",
+  "A simple contact card with name, email and phone",
+  "A pricing card with 3 tiers",
+  "A navbar with logo and 3 links",
 ];
 
 interface ChatPanelProps {
