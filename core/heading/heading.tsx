@@ -1,4 +1,5 @@
 import { HeadingProps } from "./heading.interface";
+import type { SemanticColor } from "../types/colors";
 
 const levelStyles = {
   1: "text-3xl font-bold",
@@ -9,11 +10,12 @@ const levelStyles = {
   6: "text-sm font-medium",
 };
 
-const colorStyles = {
+const colorStyles: Record<SemanticColor, string> = {
   primary: "text-blue-600",
   success: "text-green-600",
   danger: "text-red-600",
   warning: "text-yellow-600",
+  info: "text-sky-600",
 };
 
 const tags = {
