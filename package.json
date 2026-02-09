@@ -23,7 +23,8 @@
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
     "prepare": "husky",
     "npm:login": "echo \"//npm.pkg.github.com/:_authToken=$(gh auth token)\" >> ~/.npmrc && echo 'Logged in to GitHub Packages'",
-    "npm:publish": "GITHUB_TOKEN=$(gh auth token) npm publish --registry=https://npm.pkg.github.com"
+    "npm:publish": "GITHUB_TOKEN=$(gh auth token) npm publish --registry=https://npm.pkg.github.com",
+    "agent:dev": "pnpm --filter @zljs/agent dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

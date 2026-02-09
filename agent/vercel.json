@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd .. && pnpm install && pnpm --filter @zljs/agent build",
+  "outputDirectory": "dist",
+  "framework": "vite"
+}

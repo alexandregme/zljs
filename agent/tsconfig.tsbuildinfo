@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/chatpanel.tsx","./src/components/codeview.tsx","./src/components/header.tsx","./src/components/previewpanel.tsx","./src/hooks/useagent.ts","./src/utils/aiclient.ts","./src/utils/codeparser.ts","./src/utils/componentrenderer.ts"],"version":"5.9.3"}
