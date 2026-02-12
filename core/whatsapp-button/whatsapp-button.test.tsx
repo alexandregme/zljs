@@ -4,7 +4,10 @@ import { WhatsAppButton } from "./whatsapp-button";
 
 const mockOpen = vi.fn();
 const mockAssign = vi.fn();
-Object.defineProperty(window, "open", { value: mockOpen });
+const originalNavigator = window.navigator;
+const originalLocation = window.location;
+
+Object.defineProperty(window, "open", { value: mockOpen, configurable: true });
 
 const setUserAgent = (value: string) => {
   Object.defineProperty(window.navigator, "userAgent", {
@@ -16,6 +19,17 @@ const setUserAgent = (value: string) => {
 beforeEach(() => {
   mockOpen.mockClear();
   mockAssign.mockClear();
+});
+
+afterEach(() => {
+  Object.defineProperty(window, "navigator", {
+    value: originalNavigator,
+    configurable: true,
+  });
+  Object.defineProperty(window, "location", {
+    value: originalLocation,
+    configurable: true,
+  });
 });
 
 describe("<WhatsAppButton /> - Default Props", () => {
@@ -139,11 +153,6 @@ describe("<WhatsAppButton /> - Custom Props", () => {
       "https://wa.me/5511999999999?text=Hello",
       "_blank",
     );
-
-    Object.defineProperty(window, "navigator", {
-      value: { userAgent: "" },
-      configurable: true,
-    });
   });
 
   it("renders custom children", () => {
