@@ -40,9 +40,9 @@ export const WithOnClick: Story = {
 export const Icons: Story = {
   render: () => (
     <div className="flex gap-2 items-center">
-      <Button icon="BiX" aria-label="Close" />
-      <Button icon="BiPlus">Add Item</Button>
-      <Button icon="BiChevronRight" iconPosition="right">
+      <Button icon="X" aria-label="Close" />
+      <Button icon="Plus">Add Item</Button>
+      <Button icon="ChevronRight" iconPosition="right">
         Next
       </Button>
     </div>

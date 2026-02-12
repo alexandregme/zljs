@@ -27,7 +27,7 @@ describe("<FormProvider /> - Default Props", () => {
 
 describe("<FormProvider /> - Custom Props", () => {
   it("calls onSubmit when form is submitted", async () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <FormProvider onSubmit={handleSubmit}>
         <button type="submit">Submit</button>
@@ -42,7 +42,7 @@ describe("<FormProvider /> - Custom Props", () => {
   });
 
   it("provides default values to the form", async () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <FormProvider onSubmit={handleSubmit} defaultValues={{ name: "John" }}>
         <button type="submit">Submit</button>

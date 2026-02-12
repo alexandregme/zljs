@@ -71,7 +71,7 @@ describe("<TextArea /> - Custom Props", () => {
   });
 
   it("calls onChange when textarea value changes", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<TextArea label="Description" onChange={handleChange} />);
     const textarea = screen.getByRole("textbox");
 

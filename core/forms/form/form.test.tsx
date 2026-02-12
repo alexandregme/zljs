@@ -24,7 +24,7 @@ describe("<Form /> - Default Props", () => {
   });
 
   it("prevents default form submission", () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     const { container } = render(
       <Form onSubmit={handleSubmit}>
         <button type="submit">Submit</button>
@@ -40,7 +40,7 @@ describe("<Form /> - Default Props", () => {
 
 describe("<Form /> - Custom Props", () => {
   it("calls onSubmit when form is submitted", () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <Form onSubmit={handleSubmit}>
         <button type="submit">Submit</button>
@@ -77,7 +77,7 @@ describe("<Form /> - Custom Props", () => {
   });
 
   it("does not call onSubmit when form is disabled", () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <Form onSubmit={handleSubmit} disabled>
         <button type="submit">Submit</button>

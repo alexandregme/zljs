@@ -23,6 +23,6 @@
       "@zljs/rhf": ["core/rhf/index.ts"]
     }
   },
-  "include": ["core/**/*", "jest.setup.ts"],
+  "include": ["core/**/*", "vitest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -32,7 +32,7 @@ export const WhatsAppButton = ({
   };
 
   return (
-    <Button color="success" icon="BiLogoWhatsapp" onClick={handleClick}>
+    <Button color="success" icon="SiWhatsapp" onClick={handleClick}>
       {children}
     </Button>
   );

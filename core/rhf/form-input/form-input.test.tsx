@@ -66,7 +66,7 @@ describe("<FormInput /> - Custom Props", () => {
   });
 
   it("submits form with input value", async () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <FormProvider onSubmit={handleSubmit}>
         <FormInput name="email" label="Email" />

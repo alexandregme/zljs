@@ -48,7 +48,7 @@ describe("<Radio /> - Custom Props", () => {
   });
 
   it("calls onChange when clicked", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(
       <Radio
         label="Option 1"

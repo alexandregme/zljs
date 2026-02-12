@@ -66,7 +66,7 @@ describe("<Select /> - Custom Props", () => {
   });
 
   it("calls onChange when selection changes", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(
       <Select
         label="Choose option"

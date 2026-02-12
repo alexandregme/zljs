@@ -67,7 +67,7 @@ describe("<Input /> - Custom Props", () => {
   });
 
   it("calls onChange when input value changes", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Input label="Username" onChange={handleChange} />);
     const input = screen.getByRole("textbox");
 
@@ -77,7 +77,7 @@ describe("<Input /> - Custom Props", () => {
   });
 
   it("calls onKeyDown when key is pressed", () => {
-    const handleKeyDown = jest.fn();
+    const handleKeyDown = vi.fn();
     render(<Input label="Username" onKeyDown={handleKeyDown} />);
     const input = screen.getByRole("textbox");
 

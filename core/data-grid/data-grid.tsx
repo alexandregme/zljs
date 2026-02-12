@@ -50,6 +50,7 @@ export const DataGrid = <
 >({
   columns,
   data,
+  showSearch = true,
 }: DataGridProps<T>) => {
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
   const [displayedRows, setDisplayedRows] = useState(0);
@@ -110,7 +111,7 @@ export const DataGrid = <
       data-testid="data-grid"
       className="grid grid-rows-[auto,auto,1fr] grid-cols-1 h-full w-full"
     >
-      <DataGridToolbar gridApi={gridApi} />
+      {showSearch && <DataGridToolbar gridApi={gridApi} />}
       <DataGridStatusBar
         totalRows={data.length}
         displayedRows={displayedRows}

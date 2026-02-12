@@ -48,7 +48,7 @@ describe("<RegistrationForm />", () => {
   });
 
   it("submits form with valid data", async () => {
-    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
     render(<RegistrationForm />);
 
     fireEvent.change(screen.getByLabelText("First Name"), {

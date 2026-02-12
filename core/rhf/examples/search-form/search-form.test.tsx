@@ -26,7 +26,7 @@ describe("<SearchForm />", () => {
   });
 
   it("submits form with search value", async () => {
-    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
     render(<SearchForm />);
 
     fireEvent.change(screen.getByLabelText("Search"), {

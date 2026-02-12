@@ -37,10 +37,10 @@ export const DataGridToolbar = ({ gridApi }: DataGridToolbarProps) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <Button icon="BiSearch" color="primary" onClick={handleSearch}>
+      <Button icon="Search" color="primary" onClick={handleSearch}>
         Buscar
       </Button>
-      <Button icon="BiX" color="danger" onClick={handleClear}>
+      <Button icon="X" color="danger" onClick={handleClear}>
         Limpar
       </Button>
     </div>

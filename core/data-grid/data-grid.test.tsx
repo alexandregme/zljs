@@ -6,10 +6,11 @@ import { DataGrid } from "./data-grid";
 import { DataGridColumn } from "./data-grid.interface";
 
 const mockGridApi = {
-  setGridOption: jest.fn(),
+  setGridOption: vi.fn(),
+  getDisplayedRowCount: vi.fn(() => 0),
 };
 
-jest.mock("ag-grid-react", () => ({
+vi.mock("ag-grid-react", () => ({
   AgGridReact: (props: {
     columnDefs: {
       field: string;
@@ -73,7 +74,7 @@ describe("<DataGrid /> - Default Props", () => {
     const grid = screen.getByTestId("data-grid");
 
     expect(grid).toBeInTheDocument();
-    expect(grid).toHaveClass("ag-theme-alpine");
+    expect(grid).toHaveClass("grid");
   });
 
   it("renders column headers correctly", () => {

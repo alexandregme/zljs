@@ -2,15 +2,15 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Toaster } from "./toaster";
 
-jest.mock("sonner", () => ({
-  Toaster: jest.fn(() => null),
+vi.mock("sonner", () => ({
+  Toaster: vi.fn(() => null),
 }));
 
 import { Toaster as SonnerToaster } from "sonner";
 
 describe("<Toaster />", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("renders Toaster without crashing", () => {
