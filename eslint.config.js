@@ -13,7 +13,6 @@ export default tseslint.config(
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.jest,
       },
     },
     rules: {
@@ -26,9 +25,7 @@ export default tseslint.config(
       "dist/",
       "coverage/",
       "storybook-static/",
-      "jest.reporter.js",
-      "jest.env.js",
-      "__mocks__/",
+      "vitest.coverage-reporter.cjs",
       "agent/",
     ],
   },

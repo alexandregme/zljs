@@ -5,7 +5,7 @@ import { GridApi } from "ag-grid-community";
 
 const createMockGridApi = (): GridApi =>
   ({
-    setGridOption: jest.fn(),
+    setGridOption: vi.fn(),
   }) as unknown as GridApi;
 
 describe("<DataGridToolbar /> - Default Props", () => {

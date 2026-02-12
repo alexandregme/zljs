@@ -40,7 +40,7 @@ describe("<Checkbox /> - Custom Props", () => {
   });
 
   it("calls onChange when clicked", () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Checkbox label="Accept terms" onChange={handleChange} />);
     const checkbox = screen.getByRole("checkbox");
 

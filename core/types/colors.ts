@@ -6,7 +6,8 @@ export type SemanticColor =
   | "success"
   | "danger"
   | "warning"
-  | "info";
+  | "info"
+  | "none";
 
 /**
  * Literal colors for data visualization components (StatsCard, etc.)

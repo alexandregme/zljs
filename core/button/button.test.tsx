@@ -42,42 +42,42 @@ describe("<Button /> - Custom Props", () => {
   });
 
   it("renders Button with icon only", () => {
-    render(<Button icon="BiX" aria-label="Close" />);
+    render(<Button icon="X" aria-label="Close" />);
     const button = screen.getByRole("button", { name: "Close" });
 
     expect(button).toHaveClass("bg-transparent");
-    expect(screen.getByTestId("BiX")).toBeInTheDocument();
+    expect(screen.getByTestId("X")).toBeInTheDocument();
   });
 
   it("renders Button with icon on left", () => {
-    render(<Button icon="BiPlus">Add Item</Button>);
+    render(<Button icon="Plus">Add Item</Button>);
     const button = screen.getByRole("button");
 
     expect(button).toHaveTextContent("Add Item");
-    expect(screen.getByTestId("BiPlus")).toBeInTheDocument();
+    expect(screen.getByTestId("Plus")).toBeInTheDocument();
   });
 
   it("renders Button with icon on right", () => {
     render(
-      <Button icon="BiChevronRight" iconPosition="right">
+      <Button icon="ChevronRight" iconPosition="right">
         Next
       </Button>,
     );
     const button = screen.getByRole("button");
 
     expect(button).toHaveTextContent("Next");
-    expect(screen.getByTestId("BiChevronRight")).toBeInTheDocument();
+    expect(screen.getByTestId("ChevronRight")).toBeInTheDocument();
   });
 
   it("renders Button with aria-label", () => {
-    render(<Button icon="BiX" aria-label="Close" />);
+    render(<Button icon="X" aria-label="Close" />);
     const button = screen.getByRole("button", { name: "Close" });
 
     expect(button).toBeInTheDocument();
   });
 
   it("calls onClick when clicked", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click me</Button>);
     const button = screen.getByRole("button");
 
@@ -115,7 +115,7 @@ describe("<Button /> - Custom Props", () => {
   });
 
   it("does not call onClick when disabled", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(
       <Button disabled onClick={handleClick}>
         Disabled

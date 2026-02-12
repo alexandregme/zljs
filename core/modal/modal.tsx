@@ -28,7 +28,7 @@ export const Modal = ({
         >
           <div className={header()}>
             <Dialog.Title className={titleStyle()}>{title}</Dialog.Title>
-            <Button icon="BiX" aria-label="Close" onClick={onClose} />
+            <Button icon="X" aria-label="Close" onClick={onClose} />
           </div>
           {description && (
             <Dialog.Description className={descriptionStyle()}>

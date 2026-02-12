@@ -26,7 +26,7 @@ describe("<LoginForm />", () => {
   });
 
   it("submits form with valid data", async () => {
-    const alertMock = jest.spyOn(window, "alert").mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
     render(<LoginForm />);
 
     fireEvent.change(screen.getByLabelText("Email"), {

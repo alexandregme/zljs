@@ -47,7 +47,7 @@ describe("<Modal /> - Custom Props", () => {
   });
 
   it("calls onClose when escape key is pressed", () => {
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     render(<Modal open={true} onClose={handleClose} title="Test Modal" />);
 
     fireEvent.keyDown(document, { key: "Escape" });
@@ -62,7 +62,7 @@ describe("<Modal /> - Custom Props", () => {
   });
 
   it("calls onClose when close button is clicked", () => {
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     render(<Modal open={true} onClose={handleClose} title="Test Modal" />);
 
     fireEvent.click(screen.getByRole("button", { name: "Close" }));

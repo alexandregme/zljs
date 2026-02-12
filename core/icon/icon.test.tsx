@@ -13,65 +13,75 @@ describe("iconNames", () => {
 
 describe("<Icon /> - Default Props", () => {
   it("renders icon correctly", () => {
-    render(<Icon name="BiX" />);
+    render(<Icon name="X" />);
 
-    const iconElement = screen.getByTestId("BiX");
+    const iconElement = screen.getByTestId("X");
 
     expect(iconElement).toBeInTheDocument();
     expect(iconElement.querySelector("svg")).toBeInTheDocument();
   });
 });
 
+describe("<Icon /> - Invalid Icon", () => {
+  it("renders empty fragment for unknown icon name", () => {
+    const { container } = render(
+      <Icon name={"InvalidIcon" as unknown as "Check"} />,
+    );
+
+    expect(container.innerHTML).toBe("");
+  });
+});
+
 describe("<Icon /> - Custom Props", () => {
   it("renders different icon when name changes", () => {
-    render(<Icon name="BiCheck" />);
+    render(<Icon name="Check" />);
 
-    const iconElement = screen.getByTestId("BiCheck");
-
-    expect(iconElement).toBeInTheDocument();
-    expect(iconElement.querySelector("svg")).toBeInTheDocument();
-  });
-
-  it("renders WhatsApp icon", () => {
-    render(<Icon name="BiLogoWhatsapp" />);
-
-    const iconElement = screen.getByTestId("BiLogoWhatsapp");
+    const iconElement = screen.getByTestId("Check");
 
     expect(iconElement).toBeInTheDocument();
     expect(iconElement.querySelector("svg")).toBeInTheDocument();
   });
 
-  it("renders Edit icon", () => {
-    render(<Icon name="BiEdit" />);
+  it("renders WhatsApp brand icon", () => {
+    render(<Icon name="SiWhatsapp" />);
 
-    const iconElement = screen.getByTestId("BiEdit");
+    const iconElement = screen.getByTestId("SiWhatsapp");
 
     expect(iconElement).toBeInTheDocument();
     expect(iconElement.querySelector("svg")).toBeInTheDocument();
   });
 
-  it("renders Trash icon", () => {
-    render(<Icon name="BiTrash" />);
+  it("renders Pencil icon", () => {
+    render(<Icon name="Pencil" />);
 
-    const iconElement = screen.getByTestId("BiTrash");
+    const iconElement = screen.getByTestId("Pencil");
+
+    expect(iconElement).toBeInTheDocument();
+    expect(iconElement.querySelector("svg")).toBeInTheDocument();
+  });
+
+  it("renders Trash2 icon", () => {
+    render(<Icon name="Trash2" />);
+
+    const iconElement = screen.getByTestId("Trash2");
 
     expect(iconElement).toBeInTheDocument();
     expect(iconElement.querySelector("svg")).toBeInTheDocument();
   });
 
   it("renders Save icon", () => {
-    render(<Icon name="BiSave" />);
+    render(<Icon name="Save" />);
 
-    const iconElement = screen.getByTestId("BiSave");
+    const iconElement = screen.getByTestId("Save");
 
     expect(iconElement).toBeInTheDocument();
     expect(iconElement.querySelector("svg")).toBeInTheDocument();
   });
 
-  it("renders Refresh icon", () => {
-    render(<Icon name="BiRefresh" />);
+  it("renders RefreshCw icon", () => {
+    render(<Icon name="RefreshCw" />);
 
-    const iconElement = screen.getByTestId("BiRefresh");
+    const iconElement = screen.getByTestId("RefreshCw");
 
     expect(iconElement).toBeInTheDocument();
     expect(iconElement.querySelector("svg")).toBeInTheDocument();

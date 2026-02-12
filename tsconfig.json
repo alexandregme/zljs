@@ -12,6 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
+    "types": ["vitest/globals"],
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
@@ -23,6 +24,6 @@
       "@zljs/rhf": ["core/rhf/index.ts"]
     }
   },
-  "include": ["core/**/*", "jest.setup.ts"],
+  "include": ["core/**/*", "vitest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }

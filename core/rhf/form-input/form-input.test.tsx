@@ -66,7 +66,7 @@ describe("<FormInput /> - Custom Props", () => {
   });
 
   it("submits form with input value", async () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <FormProvider onSubmit={handleSubmit}>
         <FormInput name="email" label="Email" />
@@ -80,9 +80,10 @@ describe("<FormInput /> - Custom Props", () => {
     fireEvent.click(screen.getByRole("button"));
 
     await waitFor(() => {
-      expect(handleSubmit.mock.calls[0][0]).toEqual({
-        email: "test@example.com",
-      });
+      expect(handleSubmit).toHaveBeenCalledWith(
+        { email: "test@example.com" },
+        expect.anything(),
+      );
     });
   });
 
