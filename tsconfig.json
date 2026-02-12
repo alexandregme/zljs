@@ -12,6 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
+    "types": ["vitest/globals"],
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,

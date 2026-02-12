@@ -11,7 +11,7 @@ export const WhatsAppButton = ({
     const userAgent = navigator?.userAgent ?? "";
     const isMobile = /Android|iPhone|iPad|iPod/i.test(userAgent);
     const hasMessage = Boolean(message);
-    const encodedMessage = hasMessage ? encodeURIComponent(message) : "";
+    const encodedMessage = hasMessage ? encodeURIComponent(message!) : "";
     const whatsappUrl = hasMessage
       ? `https://wa.me/${phone}?text=${encodedMessage}`
       : `https://wa.me/${phone}`;

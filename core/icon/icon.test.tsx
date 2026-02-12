@@ -22,6 +22,16 @@ describe("<Icon /> - Default Props", () => {
   });
 });
 
+describe("<Icon /> - Invalid Icon", () => {
+  it("renders empty fragment for unknown icon name", () => {
+    const { container } = render(
+      <Icon name={"InvalidIcon" as unknown as "Check"} />,
+    );
+
+    expect(container.innerHTML).toBe("");
+  });
+});
+
 describe("<Icon /> - Custom Props", () => {
   it("renders different icon when name changes", () => {
     render(<Icon name="Check" />);

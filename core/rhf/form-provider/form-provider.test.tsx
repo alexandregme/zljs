@@ -52,7 +52,10 @@ describe("<FormProvider /> - Custom Props", () => {
     fireEvent.click(screen.getByRole("button"));
 
     await waitFor(() => {
-      expect(handleSubmit.mock.calls[0][0]).toEqual({ name: "John" });
+      expect(handleSubmit).toHaveBeenCalledWith(
+        { name: "John" },
+        expect.anything(),
+      );
     });
   });
 });

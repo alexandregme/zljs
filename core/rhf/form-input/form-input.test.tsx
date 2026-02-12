@@ -80,9 +80,10 @@ describe("<FormInput /> - Custom Props", () => {
     fireEvent.click(screen.getByRole("button"));
 
     await waitFor(() => {
-      expect(handleSubmit.mock.calls[0][0]).toEqual({
-        email: "test@example.com",
-      });
+      expect(handleSubmit).toHaveBeenCalledWith(
+        { email: "test@example.com" },
+        expect.anything(),
+      );
     });
   });
 

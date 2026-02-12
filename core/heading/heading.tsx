@@ -16,6 +16,7 @@ const colorStyles: Record<SemanticColor, string> = {
   danger: "text-red-600",
   warning: "text-yellow-600",
   info: "text-sky-600",
+  none: "",
 };
 
 const tags = {

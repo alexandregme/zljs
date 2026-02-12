@@ -10,6 +10,8 @@ export const Icon = ({ name }: IconProps) => {
     ? brandIcons[name]
     : (LucideIcons[name as keyof typeof LucideIcons] as React.ElementType);
 
+  if (!IconComponent) return <></>;
+
   return (
     <span data-testid={name}>
       <IconComponent size={16} />
