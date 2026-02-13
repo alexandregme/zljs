@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants";
 
 export const sidebar = tv({
-  base: "h-screen bg-neutral-900 text-neutral-300 flex flex-col overflow-hidden transition-all duration-200",
+  base: "h-screen bg-neutral-800 text-neutral-300 flex flex-col overflow-hidden transition-all duration-200",
   variants: {
     collapsed: {
       true: "w-14",
@@ -18,19 +18,19 @@ export const nav = tv({
 });
 
 export const header = tv({
-  base: "shrink-0 border-b border-neutral-700/50 grid p-2",
+  base: "shrink-0 border-b border-neutral-600/50 grid p-2",
 });
 
 export const section = tv({
-  base: "border-b border-neutral-700/50 last:border-b-0 grid gap-1 p-2",
+  base: "border-b border-neutral-600/50 last:border-b-0 grid gap-1 p-2",
 });
 
 export const item = tv({
   base: "flex w-full items-center rounded-md text-sm whitespace-nowrap transition-colors cursor-pointer p-1",
   variants: {
     active: {
-      true: "bg-neutral-800 text-white",
-      false: "text-neutral-400 hover:bg-neutral-800/50 hover:text-white",
+      true: "bg-neutral-700 text-white",
+      false: "text-neutral-400 hover:bg-neutral-700/50 hover:text-white",
     },
   },
   defaultVariants: {
@@ -55,11 +55,11 @@ export const itemLabel = tv({
 });
 
 export const footer = tv({
-  base: "shrink-0 border-t border-neutral-700/50 p-3 flex items-center gap-3 whitespace-nowrap",
+  base: "shrink-0 border-t border-neutral-600/50 p-3 flex items-center gap-3 whitespace-nowrap",
 });
 
 export const avatar = tv({
-  base: "shrink-0 w-8 h-8 rounded-full bg-neutral-700 text-white text-xs font-medium flex items-center justify-center",
+  base: "shrink-0 w-8 h-8 rounded-full bg-neutral-600 text-white text-xs font-medium flex items-center justify-center",
 });
 
 export const userInfo = tv({
@@ -75,5 +75,5 @@ export const userEmail = tv({
 });
 
 export const toggleButton = tv({
-  base: "shrink-0 border-t border-neutral-700/50 grid p-2 [&>button]:justify-start [&>button]:overflow-hidden [&>button]:whitespace-nowrap",
+  base: "shrink-0 border-t border-neutral-600/50 grid p-2 [&>button]:justify-start [&>button]:overflow-hidden [&>button]:whitespace-nowrap",
 });

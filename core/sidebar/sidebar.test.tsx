@@ -16,7 +16,7 @@ vi.mock("next/link", () => ({
 const sections: SidebarSection[] = [
   {
     items: [
-      { icon: "Home", label: "Dashboard", href: "/dashboard" },
+      { icon: "LayoutDashboard", label: "Dashboard", href: "/dashboard" },
       { icon: "MessageSquare", label: "Messenger", href: "/messenger" },
     ],
   },
@@ -40,6 +40,10 @@ const defaultProps = {
   onLogout: vi.fn(),
 };
 
+beforeEach(() => {
+  defaultProps.onLogout = vi.fn();
+});
+
 describe("<Sidebar /> - Default Props", () => {
   it("renders nav with aria-label", () => {
     render(<Sidebar {...defaultProps} />);
@@ -61,7 +65,8 @@ describe("<Sidebar /> - Default Props", () => {
   it("renders icons in items", () => {
     render(<Sidebar {...defaultProps} />);
 
-    expect(screen.getAllByTestId("Home")).toHaveLength(2);
+    expect(screen.getByTestId("Home")).toBeInTheDocument();
+    expect(screen.getByTestId("LayoutDashboard")).toBeInTheDocument();
     expect(screen.getByTestId("MessageSquare")).toBeInTheDocument();
     expect(screen.getByTestId("Store")).toBeInTheDocument();
     expect(screen.getByTestId("ShoppingCart")).toBeInTheDocument();

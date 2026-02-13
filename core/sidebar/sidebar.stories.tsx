@@ -6,7 +6,7 @@ import type { SidebarSection } from "./sidebar.interface";
 const sections: SidebarSection[] = [
   {
     items: [
-      { icon: "Home", label: "Dashboard", href: "/dashboard" },
+      { icon: "LayoutDashboard", label: "Dashboard", href: "/dashboard" },
       { icon: "MessageSquare", label: "Messenger", href: "/messenger" },
       { icon: "Users", label: "Clients", href: "/clients" },
     ],
@@ -56,6 +56,7 @@ export const Default: Story = {
     sections,
     user,
     collapseLabel: "Close menu",
+    homeLabel: "Home",
     onLogout: () => {},
   },
 };
@@ -66,6 +67,7 @@ export const Collapsed: Story = {
     user,
     defaultCollapsed: true,
     collapseLabel: "Close menu",
+    homeLabel: "Home",
     onLogout: () => {},
   },
 };
@@ -76,6 +78,18 @@ export const WithActiveItem: Story = {
     user,
     activeHref: "/messenger",
     collapseLabel: "Close menu",
+    homeLabel: "Home",
+    onLogout: () => {},
+  },
+};
+
+export const WithActiveHome: Story = {
+  args: {
+    sections,
+    user,
+    activeHref: "/",
+    collapseLabel: "Close menu",
+    homeLabel: "Home",
     onLogout: () => {},
   },
 };
@@ -96,6 +110,7 @@ const InteractiveTemplate = () => {
         user={user}
         activeHref={active}
         collapseLabel="Close menu"
+        homeLabel="Home"
         onLogout={() => alert("Logout")}
       />
       <div style={{ flex: 1, padding: 24, background: "#f5f5f5" }}>

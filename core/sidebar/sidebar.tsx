@@ -44,7 +44,11 @@ export const Sidebar = ({
   return (
     <aside className={sidebar({ collapsed })}>
       {homeHref && (
-        <Link href={homeHref} className={header()}>
+        <Link
+          href={homeHref}
+          className={header()}
+          aria-label={homeLabel || "Home"}
+        >
           <span className={item({ active: homeHref === activeHref })}>
             <span className={itemIcon()}>
               <Icon name="Home" />
