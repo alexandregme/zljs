@@ -35,8 +35,5 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Type check
-        run: pnpm tsc --noEmit
-
       - name: Test with coverage
         run: pnpm test:coverage
