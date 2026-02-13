@@ -20,5 +20,8 @@ export interface SidebarProps {
   user: SidebarUser;
   activeHref?: string;
   defaultCollapsed?: boolean;
+  collapseLabel?: string;
+  homeHref?: string | false;
+  homeLabel?: string;
   onLogout: () => void;
 }

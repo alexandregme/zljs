@@ -8,7 +8,7 @@ export const button = tv({
         "px-4 py-2 text-white text-sm gap-2 rounded-md focus:ring-2 focus:ring-offset-2",
       icon: "p-1 bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:ring-gray-500 rounded-md focus:ring-2 focus:ring-offset-2",
       ghost:
-        "p-2 gap-2 text-sm bg-transparent text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-md focus-visible:ring-2 focus-visible:ring-neutral-600",
+        "px-3 py-2 gap-3 text-sm bg-transparent text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-md focus-visible:ring-2 focus-visible:ring-neutral-600",
       link: "text-xs underline bg-transparent hover:no-underline",
     },
     color: {

@@ -17,8 +17,12 @@ export const nav = tv({
   base: "flex-1 min-h-0 overflow-y-auto overflow-x-hidden",
 });
 
+export const header = tv({
+  base: "shrink-0 border-b border-neutral-700/50 grid p-2",
+});
+
 export const section = tv({
-  base: "border-b border-neutral-700/50 grid gap-1 p-2",
+  base: "border-b border-neutral-700/50 last:border-b-0 grid gap-1 p-2",
 });
 
 export const item = tv({
@@ -55,7 +59,7 @@ export const footer = tv({
 });
 
 export const avatar = tv({
-  base: "w-8 h-8 rounded-full bg-neutral-700 text-white text-xs font-medium flex items-center justify-center",
+  base: "shrink-0 w-8 h-8 rounded-full bg-neutral-700 text-white text-xs font-medium flex items-center justify-center",
 });
 
 export const userInfo = tv({
@@ -67,9 +71,9 @@ export const userName = tv({
 });
 
 export const userEmail = tv({
-  base: "text-xs text-neutral-400 truncate",
+  base: "text-xs text-neutral-400",
 });
 
 export const toggleButton = tv({
-  base: "px-2 py-2 whitespace-nowrap",
+  base: "shrink-0 border-t border-neutral-700/50 grid p-2 [&>button]:justify-start [&>button]:overflow-hidden [&>button]:whitespace-nowrap",
 });

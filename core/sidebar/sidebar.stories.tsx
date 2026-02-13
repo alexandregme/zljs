@@ -55,6 +55,7 @@ export const Default: Story = {
   args: {
     sections,
     user,
+    collapseLabel: "Close menu",
     onLogout: () => {},
   },
 };
@@ -64,6 +65,7 @@ export const Collapsed: Story = {
     sections,
     user,
     defaultCollapsed: true,
+    collapseLabel: "Close menu",
     onLogout: () => {},
   },
 };
@@ -73,6 +75,7 @@ export const WithActiveItem: Story = {
     sections,
     user,
     activeHref: "/messenger",
+    collapseLabel: "Close menu",
     onLogout: () => {},
   },
 };
@@ -92,6 +95,7 @@ const InteractiveTemplate = () => {
         sections={sections}
         user={user}
         activeHref={active}
+        collapseLabel="Close menu"
         onLogout={() => alert("Logout")}
       />
       <div style={{ flex: 1, padding: 24, background: "#f5f5f5" }}>

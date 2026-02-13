@@ -5,6 +5,7 @@ import { Icon } from "../icon";
 import { Button } from "../button";
 import {
   sidebar,
+  header,
   nav,
   section as sectionStyle,
   item,
@@ -31,6 +32,9 @@ export const Sidebar = ({
   user,
   activeHref,
   defaultCollapsed = false,
+  collapseLabel,
+  homeHref = "/",
+  homeLabel,
   onLogout,
 }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
@@ -39,6 +43,16 @@ export const Sidebar = ({
 
   return (
     <aside className={sidebar({ collapsed })}>
+      {homeHref && (
+        <Link href={homeHref} className={header()}>
+          <span className={item({ active: homeHref === activeHref })}>
+            <span className={itemIcon()}>
+              <Icon name="Home" />
+            </span>
+            <span className={itemLabel({ collapsed })}>{homeLabel}</span>
+          </span>
+        </Link>
+      )}
       <nav aria-label="Main navigation" className={nav()}>
         {sections.map((sectionData, i) => (
           <div key={i} className={sectionStyle()}>
@@ -86,7 +100,7 @@ export const Sidebar = ({
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           onClick={() => setCollapsed(!collapsed)}
         >
-          {collapsed ? undefined : "Close menu"}
+          {collapseLabel}
         </Button>
       </div>
     </aside>

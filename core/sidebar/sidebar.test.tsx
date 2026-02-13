@@ -36,6 +36,7 @@ const user: SidebarUser = {
 const defaultProps = {
   sections,
   user,
+  collapseLabel: "Close menu",
   onLogout: vi.fn(),
 };
 
@@ -60,7 +61,7 @@ describe("<Sidebar /> - Default Props", () => {
   it("renders icons in items", () => {
     render(<Sidebar {...defaultProps} />);
 
-    expect(screen.getByTestId("Home")).toBeInTheDocument();
+    expect(screen.getAllByTestId("Home")).toHaveLength(2);
     expect(screen.getByTestId("MessageSquare")).toBeInTheDocument();
     expect(screen.getByTestId("Store")).toBeInTheDocument();
     expect(screen.getByTestId("ShoppingCart")).toBeInTheDocument();
@@ -119,13 +120,37 @@ describe("<Sidebar /> - Default Props", () => {
     expect(screen.getByText("Alexandre Mendes")).toBeVisible();
   });
 
-  it("renders links with correct href", () => {
+  it("renders home link by default", () => {
     render(<Sidebar {...defaultProps} />);
+
+    const links = screen.getAllByRole("link");
+
+    expect(links[0]).toHaveAttribute("href", "/");
+  });
+
+  it("renders home label when provided", () => {
+    render(<Sidebar {...defaultProps} homeLabel="Ruralissima" />);
+
+    expect(screen.getByText("Ruralissima")).toBeInTheDocument();
+  });
+
+  it("hides home link when homeHref is false", () => {
+    render(<Sidebar {...defaultProps} homeHref={false} />);
 
     const links = screen.getAllByRole("link");
 
     expect(links).toHaveLength(4);
     expect(links[0]).toHaveAttribute("href", "/dashboard");
+  });
+
+  it("renders links with correct href", () => {
+    render(<Sidebar {...defaultProps} />);
+
+    const links = screen.getAllByRole("link");
+
+    expect(links).toHaveLength(5);
+    expect(links[0]).toHaveAttribute("href", "/");
+    expect(links[1]).toHaveAttribute("href", "/dashboard");
   });
 });
 
@@ -170,10 +195,10 @@ describe("<Sidebar /> - Collapse", () => {
     expect(screen.getByText("Close menu")).toBeInTheDocument();
   });
 
-  it("hides Close menu text when collapsed", () => {
+  it("keeps Close menu text in DOM when collapsed (hidden via CSS)", () => {
     render(<Sidebar {...defaultProps} defaultCollapsed={true} />);
 
-    expect(screen.queryByText("Close menu")).not.toBeInTheDocument();
+    expect(screen.getByText("Close menu")).toBeInTheDocument();
   });
 });
 
