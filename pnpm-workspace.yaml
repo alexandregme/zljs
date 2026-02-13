@@ -1,6 +1,9 @@
 packages:
-  - "."
-  - "agent"
+  - .
+  - agent
 
 ignoredBuiltDependencies:
   - esbuild
+
+onlyBuiltDependencies:
+  - sharp

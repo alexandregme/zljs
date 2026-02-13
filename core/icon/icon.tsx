@@ -1,8 +1,13 @@
 import * as LucideIcons from "lucide-react";
-import { SiWhatsapp } from "react-icons/si";
+import { SiWhatsapp, SiFacebook, SiInstagram, SiShopify } from "react-icons/si";
 import type { IconProps } from "./icon.interface";
 
-const brandIcons: Record<string, React.ElementType> = { SiWhatsapp };
+const brandIcons: Record<string, React.ElementType> = {
+  SiWhatsapp,
+  SiFacebook,
+  SiInstagram,
+  SiShopify,
+};
 
 export const Icon = ({ name }: IconProps) => {
   const isBrand = name.startsWith("Si");

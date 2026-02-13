@@ -1,4 +1,20 @@
-@import "tailwindcss";
+/* Global Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(228, 231, 234, 0.5);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.75);
+}
 
 /* AG Grid Custom Styles */
 .ag-theme-alpine {

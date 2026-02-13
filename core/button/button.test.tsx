@@ -107,6 +107,13 @@ describe("<Button /> - Custom Props", () => {
     expect(button).toHaveClass("bg-yellow-500");
   });
 
+  it("renders Button with ghost variant", () => {
+    render(<Button variant="ghost" icon="LogOut" aria-label="Logout" />);
+    const button = screen.getByRole("button", { name: "Logout" });
+
+    expect(button).toHaveClass("text-neutral-400");
+  });
+
   it("renders Button as disabled", () => {
     render(<Button disabled>Disabled</Button>);
     const button = screen.getByRole("button");

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import type { IconName } from "../icon/icon.interface";
 import type { SemanticColor } from "../types";
 
-export type ButtonVariant = "default" | "icon" | "link";
+export type ButtonVariant = "default" | "icon" | "ghost" | "link";
 
 export interface ButtonProps {
   children?: ReactNode;

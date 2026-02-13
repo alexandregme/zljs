@@ -1,6 +1,7 @@
 {
   "name": "@zljs/core",
   "version": "0.2.0",
+  "type": "module",
   "main": "core/index.ts",
   "types": "core/index.ts",
   "repository": {
@@ -19,7 +20,7 @@
     "eslint": "eslint ./ --color --fix",
     "prettier": "prettier --write .",
     "stylelint": "stylelint '**/*.{css,scss}' --allow-empty-input",
-    "lint": "pnpm eslint && pnpm prettier",
+    "lint": "pnpm tsc --noEmit && pnpm eslint && pnpm prettier",
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
     "prepare": "husky",
     "npm:login": "npm login --registry=https://npm.pkg.github.com --auth-type=web",
@@ -35,7 +36,7 @@
     "react-hook-form": "^7.70.0",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.7",
-    "storybook": "^10.2.7",
+    "storybook": "^10.2.8",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
     "zod": "^4.3.5"
@@ -44,7 +45,7 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@eslint/js": "^9.39.1",
-    "@storybook/react-vite": "^10.1.11",
+    "@storybook/react-vite": "^10.2.8",
     "@tailwindcss/vite": "^4.1.18",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -56,7 +57,9 @@
     "eslint-plugin-storybook": "10.1.11",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
+    "jsdom": "^28.0.0",
     "lint-staged": "^16.2.7",
+    "next": "^16.1.6",
     "postcss": "^8.5.6",
     "prettier": "^3.7.4",
     "react": "^19.2.1",
@@ -69,6 +72,7 @@
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
+    "next": ">=14.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
