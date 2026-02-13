@@ -17,6 +17,18 @@ export const iconNames = [
   "Trash2",
   "Save",
   "RefreshCw",
+  "Home",
+  "MessageSquare",
+  "Users",
+  "Store",
+  "ShoppingCart",
+  "BarChart3",
+  "Brain",
+  "Send",
+  "LogOut",
+  "User",
   // Brand icons (react-icons/si)
   "SiWhatsapp",
+  "SiFacebook",
+  "SiInstagram",
 ] as const;
