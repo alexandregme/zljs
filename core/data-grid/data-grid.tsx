@@ -109,7 +109,7 @@ export const DataGrid = <
   return (
     <div
       data-testid="data-grid"
-      className="grid grid-rows-[auto,auto,1fr] grid-cols-1 h-full w-full"
+      className="grid grid-rows-[auto_auto_1fr] grid-cols-1 h-full w-full"
     >
       {showSearch && <DataGridToolbar gridApi={gridApi} />}
       <DataGridStatusBar
