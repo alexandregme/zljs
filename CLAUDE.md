@@ -29,15 +29,14 @@ React TypeScript UI component library built with accessibility-first approach us
 
 - **Framework:** React 19 + TypeScript
 - **UI Primitives:** Radix UI (when needed)
-- **Styling:** TBD
+- **Styling:** Tailwind CSS v4 + tailwind-variants
+- **Icons:** lucide-react (UI) + react-icons/si (brands)
 - **Package Manager:** PNPM
-- **Documentation:** Storybook 10.x (CSF3 format)
-- **Testing:** Jest + React Testing Library
-- **Quality:** ZL Quality Kit (`@alexandregme/zl_js_lint`)
+- **Documentation:** Storybook 10.x (CSF3 format, `@storybook/react-vite`)
+- **Testing:** Vitest + React Testing Library
+- **Package type:** ES Module (`"type": "module"` in package.json)
 
-**Sibling Project:** `zl-quality-kit` - Provides linting/formatting configuration
-
----
+## **Sibling Project:** `zl-quality-kit` - Provides linting/formatting configuration
 
 ## Library Philosophy
 
@@ -133,21 +132,30 @@ interface ButtonProps {
 ```
 zljs/
 ├── .github/workflows/             # CI/CD
-│   ├── ci.yml                    # Runs on push/PR (lint, test, coverage)
-│   └── release.yml               # Runs on tag push (creates GitHub release)
-├── .storybook/                    # Storybook configuration
-│   ├── main.ts                   # Stories config
-│   └── preview.ts                # Preview config
+│   ├── ci.yml                    # Runs on PR (lint, test, commitlint)
+│   ├── deploy.yml                # Runs on push to main (Storybook deploy)
+│   ├── release.yml               # Runs on tag push (GitHub Packages)
+│   └── bump-version.yml          # Version bump
+├── .husky/pre-commit              # Runs lint-staged
+├── .storybook/
+│   ├── main.ts                   # Stories config + next/link alias
+│   ├── preview.ts                # Imports storybook.css
+│   ├── storybook.css             # @import "tailwindcss" + core styles
+│   └── mocks/next-link.tsx       # Next.js Link mock for Storybook
 ├── core/                          # Component library
-│   ├── index.ts                  # Barrel export (all components)
+│   ├── index.ts                  # Barrel export (all components + types)
+│   ├── styles.css                # Global styles (scrollbar, AG Grid theme)
 │   └── [component-name]/
-│       ├── index.ts              # Component export
+│       ├── index.ts              # Component + type exports
 │       ├── [component].tsx       # Implementation
+│       ├── [component].interface.ts # TypeScript interfaces
+│       ├── [component].styles.ts # tailwind-variants styles
 │       ├── [component].test.tsx  # Tests (100% coverage required)
 │       └── [component].stories.tsx # Storybook stories (CSF3)
-├── jest.config.js                 # Jest configuration
-├── jest.setup.ts                  # Jest setup (imports jest-dom)
-├── tsconfig.json                  # TypeScript configuration
+├── commitlint.config.cjs         # Must be .cjs (package is type: module)
+├── vitest.config.ts              # Vitest config (jsdom environment)
+├── vitest.setup.ts               # Test setup
+├── tsconfig.json
 └── package.json
 ```
 
@@ -179,11 +187,18 @@ export const Button = ({
 };
 ```
 
+### File Organization
+
+- **`.interface.ts`** - TypeScript interfaces and types
+- **`.styles.ts`** - Styles using `tailwind-variants` (`tv`)
+- **`.tsx`** - Component implementation (imports from interface + styles)
+
 ### Rules
 
 - **children is `string`** - Text only, not ReactNode (enforces strict API)
 - **Props added on demand** - Only add props when tests require them
-- **Interface defined in same file** - Keep it simple until complexity grows
+- **Interfaces in `.interface.ts`** - Separate file for types
+- **Styles in `.styles.ts`** - Use `tv()` from tailwind-variants
 - **Named exports only** - `export const Button`, not `export default`
 - **No className prop** - Styling is controlled by the library, not consumers
 
@@ -195,9 +210,7 @@ export const Button = ({
 
 ```typescript
 // core/button/button.test.tsx
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Button } from "./button";
 
 describe("<Button /> - Default Props", () => {
@@ -233,7 +246,7 @@ describe("<Button /> - Custom Props", () => {
   });
 
   it("calls onClick when clicked", () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click me</Button>);
     const button = screen.getByRole("button");
 
@@ -257,13 +270,12 @@ describe("<Button /> - Custom Props", () => {
 ## Commands
 
 ```bash
-pnpm test            # Run tests
+pnpm test            # Run tests with coverage (vitest run --coverage)
 pnpm test:watch      # Run tests in watch mode
-pnpm test:coverage   # Run tests with coverage (must be 100%)
-pnpm lint            # Run all linting (eslint + prettier + stylelint)
+pnpm lint            # Run tsc --noEmit + eslint + prettier
 pnpm storybook       # Start Storybook dev server (port 6006)
-pnpm storybook:build # Build static Storybook
-pnpm fresh           # Clean reinstall
+pnpm build           # Build static Storybook
+pnpm fresh           # Clean reinstall (rm node_modules + pnpm-lock.yaml)
 ```
 
 ---
@@ -317,6 +329,8 @@ export const Submit: Story = {
 mkdir -p core/[component-name]
 touch core/[component-name]/index.ts
 touch core/[component-name]/[component].tsx
+touch core/[component-name]/[component].interface.ts
+touch core/[component-name]/[component].styles.ts
 touch core/[component-name]/[component].test.tsx
 touch core/[component-name]/[component].stories.tsx
 ```
@@ -325,9 +339,7 @@ touch core/[component-name]/[component].stories.tsx
 
 ```typescript
 // core/chip/chip.test.tsx
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Chip } from "./chip";
 
 describe("<Chip /> - Default Props", () => {
@@ -719,7 +731,7 @@ export { default as AbandonedPage } from "./AbandonedPage";
 
 ---
 
-_Last updated: 2026-01-15_
+_Last updated: 2026-02-12_
 
 ---
 
