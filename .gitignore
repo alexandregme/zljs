@@ -29,3 +29,6 @@ debug-storybook.log
 .env
 .env.local
 .env.*.local
+
+# AI agent instructions (local only)
+CLAUDE.md
