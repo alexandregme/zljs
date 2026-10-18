@@ -1,6 +1,7 @@
 {
   "name": "@zljs/core",
   "version": "0.3.0",
+  "license": "MIT",
   "type": "module",
   "main": "core/index.ts",
   "types": "core/index.ts",
