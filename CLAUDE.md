@@ -134,8 +134,7 @@ zljs/
 ├── .github/workflows/             # CI/CD
 │   ├── ci.yml                    # Runs on PR (lint, test, commitlint)
 │   ├── deploy.yml                # Runs on push to main (Storybook deploy)
-│   ├── release.yml               # Runs on tag push (GitHub Packages)
-│   └── bump-version.yml          # Version bump
+│   └── release.yml               # Runs on merge to main (version bump + tag + GH Release)
 ├── .husky/pre-commit              # Runs lint-staged
 ├── .storybook/
 │   ├── main.ts                   # Stories config + next/link alias
@@ -444,24 +443,21 @@ export { Chip } from "./chip"; // Add new component
 
 ## Versioning & Releases
 
-### Package Distribution
-
-zljs is published to **GitHub Packages** (npm registry). Releases are automatic when tags are pushed.
-
 ### Release Process
 
-```bash
-# 1. Ensure you're on main with latest changes
-git checkout main && git pull
+Versioning is automatic and driven by the **PR title**. Never run `npm version` by hand.
 
-# 2. Bump version (choose one)
-npm version patch   # Bug fixes (0.1.0 -> 0.1.1)
-npm version minor   # New features (0.1.0 -> 0.2.0)
-npm version major   # Breaking changes (0.1.0 -> 1.0.0)
+1. The PR title must be a Conventional Commit (`feat: add chip component`). CI (`PR title` job) validates it with commitlint.
+2. PRs are **squash-merged only**, so the PR title becomes the commit message on `main`.
+3. On merge, `release.yml` reads that message via `scripts/bump-type.sh`, runs `npm version`, pushes the `chore(release): vX.Y.Z` commit + tag, and creates the GitHub Release.
 
-# 3. Push with tags (triggers release workflow)
-git push origin main --follow-tags
-```
+| PR title                                      | Bump  | Example       |
+| --------------------------------------------- | ----- | ------------- |
+| `type!:` or `BREAKING CHANGE:` in the PR body | major | 0.3.0 → 1.0.0 |
+| `feat:`                                       | minor | 0.3.0 → 0.4.0 |
+| anything else (`fix`, `chore`, `docs`, `ci`…) | patch | 0.3.0 → 0.3.1 |
+
+Every merged PR releases a new version. npm publishing is not enabled yet (pending the library build).
 
 ### Consumer Setup
 
@@ -490,11 +486,11 @@ import { Button } from '@zljs/core';
 
 ## CI/CD Workflows
 
-| Workflow      | Trigger              | Purpose                                        |
-| ------------- | -------------------- | ---------------------------------------------- |
-| `ci.yml`      | Pull Request to main | Validate code (lint, test, commitlint)         |
-| `deploy.yml`  | Push to main         | Build Storybook & deploy                       |
-| `release.yml` | Tag push (v\*)       | Publish to GitHub Packages & create GH Release |
+| Workflow      | Trigger              | Purpose                                             |
+| ------------- | -------------------- | --------------------------------------------------- |
+| `ci.yml`      | Pull Request to main | Validate PR title + code (lint, test, commitlint)   |
+| `deploy.yml`  | Push to main         | Build Storybook & deploy                            |
+| `release.yml` | Push to main (merge) | Bump version from PR title, tag & create GH Release |
 
 **IMPORTANT: Never commit directly to main. Always use feature branches and PRs.**
 
