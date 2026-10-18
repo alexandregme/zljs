@@ -64,3 +64,6 @@ jobs:
 
       - name: Test with coverage
         run: pnpm test:coverage
+
+      - name: Build library
+        run: pnpm build:lib
