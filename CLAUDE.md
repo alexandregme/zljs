@@ -461,26 +461,26 @@ Every merged PR releases a new version and publishes it to npm (Trusted Publishi
 
 ### Consumer Setup
 
-Published on **npmjs** as `zljs` (public, no `.npmrc` needed). The name `zl` is taken; a transfer was requested from its owner.
+Published on **npmjs** as `@alexandregme/zljs` (public, no `.npmrc` needed):
 
 ```bash
-pnpm add zljs
+pnpm add @alexandregme/zljs
 ```
 
 **Styles** - import once and let Tailwind v4 scan the library classes:
 
 ```css
 @import "tailwindcss";
-@import "zljs/styles.css";
-@source "../node_modules/zljs/dist";
+@import "@alexandregme/zljs/styles.css";
+@source "../node_modules/@alexandregme/zljs/dist";
 ```
 
 **Usage:**
 
 ```typescript
-import { Button } from "zljs";
-import { RootLayout } from "zljs/next";
-import { FormProvider, FormInput } from "zljs/rhf";
+import { Button } from "@alexandregme/zljs";
+import { RootLayout } from "@alexandregme/zljs/next";
+import { FormProvider, FormInput } from "@alexandregme/zljs/rhf";
 
 <Button onClick={handleClick}>Submit</Button>
 ```
@@ -552,7 +552,7 @@ Pages only compose components. No data fetching, no transformations:
 ```typescript
 // page/TinyCrmPage.tsx
 import { useState } from "react";
-import { Heading } from "zljs";
+import { Heading } from "@alexandregme/zljs";
 import type { TinyCrmContact } from "../../types";
 import { ContactsGrid } from "../grid/contacts/contacts";
 import { ConversationsModal } from "../modal/ConversationsModal";
@@ -593,7 +593,7 @@ grid/
 ```typescript
 // grid/contacts/contacts.tsx
 import { useSelector } from "react-redux";
-import { DataGrid } from "zljs";
+import { DataGrid } from "@alexandregme/zljs";
 import { selectors } from "../../../store";
 import type { ContactsRow, ContactsColumnsProps } from "./contacts.interface";
 import { getContactsColumns } from "./contacts.columns";
@@ -635,7 +635,7 @@ export interface ContactsColumnsProps {
 
 ```typescript
 // grid/contacts/contacts.columns.tsx
-import { Button, type DataGridColumn } from "zljs";
+import { Button, type DataGridColumn } from "@alexandregme/zljs";
 import type { ContactsRow, ContactsColumnsProps } from "./contacts.interface";
 
 export const getContactsColumns = ({
@@ -685,7 +685,7 @@ Modal components go in the `modal/` folder:
 
 ```typescript
 // modal/CheckoutModal.tsx
-import { Modal } from "zljs";
+import { Modal } from "@alexandregme/zljs";
 
 interface CheckoutModalProps {
   data: CheckoutRow | null;
