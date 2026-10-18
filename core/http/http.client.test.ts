@@ -164,7 +164,7 @@ describe("HTTPClient", () => {
     });
 
     it("calls finishFetching after failed request", async () => {
-      mockAxios.get.mockRejectedValueOnce(new Error("fail"));
+      vi.mocked(mockAxios.get).mockRejectedValueOnce(new Error("fail"));
       const spy = vi.spyOn(useAppStore.getState(), "finishFetching");
 
       await client.get("/users");
@@ -175,18 +175,20 @@ describe("HTTPClient", () => {
 
   describe("error handling", () => {
     it("sends error toast on failure", async () => {
-      mockAxios.get.mockRejectedValueOnce(new Error("Network Error"));
+      vi.mocked(mockAxios.get).mockRejectedValueOnce(
+        new Error("Network Error"),
+      );
 
       await client.get("/users");
 
       const toasts = useToastStore.getState().toasts;
       expect(toasts).toHaveLength(1);
-      expect(toasts[0].type).toBe("error");
-      expect(toasts[0].message).toContain("Network Error");
+      expect(toasts[0]?.type).toBe("error");
+      expect(toasts[0]?.message).toContain("Network Error");
     });
 
     it("returns undefined on error", async () => {
-      mockAxios.get.mockRejectedValueOnce(new Error("fail"));
+      vi.mocked(mockAxios.get).mockRejectedValueOnce(new Error("fail"));
 
       const result = await client.get("/users");
 

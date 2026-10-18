@@ -1,5 +1,6 @@
 import {
   AllCommunityModule,
+  ColDef,
   GridApi,
   ModuleRegistry,
   themeAlpine,
@@ -121,7 +122,7 @@ export const DataGrid = <
       <div className="ag-grid h-full w-full z-0">
         <AgGridReact
           theme={customTheme}
-          columnDefs={columns}
+          columnDefs={columns as ColDef<T>[]}
           rowData={data}
           domLayout="normal"
           autoSizeStrategy={{ type: "fitCellContents" }}

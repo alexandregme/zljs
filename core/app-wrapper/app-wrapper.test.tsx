@@ -1,6 +1,11 @@
+import type { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import { AppWrapper } from "./app-wrapper";
 import { useAppStore } from "../state/app";
+
+vi.mock("next-auth/react", () => ({
+  SessionProvider: ({ children }: { children: ReactNode }) => children,
+}));
 
 vi.mock("../toaster", () => ({
   Toaster: () => null,

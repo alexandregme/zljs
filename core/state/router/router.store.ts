@@ -9,11 +9,7 @@ export const useRouterStore = create<RouterState>()(
       urlAsPath: "/",
       query: {},
       setRoute: (urlAsPath: string) =>
-        set(
-          { urlAsPath, query: splitURLasPath(urlAsPath) },
-          false,
-          "setRoute",
-        ),
+        set({ urlAsPath, query: splitURLasPath(urlAsPath) }, false, "setRoute"),
     }),
     { name: "zljs", store: "router" },
   ),

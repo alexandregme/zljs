@@ -78,7 +78,7 @@ describe("<Toaster />", () => {
     render(<Toaster />);
 
     const call = vi.mocked(toast.success).mock.calls[0];
-    const onDismiss = (call[1] as { onDismiss: () => void }).onDismiss;
+    const onDismiss = (call?.[1] as { onDismiss: () => void }).onDismiss;
 
     act(() => {
       useToastStore.setState({
@@ -90,6 +90,8 @@ describe("<Toaster />", () => {
       onDismiss();
     });
 
-    expect(useToastStore.getState().toasts.find((t) => t.id === id)).toBeUndefined();
+    expect(
+      useToastStore.getState().toasts.find((t) => t.id === id),
+    ).toBeUndefined();
   });
 });

@@ -1,6 +1,7 @@
 {
   "name": "@zljs/core",
   "version": "0.3.0",
+  "license": "MIT",
   "type": "module",
   "main": "core/index.ts",
   "types": "core/index.ts",
@@ -12,15 +13,16 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build": "storybook build",
     "test": "vitest run --coverage",
+    "lint": "tsc --noEmit && eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "build": "storybook build",
+    "storybook": "storybook dev -p 6006",
     "test:watch": "vitest --coverage",
     "test:coverage": "vitest run --coverage",
     "eslint": "eslint ./ --color --fix",
     "prettier": "prettier --write .",
     "stylelint": "stylelint '**/*.{css,scss}' --allow-empty-input",
-    "lint": "pnpm tsc --noEmit && pnpm eslint && pnpm prettier",
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
     "prepare": "husky",
     "npm:login": "npm login --registry=https://npm.pkg.github.com --auth-type=web",

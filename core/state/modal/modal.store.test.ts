@@ -13,7 +13,7 @@ describe("useModalStore", () => {
     useModalStore.getState().openModal("test-modal");
 
     expect(useModalStore.getState().modals).toHaveLength(1);
-    expect(useModalStore.getState().modals[0].name).toBe("test-modal");
+    expect(useModalStore.getState().modals[0]?.name).toBe("test-modal");
   });
 
   it("isOpen returns true when modal is open", () => {
@@ -37,7 +37,7 @@ describe("useModalStore", () => {
   it("openModalWithPayload saves payload", () => {
     useModalStore.getState().openModalWithPayload("test-modal", { id: 42 });
 
-    expect(useModalStore.getState().modals[0].payload).toEqual({ id: 42 });
+    expect(useModalStore.getState().modals[0]?.payload).toEqual({ id: 42 });
   });
 
   it("getPayload returns the correct payload", () => {
