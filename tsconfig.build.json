@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [],
+    "paths": {}
+  },
+  "include": ["core/**/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "core/**/*.test.ts",
+    "core/**/*.test.tsx",
+    "core/**/*.stories.tsx",
+    "core/**/examples/**"
+  ]
+}
