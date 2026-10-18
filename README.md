@@ -1,15 +1,17 @@
-# zljs — Enterprise Frontend Framework
+# zljs — React Component Library
 
-A modern, TypeScript-based, open-source frontend framework for building scalable web applications.
+An open-source, TypeScript React component library for enterprise web apps (Next.js, Tailwind CSS v4), plus an AI agent that generates UI screens.
 
 ## Packages
 
 | Package  | Description                                                  | Links                                |
 | -------- | ------------------------------------------------------------ | ------------------------------------ |
 | `core/`  | Component library — Button, DataGrid, Forms, Modal, and more | [Storybook](https://zljs.vercel.app) |
-| `agent/` | AI-powered UI generation agent                               | [README](./agent/README.md)          |
+| `agent/` | AI agent that generates UI screens (HTML + Tailwind CSS)     | [README](./agent/README.md)          |
 
 ## AI Roadmap
+
+Checked items exist today; unchecked items are planned, not implemented.
 
 - [x] Conversational UI Generation (`agent/`)
 - [ ] AI-Powered Testing Automation (via zl-quality-kit)

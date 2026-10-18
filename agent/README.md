@@ -1,6 +1,6 @@
 # zljs Agent
 
-An AI-powered conversational interface for generating production-ready UI screens.
+An AI-powered conversational interface that generates UI screens as HTML + Tailwind CSS.
 
 ## How It Works
 
@@ -12,8 +12,8 @@ An AI-powered conversational interface for generating production-ready UI screen
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm 10+
+- Node.js 22.13+
+- pnpm 11+
 - An Anthropic API key
 
 ### Setup
