@@ -1,6 +1,6 @@
 {
   "name": "@alexandregme/zljs",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Opinionated, accessible React component library for enterprise apps (Next.js, Tailwind CSS v4).",
   "keywords": [
     "react",
