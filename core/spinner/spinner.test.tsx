@@ -3,7 +3,11 @@ import { Spinner } from "./spinner";
 
 vi.mock("lucide-react", () => ({
   LoaderCircle: ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
-    <svg data-testid="spinner-icon" className={className as string} {...props} />
+    <svg
+      data-testid="spinner-icon"
+      className={className as string}
+      {...props}
+    />
   ),
 }));
 

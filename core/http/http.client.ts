@@ -42,11 +42,9 @@ export class HTTPClient {
           );
           break;
         case "put":
-          response = await axios.put(
-            `${this.baseUrl}${url}`,
-            config?.payload,
-            { headers },
-          );
+          response = await axios.put(`${this.baseUrl}${url}`, config?.payload, {
+            headers,
+          });
           break;
         case "delete":
           response = await axios.delete(`${this.baseUrl}${url}`, {

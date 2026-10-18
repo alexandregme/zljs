@@ -6,8 +6,7 @@ export const usePageStore = create<PageState>()(
   devtools(
     (set) => ({
       title: "",
-      setTitle: (title: string) =>
-        set({ title }, false, "setTitle"),
+      setTitle: (title: string) => set({ title }, false, "setTitle"),
     }),
     { name: "zljs", store: "page" },
   ),

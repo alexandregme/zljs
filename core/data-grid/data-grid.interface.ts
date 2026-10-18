@@ -17,9 +17,11 @@ export interface DataGridColumn<
   pinned?: "left" | "right";
   filter?: boolean;
   width?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cellStyle?: (params: DataGridCellParams<T>) => Record<string, string | number | undefined> | undefined;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+  cellStyle?: (
+    params: DataGridCellParams<T>,
+  ) => Record<string, string | number | undefined> | undefined;
+
   valueFormatter?: (params: DataGridCellParams<T>) => string;
 }
 

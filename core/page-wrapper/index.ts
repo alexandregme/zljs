@@ -1,2 +1,5 @@
 export { PageWrapper } from "./page-wrapper";
-export type { PageWrapperProps, InitPageFunction } from "./page-wrapper.interface";
+export type {
+  PageWrapperProps,
+  InitPageFunction,
+} from "./page-wrapper.interface";

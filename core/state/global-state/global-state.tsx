@@ -1,6 +1,11 @@
 "use client";
 import { Provider } from "react-redux";
-import { combineReducers, configureStore, type Middleware, type Reducer } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  type Middleware,
+  type Reducer,
+} from "@reduxjs/toolkit";
 import type { GlobalStateProps, ExtendedStore } from "./global-state.types";
 
 let store: ExtendedStore;

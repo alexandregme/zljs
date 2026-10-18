@@ -2,12 +2,7 @@
  * Semantic colors for action-oriented components (Button, Heading, etc.)
  */
 export type SemanticColor =
-  | "primary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "none";
+  "primary" | "success" | "danger" | "warning" | "info" | "none";
 
 /**
  * Literal colors for data visualization components (StatsCard, etc.)

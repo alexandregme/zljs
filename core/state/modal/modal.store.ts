@@ -7,11 +7,7 @@ export const useModalStore = create<ModalState>()(
     (set, get) => ({
       modals: [],
       openModal: (name) =>
-        set(
-          (s) => ({ modals: [...s.modals, { name }] }),
-          false,
-          "openModal",
-        ),
+        set((s) => ({ modals: [...s.modals, { name }] }), false, "openModal"),
       openModalWithPayload: (name, payload) =>
         set(
           (s) => ({ modals: [...s.modals, { name, payload }] }),
