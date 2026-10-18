@@ -2,8 +2,6 @@ packages:
   - .
   - agent
 
-ignoredBuiltDependencies:
-  - esbuild
-
-onlyBuiltDependencies:
-  - sharp
+allowBuilds:
+  esbuild: true
+  sharp: true
