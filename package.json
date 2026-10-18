@@ -1,17 +1,54 @@
 {
-  "name": "@zljs/core",
+  "name": "zljs",
   "version": "0.3.1",
+  "description": "Opinionated, accessible React component library for enterprise apps (Next.js, Tailwind CSS v4).",
+  "keywords": [
+    "react",
+    "nextjs",
+    "components",
+    "ui",
+    "tailwindcss",
+    "design-system"
+  ],
   "license": "MIT",
-  "type": "module",
-  "packageManager": "pnpm@11.9.0",
-  "main": "core/index.ts",
-  "types": "core/index.ts",
+  "author": "Alexandre Mendes",
+  "homepage": "https://zljs.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandregme/zljs.git"
+    "url": "git+https://github.com/alexandregme/zljs.git"
   },
+  "bugs": {
+    "url": "https://github.com/alexandregme/zljs/issues"
+  },
+  "type": "module",
+  "packageManager": "pnpm@11.9.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./next": {
+      "types": "./dist/next/index.d.ts",
+      "import": "./dist/next/index.js"
+    },
+    "./rhf": {
+      "types": "./dist/rhf/index.d.ts",
+      "import": "./dist/rhf/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "scripts": {
     "test": "vitest run --coverage",
@@ -26,9 +63,9 @@
     "stylelint": "stylelint '**/*.{css,scss}' --allow-empty-input",
     "fresh": "rm -rf node_modules && rm -f pnpm-lock.yaml && pnpm install",
     "prepare": "husky",
-    "npm:login": "npm login --registry=https://npm.pkg.github.com --auth-type=web",
-    "npm:publish": "npm publish --registry=https://npm.pkg.github.com",
-    "agent:dev": "pnpm --filter @zljs/agent dev"
+    "agent:dev": "pnpm --filter @zljs/agent dev",
+    "build:lib": "tsup",
+    "prepublishOnly": "pnpm build:lib"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -40,7 +77,6 @@
     "react-hook-form": "^7.70.0",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.7",
-    "storybook": "^10.2.8",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
     "zod": "^4.3.5",
@@ -69,8 +105,10 @@
     "prettier": "^3.7.4",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "storybook": "^10.4.6",
     "stylelint": "^16.26.1",
     "tailwindcss": "^4.1.18",
+    "tsup": "^9.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.49.0",
     "vite": "^7.2.7",

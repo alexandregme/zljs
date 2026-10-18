@@ -17,6 +17,31 @@ A modern, TypeScript-based, open-source frontend framework for building scalable
 - [ ] Predictive Quality Gates
 - [ ] Accessibility Validation via AI
 
+## Install
+
+```bash
+pnpm add zljs
+```
+
+Peer dependencies: `react@19`, `react-dom@19`, `next@>=16`, `next-auth@4`, `@reduxjs/toolkit@2`, `react-redux@9`.
+
+Import the global styles once (e.g. in your root layout) and let Tailwind CSS v4 scan the library classes:
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "zljs/styles.css";
+@source "../node_modules/zljs/dist";
+```
+
+```tsx
+import { Button } from "zljs";
+import { RootLayout } from "zljs/next";
+import { FormProvider, FormInput } from "zljs/rhf";
+
+<Button onClick={handleClick}>Submit</Button>;
+```
+
 ## Getting Started
 
 ```bash

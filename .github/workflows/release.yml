@@ -16,6 +16,7 @@ jobs:
 
     permissions:
       contents: write
+      id-token: write # npm Trusted Publishing (OIDC) + provenance
 
     steps:
       # Check out main (not the event sha) so a queued run sees the previous release commit
@@ -38,6 +39,7 @@ jobs:
         with:
           node-version: "22"
           cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -70,8 +72,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create "${{ steps.version.outputs.tag }}" --generate-notes
 
-      # TODO: enable once the library build (dist/) and npmjs registry are set up
-      # - name: Publish to npm
-      #   run: pnpm publish --no-git-checks --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Trusted Publishing needs npm >= 11.5.1; prepublishOnly runs the library build
+      - name: Publish to npm
+        run: |
+          npm install -g npm@11
+          npm publish --provenance --access public

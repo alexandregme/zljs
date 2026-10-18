@@ -134,7 +134,7 @@ zljs/
 ├── .github/workflows/             # CI/CD
 │   ├── ci.yml                    # Runs on PR (lint, test, commitlint)
 │   ├── deploy.yml                # Runs on push to main (Storybook deploy)
-│   └── release.yml               # Runs on merge to main (version bump + tag + GH Release)
+│   └── release.yml               # Runs on merge to main (version bump + tag + GH Release + npm publish)
 ├── .husky/pre-commit              # Runs lint-staged
 ├── .storybook/
 │   ├── main.ts                   # Stories config + next/link alias
@@ -457,40 +457,47 @@ Versioning is automatic and driven by the **PR title**. Never run `npm version` 
 | `feat:`                                       | minor | 0.3.0 → 0.4.0 |
 | anything else (`fix`, `chore`, `docs`, `ci`…) | patch | 0.3.0 → 0.3.1 |
 
-Every merged PR releases a new version. npm publishing is not enabled yet (pending the library build).
+Every merged PR releases a new version and publishes it to npm (Trusted Publishing via OIDC, with provenance - no npm token secret).
 
 ### Consumer Setup
 
-**First-time setup** - Create `.npmrc` in project root:
-
-```
-@zljs:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
-
-**Install the package:**
+Published on **npmjs** as `zljs` (public, no `.npmrc` needed). The name `zl` is taken; a transfer was requested from its owner.
 
 ```bash
-pnpm add @zljs/core
+pnpm add zljs
+```
+
+**Styles** - import once and let Tailwind v4 scan the library classes:
+
+```css
+@import "tailwindcss";
+@import "zljs/styles.css";
+@source "../node_modules/zljs/dist";
 ```
 
 **Usage:**
 
 ```typescript
-import { Button } from '@zljs/core';
+import { Button } from "zljs";
+import { RootLayout } from "zljs/next";
+import { FormProvider, FormInput } from "zljs/rhf";
 
 <Button onClick={handleClick}>Submit</Button>
 ```
+
+### Library Build
+
+`pnpm build:lib` (tsup, `tsup.config.ts`) compiles `core/` to `dist/` - ESM + `.d.ts`, entries `.`, `./next`, `./rhf`, plus `./styles.css`. Every output file starts with `"use client"` (Next.js App Router). `pnpm build` is still the Storybook build (Vercel).
 
 ---
 
 ## CI/CD Workflows
 
-| Workflow      | Trigger              | Purpose                                             |
-| ------------- | -------------------- | --------------------------------------------------- |
-| `ci.yml`      | Pull Request to main | Validate PR title + code (lint, test, commitlint)   |
-| `deploy.yml`  | Push to main         | Build Storybook & deploy                            |
-| `release.yml` | Push to main (merge) | Bump version from PR title, tag & create GH Release |
+| Workflow      | Trigger              | Purpose                                                   |
+| ------------- | -------------------- | --------------------------------------------------------- |
+| `ci.yml`      | Pull Request to main | Validate PR title + code (lint, test, commitlint)         |
+| `deploy.yml`  | Push to main         | Build Storybook & deploy                                  |
+| `release.yml` | Push to main (merge) | Bump version from PR title, tag, GH Release & npm publish |
 
 **IMPORTANT: Never commit directly to main. Always use feature branches and PRs.**
 
@@ -545,7 +552,7 @@ Pages only compose components. No data fetching, no transformations:
 ```typescript
 // page/TinyCrmPage.tsx
 import { useState } from "react";
-import { Heading } from "@alexandregme/zljs";
+import { Heading } from "zljs";
 import type { TinyCrmContact } from "../../types";
 import { ContactsGrid } from "../grid/contacts/contacts";
 import { ConversationsModal } from "../modal/ConversationsModal";
@@ -586,7 +593,7 @@ grid/
 ```typescript
 // grid/contacts/contacts.tsx
 import { useSelector } from "react-redux";
-import { DataGrid } from "@alexandregme/zljs";
+import { DataGrid } from "zljs";
 import { selectors } from "../../../store";
 import type { ContactsRow, ContactsColumnsProps } from "./contacts.interface";
 import { getContactsColumns } from "./contacts.columns";
@@ -628,7 +635,7 @@ export interface ContactsColumnsProps {
 
 ```typescript
 // grid/contacts/contacts.columns.tsx
-import { Button, type DataGridColumn } from "@alexandregme/zljs";
+import { Button, type DataGridColumn } from "zljs";
 import type { ContactsRow, ContactsColumnsProps } from "./contacts.interface";
 
 export const getContactsColumns = ({
@@ -678,7 +685,7 @@ Modal components go in the `modal/` folder:
 
 ```typescript
 // modal/CheckoutModal.tsx
-import { Modal } from "@alexandregme/zljs";
+import { Modal } from "zljs";
 
 interface CheckoutModalProps {
   data: CheckoutRow | null;
