@@ -15,7 +15,7 @@
   "homepage": "https://zljs.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandregme/zljs.git"
+    "url": "git+https://github.com/alexandregme/zljs.git"
   },
   "bugs": {
     "url": "https://github.com/alexandregme/zljs/issues"
