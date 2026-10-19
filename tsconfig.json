@@ -21,9 +21,10 @@
     "baseUrl": ".",
     "paths": {
       "@zljs/core": ["core/index.ts"],
-      "@zljs/rhf": ["core/rhf/index.ts"]
+      "@zljs/rhf": ["core/rhf/index.ts"],
+      "@test-utils": ["test-utils/index.ts"]
     }
   },
-  "include": ["core/**/*", "vitest.setup.ts"],
+  "include": ["core/**/*", "test-utils/**/*", "vitest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }
