@@ -5,36 +5,61 @@ const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
+  parameters: {
+    docs: { toc: true },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     children: "Button",
   },
 };
 
-export const Submit: Story = {
-  args: {
-    children: "Submit",
-    type: "submit",
-  },
+export const Types: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <Button type="button">Button</Button>
+      <Button type="submit">Submit</Button>
+      <Button type="reset">Reset</Button>
+    </div>
+  ),
 };
 
-export const Reset: Story = {
-  args: {
-    children: "Reset",
-    type: "reset",
-  },
+export const Variants: Story = {
+  render: () => (
+    <div className="flex gap-4 items-center">
+      <Button variant="default">Default</Button>
+      <Button icon="X" aria-label="Close" />
+      <Button variant="ghost" icon="LogOut">
+        Logout
+      </Button>
+      <Button variant="link" color="primary">
+        Link primary
+      </Button>
+      <Button variant="link" color="danger">
+        Link danger
+      </Button>
+      <Button variant="link" color="none">
+        Link none
+      </Button>
+    </div>
+  ),
 };
 
-export const WithOnClick: Story = {
-  args: {
-    children: "Click me",
-    onClick: () => alert("Clicked!"),
-  },
+export const Colors: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <Button color="primary">Primary</Button>
+      <Button color="success">Success</Button>
+      <Button color="danger">Danger</Button>
+      <Button color="warning">Warning</Button>
+      <Button color="info">Info</Button>
+    </div>
+  ),
 };
 
 export const Icons: Story = {
@@ -49,20 +74,11 @@ export const Icons: Story = {
   ),
 };
 
-export const Colors: Story = {
+export const States: Story = {
   render: () => (
     <div className="flex gap-2">
-      <Button color="primary">Primary</Button>
-      <Button color="success">Success</Button>
-      <Button color="danger">Danger</Button>
-      <Button color="warning">Warning</Button>
+      <Button disabled>Disabled</Button>
+      <Button onClick={() => alert("Clicked!")}>Click me</Button>
     </div>
   ),
-};
-
-export const Disabled: Story = {
-  args: {
-    children: "Disabled",
-    disabled: true,
-  },
 };
