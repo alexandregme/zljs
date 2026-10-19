@@ -1,5 +1,5 @@
 import { Button } from "../button";
-import { WhatsAppButtonProps } from "./whatsapp-button.interface";
+import type { WhatsAppButtonProps } from "./whatsapp-button.interface";
 
 export const WhatsAppButton = ({
   phone,

@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, KeyboardEvent } from "react";
+import type { ChangeEvent, FocusEvent, KeyboardEvent } from "react";
 
 export interface InputProps {
   label?: string;
