@@ -6,6 +6,9 @@ const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
   component: Icon,
   tags: ["autodocs"],
+  parameters: {
+    docs: { toc: true },
+  },
   argTypes: {
     name: {
       control: "select",
@@ -17,13 +20,13 @@ const meta: Meta<typeof Icon> = {
 export default meta;
 type Story = StoryObj<typeof Icon>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     name: "Check",
   },
 };
 
-export const Gallery: Story = {
+export const Names: Story = {
   render: () => (
     <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
       {iconNames.map((name) => (
