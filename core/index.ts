@@ -25,6 +25,8 @@ export { WhatsAppButton } from "./whatsapp-button";
 export type { WhatsAppButtonProps } from "./whatsapp-button";
 export { Heading } from "./heading";
 export type { HeadingProps } from "./heading";
+export { Text } from "./text";
+export type { TextProps, TextVariant } from "./text";
 export { Sidebar } from "./sidebar";
 export type {
   SidebarProps,
