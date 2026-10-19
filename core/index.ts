@@ -55,7 +55,7 @@ export type { PageWrapperProps, InitPageFunction } from "./page-wrapper";
 export { ConnectedModal } from "./connected-modal";
 export type { ConnectedModalProps } from "./connected-modal";
 export { Spinner } from "./spinner";
-export type { SpinnerProps } from "./spinner";
+export type { SpinnerProps, SpinnerVariant } from "./spinner";
 export { Loader } from "./loader";
 export type { LoaderProps } from "./loader";
 export { AppWrapper } from "./app-wrapper";

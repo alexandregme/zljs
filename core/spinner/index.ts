@@ -1,2 +1,2 @@
 export { Spinner } from "./spinner";
-export type { SpinnerProps } from "./spinner.interface";
+export type { SpinnerProps, SpinnerVariant } from "./spinner.interface";

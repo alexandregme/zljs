@@ -140,6 +140,26 @@ describe("<Button /> - Custom Props", () => {
     expect(button).not.toHaveClass("p-1");
   });
 
+  it("renders <Button /> with size lg", () => {
+    render(
+      <Button icon="Plus" size="lg">
+        Add Item
+      </Button>,
+    );
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("px-6", "py-3", "text-base");
+    expect(button.querySelector("svg")).toHaveAttribute("width", "24");
+  });
+
+  it("renders <Button /> with size lg when only icon is passed", () => {
+    render(<Button icon="X" size="lg" aria-label="Close" />);
+    const button = screen.getByRole("button", { name: "Close" });
+
+    expect(button).toHaveClass("p-2");
+    expect(button).not.toHaveClass("p-1");
+  });
+
   it("renders <Button /> with icon", () => {
     render(<Button icon="Plus">Add Item</Button>);
     const button = screen.getByRole("button");
