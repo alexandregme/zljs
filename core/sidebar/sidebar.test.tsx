@@ -134,9 +134,9 @@ describe("<Sidebar /> - Default Props", () => {
   });
 
   it("renders home label when provided", () => {
-    render(<Sidebar {...defaultProps} homeLabel="Acme" />);
+    render(<Sidebar {...defaultProps} homeLabel="Enterprise" />);
 
-    expect(screen.getByText("Acme")).toBeInTheDocument();
+    expect(screen.getByText("Enterprise")).toBeInTheDocument();
   });
 
   it("hides home link when homeHref is false", () => {
