@@ -56,6 +56,7 @@ export const Sizes: Story = {
     <div className="flex gap-4 items-center">
       <Icon name="Check" size="sm" />
       <Icon name="Check" size="md" />
+      <Icon name="Check" size="lg" />
     </div>
   ),
 };

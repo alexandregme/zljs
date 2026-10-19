@@ -45,6 +45,7 @@ export const iconNames = [
   "Cat",
   "ArrowRight",
   "Loader",
+  "LoaderCircle",
   "CheckCircle",
   "XCircle",
   "AlertTriangle",
@@ -66,4 +67,5 @@ export const iconBrands: Record<string, ElementType> = {
 export const iconSizes: Record<Size, number> = {
   sm: 12,
   md: 16,
+  lg: 24,
 };

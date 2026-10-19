@@ -1,3 +1,8 @@
+import type { Size } from "../types";
+
+export type SpinnerVariant = "circle" | "dots" | "refresh";
+
 export interface SpinnerProps {
-  className?: string;
+  variant?: SpinnerVariant;
+  size?: Size;
 }

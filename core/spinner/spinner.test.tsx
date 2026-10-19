@@ -1,32 +1,49 @@
 import { render, screen } from "@testing-library/react";
-import { Spinner } from "./spinner";
+import { Spinner } from "@zljs/core";
 
-vi.mock("lucide-react", () => ({
-  LoaderCircle: ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      data-testid="spinner-icon"
-      className={className as string}
-      {...props}
-    />
-  ),
-}));
-
-describe("<Spinner />", () => {
-  it("renders the spinning icon", () => {
+describe("<Spinner /> - Default Props", () => {
+  it("renders <Spinner /> correctly", () => {
     render(<Spinner />);
+    const spinner = screen.getByTestId("spinner");
 
-    expect(screen.getByTestId("spinner-icon")).toBeInTheDocument();
+    expect(spinner).toBeInTheDocument();
+    expect(spinner).toHaveClass("animate-spin");
   });
 
-  it("has animate-spin class", () => {
+  it("renders <Spinner /> with variant circle by default", () => {
     render(<Spinner />);
+    const spinner = screen.getByTestId("spinner");
 
-    expect(screen.getByTestId("spinner-icon")).toHaveClass("animate-spin");
+    expect(spinner).toContainElement(screen.getByTestId("LoaderCircle"));
   });
 
-  it("accepts custom className", () => {
-    render(<Spinner className="w-10 h-10" />);
+  it("renders <Spinner /> with size md by default", () => {
+    render(<Spinner />);
+    const spinner = screen.getByTestId("spinner");
 
-    expect(screen.getByTestId("spinner-icon")).toHaveClass("w-10");
+    expect(spinner.querySelector("svg")).toHaveAttribute("width", "16");
+  });
+});
+
+describe("<Spinner /> - Custom Props", () => {
+  it("renders <Spinner /> with variant dots", () => {
+    render(<Spinner variant="dots" />);
+    const spinner = screen.getByTestId("spinner");
+
+    expect(spinner).toContainElement(screen.getByTestId("Loader"));
+  });
+
+  it("renders <Spinner /> with variant refresh", () => {
+    render(<Spinner variant="refresh" />);
+    const spinner = screen.getByTestId("spinner");
+
+    expect(spinner).toContainElement(screen.getByTestId("RefreshCw"));
+  });
+
+  it("renders <Spinner /> with size lg", () => {
+    render(<Spinner size="lg" />);
+    const spinner = screen.getByTestId("spinner");
+
+    expect(spinner.querySelector("svg")).toHaveAttribute("width", "24");
   });
 });

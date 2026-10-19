@@ -23,6 +23,7 @@ export const button = tv({
     size: {
       sm: "",
       md: "",
+      lg: "",
     },
   },
   compoundVariants: [
@@ -35,6 +36,16 @@ export const button = tv({
       variant: "icon",
       size: "sm",
       class: "p-0.5",
+    },
+    {
+      variant: "default",
+      size: "lg",
+      class: "px-6 py-3 text-base gap-2",
+    },
+    {
+      variant: "icon",
+      size: "lg",
+      class: "p-2",
     },
     {
       variant: "link",

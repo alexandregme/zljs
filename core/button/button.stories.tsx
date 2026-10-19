@@ -77,8 +77,12 @@ export const Sizes: Story = {
       <Button size="md" icon="Plus">
         Medium
       </Button>
+      <Button size="lg" icon="Plus">
+        Large
+      </Button>
       <Button size="sm" icon="X" aria-label="Close small" />
       <Button size="md" icon="X" aria-label="Close medium" />
+      <Button size="lg" icon="X" aria-label="Close large" />
     </div>
   ),
 };

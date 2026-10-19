@@ -12,7 +12,7 @@ export const Loader = ({ label = "Loading" }: LoaderProps) => {
 
   return (
     <div role="status" aria-label={label} className={overlay()}>
-      <Spinner />
+      <Spinner size="lg" />
     </div>
   );
 };
