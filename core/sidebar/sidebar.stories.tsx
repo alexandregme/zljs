@@ -29,7 +29,7 @@ const sections: SidebarSection[] = [
 
 const user = {
   name: "Alexandre Mendes",
-  email: "alexandregme@zljs.com",
+  email: "user@example.com",
 };
 
 const meta: Meta<typeof Sidebar> = {

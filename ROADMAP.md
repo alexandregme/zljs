@@ -28,7 +28,7 @@ This list tracks potential improvements. Agents must review and update it when n
 
 ---
 
-## Shared Frontend Components (ruralissima-diagnostico)
+## Shared Frontend Components (dashboard apps)
 
 1. Page shell layout (header, breadcrumb, action bar)
 2. Empty/Loading/State views (standardized UX)
@@ -43,7 +43,7 @@ This list tracks potential improvements. Agents must review and update it when n
 
 ---
 
-## Shared Backend Components (ruralissima-service)
+## Shared Backend Components (API services)
 
 1. Auth module (JWT + roles + permissions)
 2. Config module (typed env + validation)

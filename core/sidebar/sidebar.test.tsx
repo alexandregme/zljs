@@ -30,7 +30,7 @@ const sections: SidebarSection[] = [
 
 const user: SidebarUser = {
   name: "Alexandre Mendes",
-  email: "alexandregme@zljs.com",
+  email: "user@example.com",
 };
 
 const defaultProps = {
@@ -85,7 +85,7 @@ describe("<Sidebar /> - Default Props", () => {
     render(<Sidebar {...defaultProps} />);
 
     expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
-    expect(screen.getByText("alexandregme@zljs.com")).toBeInTheDocument();
+    expect(screen.getByText("user@example.com")).toBeInTheDocument();
   });
 
   it("renders avatar with correct initials for two names", () => {
@@ -134,9 +134,9 @@ describe("<Sidebar /> - Default Props", () => {
   });
 
   it("renders home label when provided", () => {
-    render(<Sidebar {...defaultProps} homeLabel="Ruralissima" />);
+    render(<Sidebar {...defaultProps} homeLabel="Enterprise" />);
 
-    expect(screen.getByText("Ruralissima")).toBeInTheDocument();
+    expect(screen.getByText("Enterprise")).toBeInTheDocument();
   });
 
   it("hides home link when homeHref is false", () => {
