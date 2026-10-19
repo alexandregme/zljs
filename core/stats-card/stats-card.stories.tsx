@@ -5,60 +5,32 @@ const meta: Meta<typeof StatsCard> = {
   title: "Components/StatsCard",
   component: StatsCard,
   tags: ["autodocs"],
+  parameters: {
+    docs: { toc: true },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof StatsCard>;
 
-export const Blue: Story = {
+export const Playground: Story = {
   args: {
-    label: "Total de Produtos",
+    label: "Total",
     value: 150,
     color: "blue",
   },
 };
 
-export const Red: Story = {
-  args: {
-    label: "Problemas de URL",
-    value: 12,
-    color: "red",
-  },
+export const Values: Story = {
+  render: () => (
+    <div className="grid grid-cols-3 gap-4">
+      <StatsCard label="Number" value={150} color="blue" />
+      <StatsCard label="String" value="OK" color="blue" />
+    </div>
+  ),
 };
 
-export const Yellow: Story = {
-  args: {
-    label: "Problemas de Tags",
-    value: 8,
-    color: "yellow",
-  },
-};
-
-export const Green: Story = {
-  args: {
-    label: "Produtos OK",
-    value: 130,
-    color: "green",
-  },
-};
-
-export const Gray: Story = {
-  args: {
-    label: "Pending",
-    value: 15,
-    color: "gray",
-  },
-};
-
-export const Orange: Story = {
-  args: {
-    label: "In Progress",
-    value: 8,
-    color: "orange",
-  },
-};
-
-export const AllColors: Story = {
+export const Colors: Story = {
   render: () => (
     <div className="grid grid-cols-3 gap-4">
       <StatsCard label="Total" value={150} color="blue" />
