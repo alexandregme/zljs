@@ -31,6 +31,14 @@ describe("<Button /> - Default Props", () => {
     expect(button).toHaveClass("bg-blue-600");
   });
 
+  it("renders <Button /> with size md by default", () => {
+    render(<Button icon="Plus">Add Item</Button>);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("px-4", "py-2", "text-sm");
+    expect(button.querySelector("svg")).toHaveAttribute("width", "16");
+  });
+
   it("renders <Button /> without icon by default", () => {
     render(<Button>Click me</Button>);
     const button = screen.getByRole("button");
@@ -110,6 +118,26 @@ describe("<Button /> - Custom Props", () => {
     const button = screen.getByRole("button");
 
     expect(button).toHaveClass("bg-yellow-500");
+  });
+
+  it("renders <Button /> with size sm", () => {
+    render(
+      <Button icon="Plus" size="sm">
+        Add Item
+      </Button>,
+    );
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("px-2", "py-1", "text-xs");
+    expect(button.querySelector("svg")).toHaveAttribute("width", "12");
+  });
+
+  it("renders <Button /> with size sm when only icon is passed", () => {
+    render(<Button icon="X" size="sm" aria-label="Close" />);
+    const button = screen.getByRole("button", { name: "Close" });
+
+    expect(button).toHaveClass("p-0.5");
+    expect(button).not.toHaveClass("p-1");
   });
 
   it("renders <Button /> with icon", () => {

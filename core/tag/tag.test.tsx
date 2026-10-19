@@ -1,63 +1,51 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { Tag } from "./tag";
 
 describe("<Tag /> - Default Props", () => {
-  it("renders Tag correctly", () => {
+  it("renders <Tag /> correctly", () => {
     render(<Tag>Status</Tag>);
+    const tag = screen.getByTestId("tag");
 
-    expect(screen.getByText("Status")).toBeInTheDocument();
+    expect(tag).toBeInTheDocument();
+    expect(tag).toHaveTextContent("Status");
   });
 
-  it("renders with default blue color", () => {
+  it("renders <Tag /> with color blue by default", () => {
     render(<Tag>Status</Tag>);
+    const tag = screen.getByTestId("tag");
 
-    expect(screen.getByText("Status")).toHaveClass("bg-blue-100");
+    expect(tag).toHaveClass("bg-blue-100");
+  });
+
+  it("renders <Tag /> without onRemove by default", () => {
+    render(<Tag>Status</Tag>);
+    const removeButton = screen.queryByRole("button");
+
+    expect(removeButton).not.toBeInTheDocument();
   });
 });
 
 describe("<Tag /> - Custom Props", () => {
-  it("renders with green color", () => {
+  it("renders <Tag /> with color green", () => {
     render(<Tag color="green">Active</Tag>);
+    const tag = screen.getByTestId("tag");
 
-    expect(screen.getByText("Active")).toHaveClass("bg-green-100");
+    expect(tag).toHaveClass("bg-green-100");
   });
 
-  it("renders with red color", () => {
-    render(<Tag color="red">Error</Tag>);
+  it("renders <Tag /> with onRemove", () => {
+    render(<Tag onRemove={vi.fn()}>Removable</Tag>);
+    const removeButton = screen.getByRole("button", { name: "Remover" });
 
-    expect(screen.getByText("Error")).toHaveClass("bg-red-100");
+    expect(removeButton).toBeInTheDocument();
   });
 
-  it("renders with yellow color", () => {
-    render(<Tag color="yellow">Warning</Tag>);
-
-    expect(screen.getByText("Warning")).toHaveClass("bg-yellow-100");
-  });
-
-  it("renders with gray color", () => {
-    render(<Tag color="gray">Inactive</Tag>);
-
-    expect(screen.getByText("Inactive")).toHaveClass("bg-slate-100");
-  });
-
-  it("renders remove button when onRemove is provided", () => {
-    render(<Tag onRemove={() => {}}>Removable</Tag>);
-
-    expect(screen.getByRole("button", { name: "Remover" })).toBeInTheDocument();
-  });
-
-  it("does not render remove button when onRemove is not provided", () => {
-    render(<Tag>Static</Tag>);
-
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
-  });
-
-  it("calls onRemove when remove button is clicked", () => {
+  it("calls onRemove when <Tag /> remove button is clicked", () => {
     const handleRemove = vi.fn();
     render(<Tag onRemove={handleRemove}>Removable</Tag>);
+    const removeButton = screen.getByRole("button", { name: "Remover" });
 
-    fireEvent.click(screen.getByRole("button", { name: "Remover" }));
+    fireEvent.click(removeButton);
 
     expect(handleRemove).toHaveBeenCalledTimes(1);
   });

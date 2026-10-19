@@ -7,6 +7,7 @@ export const Button = ({
   type = "button",
   variant: variantProp,
   color = "primary",
+  size = "md",
   icon,
   iconPosition = "left",
   disabled = false,
@@ -21,7 +22,7 @@ export const Button = ({
       return children;
     }
 
-    const iconElement = <Icon name={icon} />;
+    const iconElement = <Icon name={icon} size={size} />;
 
     if (isIconOnly) {
       return iconElement;
@@ -49,6 +50,7 @@ export const Button = ({
       className={button({
         variant,
         color: variant === "icon" || variant === "ghost" ? "none" : color,
+        size,
       })}
     >
       {renderContent()}

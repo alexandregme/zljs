@@ -16,6 +16,12 @@ type Story = StoryObj<typeof Button>;
 export const Playground: Story = {
   args: {
     children: "Button",
+    type: "reset",
+    variant: "link",
+    color: "success",
+    iconPosition: "left",
+    disabled: true,
+    "aria-label": "",
   },
 };
 
@@ -58,6 +64,21 @@ export const Colors: Story = {
       <Button color="danger">Danger</Button>
       <Button color="warning">Warning</Button>
       <Button color="info">Info</Button>
+    </div>
+  ),
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex gap-2 items-center">
+      <Button size="sm" icon="Plus">
+        Small
+      </Button>
+      <Button size="md" icon="Plus">
+        Medium
+      </Button>
+      <Button size="sm" icon="X" aria-label="Close small" />
+      <Button size="md" icon="X" aria-label="Close medium" />
     </div>
   ),
 };
