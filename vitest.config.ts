@@ -32,6 +32,7 @@ export default defineConfig({
     alias: {
       "@zljs/core": resolve(__dirname, "core"),
       "@zljs/rhf": resolve(__dirname, "core/rhf"),
+      "@test-utils": resolve(__dirname, "test-utils"),
     },
   },
 });

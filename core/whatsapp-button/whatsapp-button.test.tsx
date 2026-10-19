@@ -1,167 +1,157 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { WhatsAppButton } from "./whatsapp-button";
+import {
+  ANDROID_USER_AGENT,
+  DESKTOP_USER_AGENT,
+  IPHONE_USER_AGENT,
+  restoreBrowserStubs,
+  stubLocation,
+  stubUserAgent,
+  stubWindowOpen,
+} from "@test-utils";
+import { WhatsAppButton } from "@zljs/core";
 
-const mockOpen = vi.fn();
-const mockAssign = vi.fn();
-const originalNavigator = window.navigator;
-const originalLocation = window.location;
+const PHONE = "5511999999999";
 
-Object.defineProperty(window, "open", { value: mockOpen, configurable: true });
-
-const setUserAgent = (value: string) => {
-  Object.defineProperty(window.navigator, "userAgent", {
-    value,
-    configurable: true,
-  });
-};
-
-beforeEach(() => {
-  mockOpen.mockClear();
-  mockAssign.mockClear();
-});
-
-afterEach(() => {
-  Object.defineProperty(window, "navigator", {
-    value: originalNavigator,
-    configurable: true,
-  });
-  Object.defineProperty(window, "location", {
-    value: originalLocation,
-    configurable: true,
-  });
-});
+afterEach(restoreBrowserStubs);
 
 describe("<WhatsAppButton /> - Default Props", () => {
-  it("renders WhatsAppButton correctly", () => {
-    render(<WhatsAppButton phone="5511999999999" message="Hello" />);
+  it("renders <WhatsAppButton /> correctly", () => {
+    render(<WhatsAppButton phone={PHONE} />);
+    const button = screen.getByRole("button");
 
-    expect(screen.getByRole("button")).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveTextContent("WhatsApp");
   });
 
-  it("renders with WhatsApp text", () => {
-    render(<WhatsAppButton phone="5511999999999" message="Hello" />);
+  it("opens wa.me with phone when <WhatsAppButton /> is clicked", () => {
+    stubUserAgent(DESKTOP_USER_AGENT);
+    const open = stubWindowOpen();
+    render(<WhatsAppButton phone={PHONE} />);
+    const button = screen.getByRole("button");
 
-    expect(screen.getByText("WhatsApp")).toBeInTheDocument();
+    fireEvent.click(button);
+
+    expect(open).toHaveBeenCalledWith("https://wa.me/5511999999999", "_blank");
+  });
+
+  it("renders <WhatsAppButton /> without message by default", () => {
+    stubUserAgent(DESKTOP_USER_AGENT);
+    const open = stubWindowOpen();
+    render(<WhatsAppButton phone={PHONE} />);
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(open).toHaveBeenCalledWith(
+      expect.not.stringContaining("text="),
+      "_blank",
+    );
+  });
+
+  it("renders <WhatsAppButton /> with children WhatsApp by default", () => {
+    render(<WhatsAppButton phone={PHONE} />);
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveTextContent("WhatsApp");
+  });
+
+  it("renders <WhatsAppButton /> without onClick by default", () => {
+    stubUserAgent(DESKTOP_USER_AGENT);
+    stubWindowOpen();
+    render(<WhatsAppButton phone={PHONE} />);
+    const button = screen.getByRole("button");
+
+    expect(() => fireEvent.click(button)).not.toThrow();
   });
 });
 
 describe("<WhatsAppButton /> - Custom Props", () => {
-  it("opens WhatsApp URL when clicked", () => {
-    setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)");
-    render(<WhatsAppButton phone="5511999999999" message="Hello World" />);
+  it("renders <WhatsAppButton /> with message", () => {
+    stubUserAgent(DESKTOP_USER_AGENT);
+    const open = stubWindowOpen();
+    render(<WhatsAppButton phone={PHONE} message="Hello World" />);
+    const button = screen.getByRole("button");
 
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(button);
 
-    expect(mockOpen).toHaveBeenCalledWith(
+    expect(open).toHaveBeenCalledWith(
       "https://wa.me/5511999999999?text=Hello%20World",
       "_blank",
     );
   });
 
-  it("opens WhatsApp Business on mobile", () => {
-    setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)");
-    Object.defineProperty(window, "location", {
-      value: { assign: mockAssign },
-      configurable: true,
-    });
+  it("renders <WhatsAppButton /> with message on mobile", () => {
+    stubUserAgent(IPHONE_USER_AGENT);
+    const assign = vi.fn();
+    stubLocation({ assign });
+    render(<WhatsAppButton phone={PHONE} message="Hello World" />);
+    const button = screen.getByRole("button");
 
-    render(<WhatsAppButton phone="5511999999999" message="Hello World" />);
+    fireEvent.click(button);
 
-    fireEvent.click(screen.getByRole("button"));
-
-    expect(mockAssign).toHaveBeenCalledWith(
+    expect(assign).toHaveBeenCalledWith(
       "whatsapp-business://send?phone=5511999999999&text=Hello%20World",
     );
   });
 
-  it("falls back to location.href when assign is not available", () => {
-    setUserAgent("Mozilla/5.0 (Android 14; Mobile)");
-    const locationObj: Record<string, string> = { href: "" };
-    Object.defineProperty(window, "location", {
-      value: locationObj,
-      configurable: true,
-    });
+  it("renders <WhatsAppButton /> without message on mobile", () => {
+    stubUserAgent(IPHONE_USER_AGENT);
+    const assign = vi.fn();
+    stubLocation({ assign });
+    render(<WhatsAppButton phone={PHONE} />);
+    const button = screen.getByRole("button");
 
-    render(<WhatsAppButton phone="5511999999999" message="Hello" />);
+    fireEvent.click(button);
 
-    fireEvent.click(screen.getByRole("button"));
-
-    expect(locationObj.href).toBe(
-      "whatsapp-business://send?phone=5511999999999&text=Hello",
-    );
-  });
-
-  it("opens WhatsApp Business on mobile without message", () => {
-    setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)");
-    Object.defineProperty(window, "location", {
-      value: { assign: mockAssign },
-      configurable: true,
-    });
-
-    render(<WhatsAppButton phone="5511999999999" />);
-
-    fireEvent.click(screen.getByRole("button"));
-
-    expect(mockAssign).toHaveBeenCalledWith(
+    expect(assign).toHaveBeenCalledWith(
       "whatsapp-business://send?phone=5511999999999",
     );
   });
 
-  it("opens WhatsApp chat without text when message is empty", () => {
-    setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)");
-    render(<WhatsAppButton phone="5511999999999" message="" />);
+  it("sets location.href on mobile when location.assign is missing", () => {
+    stubUserAgent(ANDROID_USER_AGENT);
+    const location = { href: "" };
+    stubLocation(location);
+    render(<WhatsAppButton phone={PHONE} message="Hello" />);
+    const button = screen.getByRole("button");
 
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(button);
 
-    expect(mockOpen).toHaveBeenCalledWith(
-      "https://wa.me/5511999999999",
-      "_blank",
+    expect(location.href).toBe(
+      "whatsapp-business://send?phone=5511999999999&text=Hello",
     );
   });
 
-  it("calls onClick callback when clicked", () => {
-    const handleClick = vi.fn();
-    render(
-      <WhatsAppButton
-        phone="5511999999999"
-        message="Test"
-        onClick={handleClick}
-      />,
-    );
+  it("opens wa.me when the browser has no userAgent", () => {
+    stubUserAgent(undefined as unknown as string);
+    const open = stubWindowOpen();
+    render(<WhatsAppButton phone={PHONE} message="Hello" />);
+    const button = screen.getByRole("button");
 
-    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(button);
 
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
-
-  it("handles missing userAgent gracefully", () => {
-    Object.defineProperty(window, "navigator", {
-      value: {},
-      configurable: true,
-    });
-    Object.defineProperty(window, "open", {
-      value: mockOpen,
-      configurable: true,
-    });
-
-    render(<WhatsAppButton phone="5511999999999" message="Hello" />);
-
-    fireEvent.click(screen.getByRole("button"));
-
-    expect(mockOpen).toHaveBeenCalledWith(
+    expect(open).toHaveBeenCalledWith(
       "https://wa.me/5511999999999?text=Hello",
       "_blank",
     );
   });
 
-  it("renders custom children", () => {
-    render(
-      <WhatsAppButton phone="5511999999999" message="Test">
-        Enviar mensagem
-      </WhatsAppButton>,
-    );
+  it("renders <WhatsAppButton /> with children", () => {
+    render(<WhatsAppButton phone={PHONE}>Enviar mensagem</WhatsAppButton>);
+    const button = screen.getByRole("button");
 
-    expect(screen.getByText("Enviar mensagem")).toBeInTheDocument();
+    expect(button).toHaveTextContent("Enviar mensagem");
+  });
+
+  it("calls onClick when <WhatsAppButton /> is clicked", () => {
+    stubUserAgent(DESKTOP_USER_AGENT);
+    stubWindowOpen();
+    const handleClick = vi.fn();
+    render(<WhatsAppButton phone={PHONE} onClick={handleClick} />);
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

@@ -5,30 +5,51 @@ const meta: Meta<typeof WhatsAppButton> = {
   title: "Components/WhatsAppButton",
   component: WhatsAppButton,
   tags: ["autodocs"],
+  parameters: {
+    docs: { toc: true },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof WhatsAppButton>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     phone: "5511999999999",
     message: "Olá! Gostaria de mais informações.",
   },
 };
 
-export const CustomText: Story = {
-  args: {
-    phone: "5511999999999",
-    message: "Olá! Vim pelo site.",
-    children: "Enviar mensagem",
-  },
+export const Messages: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <WhatsAppButton phone="5511999999999">Without message</WhatsAppButton>
+      <WhatsAppButton phone="5511999999999" message="Olá! Vim pelo site.">
+        With message
+      </WhatsAppButton>
+    </div>
+  ),
 };
 
-export const WithCallback: Story = {
-  args: {
-    phone: "5511999999999",
-    message: "Teste de callback",
-    onClick: () => alert("Mensagem enviada!"),
-  },
+export const Labels: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <WhatsAppButton phone="5511999999999" />
+      <WhatsAppButton phone="5511999999999">Enviar mensagem</WhatsAppButton>
+    </div>
+  ),
+};
+
+export const States: Story = {
+  render: () => (
+    <div className="flex gap-2">
+      <WhatsAppButton
+        phone="5511999999999"
+        message="Teste de callback"
+        onClick={() => alert("Mensagem enviada!")}
+      >
+        With onClick
+      </WhatsAppButton>
+    </div>
+  ),
 };
