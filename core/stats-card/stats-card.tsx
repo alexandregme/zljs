@@ -1,4 +1,4 @@
-import { StatsCardProps } from "./stats-card.interface";
+import type { StatsCardProps } from "./stats-card.interface";
 
 const colorClasses = {
   blue: {

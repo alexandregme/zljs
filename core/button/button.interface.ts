@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { IconName } from "../icon/icon.interface";
 import type { SemanticColor } from "../types";
 

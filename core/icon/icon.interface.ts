@@ -1,4 +1,4 @@
-import { iconNames } from "./icon.const";
+import type { iconNames } from "./icon.const";
 
 export type IconName = (typeof iconNames)[number];
 

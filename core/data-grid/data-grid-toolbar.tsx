@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GridApi } from "ag-grid-community";
+import type { GridApi } from "ag-grid-community";
 import { Button } from "../button";
 import { Input } from "../forms";
 

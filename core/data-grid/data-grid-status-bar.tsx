@@ -1,4 +1,4 @@
-import { GridApi } from "ag-grid-community";
+import type { GridApi } from "ag-grid-community";
 import { Tag } from "../tag";
 import { Button } from "../button";
 

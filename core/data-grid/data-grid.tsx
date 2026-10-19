@@ -1,15 +1,15 @@
+import type { ColDef, GridApi } from "ag-grid-community";
 import {
   AllCommunityModule,
-  ColDef,
-  GridApi,
   ModuleRegistry,
   themeAlpine,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useState, useCallback } from "react";
-import { DataGridProps } from "./data-grid.interface";
+import type { DataGridProps } from "./data-grid.interface";
 import { DataGridToolbar } from "./data-grid-toolbar";
-import { DataGridStatusBar, ActiveFilter } from "./data-grid-status-bar";
+import type { ActiveFilter } from "./data-grid-status-bar";
+import { DataGridStatusBar } from "./data-grid-status-bar";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { DataGridToolbar } from "./data-grid-toolbar";
-import { GridApi } from "ag-grid-community";
+import type { GridApi } from "ag-grid-community";
 
 const createMockGridApi = (): GridApi =>
   ({

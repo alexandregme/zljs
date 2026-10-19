@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { DataGrid } from "./data-grid";
-import { DataGridColumn } from "./data-grid.interface";
+import type { DataGridColumn } from "./data-grid.interface";
 
 const mockGridApi = {
   setGridOption: vi.fn(),
