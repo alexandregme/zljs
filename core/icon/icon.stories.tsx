@@ -50,3 +50,12 @@ export const Names: Story = {
     </div>
   ),
 };
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex gap-4 items-center">
+      <Icon name="Check" size="sm" />
+      <Icon name="Check" size="md" />
+    </div>
+  ),
+};

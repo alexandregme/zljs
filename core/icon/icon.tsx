@@ -1,25 +1,18 @@
 import * as LucideIcons from "lucide-react";
-import { SiWhatsapp, SiFacebook, SiInstagram, SiShopify } from "react-icons/si";
 import type { IconProps } from "./icon.interface";
+import { iconBrands, iconSizes } from "./icon.const";
 
-const brandIcons: Record<string, React.ElementType> = {
-  SiWhatsapp,
-  SiFacebook,
-  SiInstagram,
-  SiShopify,
-};
-
-export const Icon = ({ name }: IconProps) => {
+export const Icon = ({ name, size = "md" }: IconProps) => {
   const isBrand = name.startsWith("Si");
   const IconComponent = isBrand
-    ? brandIcons[name]
+    ? iconBrands[name]
     : (LucideIcons[name as keyof typeof LucideIcons] as React.ElementType);
 
   if (!IconComponent) return <></>;
 
   return (
     <span data-testid={name}>
-      <IconComponent size={16} />
+      <IconComponent size={iconSizes[size]} />
     </span>
   );
 };

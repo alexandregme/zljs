@@ -20,8 +20,22 @@ export const button = tv({
       info: "bg-cyan-500 hover:bg-cyan-600 focus:ring-cyan-500",
       none: "",
     },
+    size: {
+      sm: "",
+      md: "",
+    },
   },
   compoundVariants: [
+    {
+      variant: "default",
+      size: "sm",
+      class: "px-2 py-1 text-xs gap-1",
+    },
+    {
+      variant: "icon",
+      size: "sm",
+      class: "p-0.5",
+    },
     {
       variant: "link",
       color: "primary",
@@ -41,5 +55,6 @@ export const button = tv({
   defaultVariants: {
     variant: "default",
     color: "primary",
+    size: "md",
   },
 });

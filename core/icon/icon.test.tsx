@@ -10,6 +10,13 @@ describe("<Icon /> - Default Props", () => {
     expect(icon).toBeInTheDocument();
     expect(icon.querySelector("svg")).toBeInTheDocument();
   });
+
+  it("renders <Icon /> with size md by default", () => {
+    render(<Icon name="X" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon.querySelector("svg")).toHaveAttribute("width", "16");
+  });
 });
 
 describe("<Icon /> - Custom Props", () => {
@@ -26,5 +33,12 @@ describe("<Icon /> - Custom Props", () => {
     );
 
     expect(container).toBeEmptyDOMElement();
+  });
+
+  it("renders <Icon /> with size sm", () => {
+    render(<Icon name="X" size="sm" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon.querySelector("svg")).toHaveAttribute("width", "12");
   });
 });
