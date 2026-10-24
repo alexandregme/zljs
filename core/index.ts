@@ -1,5 +1,5 @@
 export { Button } from "./button";
-export type { ButtonProps, ButtonVariant } from "./button";
+export type { ButtonColor, ButtonProps, ButtonVariant } from "./button";
 export { DataGrid } from "./data-grid";
 export type { DataGridColumn, DataGridProps } from "./data-grid";
 export { Checkbox, Error, Form, Input, Radio, Select, TextArea } from "./forms";
