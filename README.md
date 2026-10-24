@@ -27,13 +27,12 @@ pnpm add @alexandregme/zljs
 
 Peer dependencies: `react@19`, `react-dom@19`, `next@>=16`, `next-auth@4`, `@reduxjs/toolkit@2`, `react-redux@9`.
 
-Import the global styles once (e.g. in your root layout) and let Tailwind CSS v4 scan the library classes:
+Import the global styles once (e.g. in your root layout). It already tells Tailwind CSS v4 to scan the library classes, so no `@source` is needed:
 
 ```css
 /* app/globals.css */
 @import "tailwindcss";
 @import "@alexandregme/zljs/styles.css";
-@source "../node_modules/@alexandregme/zljs/dist";
 ```
 
 ```tsx
