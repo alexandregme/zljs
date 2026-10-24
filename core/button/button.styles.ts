@@ -7,9 +7,7 @@ export const button = tv({
       default:
         "px-4 py-2 text-white text-sm gap-2 rounded-md focus:ring-2 focus:ring-offset-2",
       icon: "p-1 bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:ring-gray-500 rounded-md focus:ring-2 focus:ring-offset-2",
-      ghost:
-        "px-3 py-2 gap-3 text-sm bg-transparent text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-md focus-visible:ring-2 focus-visible:ring-neutral-600",
-      link: "text-xs underline bg-transparent hover:no-underline",
+      link: "text-xs hover:underline",
     },
     color: {
       primary: "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500",
@@ -18,6 +16,8 @@ export const button = tv({
       warning:
         "bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500 text-gray-900",
       info: "bg-cyan-500 hover:bg-cyan-600 focus:ring-cyan-500",
+      ghost:
+        "bg-transparent text-neutral-400 hover:text-white hover:bg-neutral-800 focus:ring-neutral-600",
       none: "",
     },
     size: {
@@ -27,6 +27,11 @@ export const button = tv({
     },
   },
   compoundVariants: [
+    {
+      variant: "default",
+      color: "none",
+      class: "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500",
+    },
     {
       variant: "default",
       size: "sm",
@@ -50,17 +55,41 @@ export const button = tv({
     {
       variant: "link",
       color: "primary",
-      class: "bg-transparent text-blue-600 hover:text-blue-800",
+      class: "text-blue-600 hover:text-blue-800",
+    },
+    {
+      variant: "link",
+      color: "success",
+      class: "text-green-600 hover:text-green-800",
     },
     {
       variant: "link",
       color: "danger",
-      class: "bg-transparent text-red-600 hover:text-red-800",
+      class: "text-red-600 hover:text-red-800",
+    },
+    {
+      variant: "link",
+      color: "warning",
+      class: "text-yellow-600 hover:text-yellow-800",
+    },
+    {
+      variant: "link",
+      color: "info",
+      class: "text-cyan-600 hover:text-cyan-800",
+    },
+    {
+      variant: "link",
+      color: "ghost",
+      class: "text-neutral-400 hover:text-neutral-600",
     },
     {
       variant: "link",
       color: "none",
       class: "text-slate-500 hover:text-slate-700",
+    },
+    {
+      variant: "link",
+      class: "bg-transparent hover:bg-transparent",
     },
   ],
   defaultVariants: {

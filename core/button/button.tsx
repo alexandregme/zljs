@@ -49,7 +49,7 @@ export const Button = ({
       aria-label={ariaLabel}
       className={button({
         variant,
-        color: variant === "icon" || variant === "ghost" ? "none" : color,
+        color: variant === "icon" && color !== "ghost" ? "none" : color,
         size,
       })}
     >

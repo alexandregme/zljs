@@ -90,7 +90,7 @@ export const Sidebar = ({
           <span className={userEmail()}>{user.email}</span>
         </div>
         <Button
-          variant="ghost"
+          color="ghost"
           icon="LogOut"
           aria-label="Logout"
           onClick={onLogout}
@@ -99,7 +99,7 @@ export const Sidebar = ({
 
       <div className={toggleButton()}>
         <Button
-          variant="ghost"
+          color="ghost"
           icon={collapsed ? "ChevronRight" : "ChevronLeft"}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           onClick={() => setCollapsed(!collapsed)}
