@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Modal } from "./modal";
-import { Button } from "../button";
+import { Button } from "@zljs/core";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",

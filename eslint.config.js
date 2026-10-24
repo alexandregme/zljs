@@ -21,6 +21,23 @@ export default tseslint.config(
     },
   },
   {
+    files: ["**/*.stories.tsx", "**/*.test.tsx"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["../*"],
+              message:
+                "Import other components from the library barrel (@zljs/core), not by relative path.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     ignores: [
       "node_modules/",
       "dist/",

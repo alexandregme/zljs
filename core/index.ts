@@ -64,3 +64,4 @@ export { DocumentWrapper } from "./document-wrapper";
 export type { DocumentWrapperProps } from "./document-wrapper";
 export { HTTPClient } from "./http";
 export type { HttpClientConfig, HttpRequestConfig } from "./http";
+export type { SemanticColor, DataColor, Size } from "./types";

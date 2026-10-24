@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AppWrapper } from "./app-wrapper";
-import { useAppStore } from "../state/app";
-import { useToastStore } from "../state/toast";
+import { useAppStore, useToastStore } from "@zljs/core";
 import { useEffect } from "react";
 
 const meta: Meta<typeof AppWrapper> = {

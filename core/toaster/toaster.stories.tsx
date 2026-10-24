@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Toaster } from "./toaster";
 import { toast } from "sonner";
-import { Button } from "../button";
+import { Button } from "@zljs/core";
 
 const meta: Meta<typeof Toaster> = {
   title: "Components/Toaster",

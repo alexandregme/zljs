@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Loader } from "./loader";
-import { useAppStore } from "../state/app";
+import { useAppStore } from "@zljs/core";
 import { useEffect } from "react";
 
 const meta: Meta<typeof Loader> = {

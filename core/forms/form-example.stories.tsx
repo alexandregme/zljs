@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button } from "../button";
+import { Button } from "@zljs/core";
 import { Form } from "./form";
 import { Input } from "./input";
 import { Checkbox } from "./checkbox";
