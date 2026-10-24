@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const config: StorybookConfig = {
   stories: ["../core/**/*.stories.@(js|jsx|ts|tsx)"],
   framework: "@storybook/react-vite",
+
   viteFinal: (config) => {
     config.plugins = [...(config.plugins || []), tailwindcss()];
     config.resolve = {
@@ -22,6 +23,8 @@ const config: StorybookConfig = {
     };
     return config;
   },
+
+  addons: ["@storybook/addon-vitest"],
 };
 
 export default config;
