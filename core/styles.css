@@ -1,3 +1,7 @@
+/* Makes the consumer's Tailwind scan the component classes. The path is
+   relative to this file, so it works from core/ and from the copy in dist/. */
+@source "./";
+
 /* Global Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
