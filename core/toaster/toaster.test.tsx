@@ -1,6 +1,6 @@
 import { act, render } from "@testing-library/react";
 import { Toaster } from "./toaster";
-import { useToastStore } from "../state/toast";
+import { useToastStore } from "@zljs/core";
 
 vi.mock("sonner", () => ({
   Toaster: vi.fn(() => null),

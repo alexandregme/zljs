@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider } from "../form-provider";
+import { FormProvider } from "@zljs/core";
 import { FormInput } from "./form-input";
 
 describe("<FormInput /> - Default Props", () => {

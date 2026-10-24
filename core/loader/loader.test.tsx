@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Loader } from "./loader";
-import { useAppStore } from "../state/app";
+import { useAppStore } from "@zljs/core";
 
 vi.mock("../spinner", () => ({
   Spinner: () => <div data-testid="spinner" />,

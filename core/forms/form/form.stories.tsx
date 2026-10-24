@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Form } from "./form";
-import { Input } from "../input";
-import { Checkbox } from "../checkbox";
-import { Radio } from "../radio";
-import { Select } from "../select";
-import { Button } from "../../button";
+import { Input, Checkbox, Radio, Select, Button } from "@zljs/core";
 
 const meta: Meta<typeof Form> = {
   title: "Forms/Form",

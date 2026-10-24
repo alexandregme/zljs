@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ConnectedModal } from "./connected-modal";
-import { useModalStore } from "../state/modal";
+import { useModalStore } from "@zljs/core";
 
 const reset = () => useModalStore.setState({ modals: [] });
 
