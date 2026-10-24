@@ -1,4 +1,6 @@
 import { resolve } from "path";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -6,7 +8,6 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
-    include: ["core/**/*.test.{ts,tsx}"],
     css: false,
     coverage: {
       provider: "v8",
@@ -34,5 +35,31 @@ export default defineConfig({
       "@zljs/rhf": resolve(__dirname, "core/rhf"),
       "@test-utils": resolve(__dirname, "test-utils"),
     },
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          include: ["core/**/*.test.{ts,tsx}"],
+        },
+      },
+      // Runs every story as a test in a real browser. This is the project the
+      // Storybook "Run tests" panel (@storybook/addon-vitest) looks for.
+      {
+        extends: true,
+        plugins: [
+          storybookTest({ configDir: resolve(__dirname, ".storybook") }),
+        ],
+        test: {
+          name: "storybook",
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright(),
+            instances: [{ browser: "chromium" }],
+          },
+        },
+      },
+    ],
   },
 });

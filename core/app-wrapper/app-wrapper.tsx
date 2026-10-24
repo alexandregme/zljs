@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useRouter } from "next/compat/router";
+import { useRouter } from "next/compat/router.js";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "../toaster";
 import { Loader } from "../loader";

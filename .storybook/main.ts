@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const config: StorybookConfig = {
   stories: ["../core/**/*.stories.@(js|jsx|ts|tsx)"],
   framework: "@storybook/react-vite",
+
   viteFinal: (config) => {
     config.plugins = [...(config.plugins || []), tailwindcss()];
     config.resolve = {
@@ -17,11 +18,14 @@ const config: StorybookConfig = {
         "@zljs/core": path.resolve(__dirname, "../core"),
         "@zljs/rhf": path.resolve(__dirname, "../core/rhf"),
         "next/link": path.resolve(__dirname, "mocks/next-link.tsx"),
+        "next/link.js": path.resolve(__dirname, "mocks/next-link.tsx"),
         "next-auth/react": path.resolve(__dirname, "mocks/next-auth-react.tsx"),
       },
     };
     return config;
   },
+
+  addons: ["@storybook/addon-vitest"],
 };
 
 export default config;

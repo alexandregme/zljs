@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Link from "next/link";
+import Link from "next/link.js";
 import type { SidebarProps } from "./sidebar.interface";
 import { Icon } from "../icon";
 import { Button } from "../button";
