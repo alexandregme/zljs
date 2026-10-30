@@ -52,6 +52,11 @@ export const iconNames = [
   "XCircle",
   "AlertTriangle",
   "Info",
+  "Route",
+  "Navigation",
+  "ListChecks",
+  "Map",
+  "MapPinOff",
   // Brand icons (react-icons/si)
   "SiWhatsapp",
   "SiFacebook",
