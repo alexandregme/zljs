@@ -17,6 +17,8 @@ export const iconNames = [
   "ChevronUp",
   "ChevronLeft",
   "ChevronRight",
+  "ChevronsUp",
+  "ArrowUp",
   "Pencil",
   "Trash2",
   "Save",

@@ -6,4 +6,5 @@ export type IconName = (typeof iconNames)[number];
 export interface IconProps {
   name: IconName;
   size?: Size;
+  "aria-label"?: string;
 }

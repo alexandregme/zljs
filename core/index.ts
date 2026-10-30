@@ -14,7 +14,7 @@ export type {
   TextAreaProps,
 } from "./forms";
 export { Icon } from "./icon";
-export type { IconName } from "./icon";
+export type { IconName, IconProps } from "./icon";
 export { FormProvider, FormInput } from "./rhf";
 export type { FormProviderProps, FormInputProps } from "./rhf";
 export { StatsCard } from "./stats-card";

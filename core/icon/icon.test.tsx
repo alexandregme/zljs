@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Icon } from "./icon";
+import { Icon } from "@zljs/core";
 import { iconNames } from "./icon.const";
 
 describe("<Icon /> - Default Props", () => {
@@ -16,6 +16,21 @@ describe("<Icon /> - Default Props", () => {
     const icon = screen.getByTestId("X");
 
     expect(icon.querySelector("svg")).toHaveAttribute("width", "16");
+  });
+
+  it("renders <Icon /> without aria-label by default", () => {
+    render(<Icon name="X" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon).not.toHaveAttribute("aria-label");
+    expect(icon).not.toHaveAttribute("role");
+  });
+
+  it("renders <Icon /> brand svg hidden from assistive technology by default", () => {
+    render(<Icon name="SiWhatsapp" />);
+    const icon = screen.getByTestId("SiWhatsapp");
+
+    expect(icon.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
   });
 });
 
@@ -40,5 +55,12 @@ describe("<Icon /> - Custom Props", () => {
     const icon = screen.getByTestId("X");
 
     expect(icon.querySelector("svg")).toHaveAttribute("width", "12");
+  });
+
+  it("renders <Icon /> with aria-label", () => {
+    render(<Icon name="SiWhatsapp" aria-label="WhatsApp" />);
+    const icon = screen.getByRole("img", { name: "WhatsApp" });
+
+    expect(icon).toBeInTheDocument();
   });
 });
