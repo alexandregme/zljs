@@ -65,5 +65,11 @@ jobs:
       - name: Test with coverage
         run: pnpm test:coverage
 
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Test stories
+        run: pnpm test:storybook
+
       - name: Build library
         run: pnpm build:lib

@@ -21,6 +21,7 @@ Thumbs.db
 # Logs
 *.log
 debug-storybook.log
+chromatic-diagnostics.json
 
 # Lock files (optional - some prefer to commit)
 # pnpm-lock.yaml

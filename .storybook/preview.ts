@@ -9,6 +9,11 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    // "todo" reports violations in the a11y panel without failing the run.
+    // Switch to "error" once the existing violations are fixed.
+    a11y: {
+      test: "todo",
+    },
   },
 };
 
