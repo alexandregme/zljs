@@ -7,6 +7,10 @@ const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
   component: Modal,
   tags: ["autodocs"],
+  // Open modals would cover the docs page and trap its focus: isolate each one.
+  parameters: {
+    docs: { story: { inline: false, height: "360px" } },
+  },
 };
 
 export default meta;
