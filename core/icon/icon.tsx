@@ -2,7 +2,11 @@ import * as LucideIcons from "lucide-react";
 import type { IconProps } from "./icon.interface";
 import { iconBrands, iconSizes } from "./icon.const";
 
-export const Icon = ({ name, size = "md" }: IconProps) => {
+export const Icon = ({
+  name,
+  size = "md",
+  "aria-label": ariaLabel,
+}: IconProps) => {
   const isBrand = name.startsWith("Si");
   const IconComponent = isBrand
     ? iconBrands[name]
@@ -11,8 +15,12 @@ export const Icon = ({ name, size = "md" }: IconProps) => {
   if (!IconComponent) return <></>;
 
   return (
-    <span data-testid={name}>
-      <IconComponent size={iconSizes[size]} />
+    <span
+      data-testid={name}
+      role={ariaLabel ? "img" : undefined}
+      aria-label={ariaLabel}
+    >
+      <IconComponent size={iconSizes[size]} aria-hidden="true" />
     </span>
   );
 };
