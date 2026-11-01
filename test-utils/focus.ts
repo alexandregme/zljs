@@ -1,5 +1,3 @@
-// Not exported from index.ts: browser.ts imports vitest, which the Storybook build can't bundle.
-
 type Rgba = [red: number, green: number, blue: number, alpha: number];
 
 const WHITE: Rgba = [255, 255, 255, 255];

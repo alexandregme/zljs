@@ -22,8 +22,7 @@
     "paths": {
       "@zljs/core": ["core/index.ts"],
       "@zljs/rhf": ["core/rhf/index.ts"],
-      "@test-utils": ["test-utils/index.ts"],
-      "@test-utils/focus": ["test-utils/focus.ts"]
+      "@test-utils": ["test-utils/index.ts"]
     }
   },
   "include": ["core/**/*", "test-utils/**/*", "vitest.setup.ts"],

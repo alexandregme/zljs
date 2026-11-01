@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ButtonColor, IconName } from "@zljs/core";
 import { Heading } from "@zljs/core";
-import { focusOutlineContrast } from "@test-utils/focus";
+import { focusOutlineContrast } from "@test-utils";
 import { expect } from "storybook/test";
 import { Button } from "./button";
 
