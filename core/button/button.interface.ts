@@ -12,6 +12,7 @@ export interface ButtonProps {
   variant?: ButtonVariant;
   color?: ButtonColor;
   size?: Size;
+  fullWidth?: boolean;
   icon?: IconName;
   iconPosition?: "left" | "right";
   disabled?: boolean;

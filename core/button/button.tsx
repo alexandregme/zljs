@@ -8,6 +8,7 @@ export const Button = ({
   variant: variantProp,
   color = "primary",
   size = "md",
+  fullWidth = false,
   icon,
   iconPosition = "left",
   disabled = false,
@@ -51,6 +52,7 @@ export const Button = ({
         variant,
         color: variant === "icon" && color !== "ghost" ? "none" : color,
         size,
+        fullWidth,
       })}
     >
       {renderContent()}

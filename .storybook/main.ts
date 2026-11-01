@@ -17,6 +17,7 @@ const config: StorybookConfig = {
         ...config.resolve?.alias,
         "@zljs/core": path.resolve(__dirname, "../core"),
         "@zljs/rhf": path.resolve(__dirname, "../core/rhf"),
+        "@test-utils/focus": path.resolve(__dirname, "../test-utils/focus.ts"),
         "next/link": path.resolve(__dirname, "mocks/next-link.tsx"),
         "next/link.js": path.resolve(__dirname, "mocks/next-link.tsx"),
         "next-auth/react": path.resolve(__dirname, "mocks/next-auth-react.tsx"),
