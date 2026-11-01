@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Heading } from "./heading";
+import { Heading } from "@zljs/core";
 
 describe("<Heading /> - Default Props", () => {
   it("renders <Heading /> correctly", () => {
@@ -36,10 +36,17 @@ describe("<Heading /> - Custom Props", () => {
     },
   );
 
+  it("renders <Heading /> with level 3 styles", () => {
+    render(<Heading level={3}>Title</Heading>);
+    const heading = screen.getByRole("heading", { level: 3 });
+
+    expect(heading).toHaveClass("text-xl", "font-semibold");
+  });
+
   it("renders <Heading /> with color warning", () => {
     render(<Heading color="warning">Warning</Heading>);
     const heading = screen.getByRole("heading");
 
-    expect(heading).toHaveClass("text-yellow-600");
+    expect(heading).toHaveClass("text-yellow-700");
   });
 });

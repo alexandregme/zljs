@@ -12,10 +12,10 @@ export const heading = tv({
     },
     color: {
       primary: "text-blue-600",
-      success: "text-green-600",
+      success: "text-green-700",
       danger: "text-red-600",
-      warning: "text-yellow-600",
-      info: "text-sky-600",
+      warning: "text-yellow-700",
+      info: "text-sky-700",
       none: "",
     },
   },
