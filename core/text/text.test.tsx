@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Text } from "./text";
+import { Text } from "@zljs/core";
 
 describe("<Text /> - Default Props", () => {
   it("renders <Text /> correctly", () => {
@@ -23,6 +23,13 @@ describe("<Text /> - Default Props", () => {
 
     expect(text).toHaveClass("text-base");
   });
+
+  it("renders <Text /> without color by default", () => {
+    render(<Text>Total</Text>);
+    const text = screen.getByRole("paragraph");
+
+    expect(text).toHaveAttribute("class", "text-base");
+  });
 });
 
 describe("<Text /> - Custom Props", () => {
@@ -45,5 +52,12 @@ describe("<Text /> - Custom Props", () => {
     const text = screen.getByRole("paragraph");
 
     expect(text).toHaveClass("text-3xl", "font-bold");
+  });
+
+  it("renders <Text /> with color warning", () => {
+    render(<Text color="warning">Total</Text>);
+    const text = screen.getByRole("paragraph");
+
+    expect(text).toHaveClass("text-yellow-700");
   });
 });
