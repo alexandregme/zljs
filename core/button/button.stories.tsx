@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ButtonColor, IconName } from "@zljs/core";
 import { Heading } from "@zljs/core";
-import { focusOutlineContrast } from "@test-utils";
+import { focusOutlineContrast, hoverTextContrast } from "@test-utils";
 import { expect } from "storybook/test";
 import { Button } from "./button";
 
@@ -56,17 +56,25 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`primary` is the default and `none` is the neutral option. `muted` is for a secondary action that shouldn't compete with the main one. `ghost` takes the text color of its parent, so it works on any background. An icon-only button ignores `color`, except for `ghost`. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. Keyboard focus draws an outline with at least 3:1 contrast on a white page, and `ghost` keeps it on any background: this story checks every button shown here.",
+          "`primary` is the default and `none` is the neutral option. `muted` is for a secondary action that shouldn't compete with the main one. `ghost` takes the text color of its parent, so it works on any background. An icon-only button ignores `color`, except for `ghost`. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. Keyboard focus draws an outline with at least 3:1 contrast on a white page, and `ghost` keeps it on any background. On hover, text keeps 4.5:1 and an icon alone keeps 3:1. This story checks both on every button shown here, because axe sees neither focus nor hover.",
       },
     },
   },
   play: async ({ canvas }) => {
-    const lowContrast = canvas
-      .getAllByRole("button")
+    const buttons = canvas.getAllByRole("button");
+    const nameOf = (button: HTMLElement) =>
+      button.textContent || button.getAttribute("aria-label");
+    const lowContrast = buttons
       .filter((button) => focusOutlineContrast(button) < 3)
-      .map((button) => button.textContent || button.getAttribute("aria-label"));
+      .map(nameOf);
+    const lowHoverContrast = buttons
+      .filter(
+        (button) => hoverTextContrast(button) < (button.textContent ? 4.5 : 3),
+      )
+      .map(nameOf);
 
     await expect(lowContrast).toEqual([]);
+    await expect(lowHoverContrast).toEqual([]);
   },
   render: () => (
     <div className="flex flex-col gap-4">
