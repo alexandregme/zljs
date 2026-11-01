@@ -5,29 +5,34 @@ import { wrapper, innerWrapper, checkbox, label } from "./checkbox.styles";
 
 export const Checkbox = ({
   label: labelText,
+  "aria-label": ariaLabel,
+  variant,
+  size,
   checked,
   disabled,
   error,
   onChange,
 }: CheckboxProps) => {
   const id = useId();
+  const errorId = `${id}-error`;
 
   return (
     <div className={wrapper()}>
-      <div className={innerWrapper()}>
+      <label htmlFor={id} className={innerWrapper({ variant })}>
         <input
           id={id}
           type="checkbox"
           checked={checked}
           disabled={disabled}
           onChange={onChange}
-          className={checkbox()}
+          aria-label={ariaLabel}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
+          className={checkbox({ size })}
         />
-        <label htmlFor={id} className={label()}>
-          {labelText}
-        </label>
-      </div>
-      {error && <Error message={error} />}
+        <span className={label()}>{labelText}</span>
+      </label>
+      {error && <Error id={errorId} message={error} />}
     </div>
   );
 };

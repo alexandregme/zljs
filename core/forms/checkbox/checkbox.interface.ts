@@ -1,7 +1,13 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, ReactNode } from "react";
+import type { Size } from "../../types";
+
+export type CheckboxVariant = "default" | "card";
 
 export interface CheckboxProps {
-  label: string;
+  label: ReactNode;
+  "aria-label"?: string;
+  variant?: CheckboxVariant;
+  size?: Size;
   checked?: boolean;
   disabled?: boolean;
   error?: string;

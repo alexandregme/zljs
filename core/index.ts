@@ -5,6 +5,7 @@ export type { DataGridColumn, DataGridProps } from "./data-grid";
 export { Checkbox, Error, Form, Input, Radio, Select, TextArea } from "./forms";
 export type {
   CheckboxProps,
+  CheckboxVariant,
   ErrorProps,
   FormProps,
   InputProps,
