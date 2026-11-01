@@ -20,6 +20,7 @@ const colors = [
   "danger",
   "warning",
   "info",
+  "muted",
   "ghost",
   "none",
 ] as const satisfies readonly ButtonColor[];
@@ -30,6 +31,7 @@ const colorIcons: Record<ButtonColor, IconName> = {
   danger: "XCircle",
   warning: "AlertTriangle",
   info: "Info",
+  muted: "MessageSquare",
   ghost: "Menu",
   none: "Minus",
 };
@@ -54,7 +56,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`primary` is the default and `none` is the neutral option. `ghost` takes the text color of its parent, so it works on any background. An icon-only button ignores `color`, except for `ghost`. Keyboard focus draws an outline with at least 3:1 contrast on a white page, and `ghost` keeps it on any background: this story checks every button shown here.",
+          "`primary` is the default and `none` is the neutral option. `muted` is for a secondary action that shouldn't compete with the main one. `ghost` takes the text color of its parent, so it works on any background. An icon-only button ignores `color`, except for `ghost`. Keyboard focus draws an outline with at least 3:1 contrast on a white page, and `ghost` keeps it on any background: this story checks every button shown here.",
       },
     },
   },

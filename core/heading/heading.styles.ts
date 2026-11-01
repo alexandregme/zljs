@@ -16,6 +16,7 @@ export const heading = tv({
       danger: "text-red-600",
       warning: "text-yellow-700",
       info: "text-sky-700",
+      muted: "text-gray-500",
       none: "",
     },
   },

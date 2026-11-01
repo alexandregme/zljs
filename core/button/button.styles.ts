@@ -18,6 +18,7 @@ export const button = tv({
       warning:
         "bg-yellow-500 hover:bg-yellow-600 focus-visible:outline-yellow-700 text-gray-900",
       info: "bg-cyan-700 hover:bg-cyan-800 focus-visible:outline-cyan-700",
+      muted: "bg-gray-500 hover:bg-gray-600 focus-visible:outline-gray-500",
       ghost:
         "bg-transparent text-current hover:text-current hover:bg-neutral-500/20",
       none: "",
@@ -81,6 +82,11 @@ export const button = tv({
       variant: "link",
       color: "info",
       class: "text-cyan-700 hover:text-cyan-900",
+    },
+    {
+      variant: "link",
+      color: "muted",
+      class: "text-gray-500 hover:text-gray-700",
     },
     {
       variant: "link",

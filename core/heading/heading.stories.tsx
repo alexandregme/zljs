@@ -52,7 +52,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "With no `color`, the heading inherits the text color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every level.",
+          "With no `color`, the heading inherits the text color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every level. `muted` is for a secondary heading that shouldn't compete with the main one.",
       },
     },
   },
@@ -64,6 +64,7 @@ export const Colors: Story = {
       <Heading color="danger">Danger</Heading>
       <Heading color="warning">Warning</Heading>
       <Heading color="info">Info</Heading>
+      <Heading color="muted">Muted</Heading>
       <Heading color="none">None</Heading>
     </div>
   ),
