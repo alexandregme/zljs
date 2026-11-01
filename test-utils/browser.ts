@@ -1,5 +1,3 @@
-import { vi } from "vitest";
-
 export const DESKTOP_USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)";
 export const IPHONE_USER_AGENT =
