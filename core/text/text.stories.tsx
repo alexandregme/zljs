@@ -68,7 +68,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "With no `color`, the text inherits the color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every variant. `muted` is for supporting text, such as a progress count or a secondary detail.",
+          "With no `color`, the text inherits the color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every variant. `muted` is for supporting text, such as a progress count or a secondary detail. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here.",
       },
     },
   },

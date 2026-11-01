@@ -2,6 +2,92 @@
    relative to this file, so it works from core/ and from the copy in dist/. */
 @source "./";
 
+/* The semantic colors of the components. Works with no setup; an app changes a
+   color by redefining its --color-zl-* value in its own @theme, after importing
+   this file. The -strong, -bg, -hover and -on values follow it unless redefined.
+   Only the defaults are checked for contrast. */
+@theme {
+  --color-zl-primary: var(--color-blue-600);
+  --color-zl-primary-strong: color-mix(
+    in oklab,
+    var(--color-zl-primary),
+    black 30%
+  );
+  --color-zl-primary-bg: var(--color-zl-primary);
+  --color-zl-primary-hover: color-mix(
+    in oklab,
+    var(--color-zl-primary-bg),
+    black 15%
+  );
+  --color-zl-primary-on: var(--color-white);
+
+  --color-zl-success: var(--color-green-700);
+  --color-zl-success-strong: color-mix(
+    in oklab,
+    var(--color-zl-success),
+    black 30%
+  );
+  --color-zl-success-bg: var(--color-zl-success);
+  --color-zl-success-hover: color-mix(
+    in oklab,
+    var(--color-zl-success-bg),
+    black 15%
+  );
+  --color-zl-success-on: var(--color-white);
+
+  --color-zl-danger: var(--color-red-600);
+  --color-zl-danger-strong: color-mix(
+    in oklab,
+    var(--color-zl-danger),
+    black 30%
+  );
+  --color-zl-danger-bg: var(--color-zl-danger);
+  --color-zl-danger-hover: color-mix(
+    in oklab,
+    var(--color-zl-danger-bg),
+    black 15%
+  );
+  --color-zl-danger-on: var(--color-white);
+
+  --color-zl-warning: var(--color-yellow-700);
+  --color-zl-warning-strong: color-mix(
+    in oklab,
+    var(--color-zl-warning),
+    black 30%
+  );
+  --color-zl-warning-bg: var(--color-yellow-500);
+  --color-zl-warning-hover: color-mix(
+    in oklab,
+    var(--color-zl-warning-bg),
+    black 15%
+  );
+  --color-zl-warning-on: var(--color-gray-900);
+
+  --color-zl-info: var(--color-cyan-700);
+  --color-zl-info-strong: color-mix(in oklab, var(--color-zl-info), black 30%);
+  --color-zl-info-bg: var(--color-zl-info);
+  --color-zl-info-hover: color-mix(
+    in oklab,
+    var(--color-zl-info-bg),
+    black 15%
+  );
+  --color-zl-info-on: var(--color-white);
+
+  --color-zl-muted: var(--color-gray-500);
+  --color-zl-muted-strong: color-mix(
+    in oklab,
+    var(--color-zl-muted),
+    black 30%
+  );
+  --color-zl-muted-bg: var(--color-zl-muted);
+  --color-zl-muted-hover: color-mix(
+    in oklab,
+    var(--color-zl-muted-bg),
+    black 15%
+  );
+  --color-zl-muted-on: var(--color-white);
+}
+
 /* Global Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

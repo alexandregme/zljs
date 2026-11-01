@@ -52,7 +52,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "With no `color`, the heading inherits the text color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every level. `muted` is for a secondary heading that shouldn't compete with the main one.",
+          "With no `color`, the heading inherits the text color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every level. `muted` is for a secondary heading that shouldn't compete with the main one. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here.",
       },
     },
   },

@@ -47,6 +47,6 @@ describe("<Heading /> - Custom Props", () => {
     render(<Heading color="warning">Warning</Heading>);
     const heading = screen.getByRole("heading");
 
-    expect(heading).toHaveClass("text-yellow-700");
+    expect(heading).toHaveClass("text-zl-warning");
   });
 });
