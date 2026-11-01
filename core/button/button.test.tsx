@@ -214,6 +214,18 @@ describe("<Button /> - Custom Props", () => {
     expect(button).not.toHaveClass("bg-cyan-700");
   });
 
+  it("renders <Button /> with variant link and color muted", () => {
+    render(
+      <Button variant="link" color="muted">
+        Skip
+      </Button>,
+    );
+    const button = screen.getByRole("button");
+
+    expect(button).toHaveClass("text-gray-500");
+    expect(button).not.toHaveClass("bg-gray-500");
+  });
+
   it("renders <Button /> with variant link and color ghost", () => {
     render(
       <Button variant="link" color="ghost">
