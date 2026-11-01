@@ -2,7 +2,7 @@ import type { SemanticColor } from "./colors";
 
 /**
  * The text class of each semantic color (Heading, Text). The values live in the
- * theme, in core/styles.css. `none` inherits the color around it.
+ * theme, in core/styles/colors.css. `none` inherits the color around it.
  */
 export const semanticTextColors = {
   primary: "text-zl-primary",
