@@ -9,6 +9,11 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        order: ["Foundations", "Components", "Forms", "Next"],
+      },
+    },
     // "todo" reports violations in the a11y panel without failing the run.
     // Switch to "error" once the existing violations are fixed.
     a11y: {

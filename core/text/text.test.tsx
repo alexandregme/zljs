@@ -58,6 +58,6 @@ describe("<Text /> - Custom Props", () => {
     render(<Text color="warning">Total</Text>);
     const text = screen.getByRole("paragraph");
 
-    expect(text).toHaveClass("text-yellow-700");
+    expect(text).toHaveClass("text-zl-warning");
   });
 });

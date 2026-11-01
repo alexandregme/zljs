@@ -7,4 +7,9 @@ export {
   stubUserAgent,
   stubWindowOpen,
 } from "./browser";
-export { focusOutlineContrast } from "./focus";
+export {
+  colorContrast,
+  focusOutlineContrast,
+  hoverTextContrast,
+  textContrast,
+} from "./contrast";

@@ -1,4 +1,4 @@
-import { copyFileSync } from "fs";
+import { copyFileSync, cpSync } from "fs";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
@@ -18,5 +18,6 @@ export default defineConfig({
   banner: { js: '"use client";' },
   onSuccess: async () => {
     copyFileSync("core/styles.css", "dist/styles.css");
+    cpSync("core/styles", "dist/styles", { recursive: true });
   },
 });

@@ -1,54 +1,7 @@
+@import "./styles/colors.css";
+@import "./styles/scrollbar.css";
+@import "./styles/ag-grid.css";
+
 /* Makes the consumer's Tailwind scan the component classes. The path is
    relative to this file, so it works from core/ and from the copy in dist/. */
 @source "./";
-
-/* Global Scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(228, 231, 234, 0.5);
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(156, 163, 175, 0.75);
-}
-
-/* AG Grid Custom Styles */
-.ag-theme-alpine {
-  --ag-header-background-color: #f8fafc;
-  --ag-header-foreground-color: #334155;
-  --ag-header-cell-hover-background-color: #e2e8f0;
-  --ag-odd-row-background-color: #f8fafc;
-  --ag-row-hover-color: #e0f2fe;
-  --ag-selected-row-background-color: #dbeafe;
-  --ag-border-color: #e2e8f0;
-  --ag-font-family: inherit;
-  --ag-font-size: 14px;
-}
-
-.ag-theme-alpine .ag-header-cell {
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  border-right: 1px solid #475569;
-}
-
-.ag-theme-alpine .ag-header-cell:last-child {
-  border-right: none;
-}
-
-.ag-theme-alpine .ag-row {
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.ag-theme-alpine .ag-row:hover {
-  background-color: var(--ag-row-hover-color);
-}

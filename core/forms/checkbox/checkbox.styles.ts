@@ -9,7 +9,7 @@ export const innerWrapper = tv({
   variants: {
     variant: {
       default: "w-fit items-center gap-2",
-      card: "items-start gap-3 rounded-lg border border-gray-500 p-3 has-checked:border-blue-600 has-checked:ring-1 has-checked:ring-blue-600 has-disabled:bg-gray-100",
+      card: "items-start gap-3 rounded-lg border border-gray-500 p-3 has-checked:border-zl-primary has-checked:ring-1 has-checked:ring-zl-primary has-disabled:bg-gray-100",
     },
   },
   defaultVariants: {

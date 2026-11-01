@@ -39,7 +39,7 @@ describe("<Button /> - Default Props", () => {
     render(<Button>Click me</Button>);
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("bg-blue-600");
+    expect(button).toHaveClass("bg-zl-primary-bg");
   });
 
   it("renders <Button /> with size md by default", () => {
@@ -113,7 +113,7 @@ describe("<Button /> - Custom Props", () => {
     const button = screen.getByRole("button", { name: "Close" });
 
     expect(button).toHaveClass("p-1", "bg-transparent");
-    expect(button).not.toHaveClass("bg-blue-600");
+    expect(button).not.toHaveClass("bg-zl-primary-bg");
     expect(screen.getByTestId("X")).toBeInTheDocument();
   });
 
@@ -121,7 +121,7 @@ describe("<Button /> - Custom Props", () => {
     render(<Button variant="default" icon="X" aria-label="Close" />);
     const button = screen.getByRole("button", { name: "Close" });
 
-    expect(button).toHaveClass("px-4", "py-2", "bg-blue-600");
+    expect(button).toHaveClass("px-4", "py-2", "bg-zl-primary-bg");
     expect(button).not.toHaveClass("p-1");
     expect(screen.getByTestId("X")).toBeInTheDocument();
   });
@@ -141,10 +141,10 @@ describe("<Button /> - Custom Props", () => {
     render(<Button variant="link">Learn more</Button>);
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("hover:underline", "text-blue-600");
+    expect(button).toHaveClass("hover:underline", "text-zl-primary");
     expect(button).not.toHaveClass("underline");
-    expect(button).not.toHaveClass("bg-blue-600");
-    expect(button).not.toHaveClass("hover:bg-blue-700");
+    expect(button).not.toHaveClass("bg-zl-primary-bg");
+    expect(button).not.toHaveClass("hover:bg-zl-primary-hover");
   });
 
   it("renders <Button /> with a focus outline with variant link", () => {
@@ -173,8 +173,8 @@ describe("<Button /> - Custom Props", () => {
     );
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("text-red-600");
-    expect(button).not.toHaveClass("bg-red-600");
+    expect(button).toHaveClass("text-zl-danger");
+    expect(button).not.toHaveClass("bg-zl-danger-bg");
   });
 
   it("renders <Button /> with variant link and color success", () => {
@@ -185,8 +185,8 @@ describe("<Button /> - Custom Props", () => {
     );
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("text-green-700");
-    expect(button).not.toHaveClass("bg-green-700");
+    expect(button).toHaveClass("text-zl-success");
+    expect(button).not.toHaveClass("bg-zl-success-bg");
   });
 
   it("renders <Button /> with variant link and color warning", () => {
@@ -197,9 +197,9 @@ describe("<Button /> - Custom Props", () => {
     );
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("text-yellow-700");
-    expect(button).not.toHaveClass("bg-yellow-500");
-    expect(button).not.toHaveClass("text-gray-900");
+    expect(button).toHaveClass("text-zl-warning");
+    expect(button).not.toHaveClass("bg-zl-warning-bg");
+    expect(button).not.toHaveClass("text-zl-warning-on");
   });
 
   it("renders <Button /> with variant link and color info", () => {
@@ -210,8 +210,8 @@ describe("<Button /> - Custom Props", () => {
     );
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("text-cyan-700");
-    expect(button).not.toHaveClass("bg-cyan-700");
+    expect(button).toHaveClass("text-zl-info");
+    expect(button).not.toHaveClass("bg-zl-info-bg");
   });
 
   it("renders <Button /> with variant link and color muted", () => {
@@ -222,8 +222,8 @@ describe("<Button /> - Custom Props", () => {
     );
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("text-gray-500");
-    expect(button).not.toHaveClass("bg-gray-500");
+    expect(button).toHaveClass("text-zl-muted");
+    expect(button).not.toHaveClass("bg-zl-muted-bg");
   });
 
   it("renders <Button /> with variant link and color ghost", () => {
@@ -252,7 +252,7 @@ describe("<Button /> - Custom Props", () => {
     render(<Button color="warning">Warning</Button>);
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("bg-yellow-500");
+    expect(button).toHaveClass("bg-zl-warning-bg");
   });
 
   it("renders <Button /> with color none", () => {

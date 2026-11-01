@@ -43,6 +43,30 @@ import { FormProvider, FormInput } from "@alexandregme/zljs/rhf";
 <Button onClick={handleClick}>Submit</Button>;
 ```
 
+## Colors
+
+The components work with no setup, using the default colors. To use your own, redefine the values you want after importing the styles:
+
+```css
+@import "tailwindcss";
+@import "@alexandregme/zljs/styles.css";
+
+@theme {
+  --color-zl-primary: #2e7d32;
+}
+```
+
+`primary`, `success`, `danger`, `warning`, `info` and `muted` each take one value (`--color-zl-<color>`), used for text and the focus outline. The others follow it, and you can redefine them too:
+
+| Value                       | Used for               | Default                                    |
+| --------------------------- | ---------------------- | ------------------------------------------ |
+| `--color-zl-<color>-strong` | Link hover             | 30% darker                                 |
+| `--color-zl-<color>-bg`     | Button background      | The color itself (`warning`: `yellow-500`) |
+| `--color-zl-<color>-hover`  | Button hover           | The background, 15% darker                 |
+| `--color-zl-<color>-on`     | Text on the background | White (`warning`: `gray-900`)              |
+
+Only the defaults are checked for contrast. Check your own choice: 4.5:1 for text, on `--color-zl-<color>` against the page and on `-on` against `-bg`, and 3:1 for the focus outline. A value set on a nested element doesn't reach the values derived from it, so set them in `@theme` or `:root`.
+
 ## Getting Started
 
 ```bash
