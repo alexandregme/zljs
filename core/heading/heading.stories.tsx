@@ -1,25 +1,40 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heading } from "./heading";
 
-const meta: Meta<typeof Heading> = {
+export default {
   title: "Components/Heading",
   component: Heading,
   tags: ["autodocs"],
   parameters: {
     docs: { toc: true },
   },
-};
+} satisfies Meta<typeof Heading>;
 
-export default meta;
 type Story = StoryObj<typeof Heading>;
 
 export const Playground: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Use the controls to try any level and color. Only `children` is required.",
+      },
+    },
+  },
   args: {
     children: "Page Title",
   },
 };
 
 export const Levels: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`level` sets both the tag (`h1` to `h6`) and the size, from 30px at level 1 (the default) down to 14px at level 6. Pick it by the document outline, not by the size you want, so screen readers can navigate the page.",
+      },
+    },
+  },
   render: () => (
     <div className="space-y-4">
       <Heading level={1}>H1 - Page Title</Heading>
@@ -33,27 +48,23 @@ export const Levels: Story = {
 };
 
 export const Colors: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "With no `color`, the heading inherits the text color around it, and `none` does the same. The other colors are meant for white backgrounds: they hold 4.5:1 contrast there at every level.",
+      },
+    },
+  },
   render: () => (
     <div className="space-y-4">
-      <Heading level={2}>Default</Heading>
-      <Heading level={2} color="primary">
-        Primary
-      </Heading>
-      <Heading level={2} color="success">
-        Success
-      </Heading>
-      <Heading level={2} color="danger">
-        Danger
-      </Heading>
-      <Heading level={2} color="warning">
-        Warning
-      </Heading>
-      <Heading level={2} color="info">
-        Info
-      </Heading>
-      <Heading level={2} color="none">
-        None
-      </Heading>
+      <Heading>Default</Heading>
+      <Heading color="primary">Primary</Heading>
+      <Heading color="success">Success</Heading>
+      <Heading color="danger">Danger</Heading>
+      <Heading color="warning">Warning</Heading>
+      <Heading color="info">Info</Heading>
+      <Heading color="none">None</Heading>
     </div>
   ),
 };
