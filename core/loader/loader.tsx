@@ -3,7 +3,7 @@
 import { useAppStore } from "../state/zustand/app";
 import { Spinner } from "../spinner";
 import type { LoaderProps } from "./loader.interface";
-import { overlay } from "./loader.styles";
+import { loader } from "./loader.styles";
 
 export const Loader = ({ label = "Loading" }: LoaderProps) => {
   const fetching = useAppStore((s) => s.fetching);
@@ -11,8 +11,8 @@ export const Loader = ({ label = "Loading" }: LoaderProps) => {
   if (!fetching) return null;
 
   return (
-    <div role="status" aria-label={label} className={overlay()}>
-      <Spinner size="lg" />
+    <div className={loader()}>
+      <Spinner size="lg" label={label} />
     </div>
   );
 };

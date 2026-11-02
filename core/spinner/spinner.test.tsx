@@ -23,6 +23,13 @@ describe("<Spinner /> - Default Props", () => {
 
     expect(spinner.querySelector("svg")).toHaveAttribute("width", "16");
   });
+
+  it("renders <Spinner /> with label Loading by default", () => {
+    render(<Spinner />);
+    const spinner = screen.getByRole("status", { name: "Loading" });
+
+    expect(spinner).toBeInTheDocument();
+  });
 });
 
 describe("<Spinner /> - Custom Props", () => {
@@ -45,5 +52,12 @@ describe("<Spinner /> - Custom Props", () => {
     const spinner = screen.getByTestId("spinner");
 
     expect(spinner.querySelector("svg")).toHaveAttribute("width", "24");
+  });
+
+  it("renders <Spinner /> with label", () => {
+    render(<Spinner label="Carregando" />);
+    const spinner = screen.getByRole("status", { name: "Carregando" });
+
+    expect(spinner).toBeInTheDocument();
   });
 });

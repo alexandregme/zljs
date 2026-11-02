@@ -5,4 +5,5 @@ export type SpinnerVariant = "circle" | "dots" | "refresh";
 export interface SpinnerProps {
   variant?: SpinnerVariant;
   size?: Size;
+  label?: string;
 }
