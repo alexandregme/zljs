@@ -8,6 +8,7 @@ This list tracks potential improvements. Agents must review and update it when n
 4. Form feedback primitives (`Label`, `HelperText`, `Field` wrappers)
 5. Modal enhancements (size prop, footer slot, closeOnOverlayClick)
 6. Notification hooks (`useToast` with typed variants + preset `Toaster`)
+7. `RadioGroup` (`label`, `name`, `error` and `options` as on `Select`), so an error shows once and is linked to the whole group. Until then `Radio` has no `error`: apps use `fieldset`, `legend` and `Error`
 
 ---
 

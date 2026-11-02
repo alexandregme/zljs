@@ -8,6 +8,32 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Radio` takes `aria-label`, `required`, `onBlur`, `onKeyDown` and `ref`, as `Input` does, so it works with `register` from `react-hook-form`
+
+### Changed
+
+- `Radio` requires `label` or `aria-label` in its type, instead of always `label`
+- `Radio` input now sits inside its `<label>`, as on `Checkbox`, so the gap between the circle and the text is clickable too
+- `Radio` draws a real `focus-visible` outline in the theme's `primary` color instead of a `focus:ring`, so focus stays visible in forced colors mode
+
+### Fixed
+
+- A checked `Radio` uses the theme's `primary` color. It had `text-blue-600` and `border-gray-300`, which do nothing on a native radio, so it kept the browser's own color
+- The label of a disabled `Radio` shows the `not-allowed` cursor instead of `pointer`
+
+#### Migration
+
+Only code that extends `RadioProps`, and tests or selectors that rely on the old structure or classes, need a change. To find them, run the commands below from the app's root. The second also finds other uses of these classes, and those stay as they are:
+
+```sh
+grep -rnE "\bRadioProps\b" . --include='*.ts' --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next
+grep -rnE "text-blue-600|focus:ring-blue-500|nextSibling|previousSibling" . --include='*.test.*' --exclude-dir=node_modules --exclude-dir=.next
+```
+
+Replace `interface X extends RadioProps` with `type X = RadioProps & { ... }`, because `RadioProps` is now a union. In tests, replace those classes with `accent-zl-primary` and `focus-visible:outline-zl-primary`, and find the radio by role instead of by its position next to the label.
+
 ## [1.12.0] - 2026-11-02
 
 ### Added
