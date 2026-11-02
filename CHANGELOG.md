@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.18.1] - 2026-11-02
+
 ### Removed
 
 - Parameters in the hash, in `splitURLasPath` and the `query` of `useRouterStore`: `/orders#id=7` now returns `{}`
@@ -261,7 +263,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.18.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.18.1...HEAD
+[1.18.1]: https://github.com/alexandregme/zljs/compare/v1.18.0...v1.18.1
 [1.18.0]: https://github.com/alexandregme/zljs/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/alexandregme/zljs/compare/v1.16.0...v1.17.0
 [1.16.0]: https://github.com/alexandregme/zljs/compare/v1.15.0...v1.16.0
