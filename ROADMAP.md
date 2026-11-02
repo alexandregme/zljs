@@ -22,6 +22,17 @@ This list tracks potential improvements. Agents must review and update it when n
 6. `Error` hides JavaScript's `Error` in any file that imports it, so `throw new Error()` would use the component there. Renaming it (`FieldError`) changes the public API, so it waits for a major
 7. `Error`: check on a real screen reader whether `role="alert"` plus `aria-describedby` announces the message twice, and how several errors at once sound
 
+Form components still missing, decided from the web platform and not from what the apps use today, in the suggested order:
+
+1. `Fieldset` (`fieldset` + `legend`), then `RadioGroup` (see the list at the top) and `CheckboxGroup`, which solve the error of a group once
+2. `Label` and `HelperText` (see "Form feedback primitives" at the top), before the new fields, because each field repeats its own label today
+3. More `Input` types: `number`, `tel`, `url` and `search` first, then `date`, `time`, `datetime-local`, `month` and `week`
+4. `Switch` (a checkbox with `role="switch"`), `FileInput` (`type="file"`), `Slider` (`type="range"`) and `ColorInput` (`type="color"`)
+5. `Select`: `optgroup`, and `multiple`, which changes the type of `value`
+6. `Combobox` (select with search, as `datalist` is limited) and `DatePicker` (own calendar, as `type="date"` already covers many cases). They are the largest and need a stable base
+7. Code field (OTP), a more specific case
+8. `Progress` and `Meter`, which are native too but only show data
+
 ---
 
 ## Tooling
@@ -39,7 +50,7 @@ Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select
 
 1. `Button` (checked, focus outline and story descriptions fixed)
    - Decide whether the type should require `aria-label` on icon-only buttons (changes the public API)
-2. `Checkbox` (next): `text-blue-600` and `border-gray-300` do nothing on a native control, as they didn't on `Radio`, so it needs `accent-zl-primary`, a real focus outline and the props of `Input`
+2. `Checkbox` (next): `border-gray-300` does nothing on a native control, and it needs a real focus outline and the props of `Input`. `accent-zl-primary` is already in
 3. Not checked yet: `Heading`, `Tag`, `Spinner`, `Loader`, `Toaster`, `Sidebar`, `DataGrid`, `NotFound`
 4. In each PR: bring the tests and stories to the current `component-tests` and `component-check` shape
 5. Last PR: switch `a11y.test` to `"error"` in `.storybook/preview.ts` and turn on the lint rule above
