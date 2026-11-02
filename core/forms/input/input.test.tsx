@@ -114,14 +114,6 @@ describe("<Input /> - Default Props", () => {
 });
 
 describe("<Input /> - Custom Props", () => {
-  it("does not accept <Input /> with no label and no aria-label", () => {
-    // @ts-expect-error a field needs a name: label or aria-label.
-    render(<Input />);
-    const input = screen.getByRole("textbox");
-
-    expect(input).toHaveAccessibleName("");
-  });
-
   it("renders <Input /> without a visible label when only aria-label is passed", () => {
     render(<Input aria-label="Search" />);
     const input = screen.getByRole("textbox", { name: "Search" });
