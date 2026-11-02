@@ -14,12 +14,13 @@ This list tracks potential improvements. Agents must review and update it when n
 
 ## Forms
 
-1. `Input`: take `ref` as a prop instead of `forwardRef`, as `Select`, `TextArea` and `Radio` do. zljs requires React 19, so apps notice nothing. The change is uncommitted in the working tree
-2. Shared type for `label` or `aria-label`: `InputName`, `SelectName`, `TextAreaName` and `RadioName` are four copies of it
-3. Decide whether `label` and `aria-label` can go together. Accepting only one makes it impossible for `aria-label` to leave out the visible text, and it changes the public API
-4. `FormInput` doesn't pass `autoComplete` or `required` on to `Input`
-5. `FormSelect`, `FormTextArea` and `FormRadio`, with a permanent test of `register`: so far it was only checked with temporary tests
-6. `Foundations/Changelog`: version titles (`h2`) and `Migration` (`h4`) aren't bold, because Tailwind's reset removes the weight and Storybook only sets it back on `h1` and `h3`. Needs a rule in `.storybook/storybook.css`, which reaches every docs page
+1. Shared type for `label` or `aria-label`: `InputName`, `SelectName`, `TextAreaName` and `RadioName` are four copies of it
+2. Decide whether `label` and `aria-label` can go together. Accepting only one makes it impossible for `aria-label` to leave out the visible text, and it changes the public API
+3. `FormInput` doesn't pass `autoComplete` or `required` on to `Input`
+4. `FormSelect`, `FormTextArea` and `FormRadio`, with a permanent test of `register`: so far it was only checked with temporary tests
+5. `Foundations/Changelog`: version titles (`h2`) and `Migration` (`h4`) aren't bold, because Tailwind's reset removes the weight and Storybook only sets it back on `h1` and `h3`. Needs a rule in `.storybook/storybook.css`, which reaches every docs page
+6. `Error` hides JavaScript's `Error` in any file that imports it, so `throw new Error()` would use the component there. Renaming it (`FieldError`) changes the public API, so it waits for a major
+7. `Error`: check on a real screen reader whether `role="alert"` plus `aria-describedby` announces the message twice, and how several errors at once sound
 
 ---
 
@@ -34,12 +35,12 @@ This list tracks potential improvements. Agents must review and update it when n
 
 ## Accessibility rollout
 
-Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select`, `TextArea` and `Radio` are done. The fixes for the components below exist as uncommitted changes in the working tree: review each with `component-check`, then open one PR per component.
+Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select`, `TextArea`, `Radio` and `Error` are done. The fixes for the components below exist as uncommitted changes in the working tree: review each with `component-check`, then open one PR per component.
 
 1. `Button` (checked, focus outline and story descriptions fixed)
    - Decide whether the type should require `aria-label` on icon-only buttons (changes the public API)
 2. `Checkbox` (next): `text-blue-600` and `border-gray-300` do nothing on a native control, as they didn't on `Radio`, so it needs `accent-zl-primary`, a real focus outline and the props of `Input`
-3. Not checked yet: `Heading`, `Tag`, `Spinner`, `Loader`, `Toaster`, `Sidebar`, `DataGrid`, `NotFound`, `Error`
+3. Not checked yet: `Heading`, `Tag`, `Spinner`, `Loader`, `Toaster`, `Sidebar`, `DataGrid`, `NotFound`
 4. In each PR: bring the tests and stories to the current `component-tests` and `component-check` shape
 5. Last PR: switch `a11y.test` to `"error"` in `.storybook/preview.ts` and turn on the lint rule above
 

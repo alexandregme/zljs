@@ -3,6 +3,7 @@ import type {
   FocusEvent,
   HTMLInputAutoCompleteAttribute,
   KeyboardEvent,
+  Ref,
 } from "react";
 
 type InputName =
@@ -21,4 +22,5 @@ export type InputProps = InputName & {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  ref?: Ref<HTMLInputElement>;
 };
