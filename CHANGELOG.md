@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.14.0] - 2026-11-02
+
 ### Changed
 
 - The box of a `Checkbox` with `variant="card"` is centered on the height of its content, instead of sitting at the top. With several lines, it is no longer beside the first one
@@ -182,7 +184,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.13.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.14.0...HEAD
+[1.14.0]: https://github.com/alexandregme/zljs/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/alexandregme/zljs/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/alexandregme/zljs/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/alexandregme/zljs/compare/v1.10.0...v1.11.0
