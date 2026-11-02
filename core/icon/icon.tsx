@@ -1,10 +1,12 @@
 import * as LucideIcons from "lucide-react";
 import type { IconProps } from "./icon.interface";
 import { iconBrands, iconSizes } from "./icon.const";
+import { icon } from "./icon.styles";
 
 export const Icon = ({
   name,
   size = "md",
+  color,
   "aria-label": ariaLabel,
 }: IconProps) => {
   const isBrand = name.startsWith("Si");
@@ -17,6 +19,7 @@ export const Icon = ({
   return (
     <span
       data-testid={name}
+      className={icon({ color })}
       role={ariaLabel ? "img" : undefined}
       aria-label={ariaLabel}
     >

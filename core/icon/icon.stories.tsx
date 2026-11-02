@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Heading, Text } from "@zljs/core";
+import { textContrast } from "@test-utils";
+import { expect } from "storybook/test";
 import { Icon } from "./icon";
 import { iconNames } from "./icon.const";
 
@@ -17,13 +20,40 @@ export default {
   },
 } satisfies Meta<typeof Icon>;
 
+const colors = [
+  undefined,
+  "primary",
+  "success",
+  "danger",
+  "warning",
+  "info",
+  "muted",
+  "none",
+] as const;
+
+const ColorRow = ({ name }: { name: "Check" | "SiWhatsapp" }) => (
+  <div className="flex flex-wrap gap-4">
+    {colors.map((color) => (
+      <div
+        key={color ?? "default"}
+        className="flex flex-col items-center gap-1"
+      >
+        <Icon name={name} size="lg" color={color} />
+        <Text as="span" variant="caption">
+          {color ?? "default"}
+        </Text>
+      </div>
+    ))}
+  </div>
+);
+
 type Story = StoryObj<typeof Icon>;
 
 export const Playground: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Use the controls to try any icon and size.",
+        story: "Use the controls to try any icon, size and color.",
       },
     },
   },
@@ -78,6 +108,37 @@ export const Sizes: Story = {
       <Icon name="Check" size="sm" />
       <Icon name="Check" size="md" />
       <Icon name="Check" size="lg" />
+    </div>
+  ),
+};
+
+export const Colors: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "With no `color`, the icon inherits the color around it, and `none` does the same, so an icon inside a `Button` or a colored text follows it. The other colors are meant for white backgrounds, where they hold 3:1, the minimum for an icon. `muted` is for a supporting icon. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. This story measures the contrast because axe doesn't check icons.",
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    const lowContrast = canvas
+      .getAllByTestId(/^(Check|SiWhatsapp)$/)
+      .filter((icon) => textContrast(icon) < 3)
+      .map((icon) => icon.className);
+
+    await expect(lowContrast).toEqual([]);
+  },
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <section className="flex flex-col gap-2">
+        <Heading level={2}>UI icon</Heading>
+        <ColorRow name="Check" />
+      </section>
+      <section className="flex flex-col gap-2">
+        <Heading level={2}>Brand icon</Heading>
+        <ColorRow name="SiWhatsapp" />
+      </section>
     </div>
   ),
 };
