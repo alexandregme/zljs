@@ -3,6 +3,7 @@ import type {
   FocusEvent,
   HTMLInputAutoCompleteAttribute,
   KeyboardEvent,
+  Ref,
 } from "react";
 
 export interface SelectOption {
@@ -26,4 +27,5 @@ export type SelectProps = SelectName & {
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
   onBlur?: (event: FocusEvent<HTMLSelectElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLSelectElement>) => void;
+  ref?: Ref<HTMLSelectElement>;
 };
