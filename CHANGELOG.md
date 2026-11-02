@@ -8,6 +8,18 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `ReduxProvider`, the new name of `GlobalState`, with the types `ReduxProviderProps` and `ReduxStore`. It behaves the same
+
+### Deprecated
+
+- `GlobalState`, `GlobalStateProps` and `ExtendedStore`: they still work, as other names of `ReduxProvider`, `ReduxProviderProps` and `ReduxStore`
+
+#### Migration
+
+Search the app for `GlobalState`, `GlobalStateProps` and `ExtendedStore` imported from `@alexandregme/zljs`, and replace them with the new names. The props don't change.
+
 ## [1.16.0] - 2026-11-02
 
 ### Added
