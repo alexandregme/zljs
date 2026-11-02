@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants";
 
-export const body = tv({
-  base: "min-h-screen",
+export const rootLayout = tv({
+  base: "min-h-dvh",
 });

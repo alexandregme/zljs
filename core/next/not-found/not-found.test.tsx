@@ -1,53 +1,44 @@
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { NotFound } from "./not-found";
 
 describe("<NotFound /> - Default Props", () => {
-  it("renders 404 code", () => {
+  it("renders <NotFound /> correctly", () => {
     render(<NotFound />);
+    const title = screen.getByRole("heading", {
+      level: 1,
+      name: "Page not found",
+    });
+    const message = screen.getByRole("paragraph");
+    const link = screen.getByRole("link", { name: "Go back home" });
 
     expect(screen.getByText("404")).toBeInTheDocument();
-  });
-
-  it("renders default title", () => {
-    render(<NotFound />);
-
-    expect(screen.getByText("Page not found")).toBeInTheDocument();
-  });
-
-  it("renders default message", () => {
-    render(<NotFound />);
-
-    expect(
-      screen.getByText("The page you are looking for does not exist."),
-    ).toBeInTheDocument();
-  });
-
-  it("renders back link with default href", () => {
-    render(<NotFound />);
-
-    const link = screen.getByRole("link", { name: "Go back home" });
+    expect(title).toBeInTheDocument();
+    expect(message).toHaveTextContent(
+      "The page you are looking for does not exist.",
+    );
     expect(link).toHaveAttribute("href", "/");
   });
 });
 
 describe("<NotFound /> - Custom Props", () => {
-  it("renders custom title", () => {
-    render(<NotFound title="Not Found" />);
+  it("renders <NotFound /> with all its props", () => {
+    render(
+      <NotFound
+        title="Order not found"
+        message="This order does not exist."
+        backHref="/orders"
+        backLabel="See all orders"
+      />,
+    );
+    const title = screen.getByRole("heading", {
+      level: 1,
+      name: "Order not found",
+    });
+    const message = screen.getByRole("paragraph");
+    const link = screen.getByRole("link", { name: "See all orders" });
 
-    expect(screen.getByText("Not Found")).toBeInTheDocument();
-  });
-
-  it("renders custom message", () => {
-    render(<NotFound message="Custom message" />);
-
-    expect(screen.getByText("Custom message")).toBeInTheDocument();
-  });
-
-  it("renders custom back href", () => {
-    render(<NotFound backHref="/dashboard" />);
-
-    const link = screen.getByRole("link", { name: "Go back home" });
-    expect(link).toHaveAttribute("href", "/dashboard");
+    expect(title).toBeInTheDocument();
+    expect(message).toHaveTextContent("This order does not exist.");
+    expect(link).toHaveAttribute("href", "/orders");
   });
 });
