@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
 import { useRouter } from "next/compat/router.js";
 import { usePageStore } from "../state/page";
-import type { ExtendedStore } from "../state/global-state";
+import type { ReduxStore } from "../redux";
 import type { PageWrapperProps } from "./page-wrapper.interface";
 
 export const PageWrapper = ({
@@ -12,7 +12,7 @@ export const PageWrapper = ({
   initPage,
   children,
 }: PageWrapperProps) => {
-  const store = useStore() as ExtendedStore;
+  const store = useStore() as ReduxStore;
   const dispatch = useDispatch();
   const router = useRouter();
   const setTitle = usePageStore((s) => s.setTitle);
