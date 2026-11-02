@@ -8,6 +8,23 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `label` on `Spinner`: the name screen readers announce, `Loading` by default
+
+### Changed
+
+- `Spinner` is a status with a name (`role="status"`) and has no color of its own. It was always white, and now inherits the color from around it
+- `Loader` draws its spinner in the `primary` color, which holds 3:1 over the overlay on a white page. It was white, at 1.6:1. The `status` role moved from the overlay to the spinner, which takes the `label`
+
+#### Migration
+
+Search the app for `<Spinner`. On a dark surface, set a light text color around it, such as `text-white`. Remove a `role="status"` the app put around a `Spinner`, so there aren't two. `Loader` needs no change.
+
+### Fixed
+
+- `Loader` covers the whole page. It had no position of its own, so it started where it was rendered, below anything before it
+
 ## [1.18.1] - 2026-11-02
 
 ### Removed

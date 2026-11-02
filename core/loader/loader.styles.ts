@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants";
 
-export const overlay = tv({
-  base: "flex fixed justify-center items-center w-full h-full bg-black/20 z-50",
+export const loader = tv({
+  base: "flex fixed inset-0 justify-center items-center bg-black/20 text-zl-primary z-50",
 });
