@@ -8,6 +8,32 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `TextArea` takes `aria-label`, `name`, `autoComplete`, `required`, `onBlur`, `onKeyDown` and `ref`, as `Input` and `Select` do, so it works with `register` from `react-hook-form`
+
+### Changed
+
+- `TextArea` requires `label` or `aria-label` in its type, instead of always `label`
+- `TextArea` draws a real `focus-visible` outline in the theme's `primary` color instead of a `focus:ring`, so focus stays visible in forced colors mode, and an app's own color reaches it
+- `TextArea` border is now `gray-500` instead of `gray-300`, for 3:1 contrast, and its placeholder is `gray-500`, for 4.5:1
+
+### Fixed
+
+- `TextArea` with `error` sets `aria-invalid` and points `aria-describedby` to the message, so a screen reader announces both
+- `TextArea` uses `resize-y`. It had a class that doesn't exist in Tailwind, so it only resized vertically in apps with Tailwind's base styles
+
+#### Migration
+
+Only code that extends `TextAreaProps` and tests that assert its old classes need a change. To find them, run the commands below from the app's root:
+
+```sh
+grep -rnE "\bTextAreaProps\b" . --include='*.ts' --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next
+grep -rnE "border-gray-300|focus:ring-blue-500|focus:border-transparent|resize-vertical" . --include='*.test.*' --exclude-dir=node_modules --exclude-dir=.next
+```
+
+Replace `interface X extends TextAreaProps` with `type X = TextAreaProps & { ... }`, because `TextAreaProps` is now a union. In tests, replace those classes with `focus-visible:outline-zl-primary`, `border-gray-500` and `resize-y`.
+
 ## [1.11.0] - 2026-11-02
 
 ### Added
