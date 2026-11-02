@@ -42,7 +42,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "sideEffects": [
     "*.css"
@@ -60,6 +61,7 @@
     "test:coverage": "vitest run --project unit --coverage",
     "test:storybook": "vitest run --project storybook",
     "test:visual": "chromatic",
+    "version": "node scripts/stamp-changelog.mjs && git add CHANGELOG.md",
     "eslint": "eslint ./ --color --fix",
     "prettier": "prettier --write .",
     "stylelint": "stylelint '**/*.{css,scss}' --allow-empty-input",

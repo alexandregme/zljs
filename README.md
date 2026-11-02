@@ -67,6 +67,10 @@ The components work with no setup, using the default colors. To use your own, re
 
 Only the defaults are checked for contrast. Check your own choice: 4.5:1 for text, on `--color-zl-<color>` against the page and on `-on` against `-bg`, and 3:1 for the focus outline. A value set on a nested element doesn't reach the values derived from it, so set them in `@theme` or `:root`.
 
+## Updating
+
+See [`CHANGELOG.md`](./CHANGELOG.md), in the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format. A change that needs action in an app has a **Migration** note, written so an agent can follow it. The file ships with the package, in `node_modules/@alexandregme/zljs/CHANGELOG.md`.
+
 ## Getting Started
 
 ```bash
