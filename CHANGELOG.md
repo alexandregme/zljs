@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Icon` takes `color`, with the same `SemanticColor` values as `Text` and `Heading`. With no `color`, or with `none`, it still inherits the color around it
+
 ## [1.14.0] - 2026-11-02
 
 ### Changed

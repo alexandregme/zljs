@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SemanticColor } from "@zljs/core";
-import { Button, Heading, Text } from "@zljs/core";
+import { Button, Heading, Icon, Text } from "@zljs/core";
 import { colorContrast, textContrast } from "@test-utils";
 import { expect } from "storybook/test";
 
@@ -199,7 +199,7 @@ export const Usage: Story = {
     docs: {
       description: {
         story:
-          "The same `color` prop on `Text`, `Heading` and `Button`. Text uses the color itself, and a `Button` uses its background and text values. `none` is not themed: as text it inherits the color around it, and a `Button` draws it with neutral grays. `Tag` and `StatsCard` use `DataColor`, literal colors for data that don't change with the theme. This story holds `Text` and `Heading` to 4.5:1 at any size: axe accepts 3:1 on a large heading, but the same color also renders small.",
+          "The same `color` prop on `Text`, `Heading`, `Icon` and `Button`. Text and icons use the color itself, and a `Button` uses its background and text values. `none` is not themed: as text it inherits the color around it, and a `Button` draws it with neutral grays. `Tag` and `StatsCard` use `DataColor`, literal colors for data that don't change with the theme. This story holds `Text` and `Heading` to 4.5:1 at any size: axe accepts 3:1 on a large heading, but the same color also renders small.",
       },
     },
   },
@@ -221,6 +221,7 @@ export const Usage: Story = {
             <Heading level={3} color={color}>
               Heading
             </Heading>
+            <Icon name="Brain" size="lg" color={color} />
             <Button color={color}>Button</Button>
             <Button variant="link" color={color}>
               Link

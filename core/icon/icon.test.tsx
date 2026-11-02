@@ -64,3 +64,26 @@ describe("<Icon /> - Custom Props", () => {
     expect(icon).toBeInTheDocument();
   });
 });
+
+describe("<Icon /> - Styles", () => {
+  it("renders <Icon /> with no color class by default, so it inherits", () => {
+    render(<Icon name="X" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon).not.toHaveAttribute("class");
+  });
+
+  it("renders <Icon /> with color warning", () => {
+    render(<Icon name="X" color="warning" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon).toHaveClass("text-zl-warning");
+  });
+
+  it("renders <Icon /> with no color class on color none, so it inherits", () => {
+    render(<Icon name="X" color="none" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon).not.toHaveAttribute("class");
+  });
+});
