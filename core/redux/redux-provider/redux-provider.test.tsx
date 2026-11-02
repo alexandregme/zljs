@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
 import { MOCK_REDUCERS } from "@test-utils";
-import { GlobalState, ReduxProvider } from "@zljs/core";
+import { ReduxProvider } from "@zljs/core";
 
 const { counter, title } = MOCK_REDUCERS;
 
@@ -41,9 +41,5 @@ describe("<ReduxProvider /> - Custom Props", () => {
 
     expect(counterText).toBeInTheDocument();
     expect(titleText).toBeInTheDocument();
-  });
-
-  it("renders <GlobalState /> as the deprecated name of <ReduxProvider />", () => {
-    expect(GlobalState).toBe(ReduxProvider);
   });
 });

@@ -23,7 +23,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "Gives its children the app's single Redux store. It renders no markup of its own. `AppWrapper` already includes it, so use it directly only in an app without `AppWrapper`.",
+          "Gives its children the app's single Redux store. It renders no markup of its own. Its store is separate from the one in `GlobalState`, which `AppWrapper` and `PageWrapper` still use, so an app uses one or the other.",
       },
     },
   },
