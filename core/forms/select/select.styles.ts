@@ -9,5 +9,5 @@ export const label = tv({
 });
 
 export const select = tv({
-  base: "px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed",
+  base: "px-3 py-2 border border-gray-500 rounded-md text-sm bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zl-primary disabled:bg-gray-100 disabled:cursor-not-allowed",
 });

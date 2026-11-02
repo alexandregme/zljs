@@ -8,6 +8,33 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Select` takes `aria-label`, `name`, `autoComplete`, `required`, `onBlur` and `onKeyDown`, and forwards `ref`, as `Input` does, so it works with `register` from `react-hook-form`
+
+### Changed
+
+- `Select` requires `label` or `aria-label` in its type, instead of always `label`
+- `Select` draws a real `focus-visible` outline in the theme's `primary` color instead of a `focus:ring`, so focus stays visible in forced colors mode, and an app's own color reaches it
+- `Select` border is now `gray-500` instead of `gray-300`, for 3:1 contrast
+
+### Fixed
+
+- `Select` shows its `placeholder` when there is no `value`. It used to start on the first option, so the `placeholder` never showed
+- `Select` with `error` sets `aria-invalid` and points `aria-describedby` to the message, so a screen reader announces both
+
+#### Migration
+
+Only a `Select` with a `placeholder` and no `value`, code that extends `SelectProps`, and tests that assert its old classes need a change. To find them, run the commands below from the app's root. The first also finds other components named `Select`, and those stay as they are:
+
+```sh
+grep -rnE -A6 "<Select([[:space:]/>]|$)" . --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next | grep -E "placeholder"
+grep -rnE "\bSelectProps\b" . --include='*.ts' --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next
+grep -rnE "border-gray-300|focus:ring-blue-500|focus:border-transparent" . --include='*.test.*' --exclude-dir=node_modules --exclude-dir=.next
+```
+
+That `Select` now starts empty, so `onChange` runs only after the user picks an option. If the app counted on the first option being selected, pass it as `value`. Replace `interface X extends SelectProps` with `type X = SelectProps & { ... }`, because `SelectProps` is now a union. In tests, replace those classes with `focus-visible:outline-zl-primary` and `border-gray-500`.
+
 ## [1.10.0] - 2026-11-02
 
 ### Added
