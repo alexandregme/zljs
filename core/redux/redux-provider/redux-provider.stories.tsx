@@ -23,7 +23,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "Gives its children the app's single Redux store. It renders no markup of its own.",
+          "Gives its children a Redux store, created once per mount, so each request on the server gets its own. It renders no markup of its own.",
       },
     },
   },
@@ -37,7 +37,7 @@ export const Reducers: Story = {
     docs: {
       description: {
         story:
-          "`reducers` and `coreReducers` become keys of the store's state, and children read them with `useSelector`. `preloadedState` and `middlewares` only count on the first render of the app, when the store is created.",
+          "`reducers` and `coreReducers` become keys of the store's state, and children read them with `useSelector`. `preloadedState` and `middlewares` only count on the first render, when the store is created.",
       },
     },
   },
@@ -53,7 +53,7 @@ export const MockStore: Story = {
     docs: {
       description: {
         story:
-          "A story or test of a component that reads the store uses `MockStoreProvider` from `@test-utils`. It has its own store, so `preloadedState` always counts and nothing is shared with the app's single store.",
+          "A story or test of a component that reads the store uses `MockStoreProvider` from `@test-utils`. Each one has its own store, so a story picks its own state and shares nothing with the others.",
       },
     },
   },

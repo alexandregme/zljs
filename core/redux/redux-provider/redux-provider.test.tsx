@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 import { MOCK_REDUCERS } from "@test-utils";
 import { ReduxProvider } from "@zljs/core";
 
@@ -41,5 +41,31 @@ describe("<ReduxProvider /> - Custom Props", () => {
 
     expect(counterText).toBeInTheDocument();
     expect(titleText).toBeInTheDocument();
+  });
+
+  it("renders <ReduxProvider /> with a new store on each mount", () => {
+    let lastStore: unknown;
+    const Capture = () => {
+      lastStore = useStore();
+      return null;
+    };
+    const Compare = () => {
+      const store = useStore();
+      return <p>{`Same store: ${String(store === lastStore)}`}</p>;
+    };
+
+    const { unmount } = render(
+      <ReduxProvider reducers={{ counter }}>
+        <Capture />
+      </ReduxProvider>,
+    );
+    unmount();
+    render(
+      <ReduxProvider reducers={{ counter }}>
+        <Compare />
+      </ReduxProvider>,
+    );
+
+    expect(screen.getByText("Same store: false")).toBeInTheDocument();
   });
 });

@@ -20,7 +20,6 @@ const config: StorybookConfig = {
         "@test-utils": path.resolve(__dirname, "../test-utils"),
         "next/link": path.resolve(__dirname, "mocks/next-link.tsx"),
         "next/link.js": path.resolve(__dirname, "mocks/next-link.tsx"),
-        "next-auth/react": path.resolve(__dirname, "mocks/next-auth-react.tsx"),
       },
     };
     return config;

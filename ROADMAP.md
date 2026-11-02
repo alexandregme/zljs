@@ -35,6 +35,10 @@ Form components still missing, decided from the web platform and not from what t
 
 ---
 
+## Layout
+
+`PageContent` was proposed and left out of the `PageConfig` change, to come back as its own proposal: the content of a page with `title` (`<h1>`), `description`, `actions`, `footer`, spacing and padding, and no landmark. It is what repeats in the pages of `ruralissima-entregas` (pedidos, detalhes, produtos and rota). A page with no title or padding, like a full-screen map, wouldn't use it. An `AppShell` for the tab frame also waits: `RootLayout` would put its header and nav inside `<main>`.
+
 ## Tooling
 
 1. Lint rule requiring tests to import components from `@zljs/core`: `no-restricted-imports` regex `^\./[^.]+$` on `*.test.tsx`, ignoring components outside the barrel (`data-grid-status-bar`, `data-grid-toolbar`, `next/`, `rhf/examples/`). Turn it on after every test has been switched, one component at a time
@@ -60,7 +64,7 @@ Known problems:
 1. Flaky story: DataGrid `Single Column` sometimes fails axe in the full suite, on a half-built grid. CI has no retry, so fix it before `a11y.test` becomes `"error"`
 2. Collapsed `Sidebar`: the Logout button is clipped but still takes keyboard focus. The layout needs a decision
 3. `Loader` mounts only while loading, and some screen readers don't announce a `role="status"` inserted that way
-4. No stories, so no axe coverage: `ConnectedModal`, `DocumentWrapper`, `PageWrapper`, `FormInput`, `FormProvider`
+4. No stories, so no axe coverage: `ConnectedModal`, `FormInput`, `FormProvider`
 5. `Checkbox` and `Modal` still use a `box-shadow` focus ring, which disappears in forced colors mode and has no contrast check. Move them to a real `focus-visible` outline and check it with `focusOutlineContrast` from `test-utils/contrast.ts`, as `Button` and `Input` do. Hover is only checked on `Button`: add `hoverTextContrast` to the others that change color on hover
 6. `Button` colored outlines are checked on a white page only: on a dark surface, `primary` and the others can fall under 3:1
 7. After the color tokens PR: the `DataGrid` status bar still hardcodes `blue-600`, and the focus outlines should use `outline-zl-primary`

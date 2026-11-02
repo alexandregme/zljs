@@ -1,5 +1,6 @@
 import type { Middleware } from "@reduxjs/toolkit";
 import { createMockStore, MOCK_REDUCERS } from "@test-utils";
+import { createReduxStore } from "./store";
 import type { ReduxStoreConfig } from "./store.types";
 
 const { counter, title } = MOCK_REDUCERS;
@@ -11,18 +12,9 @@ const CONFIG: ReduxStoreConfig = {
   coreReducers: {},
 };
 
-// The store is a module singleton, so each test loads a fresh copy of the module.
-const loadGetReduxStore = async () => {
-  vi.resetModules();
-  const { getReduxStore } = await import("./store");
-  return getReduxStore;
-};
-
-describe("getReduxStore", () => {
-  it("creates the store with the reducers", async () => {
-    const getReduxStore = await loadGetReduxStore();
-
-    const store = getReduxStore({
+describe("createReduxStore", () => {
+  it("creates the store with the reducers", () => {
+    const store = createReduxStore({
       ...CONFIG,
       coreReducers: { title },
     });
@@ -30,10 +22,8 @@ describe("getReduxStore", () => {
     expect(store.getState()).toEqual({ counter: 1, title: "zljs" });
   });
 
-  it("creates the store with the preloaded state", async () => {
-    const getReduxStore = await loadGetReduxStore();
-
-    const store = getReduxStore({
+  it("creates the store with the preloaded state", () => {
+    const store = createReduxStore({
       ...CONFIG,
       preloadedState: { counter: 5 },
     });
@@ -41,56 +31,45 @@ describe("getReduxStore", () => {
     expect(store.getState()).toEqual({ counter: 5 });
   });
 
-  it("creates the store with the middlewares", async () => {
-    const getReduxStore = await loadGetReduxStore();
+  it("creates the store with the middlewares", () => {
     const spy = vi.fn();
     const logger: Middleware = () => (next) => (action) => {
       spy();
       return next(action);
     };
 
-    const store = getReduxStore({ ...CONFIG, middlewares: [logger] });
+    const store = createReduxStore({ ...CONFIG, middlewares: [logger] });
     store.dispatch({ type: "any" });
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it("returns the same store and swaps the reducers on later calls", async () => {
-    const getReduxStore = await loadGetReduxStore();
-    const store = getReduxStore(CONFIG);
+  it("creates a new store on each call, with nothing shared", () => {
+    const first = createReduxStore(CONFIG);
+    const second = createReduxStore({ ...CONFIG, reducers: { title } });
 
-    const sameStore = getReduxStore({ ...CONFIG, reducers: { title } });
+    first.setDynamicReducers({ title });
 
-    expect(sameStore).toBe(store);
-    expect(store.getState()).toEqual({ title: "zljs" });
+    expect(first).not.toBe(second);
+    expect(first.getState()).toEqual({ counter: 1, title: "zljs" });
+    expect(second.getState()).toEqual({ title: "zljs" });
   });
 
-  it("ignores the preloaded state on later calls", async () => {
-    const getReduxStore = await loadGetReduxStore();
-    const store = getReduxStore(CONFIG);
+  it("adds and replaces reducers with setDynamicReducers", () => {
+    const store = createReduxStore(CONFIG);
 
-    getReduxStore({ ...CONFIG, preloadedState: { counter: 5 } });
-
-    expect(store.getState()).toEqual({ counter: 1 });
-  });
-
-  it("adds and replaces reducers with setDynamicReducers", async () => {
-    const getReduxStore = await loadGetReduxStore();
-    const store = getReduxStore(CONFIG);
-
-    store.setDynamicReducers?.({ title });
+    store.setDynamicReducers({ title });
     expect(store.getState()).toEqual({ counter: 1, title: "zljs" });
 
-    store.setDynamicReducers?.({});
+    store.setDynamicReducers({});
     expect(store.getState()).toEqual({ counter: 1 });
   });
 
-  it("keeps the persistent and core reducers with setDynamicReducers", async () => {
-    const getReduxStore = await loadGetReduxStore();
+  it("keeps the persistent and core reducers with setDynamicReducers", () => {
     const extra = (state = "dynamic") => state;
-    const store = getReduxStore({ ...CONFIG, coreReducers: { title } });
+    const store = createReduxStore({ ...CONFIG, coreReducers: { title } });
 
-    store.setDynamicReducers?.({ extra });
+    store.setDynamicReducers({ extra });
 
     expect(store.getState()).toEqual({
       counter: 1,
@@ -129,10 +108,10 @@ describe("createMockStore", () => {
   it("adds and replaces reducers with setDynamicReducers", () => {
     const store = createMockStore({ reducers: { counter } });
 
-    store.setDynamicReducers?.({ title });
+    store.setDynamicReducers({ title });
     expect(store.getState()).toEqual({ counter: 1, title: "zljs" });
 
-    store.setDynamicReducers?.({});
+    store.setDynamicReducers({});
     expect(store.getState()).toEqual({ counter: 1 });
   });
 
