@@ -1,23 +1,18 @@
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { Error } from "./error";
+import { Error } from "@zljs/core";
+
+const MESSAGE = "This field is required";
 
 describe("<Error /> - Default Props", () => {
-  it("renders Error correctly", () => {
-    render(<Error message="This field is required" />);
-
-    expect(screen.getByText("This field is required")).toBeInTheDocument();
-  });
-
-  it("renders Error with error role", () => {
-    render(<Error message="Invalid email" />);
+  it("renders <Error /> correctly", () => {
+    render(<Error message={MESSAGE} />);
     const error = screen.getByRole("alert");
 
-    expect(error).toBeInTheDocument();
+    expect(error).toHaveTextContent(MESSAGE);
   });
 
   it("renders <Error /> without id by default", () => {
-    render(<Error message="Invalid email" />);
+    render(<Error message={MESSAGE} />);
     const error = screen.getByRole("alert");
 
     expect(error).not.toHaveAttribute("id");
@@ -26,15 +21,24 @@ describe("<Error /> - Default Props", () => {
 
 describe("<Error /> - Custom Props", () => {
   it("renders <Error /> with id", () => {
-    render(<Error id="email-error" message="Invalid email" />);
+    render(<Error id="email-error" message={MESSAGE} />);
     const error = screen.getByRole("alert");
 
     expect(error).toHaveAttribute("id", "email-error");
   });
 
-  it("renders nothing when message is empty", () => {
-    const { container } = render(<Error message="" />);
+  it("renders <Error /> without an alert when message is empty", () => {
+    render(<Error message="" />);
 
-    expect(container.firstChild).toBeNull();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+});
+
+describe("<Error /> - Styles", () => {
+  it("renders <Error /> with the theme color", () => {
+    render(<Error message={MESSAGE} />);
+    const error = screen.getByRole("alert");
+
+    expect(error).toHaveClass("text-zl-danger");
   });
 });
