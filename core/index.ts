@@ -47,12 +47,6 @@ export { useModalStore } from "./state/modal";
 export type { ModalEntry, ModalState } from "./state/modal";
 export { ReduxProvider } from "./redux";
 export type { ReduxProviderProps, ReduxStore } from "./redux";
-// Deprecated names, kept so apps don't break: use ReduxProvider, ReduxProviderProps and ReduxStore.
-export { ReduxProvider as GlobalState } from "./redux";
-export type {
-  ReduxProviderProps as GlobalStateProps,
-  ReduxStore as ExtendedStore,
-} from "./redux";
 export { useRouterStore, splitURLasPath } from "./state/router";
 export type { RouterState } from "./state/router";
 export { usePageStore } from "./state/page";
