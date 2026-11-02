@@ -11,9 +11,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       name,
       type = "text",
       placeholder,
+      autoComplete,
       value,
       error,
       disabled,
+      required,
       onChange,
       onBlur,
       onKeyDown,
@@ -21,6 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     const id = useId();
+    const errorId = `${id}-error`;
 
     return (
       <div className={wrapper()}>
@@ -35,15 +38,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           name={name}
           type={type}
           placeholder={placeholder}
+          autoComplete={autoComplete}
           value={value}
           disabled={disabled}
+          required={required}
           onChange={onChange}
           onBlur={onBlur}
           onKeyDown={onKeyDown}
           aria-label={ariaLabel}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
           className={input()}
         />
-        {error && <Error message={error} />}
+        {error && <Error id={errorId} message={error} />}
       </div>
     );
   },

@@ -8,6 +8,33 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Input` takes `autoComplete` and `required`
+
+### Changed
+
+- `Input` requires `label` or `aria-label` in its type, so a field can't be left without a name
+- `Input` draws a real `focus-visible` outline in the theme's `primary` color instead of a `focus:ring`, so focus stays visible in forced colors mode, and an app's own color reaches it
+- `Input` border is now `gray-500` instead of `gray-300`, for 3:1 contrast, and its placeholder is `gray-500`, for 4.5:1
+
+### Fixed
+
+- `Input` with `error` sets `aria-invalid` and points `aria-describedby` to the message, so a screen reader announces both
+
+#### Migration
+
+Only an `Input` with neither `label` nor `aria-label`, code that extends `InputProps`, and tests that assert its old classes need a change. To find them, run the commands below from the app's root. The first also finds other components named `Input`, and those stay as they are:
+
+```sh
+grep -rnE "<Input([[:space:]/>]|$)|\bInputProps\b" . --include='*.ts' --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next
+grep -rnE "border-gray-300|focus:ring-blue-500|focus:border-transparent" . --include='*.test.*' --exclude-dir=node_modules --exclude-dir=.next
+```
+
+Give each field a `label`, or an `aria-label` when the context already says what it is. Replace `interface X extends InputProps` with `type X = InputProps & { ... }`, because `InputProps` is now a union. In tests, replace those classes with `focus-visible:outline-zl-primary` and `border-gray-500`.
+
+`FormInput` already requires `label`, so it doesn't change.
+
 ## [1.9.0] - 2026-11-02
 
 ### Added
