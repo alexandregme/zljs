@@ -88,14 +88,6 @@ describe("<Checkbox /> - Custom Props", () => {
     expect(screen.getByText("Notifications")).toBeInTheDocument();
   });
 
-  it("renders <Checkbox /> with variant card", () => {
-    render(<Checkbox variant="card" label={LABEL} />);
-    const label = screen.getByRole("checkbox").closest("label");
-
-    expect(label).toHaveClass("border", "rounded-lg");
-    expect(label).not.toHaveClass("w-fit");
-  });
-
   it("renders <Checkbox /> with size lg", () => {
     render(<Checkbox label={LABEL} size="lg" />);
     const checkbox = screen.getByRole("checkbox");
@@ -183,5 +175,15 @@ describe("<Checkbox /> - Custom Props", () => {
     fireEvent.click(content);
 
     expect(handleChange).not.toHaveBeenCalled();
+  });
+});
+
+describe("<Checkbox /> - Styles", () => {
+  it("renders <Checkbox /> with variant card", () => {
+    render(<Checkbox variant="card" label={LABEL} />);
+    const label = screen.getByRole("checkbox").closest("label");
+
+    expect(label).toHaveClass("border", "rounded-lg", "items-center");
+    expect(label).not.toHaveClass("w-fit");
   });
 });

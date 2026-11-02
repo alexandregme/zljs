@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { expect, fn } from "storybook/test";
 import { Heading, Tag, Text } from "@zljs/core";
+import { colorContrast } from "@test-utils";
 import { Checkbox } from "./checkbox";
 
 export default {
@@ -44,7 +45,7 @@ export const Variants: Story = {
     docs: {
       description: {
         story:
-          '`default` (the default) is a box with its text beside it. `card` turns the whole bordered area into the click target. Its `label` can be made of components, and all of their text becomes the accessible name. A `<label>` only takes inline content: use `span`s, `Tag` and `<Text as="span">`, never a `div` or anything interactive such as a `Button`. Keep the pieces apart with a flex `span` or a space, or a screen reader joins them (`Pro planUnlimited projects`).',
+          '`default` (the default) is a box with its text beside it. `card` turns the whole bordered area into the click target, with the box centered on the height of its content, so with several lines the box sits in the middle and not beside the first one. Its `label` can be made of components, and all of their text becomes the accessible name. A `<label>` only takes inline content: use `span`s, `Tag` and `<Text as="span">`, never a `div` or anything interactive such as a `Button`. Keep the pieces apart with a flex `span` or a space, or a screen reader joins them (`Pro planUnlimited projects`).',
       },
     },
   },
@@ -53,6 +54,8 @@ export const Variants: Story = {
       <Heading level={2}>Default</Heading>
       <Checkbox label="Accept terms and conditions" />
       <Heading level={2}>Card</Heading>
+      <Checkbox variant="card" label="Pro plan" />
+      <Heading level={2}>Card with several lines</Heading>
       <Checkbox variant="card" label={cardLabel} />
     </div>
   ),
@@ -96,9 +99,18 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`checked` needs `onChange` to stay controlled, and `disabled` blocks the click on the box and on the label. A `card` shows both on its whole area: a blue border when checked, a gray background when disabled. `aria-label` has no visual effect and replaces the name that comes from `label`: use it only to add what the text leaves out, and keep the visible text in it (`Notifications for new comments` for a label reading `Notifications`), because voice control users say what they see. A `card` already reads its whole content, so it doesn't need one.",
+          "`checked` needs `onChange` to stay controlled, and `disabled` blocks the click on the box and on the label. A checked box uses the theme's `primary` color, at 5.25:1 on white, which this story checks. A `card` shows both on its whole area: a border in that same color when checked, a gray background when disabled. `aria-label` has no visual effect and replaces the name that comes from `label`: use it only to add what the text leaves out, and keep the visible text in it (`Notifications for new comments` for a label reading `Notifications`), because voice control users say what they see. A `card` already reads its whole content, so it doesn't need one.",
       },
     },
+  },
+  play: async ({ canvas }) => {
+    const { accentColor } = getComputedStyle(
+      canvas.getByRole("checkbox", { name: "Checked" }),
+    );
+
+    // "auto" is the browser's own color, and the contrast helper reads it as black, so it can't catch a missing class.
+    await expect(accentColor).not.toBe("auto");
+    await expect(colorContrast(accentColor, "#fff")).toBeGreaterThanOrEqual(3);
   },
   render: () => (
     <div className="flex max-w-sm flex-col gap-4">

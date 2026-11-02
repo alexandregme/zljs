@@ -9,7 +9,7 @@ export const innerWrapper = tv({
   variants: {
     variant: {
       default: "w-fit items-center gap-2",
-      card: "items-start gap-3 rounded-lg border border-gray-500 p-3 has-checked:border-zl-primary has-checked:ring-1 has-checked:ring-zl-primary has-disabled:bg-gray-100",
+      card: "items-center gap-3 rounded-lg border border-gray-500 p-3 has-checked:border-zl-primary has-checked:ring-1 has-checked:ring-zl-primary has-disabled:bg-gray-100",
     },
   },
   defaultVariants: {
@@ -18,7 +18,7 @@ export const innerWrapper = tv({
 });
 
 export const checkbox = tv({
-  base: "shrink-0 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed",
+  base: "shrink-0 accent-zl-primary border-gray-300 rounded focus:ring-2 focus:ring-blue-500 disabled:cursor-not-allowed",
   variants: {
     size: {
       sm: "w-3.5 h-3.5",

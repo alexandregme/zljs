@@ -8,6 +8,26 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Changed
+
+- The box of a `Checkbox` with `variant="card"` is centered on the height of its content, instead of sitting at the top. With several lines, it is no longer beside the first one
+
+### Fixed
+
+- A checked `Checkbox` uses the theme's `primary` color. It had `text-blue-600`, which does nothing on a native checkbox, so it kept the browser's own color, and an app's theme only reached the border of a `card`
+
+#### Migration
+
+Every `Checkbox` with `variant="card"` looks different, so check those screens. Code only needs a change if it forces the alignment from outside, or if a test asserts `items-start` on the card. To find them, run the commands below from the app's root. The first also finds other components named `Checkbox` and any `variant`, and the last also finds `items-start` set by the app, and those stay as they are:
+
+```sh
+grep -rnE -A6 "<Checkbox([[:space:]/>]|$)" . --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next | grep -E "variant="
+grep -rnE "\[&_label\]:items-" . --include='*.ts' --include='*.tsx' --exclude-dir=node_modules --exclude-dir=.next
+grep -rnE "items-start" . --include='*.test.*' --exclude-dir=node_modules --exclude-dir=.next
+```
+
+Remove a wrapper that only sets `[&_label]:items-center`, and the test that asserts it. In tests, replace `items-start` with `items-center`.
+
 ## [1.13.0] - 2026-11-02
 
 ### Added
