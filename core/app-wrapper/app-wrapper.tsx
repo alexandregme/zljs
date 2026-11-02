@@ -4,7 +4,7 @@ import { useRouter } from "next/compat/router.js";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "../toaster";
 import { Loader } from "../loader";
-import { GlobalState } from "../state/global-state";
+import { ReduxProvider } from "../redux";
 import { useRouterStore } from "../state/router";
 import type { AppWrapperProps } from "./app-wrapper.interface";
 
@@ -25,7 +25,7 @@ export const AppWrapper = ({
 
   return (
     <SessionProvider>
-      <GlobalState
+      <ReduxProvider
         reducers={reducers}
         middlewares={middlewares}
         coreReducers={coreReducers}
@@ -33,7 +33,7 @@ export const AppWrapper = ({
         <Loader />
         <Toaster />
         {children}
-      </GlobalState>
+      </ReduxProvider>
     </SessionProvider>
   );
 };

@@ -1,14 +1,11 @@
-"use client";
-import { Provider } from "react-redux";
 import {
   combineReducers,
   configureStore,
-  type Middleware,
   type Reducer,
 } from "@reduxjs/toolkit";
-import type { GlobalStateProps, ExtendedStore } from "./global-state.types";
+import type { ReduxStore, ReduxStoreConfig } from "./store.types";
 
-let store: ExtendedStore;
+let store: ReduxStore;
 let persistentReducers: Record<string, Reducer> = {};
 let dynamicReducers: Record<string, Reducer> = {};
 
@@ -19,12 +16,12 @@ const createReducer = (coreReducers: Record<string, Reducer>) =>
     ...coreReducers,
   });
 
-const createStore = (
-  reducers: Record<string, Reducer>,
-  middlewares: Middleware[],
-  preloadedState: Record<string, unknown>,
-  coreReducers: Record<string, Reducer>,
-): ExtendedStore => {
+export const getReduxStore = ({
+  reducers,
+  middlewares,
+  preloadedState,
+  coreReducers,
+}: ReduxStoreConfig): ReduxStore => {
   persistentReducers = reducers;
 
   if (!store) {
@@ -33,7 +30,7 @@ const createStore = (
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(middlewares),
       preloadedState,
-    }) as ExtendedStore;
+    }) as ReduxStore;
 
     store.setDynamicReducers = (newDynamicReducers = {}) => {
       dynamicReducers = newDynamicReducers;
@@ -44,20 +41,4 @@ const createStore = (
   }
 
   return store;
-};
-
-export const GlobalState = ({
-  children,
-  reducers = {},
-  middlewares = [],
-  preloadedState = {},
-  coreReducers = {},
-}: GlobalStateProps) => {
-  const reduxStore = createStore(
-    reducers,
-    middlewares,
-    preloadedState,
-    coreReducers,
-  );
-  return <Provider store={reduxStore}>{children}</Provider>;
 };
