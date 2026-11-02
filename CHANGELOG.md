@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.11.0] - 2026-11-02
+
 ### Added
 
 - `Select` takes `aria-label`, `name`, `autoComplete`, `required`, `onBlur` and `onKeyDown`, and forwards `ref`, as `Input` does, so it works with `register` from `react-hook-form`
@@ -104,7 +106,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.10.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.11.0...HEAD
+[1.11.0]: https://github.com/alexandregme/zljs/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/alexandregme/zljs/compare/v1.9.0...v1.10.0
 [1.9.0]: https://github.com/alexandregme/zljs/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/alexandregme/zljs/compare/v1.7.0...v1.8.0
