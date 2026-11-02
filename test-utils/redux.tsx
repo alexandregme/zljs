@@ -24,8 +24,8 @@ export interface MockStoreProviderProps extends MockStoreConfig {
 }
 
 /**
- * A new store on each call, unlike the app's single store, so a test or story
- * picks its own state and shares nothing with the others.
+ * A new store on each call, so a test or story picks its own state and shares
+ * nothing with the others.
  */
 export const createMockStore = ({
   reducers = MOCK_REDUCERS,

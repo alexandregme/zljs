@@ -1,31 +1,29 @@
 "use client";
 import { useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
-import { useRouter } from "next/compat/router.js";
-import { usePageStore } from "../state/page";
-import type { ReduxStore } from "../redux";
-import type { PageWrapperProps } from "./page-wrapper.interface";
+import type { ReduxStore } from "../../redux";
+import { usePageStore } from "../../state/page";
+import type { PageConfigProps } from "./page-config.interface";
 
-export const PageWrapper = ({
-  reducers,
-  title,
-  initPage,
+export const PageConfig = ({
   children,
-}: PageWrapperProps) => {
+  title,
+  reducers,
+  initPage,
+}: PageConfigProps) => {
   const store = useStore() as ReduxStore;
   const dispatch = useDispatch();
-  const router = useRouter();
   const setTitle = usePageStore((s) => s.setTitle);
 
   useEffect(() => {
     if (reducers) {
-      store.setDynamicReducers?.(reducers);
+      store.setDynamicReducers(reducers);
     }
   }, [reducers]);
 
   useEffect(() => {
     setTitle(title);
-  }, [router?.asPath, title, setTitle]);
+  }, [title, setTitle]);
 
   useEffect(() => {
     if (initPage) {

@@ -8,6 +8,32 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `AppProviders` in `@alexandregme/zljs/next`: the app's global configuration, with the Redux store, `Loader`, `Toaster` and the route in `useRouterStore`. It takes `children`, `reducers`, `coreReducers`, `middlewares` and `preloadedState`
+- `PageConfig` in `@alexandregme/zljs/next`: a feature's state configuration, with `title`, `reducers` and `initPage`. It renders only its children
+
+### Changed
+
+- `ReduxProvider` creates a store per mount. It was a single store in the module, which on the server was shared between requests. Props changed after the first render no longer change the reducers. A page's reducers still change with `setDynamicReducers`, which is now required on `ReduxStore`
+- `InitPageFunction` moved to `@alexandregme/zljs/next`. Its `dispatch` accepts thunks
+
+### Removed
+
+- `AppWrapper` and `AppWrapperProps`. The route it synced never ran on the App Router, because `next/compat/router` returns `null` there
+- `PageWrapper` and `PageWrapperProps`
+- `DocumentWrapper` and `DocumentWrapperProps`
+- `next-auth` from the peer dependencies. An app that uses it keeps it in its own `package.json`
+
+#### Migration
+
+Search the app for `AppWrapper`, `PageWrapper`, `InitPageFunction` and `DocumentWrapper` imported from `@alexandregme/zljs`. A local component with the same name, as in `ruralissima-diagnostico`, stays.
+
+- `AppWrapper`: use `AppProviders` from `@alexandregme/zljs/next`, with the same `reducers`, `middlewares` and `coreReducers`, in a `'use client'` file of the app, because a Server Component can't pass a function. An app that used the session adds `SessionProvider` from `next-auth/react` around it, and installs `next-auth` if it isn't in its `package.json`
+- `PageWrapper`: use `PageConfig` from `@alexandregme/zljs/next`, with the same `title`, `reducers` and `initPage`, and start the file that renders it with `'use client'`
+- `InitPageFunction`: import it from `@alexandregme/zljs/next`
+- `DocumentWrapper`: write `<html lang="…">` and `<body>` directly in `app/layout.tsx`
+
 ## [1.17.0] - 2026-11-02
 
 ### Added

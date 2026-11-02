@@ -15,3 +15,5 @@ export {
 } from "./contrast";
 export { createMockStore, MOCK_REDUCERS, MockStoreProvider } from "./redux";
 export type { MockStoreConfig, MockStoreProviderProps } from "./redux";
+export { MockRouteProvider } from "./next";
+export type { MockRouteProviderProps } from "./next";

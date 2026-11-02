@@ -1,6 +1,7 @@
 "use client";
+import { useState } from "react";
 import { Provider } from "react-redux";
-import { getReduxStore } from "../store";
+import { createReduxStore } from "../store";
 import type { ReduxProviderProps } from "./redux-provider.interface";
 
 export const ReduxProvider = ({
@@ -10,11 +11,14 @@ export const ReduxProvider = ({
   preloadedState = {},
   coreReducers = {},
 }: ReduxProviderProps) => {
-  const store = getReduxStore({
-    reducers,
-    middlewares,
-    preloadedState,
-    coreReducers,
-  });
+  const [store] = useState(() =>
+    createReduxStore({
+      reducers,
+      middlewares,
+      preloadedState,
+      coreReducers,
+    }),
+  );
+
   return <Provider store={store}>{children}</Provider>;
 };
