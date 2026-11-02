@@ -11,7 +11,13 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ["Foundations", "Components", "Forms", "Next"],
+        order: [
+          "Foundations",
+          "Components",
+          "Forms",
+          ["Examples", "*", "Error"],
+          "Next",
+        ],
       },
     },
     // "todo" reports violations in the a11y panel without failing the run.

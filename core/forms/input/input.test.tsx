@@ -1,105 +1,129 @@
+import { createRef } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { Input } from "./input";
+import { Input } from "@zljs/core";
+
+const LABEL = "Username";
+const ERROR = "Email is required";
 
 describe("<Input /> - Default Props", () => {
-  it("renders Input correctly", () => {
-    render(<Input label="Username" />);
-    const input = screen.getByRole("textbox");
+  it("renders <Input /> correctly", () => {
+    render(<Input label={LABEL} />);
+    const input = screen.getByRole("textbox", { name: LABEL });
 
     expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute("type", "text");
+    expect(input).toBeEnabled();
   });
 
-  it("renders Input with label", () => {
-    render(<Input label="Username" />);
-
-    expect(screen.getByText("Username")).toBeInTheDocument();
-  });
-
-  it("renders Input with type text by default", () => {
-    render(<Input label="Username" />);
+  it("renders <Input /> without its optional props by default", () => {
+    render(<Input label={LABEL} />);
     const input = screen.getByRole("textbox");
 
-    expect(input).toHaveAttribute("type", "text");
+    expect(input).toHaveValue("");
+    expect(input).not.toHaveAttribute("aria-label");
+    expect(input).not.toHaveAttribute("name");
+    expect(input).not.toHaveAttribute("placeholder");
+    expect(input).not.toHaveAttribute("autocomplete");
+    expect(input).not.toHaveAttribute("aria-invalid");
+    expect(input).not.toHaveAttribute("aria-describedby");
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(input).not.toBeRequired();
+    expect(() =>
+      fireEvent.change(input, { target: { value: "john" } }),
+    ).not.toThrow();
+    expect(() => fireEvent.blur(input)).not.toThrow();
+    expect(() => fireEvent.keyDown(input, { key: "Enter" })).not.toThrow();
   });
 });
 
 describe("<Input /> - Custom Props", () => {
-  it("renders Input with placeholder", () => {
-    render(<Input label="Username" placeholder="Enter username" />);
-    const input = screen.getByRole("textbox");
+  it("renders <Input /> with all its props", () => {
+    const ref = createRef<HTMLInputElement>();
+    render(
+      <Input
+        label="Email"
+        aria-label="Email address"
+        name="email"
+        type="email"
+        placeholder="name@example.com"
+        autoComplete="email"
+        value="john@example.com"
+        error={ERROR}
+        required
+        onChange={() => {}}
+        ref={ref}
+      />,
+    );
+    const input = screen.getByRole("textbox", { name: "Email address" });
 
-    expect(input).toHaveAttribute("placeholder", "Enter username");
+    expect(screen.getByText("Email")).toBeInTheDocument();
+    expect(input).toHaveAttribute("name", "email");
+    expect(input).toHaveAttribute("type", "email");
+    expect(input).toHaveAttribute("placeholder", "name@example.com");
+    expect(input).toHaveAttribute("autocomplete", "email");
+    expect(input).toHaveValue("john@example.com");
+    expect(input).toHaveAttribute("aria-invalid", "true");
+    expect(input).toHaveAccessibleDescription(ERROR);
+    expect(screen.getByRole("alert")).toHaveTextContent(ERROR);
+    expect(input).toBeRequired();
+    expect(ref.current).toBe(input);
   });
 
-  it("renders Input with value", () => {
-    render(<Input label="Username" value="john" onChange={() => {}} />);
-    const input = screen.getByRole("textbox");
-
-    expect(input).toHaveValue("john");
-  });
-
-  it("renders Input with type password", () => {
+  it("renders <Input /> with type password", () => {
     render(<Input label="Password" type="password" />);
     const input = screen.getByLabelText("Password");
 
     expect(input).toHaveAttribute("type", "password");
   });
 
-  it("renders Input with type email", () => {
-    render(<Input label="Email" type="email" />);
-    const input = screen.getByRole("textbox");
-
-    expect(input).toHaveAttribute("type", "email");
-  });
-
-  it("renders Input with error message", () => {
-    render(<Input label="Username" error="Username is required" />);
-
-    expect(screen.getByRole("alert")).toHaveTextContent("Username is required");
-  });
-
-  it("renders Input as disabled", () => {
-    render(<Input label="Username" disabled />);
+  it("renders <Input /> disabled", () => {
+    render(<Input label={LABEL} disabled />);
     const input = screen.getByRole("textbox");
 
     expect(input).toBeDisabled();
   });
 
-  it("calls onChange when input value changes", () => {
+  it("renders <Input /> without a visible label when only aria-label is passed", () => {
+    render(<Input aria-label="Search" />);
+    const input = screen.getByRole("textbox", { name: "Search" });
+
+    expect(input).toBeInTheDocument();
+    expect(screen.queryByText("Search")).not.toBeInTheDocument();
+  });
+
+  it("calls onChange, onBlur and onKeyDown when <Input /> is used", () => {
     const handleChange = vi.fn();
-    render(<Input label="Username" onChange={handleChange} />);
+    const handleBlur = vi.fn();
+    const handleKeyDown = vi.fn();
+    render(
+      <Input
+        label={LABEL}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+      />,
+    );
     const input = screen.getByRole("textbox");
 
     fireEvent.change(input, { target: { value: "john" } });
-
-    expect(handleChange).toHaveBeenCalledTimes(1);
-  });
-
-  it("calls onKeyDown when key is pressed", () => {
-    const handleKeyDown = vi.fn();
-    render(<Input label="Username" onKeyDown={handleKeyDown} />);
-    const input = screen.getByRole("textbox");
-
+    fireEvent.blur(input);
     fireEvent.keyDown(input, { key: "Enter" });
 
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleBlur).toHaveBeenCalledTimes(1);
     expect(handleKeyDown).toHaveBeenCalledTimes(1);
   });
+});
 
-  it("renders Input with aria-label for accessibility", () => {
-    render(<Input aria-label="Search field" placeholder="Search..." />);
+describe("<Input /> - Styles", () => {
+  it("renders <Input /> with a real focus outline", () => {
+    render(<Input label={LABEL} />);
     const input = screen.getByRole("textbox");
 
-    expect(input).toHaveAttribute("aria-label", "Search field");
-  });
-
-  it("renders Input without visible label", () => {
-    render(<Input aria-label="Hidden label" />);
-
-    expect(screen.queryByRole("label")).not.toBeInTheDocument();
-    expect(screen.getByRole("textbox")).toHaveAttribute(
-      "aria-label",
-      "Hidden label",
+    expect(input).toHaveClass(
+      "focus-visible:outline-2",
+      "focus-visible:outline-zl-primary",
     );
+    expect(input).not.toHaveClass("focus:outline-none");
   });
 });
