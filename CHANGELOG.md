@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.18.0] - 2026-11-02
+
 ### Added
 
 - `AppProviders` in `@alexandregme/zljs/next`: the app's global configuration, with the Redux store, `Loader`, `Toaster` and the route in `useRouterStore`. It takes `children`, `reducers`, `coreReducers`, `middlewares` and `preloadedState`
@@ -247,7 +249,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.17.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.18.0...HEAD
+[1.18.0]: https://github.com/alexandregme/zljs/compare/v1.17.0...v1.18.0
 [1.17.0]: https://github.com/alexandregme/zljs/compare/v1.16.0...v1.17.0
 [1.16.0]: https://github.com/alexandregme/zljs/compare/v1.15.0...v1.16.0
 [1.15.0]: https://github.com/alexandregme/zljs/compare/v1.14.0...v1.15.0
