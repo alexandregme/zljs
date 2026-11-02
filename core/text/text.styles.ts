@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants";
-import { semanticTextColors } from "../types/colors.const";
+import { semanticTextColors } from "../types/colors";
 
 export const text = tv({
   variants: {

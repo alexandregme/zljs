@@ -1,0 +1,31 @@
+import { Markdown, Meta } from "@storybook/addon-docs/blocks";
+import changelog from "../../CHANGELOG.md?raw";
+
+export const compareLinks = Object.fromEntries(
+  Array.from(changelog.matchAll(/^\[(.+)\]: (.+)$/gm), ([, version, url]) => [
+    version,
+    url,
+  ]),
+);
+
+{/* The Markdown block doesn't resolve the [1.8.0] reference links of Keep a Changelog, so they become inline links here. */}
+
+export const page = changelog
+  .replace(/^\[.+\]: .+$/gm, "")
+  .replace(
+    /^## \[(.+?)\]/gm,
+    (_, version) => `## [${version}](${compareLinks[version]})`,
+  );
+
+{/* Links open in a new tab, so following one doesn't lose the page. */}
+
+export const NewTabLink = ({ children, ...props }) => (
+
+<a {...props} target="_blank" rel="noreferrer">
+  {children}
+</a>
+);
+
+<Meta title="Foundations/Changelog" />
+
+<Markdown options={{ overrides: { a: NewTabLink } }}>{page}</Markdown>

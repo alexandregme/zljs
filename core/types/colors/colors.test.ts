@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "fs";
 import { resolve } from "path";
 import { semanticTextColors } from "./colors.const";
 
-const CORE = resolve(__dirname, "..");
+const CORE = resolve(__dirname, "../..");
 const THEME = readFileSync(resolve(CORE, "styles/colors.css"), "utf8");
 const TOKEN_SUFFIXES = ["", "-strong", "-bg", "-hover", "-on"];
 
