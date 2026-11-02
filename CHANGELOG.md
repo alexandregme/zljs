@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.15.0] - 2026-11-02
+
 ### Added
 
 - `Icon` takes `color`, with the same `SemanticColor` values as `Text` and `Heading`. With no `color`, or with `none`, it still inherits the color around it
@@ -188,7 +190,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.14.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.15.0...HEAD
+[1.15.0]: https://github.com/alexandregme/zljs/compare/v1.14.0...v1.15.0
 [1.14.0]: https://github.com/alexandregme/zljs/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/alexandregme/zljs/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/alexandregme/zljs/compare/v1.11.0...v1.12.0
