@@ -1,7 +1,7 @@
 "use client";
 
 import { Modal } from "../modal";
-import { useModalStore } from "../state/modal";
+import { useModalStore } from "../state/zustand/modal";
 import type { ConnectedModalProps } from "./connected-modal.interface";
 
 export const ConnectedModal = ({

@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
-import type { ReduxStore } from "../../redux";
-import { usePageStore } from "../../state/page";
+import type { ReduxStore } from "../../state/redux";
+import { usePageStore } from "../../state/zustand/page";
 import type { PageConfigProps } from "./page-config.interface";
 
 export const PageConfig = ({

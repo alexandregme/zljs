@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import type { AppState } from "./app.types";
+import { appDevtools, appInitialState } from "./app.const";
+import type { AppState } from "./app.interface";
 
 export const useAppStore = create<AppState>()(
   devtools(
     (set) => ({
-      fetchingCalls: 0,
-      fetching: false,
+      ...appInitialState,
       startFetching: () =>
         set(
           (s) => {
@@ -26,6 +26,6 @@ export const useAppStore = create<AppState>()(
           "finishFetching",
         ),
     }),
-    { name: "zljs", store: "app" },
+    appDevtools,
   ),
 );

@@ -1,16 +1,16 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import type { RouterState } from "./router.types";
+import { routerDevtools, routerInitialState } from "./router.const";
+import type { RouterState } from "./router.interface";
 import { splitURLasPath } from "./router.utils";
 
 export const useRouterStore = create<RouterState>()(
   devtools(
     (set) => ({
-      urlAsPath: "/",
-      query: {},
+      ...routerInitialState,
       setRoute: (urlAsPath: string) =>
         set({ urlAsPath, query: splitURLasPath(urlAsPath) }, false, "setRoute"),
     }),
-    { name: "zljs", store: "router" },
+    routerDevtools,
   ),
 );
