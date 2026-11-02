@@ -1,25 +1,28 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen, within } from "@testing-library/react";
+import { Heading } from "@zljs/core";
 import { RootLayout } from "./root-layout";
 
 describe("<RootLayout /> - Default Props", () => {
-  it("renders children correctly", () => {
-    render(
-      <RootLayout>
-        <div>Test content</div>
-      </RootLayout>,
-    );
+  it("renders <RootLayout /> correctly", () => {
+    render(<RootLayout>Page content</RootLayout>);
+    const main = screen.getByRole("main");
 
-    expect(screen.getByText("Test content")).toBeInTheDocument();
+    expect(main).toBeInTheDocument();
+    expect(main).toHaveTextContent("Page content");
   });
+});
 
-  it("renders main element", () => {
+describe("<RootLayout /> - Custom Props", () => {
+  it("renders <RootLayout /> with children as an element", () => {
     render(
       <RootLayout>
-        <div>Content</div>
+        <Heading>Orders</Heading>
       </RootLayout>,
     );
+    const main = screen.getByRole("main");
 
-    expect(screen.getByRole("main")).toBeInTheDocument();
+    expect(
+      within(main).getByRole("heading", { name: "Orders" }),
+    ).toBeInTheDocument();
   });
 });

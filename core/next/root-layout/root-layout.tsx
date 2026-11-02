@@ -1,6 +1,6 @@
 import type { RootLayoutProps } from "./root-layout.interface";
-import { body } from "./root-layout.styles";
+import { rootLayout } from "./root-layout.styles";
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
-  return <main className={body()}>{children}</main>;
+  return <main className={rootLayout()}>{children}</main>;
 };

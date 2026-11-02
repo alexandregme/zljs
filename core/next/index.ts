@@ -3,3 +3,6 @@ export type { RootLayoutProps } from "./root-layout";
 
 export { NotFound } from "./not-found";
 export type { NotFoundProps } from "./not-found";
+
+export { Link } from "./link";
+export type { LinkProps } from "./link";

@@ -8,6 +8,21 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Link` in `@alexandregme/zljs/next`: navigates with `next/link` and takes `children`, `href` and `color`, with the `SemanticColor` values. It is always underlined, inherits the font size around it and has a 44px touch target, so keep at least 20px between stacked links
+- `NotFound` takes `backLabel`. "Go back home" was fixed, so an app in another language couldn't translate it
+
+### Changed
+
+- `RootLayout` takes the height of the visible screen, with `min-h-dvh` instead of `min-h-screen`, so it doesn't scroll on a phone
+- `NotFound` is built with `Heading`, `Text` and `Link`: the title goes from `text-2xl` semibold to `text-3xl` bold, the message uses the theme's `muted`, and the link follows the theme and is always underlined. It navigates with `next/link` instead of reloading the page
+- `NotFound` takes the height of the visible screen, with `min-h-dvh` instead of `min-h-screen`, so it doesn't scroll on a phone
+
+### Fixed
+
+- The `404` of `NotFound` had 1.47:1 contrast on white with `text-gray-300`. It now uses the theme's `muted`, which is 4.84:1
+
 ## [1.15.0] - 2026-11-02
 
 ### Added

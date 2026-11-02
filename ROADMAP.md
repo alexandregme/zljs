@@ -51,7 +51,7 @@ Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select
 1. `Button` (checked, focus outline and story descriptions fixed)
    - Decide whether the type should require `aria-label` on icon-only buttons (changes the public API)
 2. `Checkbox` (next): `border-gray-300` does nothing on a native control, and it needs a real focus outline and the props of `Input`. `accent-zl-primary` is already in
-3. Not checked yet: `Heading`, `Tag`, `Spinner`, `Loader`, `Toaster`, `Sidebar`, `DataGrid`, `NotFound`
+3. Not checked yet: `Heading`, `Tag`, `Spinner`, `Loader`, `Toaster`, `Sidebar`, `DataGrid`
 4. In each PR: bring the tests and stories to the current `component-tests` and `component-check` shape
 5. Last PR: switch `a11y.test` to `"error"` in `.storybook/preview.ts` and turn on the lint rule above
 
@@ -60,11 +60,12 @@ Known problems:
 1. Flaky story: DataGrid `Single Column` sometimes fails axe in the full suite, on a half-built grid. CI has no retry, so fix it before `a11y.test` becomes `"error"`
 2. Collapsed `Sidebar`: the Logout button is clipped but still takes keyboard focus. The layout needs a decision
 3. `Loader` mounts only while loading, and some screen readers don't announce a `role="status"` inserted that way
-4. No stories, so no axe coverage: `RootLayout`, `ConnectedModal`, `DocumentWrapper`, `PageWrapper`, `FormInput`, `FormProvider`
+4. No stories, so no axe coverage: `ConnectedModal`, `DocumentWrapper`, `PageWrapper`, `FormInput`, `FormProvider`
 5. `Checkbox` and `Modal` still use a `box-shadow` focus ring, which disappears in forced colors mode and has no contrast check. Move them to a real `focus-visible` outline and check it with `focusOutlineContrast` from `test-utils/contrast.ts`, as `Button` and `Input` do. Hover is only checked on `Button`: add `hoverTextContrast` to the others that change color on hover
 6. `Button` colored outlines are checked on a white page only: on a dark surface, `primary` and the others can fall under 3:1
-7. After the color tokens PR: the `NotFound` link and the `DataGrid` status bar still hardcode `blue-600`, and the focus outlines should use `outline-zl-primary`
+7. After the color tokens PR: the `DataGrid` status bar still hardcodes `blue-600`, and the focus outlines should use `outline-zl-primary`
 8. The border of an unchecked `Radio` is drawn by the browser, so no story can check its contrast
+9. `Button` with `variant="link"` has the same 44px touch target as `Link`, and its story doesn't say that stacked ones need 20px between them. Not measured on `Button`: it was measured on `Link`, where a tap on the lower 10px of a link opens the one below
 
 Skills (`zl-ai-toolkit`, `component-check` and `component-tests` still uncommitted):
 

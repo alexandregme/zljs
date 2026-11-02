@@ -1,19 +1,25 @@
+import { Heading } from "../../heading";
+import { Text } from "../../text";
+import { Link } from "../link";
 import type { NotFoundProps } from "./not-found.interface";
-import { container, code, title, message, link } from "./not-found.styles";
+import { notFound } from "./not-found.styles";
 
 export const NotFound = ({
-  title: notFoundTitle = "Page not found",
-  message: notFoundMessage = "The page you are looking for does not exist.",
+  title = "Page not found",
+  message = "The page you are looking for does not exist.",
   backHref = "/",
+  backLabel = "Go back home",
 }: NotFoundProps) => {
+  const { base, code, content } = notFound();
+
   return (
-    <div className={container()}>
+    <div className={base()}>
       <span className={code()}>404</span>
-      <h1 className={title()}>{notFoundTitle}</h1>
-      <p className={message()}>{notFoundMessage}</p>
-      <a href={backHref} className={link()}>
-        Go back home
-      </a>
+      <div className={content()}>
+        <Heading>{title}</Heading>
+        <Text color="muted">{message}</Text>
+      </div>
+      <Link href={backHref}>{backLabel}</Link>
     </div>
   );
 };
