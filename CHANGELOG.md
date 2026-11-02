@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.9.0] - 2026-11-02
+
 ### Added
 
 - `CHANGELOG.md` now ships with the package, and has a `Foundations/Changelog` page in Storybook
@@ -46,5 +48,6 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/alexandregme/zljs/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/alexandregme/zljs/compare/v1.7.0...v1.8.0
