@@ -3,7 +3,7 @@ import {
   configureStore,
   type Reducer,
 } from "@reduxjs/toolkit";
-import type { ReduxStore, ReduxStoreConfig } from "./store.types";
+import type { ReduxStore, ReduxStoreConfig } from "./store.interface";
 
 export const createReduxStore = ({
   reducers,

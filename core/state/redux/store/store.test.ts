@@ -1,7 +1,7 @@
 import type { Middleware } from "@reduxjs/toolkit";
 import { createMockStore, MOCK_REDUCERS } from "@test-utils";
 import { createReduxStore } from "./store";
-import type { ReduxStoreConfig } from "./store.types";
+import type { ReduxStoreConfig } from "./store.interface";
 
 const { counter, title } = MOCK_REDUCERS;
 

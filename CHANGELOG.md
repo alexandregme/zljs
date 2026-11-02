@@ -8,6 +8,18 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Removed
+
+- Parameters in the hash, in `splitURLasPath` and the `query` of `useRouterStore`: `/orders#id=7` now returns `{}`
+
+#### Migration
+
+Search the app for `splitURLasPath` and `setRoute`. A URL with its parameters after `#` now reads them from `window.location.hash`.
+
+### Fixed
+
+- `splitURLasPath` and the `query` of `useRouterStore` lost the query when the URL also had a hash: `/orders?id=7#top` returned `{ top: "" }` and now returns `{ id: "7" }`
+
 ## [1.18.0] - 2026-11-02
 
 ### Added

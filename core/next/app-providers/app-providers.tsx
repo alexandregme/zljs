@@ -2,8 +2,8 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation.js";
 import { Loader } from "../../loader";
-import { ReduxProvider } from "../../redux";
-import { useRouterStore } from "../../state/router";
+import { ReduxProvider } from "../../state/redux";
+import { useRouterStore } from "../../state/zustand/router";
 import { Toaster } from "../../toaster";
 import type { AppProvidersProps } from "./app-providers.interface";
 

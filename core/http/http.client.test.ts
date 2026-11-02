@@ -1,7 +1,7 @@
 import mockAxios from "axios";
 import { HTTPClient } from "./http.client";
-import { useAppStore } from "../state/app";
-import { useToastStore } from "../state/toast";
+import { useAppStore } from "../state/zustand/app";
+import { useToastStore } from "../state/zustand/toast";
 
 vi.mock("axios", () => ({
   default: {

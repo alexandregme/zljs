@@ -1,13 +1,14 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import type { ToastState } from "./toast.types";
+import { toastDevtools, toastInitialState } from "./toast.const";
+import type { ToastState } from "./toast.interface";
 
 let toastId = 0;
 
 export const useToastStore = create<ToastState>()(
   devtools(
     (set, get) => ({
-      toasts: [],
+      ...toastInitialState,
       addToast: (message, type = "error") => {
         const id = ++toastId;
         set(
@@ -28,6 +29,6 @@ export const useToastStore = create<ToastState>()(
       info: (message) => get().addToast(message, "info"),
       warning: (message) => get().addToast(message, "warning"),
     }),
-    { name: "zljs", store: "toast" },
+    toastDevtools,
   ),
 );
