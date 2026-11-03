@@ -10,8 +10,10 @@ const Title = () => {
 };
 
 afterEach(() => {
-  useAppStore.setState({ fetchingCalls: 0, fetching: false });
-  useRouterStore.getState().setRoute("/");
+  act(() => {
+    useAppStore.setState({ fetchingCalls: 0, fetching: false });
+    useRouterStore.getState().setRoute("/");
+  });
   window.history.pushState({}, "", "/");
 });
 

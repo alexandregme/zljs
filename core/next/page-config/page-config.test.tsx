@@ -49,12 +49,11 @@ describe("<PageConfig /> - Custom Props", () => {
     const PAGE_A = { pageA: (state = "state of A") => state };
     const PAGE_B = { pageB: (state = "state of B") => state };
     const Pages = () => {
-      const state = useSelector(
-        (root: { counter: number; pageA?: string; pageB?: string }) => root,
+      const text = useSelector(
+        (root: { counter: number; pageA?: string; pageB?: string }) =>
+          `${root.counter} | ${root.pageA ?? "no A"} | ${root.pageB ?? "no B"}`,
       );
-      return (
-        <p>{`${state.counter} | ${state.pageA ?? "no A"} | ${state.pageB ?? "no B"}`}</p>
-      );
+      return <p>{text}</p>;
     };
     const page = (key: string, reducers: typeof PAGE_A | typeof PAGE_B) => (
       <ReduxProvider reducers={{ counter: MOCK_REDUCERS.counter }}>

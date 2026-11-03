@@ -22,6 +22,12 @@ describe("createReduxStore", () => {
     expect(store.getState()).toEqual({ counter: 1, title: "zljs" });
   });
 
+  it("creates the store with an empty state when there are no reducers", () => {
+    const store = createReduxStore({ ...CONFIG, reducers: {} });
+
+    expect(store.getState()).toEqual({});
+  });
+
   it("creates the store with the preloaded state", () => {
     const store = createReduxStore({
       ...CONFIG,

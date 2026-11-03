@@ -5,17 +5,24 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { DataGrid } from "./data-grid";
 
+// AG Grid renders asynchronously, the header and the rows in separate frames:
+// the a11y test must not see it half-built.
+const waitForGrid = async (canvasElement: HTMLElement, withRows = true) => {
+  await waitFor(() => {
+    expect(canvasElement.querySelector(".ag-header-cell")).not.toBeNull();
+    if (withRows) {
+      expect(canvasElement.querySelector(".ag-cell")).not.toBeNull();
+    }
+  });
+};
+
 export default {
   title: "Components/DataGrid",
   component: DataGrid,
   tags: ["autodocs"],
   parameters: { docs: { toc: true }, a11y: { test: "error" } },
-  // AG Grid renders asynchronously: the a11y test must not see it half-built.
   play: async ({ canvasElement, args }) => {
-    await waitFor(() => {
-      const selector = args.data?.length ? ".ag-cell" : ".ag-header-cell";
-      expect(canvasElement.querySelector(selector)).not.toBeNull();
-    });
+    await waitForGrid(canvasElement, Boolean(args.data?.length));
   },
 } satisfies Meta<typeof DataGrid>;
 
@@ -72,14 +79,8 @@ const optionColumns: DataGridColumn[] = [
 
 const optionData = data.map((row) => ({ ...row, price: row.id * 4 }));
 
-const waitForCells = async (canvasElement: HTMLElement) => {
-  await waitFor(() => {
-    expect(canvasElement.querySelector(".ag-cell")).not.toBeNull();
-  });
-};
-
 const openFilter = async (canvasElement: HTMLElement, value: string) => {
-  await waitForCells(canvasElement);
+  await waitForGrid(canvasElement);
 
   const buttons = canvasElement.querySelectorAll<HTMLElement>(
     ".ag-header-cell-filter-button",
@@ -134,7 +135,7 @@ export const Columns: Story = {
   },
   args: { columns: optionColumns, data: optionData },
   play: async ({ canvasElement }) => {
-    await waitForCells(canvasElement);
+    await waitForGrid(canvasElement);
 
     const body = canvasElement.querySelector(".ag-grid-scrolling-container");
     const header = within(canvasElement).getByRole("columnheader", {
@@ -165,7 +166,7 @@ export const Data: Story = {
     </div>
   ),
   play: async ({ canvasElement }) => {
-    await waitForCells(canvasElement);
+    await waitForGrid(canvasElement);
   },
 };
 
@@ -192,7 +193,7 @@ export const Searched: Story = {
   },
   args: { columns, data },
   play: async ({ canvasElement }) => {
-    await waitForCells(canvasElement);
+    await waitForGrid(canvasElement);
 
     const canvas = within(canvasElement);
     await userEvent.type(
