@@ -3,6 +3,7 @@ export {
   DESKTOP_USER_AGENT,
   IPHONE_USER_AGENT,
   restoreBrowserStubs,
+  stubElementRect,
   stubLocation,
   stubUserAgent,
   stubWindowOpen,

@@ -8,6 +8,38 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `aria-label` on `DataGrid`, to name the grid for screen readers. It defaults to `Tabela de dados`
+- `@ag-grid-community/locale` as a dependency, for the AG Grid texts
+
+### Changed
+
+- AG Grid moved from 35 to 36 (`ag-grid-community`, `ag-grid-react` and `@ag-grid-community/locale` 36.2.0). In Chrome, 35 rendered a `DataGrid` blank (header collapsed, rows at 0px until a window resize) when a grid was destroyed and another created in the same task, such as a route change between two pages with a grid or a Storybook story switch; 36 fixes it. AG Grid 36 also renamed its DOM classes: `ag-body-viewport` is now `ag-grid-scrolling-container`, and `ag-pinned-left-header` is now `.ag-header .ag-grid-pinned-left-cells`
+- `DataGrid` has a minimum height of 320px, so its rows show in a parent with no height. A parent with a height smaller than that now overflows
+- The AG Grid texts in `DataGrid` are in Brazilian Portuguese, such as `Aplicar` and `Sem linhas para mostrar`
+- The accent color of `DataGrid` follows `--color-zl-primary`
+- `Limpar todos` in `DataGrid` also clears the search
+
+### Fixed
+
+- The status bar of `DataGrid` holds 4.5:1 on its text, and its filters are separated from the count by a border instead of a `|` that screen readers read out
+- The row count of `DataGrid` is a `role="status"` with a name, so it is announced when it changes, and it no longer shows `0 / N` before the grid is ready
+- Each remove button of an active filter in `DataGrid` is named after its column, such as `Remover filtro Nome`. They all had the same name
+- The buttons of the column filter in `DataGrid` hold 4.5:1, and its controls and the column headers draw a real focus outline, which also shows in forced colors mode
+- `width` on a `DataGrid` column is respected. Fitting the columns to their content replaced it
+- A filter tag in `DataGrid` shows its value for a number of 0, a range, a date, a filter with no value and combined conditions. These showed raw JSON
+
+### Removed
+
+- The `.ag-theme-alpine` rules in `styles.css`. `DataGrid` never rendered that class, so they had no effect on it
+
+#### Migration
+
+Only for an app that renders its own AG Grid with the `ag-theme-alpine` class and relied on these rules: search for `ag-theme-alpine`, and copy the rules it needs. `DataGrid` needs nothing.
+
+An app that lists `ag-grid-community` or `ag-grid-react` in its own `package.json` must move them to `^36.2.0` too, so a single copy of AG Grid is installed: two copies register their modules twice and warn. Search for `ag-grid` in `package.json`. An app with its own CSS or tests on the AG Grid DOM (`ag-body-viewport`, `ag-center-cols-container`, `ag-pinned-left-header`) must follow the [AG Grid 36 upgrade guide](https://www.ag-grid.com/react-data-grid/upgrading-to-ag-grid-36/). An app that uses only `DataGrid` changes nothing.
+
 ## [2.0.1] - 2026-11-03
 
 ### Changed

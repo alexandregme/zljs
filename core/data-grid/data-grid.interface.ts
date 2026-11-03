@@ -31,4 +31,5 @@ export interface DataGridProps<
   columns: DataGridColumn<T>[];
   data: T[];
   showSearch?: boolean;
+  "aria-label"?: string;
 }

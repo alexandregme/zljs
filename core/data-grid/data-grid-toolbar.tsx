@@ -1,27 +1,22 @@
-import { useState } from "react";
-import type { GridApi } from "ag-grid-community";
 import { Button } from "../button";
 import { Input } from "../forms";
 
 export interface DataGridToolbarProps {
-  gridApi: GridApi | null;
+  searchTerm: string;
+  onSearchTermChange: (searchTerm: string) => void;
+  onSearch: () => void;
+  onClear: () => void;
 }
 
-export const DataGridToolbar = ({ gridApi }: DataGridToolbarProps) => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSearch = () => {
-    gridApi?.setGridOption("quickFilterText", searchTerm);
-  };
-
-  const handleClear = () => {
-    setSearchTerm("");
-    gridApi?.setGridOption("quickFilterText", "");
-  };
-
+export const DataGridToolbar = ({
+  searchTerm,
+  onSearchTermChange,
+  onSearch,
+  onClear,
+}: DataGridToolbarProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSearch();
+      onSearch();
     }
   };
 
@@ -34,13 +29,13 @@ export const DataGridToolbar = ({ gridApi }: DataGridToolbarProps) => {
         aria-label="Buscar na tabela"
         placeholder="Buscar..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => onSearchTermChange(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <Button icon="Search" color="primary" onClick={handleSearch}>
+      <Button icon="Search" color="primary" onClick={onSearch}>
         Buscar
       </Button>
-      <Button icon="X" color="danger" onClick={handleClear}>
+      <Button icon="X" color="danger" onClick={onClear}>
         Limpar
       </Button>
     </div>

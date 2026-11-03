@@ -20,10 +20,9 @@ const preview: Preview = {
         ],
       },
     },
-    // "todo" reports violations in the a11y panel without failing the run.
-    // Switch to "error" once the existing violations are fixed.
+    // Every story is an axe test: a violation fails the run.
     a11y: {
-      test: "todo",
+      test: "error",
     },
   },
 };
