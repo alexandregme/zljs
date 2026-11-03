@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-11-03
+
 ### Changed
 
 - The colored toasts of `Toaster` follow the `--color-zl-*` theme values: the text is the `-strong` value, the background is the color at 15% over white and the border is the color at 30%. `error` uses `danger`
@@ -333,7 +335,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/alexandregme/zljs/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/alexandregme/zljs/compare/v1.19.1...v2.0.0
 [1.19.1]: https://github.com/alexandregme/zljs/compare/v1.19.0...v1.19.1
 [1.19.0]: https://github.com/alexandregme/zljs/compare/v1.18.1...v1.19.0
