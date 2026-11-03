@@ -1,2 +1,2 @@
 export { Tag } from "./tag";
-export type { TagProps } from "./tag.interface";
+export type { TagColor, TagProps } from "./tag.interface";

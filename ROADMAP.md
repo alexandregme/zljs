@@ -55,7 +55,7 @@ Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select
 1. `Button` (checked, focus outline and story descriptions fixed)
    - Decide whether the type should require `aria-label` on icon-only buttons (changes the public API)
 2. `Checkbox` (next): `border-gray-300` does nothing on a native control, and it needs a real focus outline and the props of `Input`. `accent-zl-primary` is already in
-3. Not checked yet: `Heading`, `Tag`, `Spinner`, `Loader`, `Toaster`, `DataGrid`
+3. Not checked yet: `Heading`, `Spinner`, `Loader`, `Toaster`, `DataGrid`
 4. In each PR: bring the tests and stories to the current `component-tests` and `component-check` shape
 5. Last PR: switch `a11y.test` to `"error"` in `.storybook/preview.ts` and turn on the lint rule above
 
