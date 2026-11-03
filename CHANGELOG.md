@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [1.19.1] - 2026-11-03
+
 ### Changed
 
 - Collapsed `Sidebar` shows only the logout button in its footer. The avatar, name and email come back when it expands, and the footer and the collapse button keep their height in both states, at 64px and 56px
@@ -300,7 +302,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.19.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.19.1...HEAD
+[1.19.1]: https://github.com/alexandregme/zljs/compare/v1.19.0...v1.19.1
 [1.19.0]: https://github.com/alexandregme/zljs/compare/v1.18.1...v1.19.0
 [1.18.1]: https://github.com/alexandregme/zljs/compare/v1.18.0...v1.18.1
 [1.18.0]: https://github.com/alexandregme/zljs/compare/v1.17.0...v1.18.0
