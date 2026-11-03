@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-11-03
+
 ### Added
 
 - Auxiliary colors `orange`, `pink` and `purple`, with the `AuxiliaryColor` type and the `--color-zl-<color>` and `--color-zl-<color>-strong` theme values. They have no meaning of their own and only `Tag` takes them
@@ -321,7 +323,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v1.19.1...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/alexandregme/zljs/compare/v1.19.1...v2.0.0
 [1.19.1]: https://github.com/alexandregme/zljs/compare/v1.19.0...v1.19.1
 [1.19.0]: https://github.com/alexandregme/zljs/compare/v1.18.1...v1.19.0
 [1.18.1]: https://github.com/alexandregme/zljs/compare/v1.18.0...v1.18.1
