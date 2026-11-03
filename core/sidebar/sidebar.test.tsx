@@ -1,19 +1,8 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { Sidebar } from "./sidebar";
+import { Sidebar } from "@zljs/core";
 import type { SidebarSection, SidebarUser } from "@zljs/core";
 
-vi.mock("next/link", () => ({
-  default: ({
-    children,
-    ...props
-  }: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    children: React.ReactNode;
-  }) => <a {...props}>{children}</a>,
-}));
-
-const sections: SidebarSection[] = [
+const SECTIONS: SidebarSection[] = [
   {
     items: [
       { icon: "LayoutDashboard", label: "Dashboard", href: "/dashboard" },
@@ -28,200 +17,239 @@ const sections: SidebarSection[] = [
   },
 ];
 
-const user: SidebarUser = {
+const USER: SidebarUser = {
   name: "Alexandre Mendes",
   email: "user@example.com",
 };
 
-const defaultProps = {
-  sections,
-  user,
-  collapseLabel: "Close menu",
-  onLogout: vi.fn(),
+const COLLAPSE_LABEL = "Close menu";
+
+const REQUIRED_PROPS = {
+  sections: SECTIONS,
+  user: USER,
+  collapseLabel: COLLAPSE_LABEL,
+  onLogout: () => {},
 };
 
-beforeEach(() => {
-  defaultProps.onLogout = vi.fn();
-});
-
 describe("<Sidebar /> - Default Props", () => {
-  it("renders nav with aria-label", () => {
-    render(<Sidebar {...defaultProps} />);
+  it("renders <Sidebar /> correctly", () => {
+    render(<Sidebar {...REQUIRED_PROPS} />);
+    const nav = screen.getByRole("navigation", { name: "Main navigation" });
+    const links = screen.getAllByRole("link");
 
-    expect(
-      screen.getByRole("navigation", { name: "Main navigation" }),
-    ).toBeInTheDocument();
-  });
-
-  it("renders items as links with correct text", () => {
-    render(<Sidebar {...defaultProps} />);
-
-    expect(screen.getByText("Dashboard")).toBeInTheDocument();
-    expect(screen.getByText("Messenger")).toBeInTheDocument();
-    expect(screen.getByText("Products")).toBeInTheDocument();
-    expect(screen.getByText("Orders")).toBeInTheDocument();
-  });
-
-  it("renders icons in items", () => {
-    render(<Sidebar {...defaultProps} />);
-
+    expect(nav).toBeInTheDocument();
+    expect(nav.querySelectorAll(":scope > div")).toHaveLength(2);
+    expect(links).toHaveLength(5);
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+      "href",
+      "/",
+    );
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveAttribute(
+      "href",
+      "/dashboard",
+    );
+    expect(screen.getByRole("link", { name: "Orders" })).toHaveAttribute(
+      "href",
+      "/orders",
+    );
     expect(screen.getByTestId("Home")).toBeInTheDocument();
-    expect(screen.getByTestId("LayoutDashboard")).toBeInTheDocument();
-    expect(screen.getByTestId("MessageSquare")).toBeInTheDocument();
-    expect(screen.getByTestId("Store")).toBeInTheDocument();
+    expect(screen.getByTestId("LayoutDashboard").parentElement).toBe(
+      screen.getByRole("link", { name: "Dashboard" }),
+    );
     expect(screen.getByTestId("ShoppingCart")).toBeInTheDocument();
-  });
-
-  it("renders multiple sections", () => {
-    const { container } = render(<Sidebar {...defaultProps} />);
-
-    const nav = container.querySelector("nav");
-    const sectionDivs = nav?.querySelectorAll(":scope > div");
-
-    expect(sectionDivs?.length).toBe(2);
-  });
-
-  it("renders user name and email", () => {
-    render(<Sidebar {...defaultProps} />);
-
     expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
     expect(screen.getByText("user@example.com")).toBeInTheDocument();
+    expect(screen.getAllByTestId("text")).toHaveLength(6);
+    expect(screen.getByText("AM")).toHaveAttribute("aria-hidden", "true");
+    expect(
+      screen.getByRole("button", { name: COLLAPSE_LABEL }),
+    ).not.toHaveAttribute("aria-label");
+    expect(screen.getByRole("button", { name: "Logout" })).toBeInTheDocument();
   });
 
-  it("renders avatar with correct initials for two names", () => {
-    render(<Sidebar {...defaultProps} />);
+  it("renders <Sidebar /> without its optional props by default", () => {
+    render(<Sidebar {...REQUIRED_PROPS} />);
+    const links = screen.getAllByRole("link");
 
-    expect(screen.getByText("AM")).toBeInTheDocument();
+    links.forEach((link) => {
+      expect(link).not.toHaveAttribute("aria-current");
+    });
+    expect(screen.getByRole("link", { name: "Home" }).children).toHaveLength(1);
+    expect(
+      screen.queryByRole("button", { name: "Expand sidebar" }),
+    ).not.toBeInTheDocument();
   });
+});
 
-  it("renders avatar with single initial for one name", () => {
+describe("<Sidebar /> - Custom Props", () => {
+  it("renders <Sidebar /> with all its props", () => {
     render(
       <Sidebar
-        {...defaultProps}
+        {...REQUIRED_PROPS}
+        activeHref="/dashboard"
+        homeHref="/start"
+        homeLabel="Enterprise"
+      />,
+    );
+    const homeLink = screen.getByRole("link", { name: "Enterprise" });
+
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(homeLink).toHaveAttribute("href", "/start");
+    expect(homeLink).toHaveTextContent("Enterprise");
+    expect(homeLink.children).toHaveLength(2);
+    expect(screen.getAllByTestId("text")).toHaveLength(7);
+    expect(homeLink).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("link", { name: "Messenger" })).not.toHaveAttribute(
+      "aria-current",
+    );
+  });
+
+  it("renders <Sidebar /> with a user with one name", () => {
+    render(
+      <Sidebar
+        {...REQUIRED_PROPS}
         user={{ name: "Alexandre", email: "a@test.com" }}
       />,
     );
 
-    expect(screen.getByText("A")).toBeInTheDocument();
+    expect(screen.getByText("A")).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("renders empty avatar for empty name", () => {
+  it("renders <Sidebar /> with a user with an empty name", () => {
     render(
-      <Sidebar {...defaultProps} user={{ name: "", email: "a@test.com" }} />,
+      <Sidebar {...REQUIRED_PROPS} user={{ name: "", email: "a@test.com" }} />,
     );
+    const footer = screen.getByRole("button", { name: "Logout" }).parentElement;
 
-    const avatarEl = screen
-      .getByRole("button", { name: "Logout" })
-      .closest("div")
-      ?.querySelector("div");
-
-    expect(avatarEl?.textContent).toBe("");
+    expect(footer?.querySelector('[aria-hidden="true"]')).toHaveTextContent("");
   });
 
-  it("is expanded by default with visible labels", () => {
-    render(<Sidebar {...defaultProps} />);
+  it("renders <Sidebar /> with activeHref on the home link", () => {
+    render(<Sidebar {...REQUIRED_PROPS} activeHref="/" />);
 
-    expect(screen.getByText("Dashboard")).toBeVisible();
-    expect(screen.getByText("Alexandre Mendes")).toBeVisible();
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
   });
 
-  it("renders home link by default", () => {
-    render(<Sidebar {...defaultProps} />);
+  it("renders <Sidebar /> with defaultCollapsed", () => {
+    render(<Sidebar {...REQUIRED_PROPS} defaultCollapsed />);
 
-    const links = screen.getAllByRole("link");
-
-    expect(links[0]).toHaveAttribute("href", "/");
+    expect(
+      screen.getByRole("button", { name: "Expand sidebar" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Logout" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Dashboard" })).toBeInTheDocument();
+    expect(screen.queryByText(COLLAPSE_LABEL)).not.toBeInTheDocument();
+    expect(screen.queryByText("AM")).not.toBeInTheDocument();
+    expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
+    expect(screen.queryByText("user@example.com")).not.toBeInTheDocument();
   });
 
-  it("renders home label when provided", () => {
-    render(<Sidebar {...defaultProps} homeLabel="Enterprise" />);
-
-    expect(screen.getByText("Enterprise")).toBeInTheDocument();
-  });
-
-  it("hides home link when homeHref is false", () => {
-    render(<Sidebar {...defaultProps} homeHref={false} />);
-
+  it("renders <Sidebar /> without the home link when homeHref is false", () => {
+    render(<Sidebar {...REQUIRED_PROPS} homeHref={false} />);
     const links = screen.getAllByRole("link");
 
     expect(links).toHaveLength(4);
-    expect(links[0]).toHaveAttribute("href", "/dashboard");
-  });
-
-  it("renders links with correct href", () => {
-    render(<Sidebar {...defaultProps} />);
-
-    const links = screen.getAllByRole("link");
-
-    expect(links).toHaveLength(5);
-    expect(links[0]).toHaveAttribute("href", "/");
-    expect(links[1]).toHaveAttribute("href", "/dashboard");
-  });
-});
-
-describe("<Sidebar /> - Collapse", () => {
-  it("collapses when toggle button is clicked", () => {
-    const { container } = render(<Sidebar {...defaultProps} />);
-
-    fireEvent.click(screen.getByRole("button", { name: "Collapse sidebar" }));
-
-    expect(container.querySelector("aside")).toHaveClass("w-14");
     expect(
-      screen.getByRole("button", { name: "Expand sidebar" }),
-    ).toBeInTheDocument();
+      screen.queryByRole("link", { name: "Home" }),
+    ).not.toBeInTheDocument();
   });
 
-  it("starts collapsed when defaultCollapsed is true", () => {
-    const { container } = render(
-      <Sidebar {...defaultProps} defaultCollapsed={true} />,
-    );
+  it("toggles <Sidebar /> when the collapse button is clicked", () => {
+    render(<Sidebar {...REQUIRED_PROPS} />);
 
-    expect(container.querySelector("aside")).toHaveClass("w-14");
-    expect(
-      screen.getByRole("button", { name: "Expand sidebar" }),
-    ).toBeInTheDocument();
-  });
+    fireEvent.click(screen.getByRole("button", { name: COLLAPSE_LABEL }));
 
-  it("expands back when toggle is clicked twice", () => {
-    const { container } = render(<Sidebar {...defaultProps} />);
+    expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Collapse sidebar" }));
     fireEvent.click(screen.getByRole("button", { name: "Expand sidebar" }));
 
-    expect(container.querySelector("aside")).toHaveClass("w-64");
+    expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Collapse sidebar" }),
+      screen.getByRole("button", { name: COLLAPSE_LABEL }),
     ).toBeInTheDocument();
   });
 
-  it("shows Close menu text when expanded", () => {
-    render(<Sidebar {...defaultProps} />);
-
-    expect(screen.getByText("Close menu")).toBeInTheDocument();
-  });
-
-  it("keeps Close menu text in DOM when collapsed (hidden via CSS)", () => {
-    render(<Sidebar {...defaultProps} defaultCollapsed={true} />);
-
-    expect(screen.getByText("Close menu")).toBeInTheDocument();
-  });
-});
-
-describe("<Sidebar /> - Active & Actions", () => {
-  it("highlights active item with aria-current", () => {
-    render(<Sidebar {...defaultProps} activeHref="/dashboard" />);
-
-    const activeLink = screen.getByRole("link", { name: /Dashboard/ });
-
-    expect(activeLink).toHaveAttribute("aria-current", "page");
-  });
-
-  it("calls onLogout when logout button is clicked", () => {
+  it("calls onLogout when the logout button of <Sidebar /> is clicked", () => {
     const handleLogout = vi.fn();
-    render(<Sidebar {...defaultProps} onLogout={handleLogout} />);
+    render(<Sidebar {...REQUIRED_PROPS} onLogout={handleLogout} />);
 
     fireEvent.click(screen.getByRole("button", { name: "Logout" }));
 
     expect(handleLogout).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onLogout when the logout button of a collapsed <Sidebar /> is clicked", () => {
+    const handleLogout = vi.fn();
+    render(
+      <Sidebar {...REQUIRED_PROPS} defaultCollapsed onLogout={handleLogout} />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Logout" }));
+
+    expect(handleLogout).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("<Sidebar /> - Styles", () => {
+  it("renders <Sidebar /> expanded by default", () => {
+    const { container } = render(<Sidebar {...REQUIRED_PROPS} />);
+    const footer = screen.getByRole("button", { name: "Logout" }).parentElement;
+
+    expect(container.querySelector("aside")).toHaveClass("w-64");
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
+      "[&>*+*]:opacity-100",
+    );
+    expect(footer).not.toHaveClass("justify-center");
+  });
+
+  it("renders <Sidebar /> with defaultCollapsed", () => {
+    const { container } = render(
+      <Sidebar {...REQUIRED_PROPS} defaultCollapsed />,
+    );
+    const footer = screen.getByRole("button", { name: "Logout" }).parentElement;
+
+    expect(container.querySelector("aside")).toHaveClass("w-14");
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
+      "[&>*+*]:opacity-0",
+    );
+    expect(footer).toHaveClass("justify-center");
+  });
+
+  it("renders the active links of <Sidebar /> with the active background", () => {
+    render(<Sidebar {...REQUIRED_PROPS} activeHref="/dashboard" />);
+
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
+      "bg-neutral-700",
+    );
+    expect(screen.getByRole("link", { name: "Messenger" })).not.toHaveClass(
+      "bg-neutral-700",
+    );
+    expect(screen.getByRole("link", { name: "Home" })).not.toHaveClass(
+      "bg-neutral-700",
+    );
+  });
+
+  it("renders the home link of <Sidebar /> with the active background when active", () => {
+    render(<Sidebar {...REQUIRED_PROPS} activeHref="/" />);
+
+    expect(screen.getByRole("link", { name: "Home" })).toHaveClass(
+      "bg-neutral-700",
+    );
+  });
+
+  it("renders the links of <Sidebar /> with a visible focus outline", () => {
+    render(<Sidebar {...REQUIRED_PROPS} />);
+    const links = screen.getAllByRole("link");
+
+    links.forEach((link) => {
+      expect(link).toHaveClass("focus-visible:outline-2");
+      expect(link).not.toHaveClass("focus:outline-none");
+    });
   });
 });

@@ -72,6 +72,11 @@ const backgroundOf = (element: Element | null) => {
   return layers.reduce(over, WHITE);
 };
 
+// Jumps a transition to its end, so transition-colors doesn't make a check read the color it started from.
+const finishTransitions = (element: Element) => {
+  element.getAnimations().forEach((animation) => animation.finish());
+};
+
 /**
  * Returns the contrast between the element's text and the background behind
  * it. Unlike axe, it always applies to the size of the text: use 4.5 to hold a
@@ -129,6 +134,8 @@ export const hoverTextContrast = (element: HTMLElement) => {
     });
   });
 
+  finishTransitions(element);
+
   const ratio = textContrast(element);
 
   if (previous === null) {
@@ -136,6 +143,8 @@ export const hoverTextContrast = (element: HTMLElement) => {
   } else {
     element.setAttribute("style", previous);
   }
+
+  finishTransitions(element);
 
   return ratio;
 };
@@ -152,6 +161,8 @@ export const focusOutlineContrast = (element: HTMLElement) => {
     throw new Error("The element did not match :focus-visible");
   }
 
+  finishTransitions(element);
+
   const { outlineColor, outlineStyle, outlineWidth } =
     getComputedStyle(element);
   const hasOutline = outlineStyle !== "none" && parseFloat(outlineWidth) > 0;
@@ -159,6 +170,7 @@ export const focusOutlineContrast = (element: HTMLElement) => {
   const background = backgroundOf(element.parentElement);
 
   element.blur();
+  finishTransitions(element);
 
   if (!hasOutline) {
     return 0;

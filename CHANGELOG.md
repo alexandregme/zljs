@@ -8,6 +8,24 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Changed
+
+- Collapsed `Sidebar` shows only the logout button in its footer. The avatar, name and email come back when it expands, and the footer and the collapse button keep their height in both states, at 64px and 56px
+- The collapse button of `Sidebar` is named by `collapseLabel` while expanded, no longer `Collapse sidebar`, and shows only its icon when collapsed
+- `Sidebar` links have fewer elements and look the same: the `Icon` is a direct child of the link, and the home link has no empty `span` when there is no `homeLabel`
+
+#### Migration
+
+Search the app's tests for `Collapse sidebar` and replace it with the value the app passes in `collapseLabel`. `Expand sidebar` stays.
+
+### Fixed
+
+- Collapsed `Sidebar` can log out with a mouse. The button sat outside the visible area, and focusing it with the keyboard scrolled the sidebar sideways, out of view
+- `Sidebar` links draw their own focus outline in the text color. They relied on the browser's default, which was 2.53:1 in Chromium
+- The active home link of `Sidebar` has `aria-current="page"`, its link is styled like the others, and the avatar initials are hidden from screen readers
+- A long email in `Sidebar` is cut with an ellipsis. It ran under the logout button
+- The icon of the `Sidebar` collapse button lines up with the link icons, so it is centered when collapsed and doesn't move on toggle. It sat 4px to the right
+
 ## [1.19.0] - 2026-11-02
 
 ### Added
