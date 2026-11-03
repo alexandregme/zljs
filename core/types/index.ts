@@ -1,2 +1,2 @@
-export type { SemanticColor, DataColor } from "./colors";
+export type { SemanticColor, DataColor, AuxiliaryColor } from "./colors";
 export type { Size } from "./sizes";

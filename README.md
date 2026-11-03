@@ -58,12 +58,14 @@ The components work with no setup, using the default colors. To use your own, re
 
 `primary`, `success`, `danger`, `warning`, `info` and `muted` each take one value (`--color-zl-<color>`), used for text and the focus outline. The others follow it, and you can redefine them too:
 
-| Value                       | Used for               | Default                                    |
-| --------------------------- | ---------------------- | ------------------------------------------ |
-| `--color-zl-<color>-strong` | Link hover             | 30% darker                                 |
-| `--color-zl-<color>-bg`     | Button background      | The color itself (`warning`: `yellow-500`) |
-| `--color-zl-<color>-hover`  | Button hover           | The background, 15% darker                 |
-| `--color-zl-<color>-on`     | Text on the background | White (`warning`: `gray-900`)              |
+| Value                       | Used for                | Default                                    |
+| --------------------------- | ----------------------- | ------------------------------------------ |
+| `--color-zl-<color>-strong` | Link hover and Tag text | 30% darker                                 |
+| `--color-zl-<color>-bg`     | Button background       | The color itself (`warning`: `yellow-500`) |
+| `--color-zl-<color>-hover`  | Button hover            | The background, 15% darker                 |
+| `--color-zl-<color>-on`     | Text on the background  | White (`warning`: `gray-900`)              |
+
+A `Tag` also takes the auxiliary colors `orange`, `pink` and `purple`, which have no meaning of their own: use them to tell categories apart. Each has only `--color-zl-<color>` and `--color-zl-<color>-strong`. The first, at 15%, is the `Tag` background, and the second is its text.
 
 Only the defaults are checked for contrast. Check your own choice: 4.5:1 for text, on `--color-zl-<color>` against the page and on `-on` against `-bg`, and 3:1 for the focus outline. A value set on a nested element doesn't reach the values derived from it, so set them in `@theme` or `:root`.
 

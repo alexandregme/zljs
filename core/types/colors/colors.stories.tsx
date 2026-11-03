@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { SemanticColor } from "@zljs/core";
-import { Button, Heading, Icon, Text } from "@zljs/core";
+import type { AuxiliaryColor, SemanticColor } from "@zljs/core";
+import { Button, Heading, Icon, Tag, Text } from "@zljs/core";
 import { colorContrast, textContrast } from "@test-utils";
 import { expect } from "storybook/test";
 
@@ -23,11 +23,22 @@ const colors = [
 ] as const satisfies readonly SemanticColor[];
 
 const values = [
-  { suffix: "", use: "Text and focus outline" },
-  { suffix: "-strong", use: "Link hover" },
+  { suffix: "", use: "Text, focus outline and Tag background, at 15%" },
+  { suffix: "-strong", use: "Link hover and Tag text" },
   { suffix: "-bg", use: "Button background" },
   { suffix: "-hover", use: "Button hover" },
   { suffix: "-on", use: "Text on the background" },
+];
+
+const auxiliaryColors = [
+  "orange",
+  "pink",
+  "purple",
+] as const satisfies readonly AuxiliaryColor[];
+
+const auxiliaryValues = [
+  { suffix: "", use: "Tag background, at 15%" },
+  { suffix: "-strong", use: "Tag text" },
 ];
 
 const WHITE = "#fff";
@@ -107,6 +118,40 @@ const measure = (color: string) => {
   ];
 };
 
+const missingTokens = (
+  names: readonly string[],
+  tokens: { suffix: string }[],
+) => {
+  const root = getComputedStyle(document.documentElement);
+
+  return names
+    .flatMap((color) => tokens.map(({ suffix }) => tokenOf(color, suffix)))
+    .filter((token) => !root.getPropertyValue(token));
+};
+
+const Swatches = ({
+  color,
+  tokens,
+}: {
+  color: string;
+  tokens: { suffix: string; use: string }[];
+}) => (
+  <div className="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] gap-4">
+    {tokens.map(({ suffix, use }) => (
+      <div key={suffix} className="flex flex-col gap-1">
+        <div
+          className="h-12 rounded-md border border-gray-500"
+          style={{ backgroundColor: `var(${tokenOf(color, suffix)})` }}
+        />
+        <code className="text-xs">{tokenOf(color, suffix)}</code>
+        <Text as="span" variant="caption">
+          {use}
+        </Text>
+      </div>
+    ))}
+  </div>
+);
+
 const ContrastTable = () => {
   const [rows, setRows] = useState<
     { color: string; cells: ReturnType<typeof measure> }[]
@@ -162,31 +207,46 @@ export const Values: Story = {
     },
   },
   play: async () => {
-    const root = getComputedStyle(document.documentElement);
-    const missing = colors
-      .flatMap((color) => values.map(({ suffix }) => tokenOf(color, suffix)))
-      .filter((token) => !root.getPropertyValue(token));
-
-    await expect(missing).toEqual([]);
+    await expect(missingTokens(colors, values)).toEqual([]);
   },
   render: () => (
     <div className="flex flex-col gap-6">
       {colors.map((color) => (
         <section key={color} className="flex flex-col gap-2">
           <Heading level={2}>{titleOf(color)}</Heading>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] gap-4">
-            {values.map(({ suffix, use }) => (
-              <div key={suffix} className="flex flex-col gap-1">
-                <div
-                  className="h-12 rounded-md border border-gray-500"
-                  style={{ backgroundColor: `var(${tokenOf(color, suffix)})` }}
-                />
-                <code className="text-xs">{tokenOf(color, suffix)}</code>
-                <Text as="span" variant="caption">
-                  {use}
-                </Text>
-              </div>
-            ))}
+          <Swatches color={color} tokens={values} />
+        </section>
+      ))}
+    </div>
+  ),
+};
+
+export const Auxiliary: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`orange`, `pink` and `purple` have no meaning of their own: use them on a `Tag` to tell categories apart when `success`, `danger` and the others don't apply. Only `Tag` takes them, so each has two values: the color, shown at 15% as the background, and `-strong`, 30% darker, as the text. An app redefines them like any other color. This story fails if a value is missing from the theme or if the text of a `Tag` falls under 4.5:1.",
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    const lowContrast = canvas
+      .getAllByTestId("tag")
+      .filter((tag) => textContrast(tag) < TEXT_MINIMUM)
+      .map((tag) => tag.textContent);
+
+    await expect(missingTokens(auxiliaryColors, auxiliaryValues)).toEqual([]);
+    await expect(lowContrast).toEqual([]);
+  },
+  render: () => (
+    <div className="flex flex-col gap-6">
+      {auxiliaryColors.map((color) => (
+        <section key={color} className="flex flex-col gap-2">
+          <Heading level={2}>{titleOf(color)}</Heading>
+          <Swatches color={color} tokens={auxiliaryValues} />
+          <div>
+            <Tag color={color}>{titleOf(color)}</Tag>
           </div>
         </section>
       ))}
@@ -199,13 +259,13 @@ export const Usage: Story = {
     docs: {
       description: {
         story:
-          "The same `color` prop on `Text`, `Heading`, `Icon` and `Button`. Text and icons use the color itself, and a `Button` uses its background and text values. `none` is not themed: as text it inherits the color around it, and a `Button` draws it with neutral grays. `Tag` and `StatsCard` use `DataColor`, literal colors for data that don't change with the theme. This story holds `Text` and `Heading` to 4.5:1 at any size: axe accepts 3:1 on a large heading, but the same color also renders small.",
+          "The same `color` prop on `Text`, `Heading`, `Icon` and `Button`. Text and icons use the color itself, and a `Button` uses its background and text values. `none` is not themed: as text it inherits the color around it, and a `Button` draws it with neutral grays. A `Tag` uses the color at 15% as its background and `-strong` as its text, and has no `none`. `StatsCard` uses `DataColor`, literal colors for data that don't change with the theme. This story holds `Text`, `Heading` and `Tag` to 4.5:1 at any size: axe accepts 3:1 on a large heading, but the same color also renders small.",
       },
     },
   },
   play: async ({ canvas }) => {
     const lowContrast = canvas
-      .getAllByText(/^(Text|Heading)$/)
+      .getAllByText(/^(Text|Heading|Tag)$/)
       .filter((element) => textContrast(element) < TEXT_MINIMUM)
       .map((element) => element.textContent);
 
@@ -226,6 +286,7 @@ export const Usage: Story = {
             <Button variant="link" color={color}>
               Link
             </Button>
+            {color !== "none" && <Tag color={color}>Tag</Tag>}
           </div>
         </section>
       ))}

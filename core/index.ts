@@ -36,7 +36,7 @@ export type {
   SidebarUser,
 } from "./sidebar";
 export { Tag } from "./tag";
-export type { TagProps } from "./tag";
+export type { TagColor, TagProps } from "./tag";
 export { Toaster } from "./toaster";
 export { toast } from "sonner";
 export { useAppStore } from "./state/zustand/app";
@@ -59,4 +59,4 @@ export { Loader } from "./loader";
 export type { LoaderProps } from "./loader";
 export { HTTPClient } from "./http";
 export type { HttpClientConfig, HttpRequestConfig } from "./http";
-export type { SemanticColor, DataColor, Size } from "./types";
+export type { SemanticColor, DataColor, AuxiliaryColor, Size } from "./types";

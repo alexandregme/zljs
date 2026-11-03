@@ -3,11 +3,16 @@
    the styles. Only the defaults are checked for contrast.
 
    Each color has five values, and the others follow the first unless redefined:
-     --color-zl-<color>         text and focus outline
-     --color-zl-<color>-strong  link hover
+     --color-zl-<color>         text, focus outline and tag background, at 15%
+     --color-zl-<color>-strong  link hover and tag text
      --color-zl-<color>-bg      button background
      --color-zl-<color>-hover   button hover
      --color-zl-<color>-on      text on the background
+
+   The auxiliary colors (orange, pink, purple) have no meaning of their own. Tag
+   is their only user, so they have two values:
+     --color-zl-<color>         tag background, at 15%
+     --color-zl-<color>-strong  tag text
 
    Prettier is off for this block to keep one value per line. */
 
@@ -54,4 +59,16 @@
   --color-zl-muted-bg:     var(--color-zl-muted);
   --color-zl-muted-hover:  color-mix(in oklab, var(--color-zl-muted-bg), black 15%);
   --color-zl-muted-on:     var(--color-white);
+
+  /* Orange */
+  --color-zl-orange:        var(--color-orange-700);
+  --color-zl-orange-strong: color-mix(in oklab, var(--color-zl-orange), black 30%);
+
+  /* Pink */
+  --color-zl-pink:        var(--color-pink-700);
+  --color-zl-pink-strong: color-mix(in oklab, var(--color-zl-pink), black 30%);
+
+  /* Purple */
+  --color-zl-purple:        var(--color-purple-700);
+  --color-zl-purple-strong: color-mix(in oklab, var(--color-zl-purple), black 30%);
 }

@@ -8,6 +8,25 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- Auxiliary colors `orange`, `pink` and `purple`, with the `AuxiliaryColor` type and the `--color-zl-<color>` and `--color-zl-<color>-strong` theme values. They have no meaning of their own and only `Tag` takes them
+- `TagColor` type, and `Tag` takes `primary`, `success`, `danger`, `warning`, `info` and `muted`
+- `removeLabel` on `Tag`, to name the remove button when several tags show at once. It defaults to `Remover`
+
+### Changed
+
+- `Tag` follows the `--color-zl-*` theme values: its background is the color at 15% and its text is the `-strong` value. Its default color is `primary`, no longer `blue`
+- The remove button of `Tag` takes the text color of the `Tag`, for its icon and its focus outline
+
+### Removed
+
+- The `blue`, `green`, `red`, `yellow` and `gray` colors of `Tag`. `orange` stays. `StatsCard` and `DataColor` keep them
+
+#### Migration
+
+Search the app for `<Tag` and read its props, which can sit on the next lines (`grep -rn -A3 "<Tag"`). Replace `color`: `blue` → `primary`, `green` → `success`, `red` → `danger`, `yellow` → `warning`, `gray` → `muted`. A variable typed `DataColor` that reaches a `Tag` becomes `TagColor`. A test that asserts `bg-*-100` or `text-*-700` on a `Tag` moves to `bg-zl-<color>/15` and `text-zl-<color>-strong`. Don't change `StatsCard`.
+
 ## [1.19.1] - 2026-11-03
 
 ### Changed

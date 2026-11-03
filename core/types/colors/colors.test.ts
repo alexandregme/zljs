@@ -1,10 +1,17 @@
 import { readdirSync, readFileSync } from "fs";
 import { resolve } from "path";
+import type { AuxiliaryColor } from "./colors";
 import { semanticTextColors } from "./colors.const";
 
 const CORE = resolve(__dirname, "../..");
 const THEME = readFileSync(resolve(CORE, "styles/colors.css"), "utf8");
 const TOKEN_SUFFIXES = ["", "-strong", "-bg", "-hover", "-on"];
+const AUXILIARY_COLORS = [
+  "orange",
+  "pink",
+  "purple",
+] as const satisfies readonly AuxiliaryColor[];
+const AUXILIARY_TOKEN_SUFFIXES = ["", "-strong"];
 
 const usedTokens = readdirSync(CORE, { recursive: true, encoding: "utf8" })
   .filter((file) => /\.(styles|const)\.ts$/.test(file))
@@ -27,6 +34,17 @@ describe("semantic color tokens", () => {
 
     expect(missing).toEqual([]);
   });
+
+  it.each(AUXILIARY_COLORS)(
+    "declares every token of the auxiliary color %s in the theme",
+    (color) => {
+      const missing = AUXILIARY_TOKEN_SUFFIXES.filter(
+        (suffix) => !THEME.includes(`--color-zl-${color}${suffix}:`),
+      );
+
+      expect(missing).toEqual([]);
+    },
+  );
 
   it.each(themedColors)("points the text class of %s to its token", (color) => {
     const classes = semanticTextColors as Record<string, string>;

@@ -65,7 +65,6 @@ export const DataGridStatusBar = ({
             {activeFilters.map((filter) => (
               <Tag
                 key={filter.column}
-                color="blue"
                 onRemove={() => handleClearFilter(filter.column)}
               >
                 <span className="font-medium">{filter.headerName}:</span>
