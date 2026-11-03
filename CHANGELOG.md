@@ -21,7 +21,7 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ### Removed
 
-- **BREAKING:** the `blue`, `green`, `red`, `yellow` and `gray` colors of `Tag`. `orange` stays. `StatsCard` and `DataColor` keep them
+- The `blue`, `green`, `red`, `yellow` and `gray` colors of `Tag`. `orange` stays. `StatsCard` and `DataColor` keep them
 
 #### Migration
 
