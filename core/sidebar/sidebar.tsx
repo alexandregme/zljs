@@ -3,19 +3,16 @@ import Link from "next/link.js";
 import type { SidebarProps } from "./sidebar.interface";
 import { Icon } from "../icon";
 import { Button } from "../button";
+import { Text } from "../text";
 import {
   sidebar,
   header,
   nav,
   section as sectionStyle,
   item,
-  itemIcon,
-  itemLabel,
   footer,
   avatar,
   userInfo,
-  userName,
-  userEmail,
   toggleButton,
 } from "./sidebar.styles";
 
@@ -44,18 +41,21 @@ export const Sidebar = ({
   return (
     <aside className={sidebar({ collapsed })}>
       {homeHref && (
-        <Link
-          href={homeHref}
-          className={header()}
-          aria-label={homeLabel || "Home"}
-        >
-          <span className={item({ active: homeHref === activeHref })}>
-            <span className={itemIcon()}>
-              <Icon name="Home" />
-            </span>
-            <span className={itemLabel({ collapsed })}>{homeLabel}</span>
-          </span>
-        </Link>
+        <div className={header()}>
+          <Link
+            href={homeHref}
+            className={item({ active: homeHref === activeHref, collapsed })}
+            aria-label={homeLabel || "Home"}
+            {...(homeHref === activeHref && { "aria-current": "page" })}
+          >
+            <Icon name="Home" />
+            {homeLabel && (
+              <Text as="span" variant="caption">
+                {homeLabel}
+              </Text>
+            )}
+          </Link>
+        </div>
       )}
       <nav aria-label="Main navigation" className={nav()}>
         {sections.map((sectionData, i) => (
@@ -67,15 +67,13 @@ export const Sidebar = ({
                 <Link
                   key={sidebarItem.href}
                   href={sidebarItem.href}
-                  className={item({ active: isActive })}
+                  className={item({ active: isActive, collapsed })}
                   {...(isActive && { "aria-current": "page" })}
                 >
-                  <span className={itemIcon()}>
-                    <Icon name={sidebarItem.icon} />
-                  </span>
-                  <span className={itemLabel({ collapsed })}>
+                  <Icon name={sidebarItem.icon} />
+                  <Text as="span" variant="caption">
                     {sidebarItem.label}
-                  </span>
+                  </Text>
                 </Link>
               );
             })}
@@ -83,12 +81,22 @@ export const Sidebar = ({
         ))}
       </nav>
 
-      <div className={footer()}>
-        <div className={avatar()}>{initials}</div>
-        <div className={userInfo()}>
-          <span className={userName()}>{user.name}</span>
-          <span className={userEmail()}>{user.email}</span>
-        </div>
+      <div className={footer({ collapsed })}>
+        {!collapsed && (
+          <>
+            <div aria-hidden="true" className={avatar()}>
+              {initials}
+            </div>
+            <div className={userInfo()}>
+              <Text as="span" variant="caption">
+                {user.name}
+              </Text>
+              <Text as="span" variant="caption">
+                {user.email}
+              </Text>
+            </div>
+          </>
+        )}
         <Button
           color="ghost"
           icon="LogOut"
@@ -99,12 +107,13 @@ export const Sidebar = ({
 
       <div className={toggleButton()}>
         <Button
+          variant="default"
           color="ghost"
           icon={collapsed ? "ChevronRight" : "ChevronLeft"}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={collapsed ? "Expand sidebar" : undefined}
           onClick={() => setCollapsed(!collapsed)}
         >
-          {collapseLabel}
+          {collapsed ? undefined : collapseLabel}
         </Button>
       </div>
     </aside>
