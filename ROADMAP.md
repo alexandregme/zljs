@@ -50,12 +50,12 @@ Form components still missing, decided from the web platform and not from what t
 
 ## Accessibility rollout
 
-Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select`, `TextArea`, `Radio` and `Error` are done. The fixes for the components below exist as uncommitted changes in the working tree: review each with `component-check`, then open one PR per component.
+Goal: every story passes axe with `a11y.test: "error"`. `Icon`, `Input`, `Select`, `TextArea`, `Radio`, `Error` and `Toaster` are done. The fixes for the components below exist as uncommitted changes in the working tree: review each with `component-check`, then open one PR per component.
 
 1. `Button` (checked, focus outline and story descriptions fixed)
    - Decide whether the type should require `aria-label` on icon-only buttons (changes the public API)
 2. `Checkbox` (next): `border-gray-300` does nothing on a native control, and it needs a real focus outline and the props of `Input`. `accent-zl-primary` is already in
-3. Not checked yet: `Heading`, `Spinner`, `Loader`, `Toaster`, `DataGrid`
+3. Not checked yet: `Heading`, `Spinner`, `Loader`, `DataGrid`
 4. In each PR: bring the tests and stories to the current `component-tests` and `component-check` shape
 5. Last PR: switch `a11y.test` to `"error"` in `.storybook/preview.ts` and turn on the lint rule above
 
