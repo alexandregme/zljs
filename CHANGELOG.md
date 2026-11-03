@@ -8,6 +8,16 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Changed
+
+- The colored toasts of `Toaster` follow the `--color-zl-*` theme values: the text is the `-strong` value, the background is the color at 15% over white and the border is the color at 30%. `error` uses `danger`
+
+### Fixed
+
+- `Toaster` holds 4.5:1 on the text of each toast type. The rich colors of Sonner stayed under it on their light backgrounds
+- A toast from `useToastStore` no longer replaces a toast from `toast()` that is showing. Both numbered their toasts from 1
+- A toast and its close button draw a real focus outline in the text color. Their `box-shadow` ring was about 1.6:1 and disappeared in forced colors mode
+
 ## [2.0.0] - 2026-11-03
 
 ### Added
