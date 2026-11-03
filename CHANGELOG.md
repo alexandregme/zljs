@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-11-03
+
 ### Added
 
 - `aria-label` on `DataGrid`, to name the grid for screen readers. It defaults to `Tabela de dados`
@@ -367,7 +369,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/alexandregme/zljs/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/alexandregme/zljs/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/alexandregme/zljs/compare/v1.19.1...v2.0.0
 [1.19.1]: https://github.com/alexandregme/zljs/compare/v1.19.0...v1.19.1
