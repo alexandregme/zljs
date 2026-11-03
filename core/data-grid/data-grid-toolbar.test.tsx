@@ -1,102 +1,68 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { DataGridToolbar } from "./data-grid-toolbar";
-import type { GridApi } from "ag-grid-community";
 
-const createMockGridApi = (): GridApi =>
-  ({
-    setGridOption: vi.fn(),
-  }) as unknown as GridApi;
+const DEFAULT_PROPS = {
+  searchTerm: "",
+  onSearchTermChange: vi.fn(),
+  onSearch: vi.fn(),
+  onClear: vi.fn(),
+};
 
 describe("<DataGridToolbar /> - Default Props", () => {
-  it("renders toolbar correctly", () => {
-    render(<DataGridToolbar gridApi={null} />);
+  it("renders <DataGridToolbar /> correctly", () => {
+    render(<DataGridToolbar {...DEFAULT_PROPS} />);
+    const search = screen.getByRole("textbox", { name: "Buscar na tabela" });
 
-    expect(screen.getByTestId("data-grid-toolbar")).toBeInTheDocument();
-  });
-
-  it("renders search input", () => {
-    render(<DataGridToolbar gridApi={null} />);
-
-    expect(screen.getByPlaceholderText("Buscar...")).toBeInTheDocument();
-  });
-
-  it("renders search button", () => {
-    render(<DataGridToolbar gridApi={null} />);
-
-    expect(screen.getByText("Buscar")).toBeInTheDocument();
-  });
-
-  it("renders clear button", () => {
-    render(<DataGridToolbar gridApi={null} />);
-
-    expect(screen.getByText("Limpar")).toBeInTheDocument();
+    expect(search).toHaveAttribute("placeholder", "Buscar...");
+    expect(search).toHaveValue("");
+    expect(screen.getByRole("button", { name: "Buscar" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Limpar" })).toBeInTheDocument();
   });
 });
 
-describe("<DataGridToolbar /> - Search Functionality", () => {
-  it("calls setGridOption when search button is clicked", () => {
-    const mockApi = createMockGridApi();
-    render(<DataGridToolbar gridApi={mockApi} />);
+describe("<DataGridToolbar /> - Custom Props", () => {
+  it("renders <DataGridToolbar /> with searchTerm", () => {
+    render(<DataGridToolbar {...DEFAULT_PROPS} searchTerm="Ana" />);
+    const search = screen.getByRole("textbox", { name: "Buscar na tabela" });
 
-    const searchInput = screen.getByPlaceholderText("Buscar...");
-    fireEvent.change(searchInput, { target: { value: "John" } });
+    expect(search).toHaveValue("Ana");
+  });
 
-    const searchButton = screen.getByText("Buscar");
-    fireEvent.click(searchButton);
-
-    expect(mockApi.setGridOption).toHaveBeenCalledWith(
-      "quickFilterText",
-      "John",
+  it("calls onSearchTermChange when <DataGridToolbar /> is typed in", () => {
+    const onSearchTermChange = vi.fn();
+    render(
+      <DataGridToolbar
+        {...DEFAULT_PROPS}
+        onSearchTermChange={onSearchTermChange}
+      />,
     );
+    const search = screen.getByRole("textbox", { name: "Buscar na tabela" });
+
+    fireEvent.change(search, { target: { value: "Ana" } });
+
+    expect(onSearchTermChange).toHaveBeenCalledWith("Ana");
   });
 
-  it("calls setGridOption when Enter key is pressed", () => {
-    const mockApi = createMockGridApi();
-    render(<DataGridToolbar gridApi={mockApi} />);
+  it("calls onSearch when <DataGridToolbar /> is submitted", () => {
+    const onSearch = vi.fn();
+    render(<DataGridToolbar {...DEFAULT_PROPS} onSearch={onSearch} />);
+    const search = screen.getByRole("textbox", { name: "Buscar na tabela" });
 
-    const searchInput = screen.getByPlaceholderText("Buscar...");
-    fireEvent.change(searchInput, { target: { value: "Jane" } });
-    fireEvent.keyDown(searchInput, { key: "Enter" });
+    fireEvent.keyDown(search, { key: "a" });
+    expect(onSearch).not.toHaveBeenCalled();
 
-    expect(mockApi.setGridOption).toHaveBeenCalledWith(
-      "quickFilterText",
-      "Jane",
-    );
+    fireEvent.keyDown(search, { key: "Enter" });
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    expect(onSearch).toHaveBeenCalledTimes(2);
   });
 
-  it("does not call setGridOption on non-Enter key", () => {
-    const mockApi = createMockGridApi();
-    render(<DataGridToolbar gridApi={mockApi} />);
+  it("calls onClear when <DataGridToolbar /> is cleared", () => {
+    const onClear = vi.fn();
+    render(<DataGridToolbar {...DEFAULT_PROPS} onClear={onClear} />);
+    const clear = screen.getByRole("button", { name: "Limpar" });
 
-    const searchInput = screen.getByPlaceholderText("Buscar...");
-    fireEvent.change(searchInput, { target: { value: "test" } });
-    fireEvent.keyDown(searchInput, { key: "a" });
+    fireEvent.click(clear);
 
-    expect(mockApi.setGridOption).not.toHaveBeenCalled();
-  });
-
-  it("clears search when clear button is clicked", () => {
-    const mockApi = createMockGridApi();
-    render(<DataGridToolbar gridApi={mockApi} />);
-
-    const searchInput = screen.getByPlaceholderText("Buscar...");
-    fireEvent.change(searchInput, { target: { value: "test" } });
-
-    const clearButton = screen.getByText("Limpar");
-    fireEvent.click(clearButton);
-
-    expect(mockApi.setGridOption).toHaveBeenCalledWith("quickFilterText", "");
-    expect(searchInput).toHaveValue("");
-  });
-
-  it("does not throw when gridApi is null", () => {
-    render(<DataGridToolbar gridApi={null} />);
-
-    const searchButton = screen.getByText("Buscar");
-    expect(() => fireEvent.click(searchButton)).not.toThrow();
-
-    const clearButton = screen.getByText("Limpar");
-    expect(() => fireEvent.click(clearButton)).not.toThrow();
+    expect(onClear).toHaveBeenCalledTimes(1);
   });
 });
