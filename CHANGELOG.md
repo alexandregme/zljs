@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Fixed
+
+- `WhatsAppButton` opens `https://wa.me` on a phone too, which hands off to whichever WhatsApp app is installed. It opened `whatsapp-business://`, which an iPhone doesn't recognize even with WhatsApp Business installed: Safari said the address was invalid
+
 ## [2.1.0] - 2026-11-03
 
 ### Added

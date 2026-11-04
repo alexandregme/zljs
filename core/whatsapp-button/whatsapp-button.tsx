@@ -1,7 +1,6 @@
 import { Button } from "../button";
 import type { WhatsAppButtonProps } from "./whatsapp-button.interface";
 import {
-  whatsappBusinessUrl,
   whatsappMobileUserAgent,
   whatsappWebUrl,
 } from "./whatsapp-button.const";
@@ -20,15 +19,16 @@ export const WhatsAppButton = ({
     const webUrl = hasMessage
       ? `${whatsappWebUrl}/${phone}?text=${encodedMessage}`
       : `${whatsappWebUrl}/${phone}`;
-    const businessUrl = hasMessage
-      ? `${whatsappBusinessUrl}?phone=${phone}&text=${encodedMessage}`
-      : `${whatsappBusinessUrl}?phone=${phone}`;
 
+    // On a phone, wa.me in the same tab hands off to whichever WhatsApp app
+    // is installed, WhatsApp or WhatsApp Business. The whatsapp-business://
+    // scheme isn't recognized on an iPhone, even with WhatsApp Business
+    // installed: Safari called it an invalid address.
     if (isMobile) {
       if (window.location?.assign) {
-        window.location.assign(businessUrl);
+        window.location.assign(webUrl);
       } else {
-        window.location.href = businessUrl;
+        window.location.href = webUrl;
       }
     } else {
       window.open(webUrl, "_blank");

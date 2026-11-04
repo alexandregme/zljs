@@ -80,7 +80,10 @@ describe("<WhatsAppButton /> - Custom Props", () => {
     );
   });
 
-  it("renders <WhatsAppButton /> with message on mobile", () => {
+  // wa.me opens whichever WhatsApp app the phone has. Safari answered
+  // "the address is invalid" to whatsapp-business:// on an iPhone, even
+  // with WhatsApp Business installed.
+  it("opens wa.me with message on mobile", () => {
     stubUserAgent(IPHONE_USER_AGENT);
     const assign = vi.fn();
     stubLocation({ assign });
@@ -90,11 +93,11 @@ describe("<WhatsAppButton /> - Custom Props", () => {
     fireEvent.click(button);
 
     expect(assign).toHaveBeenCalledWith(
-      "whatsapp-business://send?phone=5511999999999&text=Hello%20World",
+      "https://wa.me/5511999999999?text=Hello%20World",
     );
   });
 
-  it("renders <WhatsAppButton /> without message on mobile", () => {
+  it("opens wa.me without message on mobile", () => {
     stubUserAgent(IPHONE_USER_AGENT);
     const assign = vi.fn();
     stubLocation({ assign });
@@ -103,9 +106,7 @@ describe("<WhatsAppButton /> - Custom Props", () => {
 
     fireEvent.click(button);
 
-    expect(assign).toHaveBeenCalledWith(
-      "whatsapp-business://send?phone=5511999999999",
-    );
+    expect(assign).toHaveBeenCalledWith("https://wa.me/5511999999999");
   });
 
   it("sets location.href on mobile when location.assign is missing", () => {
@@ -117,9 +118,7 @@ describe("<WhatsAppButton /> - Custom Props", () => {
 
     fireEvent.click(button);
 
-    expect(location.href).toBe(
-      "whatsapp-business://send?phone=5511999999999&text=Hello",
-    );
+    expect(location.href).toBe("https://wa.me/5511999999999?text=Hello");
   });
 
   it("opens wa.me when the browser has no userAgent", () => {
