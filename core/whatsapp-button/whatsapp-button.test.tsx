@@ -80,9 +80,6 @@ describe("<WhatsAppButton /> - Custom Props", () => {
     );
   });
 
-  // whatsapp:// is the scheme Meta's iOS docs use. whatsapp-business:// is
-  // in no official doc, and Safari called it an invalid address on an iPhone
-  // with WhatsApp Business installed.
   it("opens the WhatsApp app with message on mobile", () => {
     stubUserAgent(IPHONE_USER_AGENT);
     const assign = vi.fn();
