@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Fixed
+
+- `WhatsAppButton` opens `whatsapp://send` on a phone, the scheme in Meta's iOS docs. It opened `whatsapp-business://send`, which is in no official doc: on an iPhone with WhatsApp Business installed, Safari said the address was invalid. On Android, a phone with both apps asks which one to use; on an iPhone, iOS picks one of them
+
 ## [2.1.0] - 2026-11-03
 
 ### Added
