@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [2.1.2] - 2026-11-04
+
 ### Fixed
 
 - `WhatsAppButton` opens `whatsapp://send` on a phone, the scheme in Meta's iOS docs. It opened `whatsapp-business://send`, which is in no official doc: on an iPhone with WhatsApp Business installed, Safari said the address was invalid. On Android, a phone with both apps asks which one to use; on an iPhone, iOS picks one of them
@@ -373,7 +375,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.1.2...HEAD
+[2.1.2]: https://github.com/alexandregme/zljs/compare/v2.1.0...v2.1.2
 [2.1.0]: https://github.com/alexandregme/zljs/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/alexandregme/zljs/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/alexandregme/zljs/compare/v1.19.1...v2.0.0
