@@ -1,4 +1,5 @@
 import axios, { type AxiosError } from "axios";
+import { getAuthSession } from "../../features/auth/state";
 import { useAppStore } from "../../features/app/state";
 import { useToastStore } from "../../features/toaster/state";
 import type { HttpClientConfig, HttpRequestConfig } from "./http.types";
@@ -8,10 +9,18 @@ type HttpMethod = "get" | "post" | "put" | "delete" | "patch";
 export class HTTPClient {
   baseUrl: string;
   headers: Record<string, string>;
+  withAuth: boolean;
 
   constructor(config?: HttpClientConfig) {
     this.baseUrl = config?.baseUrl ?? "/api";
     this.headers = config?.headers ?? {};
+    this.withAuth = config?.withAuth ?? false;
+  }
+
+  private authHeaders(): Record<string, string> {
+    const session = this.withAuth ? getAuthSession() : null;
+
+    return session ? { Authorization: `Bearer ${session.accessToken}` } : {};
   }
 
   private async request<T = unknown>(
@@ -20,7 +29,11 @@ export class HTTPClient {
     config?: HttpRequestConfig,
   ): Promise<T | undefined> {
     const silent = config?.silent ?? false;
-    const headers = { ...this.headers, ...config?.headers };
+    const headers = {
+      ...this.headers,
+      ...this.authHeaders(),
+      ...config?.headers,
+    };
 
     if (!silent) useAppStore.getState().startFetching();
 

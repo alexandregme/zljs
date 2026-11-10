@@ -19,9 +19,13 @@ const RouteSync = () => {
   return null;
 };
 
-export const AppProviders = ({ children, ...store }: AppProvidersProps) => (
+export const AppProviders = ({
+  children,
+  auth,
+  ...store
+}: AppProvidersProps) => (
   <ReduxProvider {...store}>
     <RouteSync />
-    <ZustandProviders>{children}</ZustandProviders>
+    <ZustandProviders auth={auth}>{children}</ZustandProviders>
   </ReduxProvider>
 );

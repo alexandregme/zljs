@@ -2,6 +2,8 @@ import mockAxios from "axios";
 import { HTTPClient } from "./http.client";
 import { appInitialState, useAppStore } from "../../features/app/state";
 import { useToastStore } from "../../features/toaster/state";
+import { useAuthStore } from "../../features/auth/state";
+import { MOCK_AUTH_SESSION } from "@test-utils";
 
 vi.mock("axios", () => ({
   default: {
@@ -16,6 +18,7 @@ vi.mock("axios", () => ({
 const resetStores = () => {
   useAppStore.setState(appInitialState);
   useToastStore.setState({ toasts: [] });
+  useAuthStore.getState().reset();
 };
 
 let client: HTTPClient;
@@ -193,6 +196,56 @@ describe("HTTPClient", () => {
       const result = await client.get("/users");
 
       expect(result).toBeUndefined();
+    });
+  });
+
+  describe("auth", () => {
+    it("does not send the access token by default", async () => {
+      useAuthStore.getState().setSession(MOCK_AUTH_SESSION);
+
+      await client.get("/users");
+
+      expect(mockAxios.get).toHaveBeenCalledWith("/api/users", {
+        headers: {},
+        params: undefined,
+      });
+    });
+
+    it("sends the access token with withAuth", async () => {
+      const authClient = new HTTPClient({ withAuth: true });
+      useAuthStore.getState().setSession(MOCK_AUTH_SESSION);
+
+      await authClient.get("/users");
+
+      expect(mockAxios.get).toHaveBeenCalledWith("/api/users", {
+        headers: { Authorization: "Bearer mock-access-token" },
+        params: undefined,
+      });
+    });
+
+    it("sends no Authorization with withAuth and no session", async () => {
+      const authClient = new HTTPClient({ withAuth: true });
+
+      await authClient.get("/users");
+
+      expect(mockAxios.get).toHaveBeenCalledWith("/api/users", {
+        headers: {},
+        params: undefined,
+      });
+    });
+
+    it("lets a request override the Authorization header", async () => {
+      const authClient = new HTTPClient({ withAuth: true });
+      useAuthStore.getState().setSession(MOCK_AUTH_SESSION);
+
+      await authClient.get("/users", {
+        headers: { Authorization: "Bearer other" },
+      });
+
+      expect(mockAxios.get).toHaveBeenCalledWith("/api/users", {
+        headers: { Authorization: "Bearer other" },
+        params: undefined,
+      });
     });
   });
 

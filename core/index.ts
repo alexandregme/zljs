@@ -64,4 +64,6 @@ export { Spinner } from "./spinner";
 export type { SpinnerProps, SpinnerVariant } from "./spinner";
 export { HTTPClient } from "./http";
 export type { HttpClientConfig, HttpRequestConfig } from "./http";
+export { AuthProvider, getAuthSession, useAuth } from "../features/auth";
+export type { AuthAdapter, AuthSession } from "../features/auth";
 export type { SemanticColor, DataColor, AuxiliaryColor, Size } from "./types";

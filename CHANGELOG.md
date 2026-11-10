@@ -8,6 +8,15 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- Authentication that doesn't depend on a provider. `AuthProvider` takes an `adapter` (`AuthAdapter`), which connects to a provider such as Supabase, and an `appId`, the key of the app in each user's `roles`, so the same users sign in to several apps with a role in each
+- `useAuth`, which returns `status` (`loading`, `authenticated` or `unauthenticated`), `user`, `role` in this app, and the sign-in methods: `signInWithOAuth`, `signInWithPassword`, `signInWithMagicLink` and `signOut`
+- `getAuthSession`, which returns the session to code outside React, such as a thunk
+- `withAuth` on `HTTPClient`, which sends the access token as `Authorization: Bearer`. It is off by default, so the token only goes to an API turned on for it
+- The types `AuthAdapter` and `AuthSession`, the contract an app implements to connect its provider
+- `auth` on `ZustandProviders` and `AppProviders`, with the `adapter` and `appId` of `AuthProvider`, which mounts `AuthProvider` so the app doesn't. Without `auth`, nothing of auth is mounted
+
 ## [3.2.0] - 2026-11-10
 
 ### Added

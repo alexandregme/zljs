@@ -16,5 +16,12 @@ export {
 } from "./contrast";
 export { createMockStore, MOCK_REDUCERS, MockStoreProvider } from "./redux";
 export type { MockStoreConfig, MockStoreProviderProps } from "./redux";
+export {
+  createMockAuthAdapter,
+  MOCK_APP_ID,
+  MOCK_AUTH_SESSION,
+  MockAuthProvider,
+} from "./auth";
+export type { MockAuthProviderProps } from "./auth";
 export { MockRouteProvider } from "./next";
 export type { MockRouteProviderProps } from "./next";

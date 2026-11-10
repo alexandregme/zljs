@@ -1,13 +1,25 @@
 import { act, render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
-import { MockRouteProvider, MOCK_REDUCERS } from "@test-utils";
+import {
+  createMockAuthAdapter,
+  MOCK_APP_ID,
+  MOCK_AUTH_SESSION,
+  MockRouteProvider,
+  MOCK_REDUCERS,
+} from "@test-utils";
 import {
   appInitialState,
   useAppStore,
+  useAuth,
   useRouterStore,
   useToastStore,
 } from "@zljs/core";
 import { AppProviders } from "./app-providers";
+
+const Role = () => {
+  const { role } = useAuth();
+  return <p>{`Role: ${role}`}</p>;
+};
 
 const Title = () => {
   const value = useSelector((state: { title: string }) => state.title);
@@ -57,6 +69,18 @@ describe("<AppProviders /> - Default Props", () => {
 });
 
 describe("<AppProviders /> - Custom Props", () => {
+  it("renders <AppProviders /> with auth", () => {
+    const adapter = createMockAuthAdapter(MOCK_AUTH_SESSION);
+    render(
+      <AppProviders auth={{ adapter, appId: MOCK_APP_ID }}>
+        <Role />
+      </AppProviders>,
+    );
+    const role = screen.getByText("Role: admin");
+
+    expect(role).toBeInTheDocument();
+  });
+
   it("renders <AppProviders /> with its reducers in the store", () => {
     render(
       <AppProviders reducers={MOCK_REDUCERS}>
