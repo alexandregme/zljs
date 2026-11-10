@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-11-10
+
 ### Added
 
 - `Card`, a surface with a border, rounded corners and a soft shadow, which groups what belongs together. `title`, `titleLevel` and `message` show a header above the children, and `color` sets the border, a light background and the shadow from the theme. It takes the width of its parent
@@ -379,7 +381,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.1.2...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/alexandregme/zljs/compare/v2.1.2...v2.2.0
 [2.1.2]: https://github.com/alexandregme/zljs/compare/v2.1.0...v2.1.2
 [2.1.0]: https://github.com/alexandregme/zljs/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/alexandregme/zljs/compare/v2.0.0...v2.0.1
