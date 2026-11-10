@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Loader } from "./loader";
-import { appInitialState } from "@test-utils";
-import { useAppStore } from "@zljs/core";
+import { appInitialState, useAppStore } from "@zljs/core";
 
 const reset = () => useAppStore.setState(appInitialState);
 

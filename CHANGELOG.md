@@ -11,6 +11,7 @@ A change that needs action in an app has a **Migration** note. When updating, re
 ### Added
 
 - Modals on `useAppStore`: `openModal`, `openModalWithPayload`, `closeModal`, `isModalOpen` and `getModalPayload`, each by the id of the modal, which is unique in the app. `modals` has the open ones, by id
+- `appInitialState`, the state `useAppStore` starts with. A test resets the store with `useAppStore.setState(appInitialState)`
 
 ### Changed
 

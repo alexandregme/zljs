@@ -1,7 +1,12 @@
 import { act, render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
-import { appInitialState, MockRouteProvider, MOCK_REDUCERS } from "@test-utils";
-import { useAppStore, useRouterStore, useToastStore } from "@zljs/core";
+import { MockRouteProvider, MOCK_REDUCERS } from "@test-utils";
+import {
+  appInitialState,
+  useAppStore,
+  useRouterStore,
+  useToastStore,
+} from "@zljs/core";
 import { AppProviders } from "./app-providers";
 
 const Title = () => {

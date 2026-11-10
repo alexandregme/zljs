@@ -1,6 +1,5 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import { appInitialState } from "@test-utils";
-import { ConnectedModal, useAppStore } from "@zljs/core";
+import { appInitialState, ConnectedModal, useAppStore } from "@zljs/core";
 
 const MODAL_ID = "test";
 

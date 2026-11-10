@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useSelector } from "react-redux";
 import { expect, waitFor } from "storybook/test";
-import { appInitialState, MOCK_REDUCERS, MockRouteProvider } from "@test-utils";
+import { MOCK_REDUCERS, MockRouteProvider } from "@test-utils";
 import {
+  appInitialState,
   Button,
   Text,
   useAppStore,

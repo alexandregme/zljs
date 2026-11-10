@@ -1,7 +1,7 @@
-import { appInitialState } from "@test-utils";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, waitFor } from "storybook/test";
 import {
+  appInitialState,
   Button,
   Text,
   useAppStore,

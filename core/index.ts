@@ -39,7 +39,12 @@ export { Tag } from "./tag";
 export type { TagColor, TagProps } from "./tag";
 export { toast, Toaster, useToastStore } from "../features/toaster";
 export type { Toast, ToastType, ToastState } from "../features/toaster";
-export { ConnectedModal, Loader, useAppStore } from "../features/app";
+export {
+  appInitialState,
+  ConnectedModal,
+  Loader,
+  useAppStore,
+} from "../features/app";
 export type {
   AppState,
   ConnectedModalProps,

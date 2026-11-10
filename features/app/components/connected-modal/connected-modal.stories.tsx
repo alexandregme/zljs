@@ -1,7 +1,12 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import { appInitialState } from "@test-utils";
-import { Button, ConnectedModal, Text, useAppStore } from "@zljs/core";
+import {
+  appInitialState,
+  Button,
+  ConnectedModal,
+  Text,
+  useAppStore,
+} from "@zljs/core";
 
 const MODAL_ID = "story-modal";
 
