@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-11-10
+
 ### Added
 
 - `size="xs"` on `Modal` and `ConnectedModal`, the smallest width, for a short question and its buttons
@@ -415,7 +417,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/alexandregme/zljs/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/alexandregme/zljs/compare/v2.3.0...v3.0.0
 [2.3.0]: https://github.com/alexandregme/zljs/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/alexandregme/zljs/compare/v2.1.2...v2.2.0
