@@ -4,6 +4,9 @@ export type { RootLayoutProps } from "./root-layout";
 export { NotFound } from "./not-found";
 export type { NotFoundProps } from "./not-found";
 
+export { PageWrapper } from "./page-wrapper";
+export type { PageWrapperProps } from "./page-wrapper";
+
 export { Link } from "./link";
 export type { LinkProps } from "./link";
 
