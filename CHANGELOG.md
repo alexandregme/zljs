@@ -16,6 +16,7 @@ A change that needs action in an app has a **Migration** note. When updating, re
 - The types `AuthAdapter` and `AuthSession`, the contract an app implements to connect its provider
 - `auth` on `ZustandProviders` and `AppProviders`, with the `adapter` and `appId` of `AuthProvider`, which mounts `AuthProvider` so the app doesn't. Without `auth`, nothing of auth is mounted
 - `color` on `Modal` and `ConnectedModal`, a semantic color for the title and a light background in that color, such as `danger` for a question that can't be undone. `none`, the default, keeps the modal as it was
+- `SignOutButton`, an icon button that signs the user out through the adapter. A click opens a `danger` modal that asks first, with the texts the button gets: `confirmTitle`, `confirmLabel` and `cancelLabel`. A failed sign-out fires an error toast with `errorMessage`
 
 ## [3.2.0] - 2026-11-10
 
