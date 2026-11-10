@@ -74,7 +74,7 @@ export const Content: Story = {
     docs: {
       description: {
         story:
-          "`title`, `description`, `size` and `children` go to the `Modal` as they are. This story opens the modal, so axe checks it.",
+          "`title`, `description`, `size`, `color` and `children` go to the `Modal` as they are. This story opens the modal, so axe checks it.",
       },
     },
   },

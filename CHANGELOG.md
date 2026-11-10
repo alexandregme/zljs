@@ -15,6 +15,7 @@ A change that needs action in an app has a **Migration** note. When updating, re
 - `getAuthSession`, which returns the session to code outside React, such as a thunk
 - The types `AuthAdapter` and `AuthSession`, the contract an app implements to connect its provider
 - `auth` on `ZustandProviders` and `AppProviders`, with the `adapter` and `appId` of `AuthProvider`, which mounts `AuthProvider` so the app doesn't. Without `auth`, nothing of auth is mounted
+- `color` on `Modal` and `ConnectedModal`, a semantic color for the title and a light background in that color, such as `danger` for a question that can't be undone. `none`, the default, keeps the modal as it was
 
 ## [3.2.0] - 2026-11-10
 
