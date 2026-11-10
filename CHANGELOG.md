@@ -10,9 +10,14 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ### Added
 
-- `SignOutButton`, an icon button that signs the user out through the adapter. A click opens a `danger` modal that asks first, with the texts the button gets: `confirmTitle`, `confirmLabel` and `cancelLabel`. A failed sign-out fires an error toast with `errorMessage`
 - `Login`, the sign-in screen of an app, shared like `NotFound`. It takes `vendor`, the auth vendor behind the app's adapter (today only `supabase`), and `providers`, the OAuth providers the app turned on, and shows one button for each. A click calls `signInWithOAuth` of the adapter, and a failed sign-in fires an error toast. Every text has an English default: `title`, `message`, `providerLabel` and `errorMessage`
 - The types `LoginVendor` and `LoginProvider`, to type the `vendor` and `providers` an app passes to `Login`
+
+## [3.4.0] - 2026-11-10
+
+### Added
+
+- `SignOutButton`, an icon button that signs the user out through the adapter. A click opens a `danger` modal that asks first, with the texts the button gets: `confirmTitle`, `confirmLabel` and `cancelLabel`. A failed sign-out fires an error toast with `errorMessage`
 
 ## [3.3.0] - 2026-11-10
 
