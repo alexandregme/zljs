@@ -39,20 +39,25 @@ export { Tag } from "./tag";
 export type { TagColor, TagProps } from "./tag";
 export { toast, Toaster, useToastStore } from "../features/toaster";
 export type { Toast, ToastType, ToastState } from "../features/toaster";
-export { Loader, useAppStore } from "../features/app";
-export type { AppState, LoaderProps } from "../features/app";
+export {
+  appInitialState,
+  ConnectedModal,
+  Loader,
+  useAppStore,
+} from "../features/app";
+export type {
+  AppState,
+  ConnectedModalProps,
+  LoaderProps,
+} from "../features/app";
 export { ZustandProviders } from "../features/providers";
 export type { ZustandProvidersProps } from "../features/providers";
-export { useModalStore } from "./state/zustand/modal";
-export type { ModalEntry, ModalState } from "./state/zustand/modal";
 export { ReduxProvider } from "./state/redux";
 export type { ReduxProviderProps, ReduxStore } from "./state/redux";
 export { useRouterStore, splitURLasPath } from "./state/zustand/router";
 export type { RouterState } from "./state/zustand/router";
 export { usePageStore } from "./state/zustand/page";
 export type { PageState } from "./state/zustand/page";
-export { ConnectedModal } from "./connected-modal";
-export type { ConnectedModalProps } from "./connected-modal";
 export { Card } from "./card";
 export type { CardProps } from "./card";
 export { Spinner } from "./spinner";

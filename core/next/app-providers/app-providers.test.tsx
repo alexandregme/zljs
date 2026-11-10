@@ -1,7 +1,12 @@
 import { act, render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
 import { MockRouteProvider, MOCK_REDUCERS } from "@test-utils";
-import { useAppStore, useRouterStore, useToastStore } from "@zljs/core";
+import {
+  appInitialState,
+  useAppStore,
+  useRouterStore,
+  useToastStore,
+} from "@zljs/core";
 import { AppProviders } from "./app-providers";
 
 const Title = () => {
@@ -11,7 +16,7 @@ const Title = () => {
 
 afterEach(() => {
   act(() => {
-    useAppStore.setState({ fetchingCalls: 0, fetching: false });
+    useAppStore.setState(appInitialState);
     useRouterStore.getState().setRoute("/");
   });
   window.history.pushState({}, "", "/");

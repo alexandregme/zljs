@@ -5,7 +5,7 @@ import type { AppState } from "./app.interface";
 
 export const useAppStore = create<AppState>()(
   devtools(
-    (set) => ({
+    (set, get) => ({
       ...appInitialState,
       startFetching: () =>
         set(
@@ -25,6 +25,30 @@ export const useAppStore = create<AppState>()(
           false,
           "finishFetching",
         ),
+      openModal: (id) =>
+        set(
+          (s) => ({ modals: { ...s.modals, [id]: undefined } }),
+          false,
+          "openModal",
+        ),
+      openModalWithPayload: (id, payload) =>
+        set(
+          (s) => ({ modals: { ...s.modals, [id]: payload } }),
+          false,
+          "openModalWithPayload",
+        ),
+      closeModal: (id) =>
+        set(
+          (s) => {
+            const modals = { ...s.modals };
+            delete modals[id];
+            return { modals };
+          },
+          false,
+          "closeModal",
+        ),
+      isModalOpen: (id) => Object.keys(get().modals).includes(id),
+      getModalPayload: (id) => get().modals[id],
     }),
     appDevtools,
   ),

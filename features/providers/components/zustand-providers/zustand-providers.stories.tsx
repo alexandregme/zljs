@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, waitFor } from "storybook/test";
 import {
+  appInitialState,
   Button,
   Text,
   useAppStore,
@@ -74,7 +75,7 @@ export const States: Story = {
       await canvas.findByRole("status", { name: "Loading" }),
     ).toBeVisible();
 
-    useAppStore.setState({ fetchingCalls: 0, fetching: false });
+    useAppStore.setState(appInitialState);
   },
   render: () => (
     <ZustandProviders>

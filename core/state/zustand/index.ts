@@ -1,5 +1,3 @@
-export { useModalStore } from "./modal";
-export type { ModalEntry, ModalState } from "./modal";
 export { useRouterStore } from "./router";
 export type { RouterState } from "./router";
 export { splitURLasPath } from "./router";
