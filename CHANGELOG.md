@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `size="xs"` on `Modal` and `ConnectedModal`, the smallest width, for a short question and its buttons
+
 ## [3.0.0] - 2026-11-10
 
 ### Added

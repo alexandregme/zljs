@@ -70,3 +70,12 @@ describe("<Modal /> - Custom Props", () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("<Modal /> - Styles", () => {
+  it("renders <Modal /> with size xs", () => {
+    render(<Modal open onClose={() => {}} title="Test Modal" size="xs" />);
+    const dialog = screen.getByRole("dialog", { name: "Test Modal" });
+
+    expect(dialog).toHaveClass("max-w-xs");
+  });
+});

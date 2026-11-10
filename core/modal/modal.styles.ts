@@ -8,6 +8,7 @@ export const content = tv({
   base: "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-6 w-full focus:outline-none max-h-[90vh] overflow-y-auto",
   variants: {
     size: {
+      xs: "max-w-xs",
       sm: "max-w-sm",
       md: "max-w-md",
       lg: "max-w-2xl",
