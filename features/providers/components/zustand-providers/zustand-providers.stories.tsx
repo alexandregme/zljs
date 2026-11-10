@@ -1,10 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
 import { expect, waitFor } from "storybook/test";
+import {
+  createMockAuthAdapter,
+  MOCK_APP_ID,
+  MOCK_AUTH_SESSION,
+} from "@test-utils";
 import {
   appInitialState,
   Button,
   Text,
   useAppStore,
+  useAuth,
   useToastStore,
   ZustandProviders,
 } from "@zljs/core";
@@ -34,12 +41,30 @@ const ToastButton = () => {
   return <Button onClick={showToast}>Show toast</Button>;
 };
 
+const Session = () => {
+  const { user, role } = useAuth();
+
+  return (
+    <Text>{`${user?.email ?? "Signed out"}, role: ${role ?? "none"}`}</Text>
+  );
+};
+
+const WithAuth = () => {
+  const [adapter] = useState(() => createMockAuthAdapter(MOCK_AUTH_SESSION));
+
+  return (
+    <ZustandProviders auth={{ adapter, appId: MOCK_APP_ID }}>
+      <Session />
+    </ZustandProviders>
+  );
+};
+
 export const Playground: Story = {
   parameters: {
     docs: {
       description: {
         story:
-          "Every provider of zljs that needs neither Redux nor a framework, ready and tested: `Loader` and `Toaster`, always on. It works in any React app; in Next.js, `AppProviders` renders it inside the Redux store. It renders no markup of its own.",
+          "Every provider of zljs that needs neither Redux nor a framework, ready and tested: `Loader`, `Toaster` and, with `auth`, `AuthProvider`. `Loader` and `Toaster` are always on, and `auth` turns `AuthProvider` on. It works in any React app; in Next.js, `AppProviders` renders it inside the Redux store, so an app with `AppProviders` passes `auth` to it instead. It renders no markup of its own.",
       },
     },
   },
@@ -53,7 +78,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`Loader` follows `useAppStore` and `Toaster` follows `useToastStore`, so a page only calls the stores. This story starts a fetch and shows a toast, so axe checks both.",
+          "`Loader` and `Toaster` are always on, so a page only calls `useAppStore` and `useToastStore`. This story starts a fetch and shows a toast, so axe checks both.",
       },
     },
   },
@@ -83,4 +108,21 @@ export const States: Story = {
       <LoaderButton />
     </ZustandProviders>
   ),
+};
+
+export const Auth: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`auth` takes the `adapter` and the `appId` of `AuthProvider`, so the app doesn't mount it. Without `auth`, nothing of auth is mounted and nothing breaks, until a component calls `useAuth`.",
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByText(`${MOCK_AUTH_SESSION.user.email}, role: admin`),
+    ).toBeInTheDocument();
+  },
+  render: () => <WithAuth />,
 };
