@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Card`, a surface with a border, rounded corners and a soft shadow, which groups what belongs together. `title`, `titleLevel` and `message` show a header above the children, and `color` sets the border, a light background and the shadow from the theme. It takes the width of its parent
+
 ## [2.1.2] - 2026-11-04
 
 ### Fixed

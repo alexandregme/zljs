@@ -53,6 +53,8 @@ export { usePageStore } from "./state/zustand/page";
 export type { PageState } from "./state/zustand/page";
 export { ConnectedModal } from "./connected-modal";
 export type { ConnectedModalProps } from "./connected-modal";
+export { Card } from "./card";
+export type { CardProps } from "./card";
 export { Spinner } from "./spinner";
 export type { SpinnerProps, SpinnerVariant } from "./spinner";
 export { Loader } from "./loader";
