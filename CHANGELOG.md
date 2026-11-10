@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `PageWrapper`, in `@alexandregme/zljs/next`, the frame of a page with a single block in the middle, such as a sign-in card: it takes the height of the screen, centers its children and keeps them narrow
+
 ## [3.1.0] - 2026-11-10
 
 ### Added
