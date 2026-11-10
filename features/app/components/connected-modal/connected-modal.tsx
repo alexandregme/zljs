@@ -9,6 +9,7 @@ export const ConnectedModal = ({
   title,
   description,
   size,
+  color,
   children,
 }: ConnectedModalProps) => {
   const open = useAppStore((s) => s.isModalOpen(modalId));
@@ -25,6 +26,7 @@ export const ConnectedModal = ({
       title={title}
       description={description}
       size={size}
+      color={color}
     >
       {children}
     </Modal>

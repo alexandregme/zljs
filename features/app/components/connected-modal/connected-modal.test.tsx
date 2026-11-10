@@ -72,3 +72,17 @@ describe("<ConnectedModal /> - Custom Props", () => {
     expect(useAppStore.getState().isModalOpen("other")).toBe(true);
   });
 });
+
+describe("<ConnectedModal /> - Styles", () => {
+  it("renders <ConnectedModal /> with color danger", () => {
+    useAppStore.getState().openModal(MODAL_ID);
+    render(
+      <ConnectedModal modalId={MODAL_ID} title="Test Modal" color="danger" />,
+    );
+    const dialog = screen.getByRole("dialog", { name: "Test Modal" });
+
+    expect(dialog).toHaveClass(
+      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,white)]",
+    );
+  });
+});

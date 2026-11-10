@@ -17,17 +17,20 @@ export const Modal = ({
   description,
   children,
   size = "md",
+  color = "none",
 }: ModalProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <Dialog.Portal>
         <Dialog.Overlay className={overlay()} />
         <Dialog.Content
-          className={content({ size })}
+          className={content({ size, color })}
           {...(!description && { "aria-describedby": undefined })}
         >
           <div className={header()}>
-            <Dialog.Title className={titleStyle()}>{title}</Dialog.Title>
+            <Dialog.Title className={titleStyle({ color })}>
+              {title}
+            </Dialog.Title>
             <Button icon="X" aria-label="Close" onClick={onClose} />
           </div>
           {description && (

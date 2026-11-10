@@ -1,9 +1,11 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
+import { textContrast } from "@test-utils";
 import { Modal } from "./modal";
 import type { ModalSize } from "./modal.interface";
 import { Button } from "@zljs/core";
+import type { SemanticColor } from "@zljs/core";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
@@ -113,6 +115,105 @@ export const Sizes: Story = {
 
     const dialog = await within(document.body).findByRole("dialog", {
       name: "Size xs",
+    });
+
+    await expect(dialog).toBeVisible();
+  },
+};
+
+const COLORS: SemanticColor[] = [
+  "primary",
+  "success",
+  "danger",
+  "warning",
+  "info",
+  "muted",
+  "none",
+];
+
+interface ColorButtonProps {
+  color: SemanticColor;
+  onOpen: (color: SemanticColor) => void;
+}
+
+const ColorButton = ({ color, onOpen }: ColorButtonProps) => {
+  const handleClick = () => {
+    onOpen(color);
+  };
+
+  return (
+    <Button color={color} onClick={handleClick}>
+      {color}
+    </Button>
+  );
+};
+
+const ColorsTemplate = () => {
+  const [color, setColor] = useState<SemanticColor | null>(null);
+
+  const close = () => {
+    setColor(null);
+  };
+
+  return (
+    <>
+      <div className="flex flex-wrap gap-2">
+        {COLORS.map((option) => (
+          <ColorButton key={option} color={option} onOpen={setColor} />
+        ))}
+      </div>
+      <Modal
+        open={color !== null}
+        onClose={close}
+        title={`Color ${color}`}
+        description="The color goes on the title and on the background."
+        size="xs"
+        color={color ?? undefined}
+      >
+        <div className="flex gap-2 justify-end">
+          <Button color="ghost" onClick={close}>
+            Cancel
+          </Button>
+          <Button color={color ?? undefined} onClick={close}>
+            Confirm
+          </Button>
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+export const Colors: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`color` paints the title and gives the modal a light background in that color, such as `danger` for a question that can't be undone. `none`, the default, has a dark title on white. The buttons inside take their own `color`. Each button opens the modal in its own color.",
+      },
+    },
+  },
+  render: () => <ColorsTemplate />,
+  play: async ({ canvas, userEvent }) => {
+    // Axe only sees the modal left open: measure the text of every color on its tint.
+    for (const color of COLORS) {
+      await userEvent.click(canvas.getByRole("button", { name: color }));
+
+      const dialog = await within(document.body).findByRole("dialog", {
+        name: `Color ${color}`,
+      });
+      const title = within(dialog).getByRole("heading");
+      const description = within(dialog).getByText(/The color goes/);
+
+      await expect(textContrast(title)).toBeGreaterThanOrEqual(4.5);
+      await expect(textContrast(description)).toBeGreaterThanOrEqual(4.5);
+
+      await userEvent.keyboard("{Escape}");
+    }
+
+    await userEvent.click(canvas.getByRole("button", { name: "danger" }));
+
+    const dialog = await within(document.body).findByRole("dialog", {
+      name: "Color danger",
     });
 
     await expect(dialog).toBeVisible();

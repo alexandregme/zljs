@@ -78,4 +78,25 @@ describe("<Modal /> - Styles", () => {
 
     expect(dialog).toHaveClass("max-w-xs");
   });
+
+  it("renders <Modal /> with color danger", () => {
+    render(<Modal open onClose={() => {}} title="Test Modal" color="danger" />);
+    const dialog = screen.getByRole("dialog", { name: "Test Modal" });
+    const title = screen.getByRole("heading", { name: "Test Modal" });
+
+    expect(dialog).toHaveClass(
+      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,white)]",
+    );
+    expect(dialog).not.toHaveClass("bg-white");
+    expect(title).toHaveClass("text-zl-danger-strong");
+  });
+
+  it("renders <Modal /> without a color by default", () => {
+    render(<Modal open onClose={() => {}} title="Test Modal" />);
+    const dialog = screen.getByRole("dialog", { name: "Test Modal" });
+    const title = screen.getByRole("heading", { name: "Test Modal" });
+
+    expect(dialog).toHaveClass("bg-white");
+    expect(title).toHaveClass("text-gray-900");
+  });
 });
