@@ -25,6 +25,11 @@
       "@test-utils": ["test-utils/index.ts"]
     }
   },
-  "include": ["core/**/*", "test-utils/**/*", "vitest.setup.ts"],
+  "include": [
+    "core/**/*",
+    "features/**/*",
+    "test-utils/**/*",
+    "vitest.setup.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

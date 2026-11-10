@@ -47,7 +47,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "The app's global configuration: the Redux store, `Loader`, `Toaster` and the route in `useRouterStore`. It goes in the app's root layout, around `RootLayout`. A Server Component can't pass a function to a Client Component, so the app keeps its own `'use client'` file that imports its reducers and renders `AppProviders`. It renders no markup of its own.",
+          "The app's global configuration: the Redux store around `ZustandProviders`, which brings `Loader` and `Toaster`, plus the route in `useRouterStore`. It goes in the app's root layout, around `RootLayout`. A Server Component can't pass a function to a Client Component, so the app keeps its own `'use client'` file that imports its reducers and renders `AppProviders`. It renders no markup of its own.",
       },
     },
   },

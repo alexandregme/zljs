@@ -8,6 +8,15 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `ZustandProviders`, with every provider of zljs that needs neither Redux nor a framework: `Loader` and `Toaster`, always on. It works in any React app
+
+### Changed
+
+- `AppProviders` renders `ZustandProviders` inside the Redux store. It renders the same as before
+- `Loader`, `Toaster`, `toast`, `useAppStore` and `useToastStore` moved to `features/`, the components that come with their own state. The exports are the same
+
 ## [2.2.0] - 2026-11-10
 
 ### Added

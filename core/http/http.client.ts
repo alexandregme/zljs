@@ -1,6 +1,6 @@
 import axios, { type AxiosError } from "axios";
-import { useAppStore } from "../state/zustand/app";
-import { useToastStore } from "../state/zustand/toast";
+import { useAppStore } from "../../features/app/state";
+import { useToastStore } from "../../features/toaster/state";
 import type { HttpClientConfig, HttpRequestConfig } from "./http.types";
 
 type HttpMethod = "get" | "post" | "put" | "delete" | "patch";

@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @import "../core/styles.css";
+
+/* core/styles.css only scans core/. In dist the features are bundled into the
+   same folder, so this line is needed only here. */
+@source "../features";

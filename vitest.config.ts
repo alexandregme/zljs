@@ -11,7 +11,7 @@ export default defineConfig({
     css: false,
     coverage: {
       provider: "v8",
-      include: ["core/**/*.{ts,tsx}"],
+      include: ["core/**/*.{ts,tsx}", "features/**/*.{ts,tsx}"],
       exclude: [
         "**/index.ts",
         "**/*.stories.tsx",
@@ -40,7 +40,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: "unit",
-          include: ["core/**/*.test.{ts,tsx}"],
+          include: ["core/**/*.test.{ts,tsx}", "features/**/*.test.{ts,tsx}"],
         },
       },
       // Runs every story as a test in a real browser. This is the project the

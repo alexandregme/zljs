@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { Toaster as SonnerToaster, toast } from "sonner";
-import { useToastStore } from "../state/zustand/toast";
+import { useToastStore } from "../../state";
 import { toaster, toasterColors } from "./toaster.styles";
 
 export const Toaster = () => {

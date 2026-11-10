@@ -4,13 +4,16 @@
     "types": [],
     "paths": {}
   },
-  "include": ["core/**/*"],
+  "include": ["core/**/*", "features/**/*"],
   "exclude": [
     "node_modules",
     "dist",
     "core/**/*.test.ts",
     "core/**/*.test.tsx",
     "core/**/*.stories.tsx",
+    "features/**/*.test.ts",
+    "features/**/*.test.tsx",
+    "features/**/*.stories.tsx",
     "core/**/examples/**"
   ]
 }
