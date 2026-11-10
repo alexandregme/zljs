@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.3.0] - 2026-11-10
+
 ### Added
 
 - Authentication that doesn't depend on a provider. `AuthProvider` takes an `adapter` (`AuthAdapter`), which connects to the app's auth provider, and an `appId`, the key of the app in each user's `roles`, so the same users sign in to several apps with a role in each
@@ -432,7 +434,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.2.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.3.0...HEAD
+[3.3.0]: https://github.com/alexandregme/zljs/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/alexandregme/zljs/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/alexandregme/zljs/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/alexandregme/zljs/compare/v2.3.0...v3.0.0
