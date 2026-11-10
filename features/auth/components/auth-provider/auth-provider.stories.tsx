@@ -71,7 +71,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`adapter` connects zljs to an auth provider, such as Supabase: the session follows it on sign in, sign out and token refresh. The adapter says whether the user has access to this app (`hasAccess`). `appId` is the key of this app in each user's `roles`, so the same users can sign in to several apps, each with its own role; a user with no role in this app has `role` `null`. While the adapter hasn't answered, `status` is `loading`.",
+          "`adapter` connects zljs to the app's auth provider: the session follows it on sign in, sign out and token refresh. The adapter says whether the user has access to this app (`hasAccess`). `appId` is the key of this app in each user's `roles`, so the same users can sign in to several apps, each with its own role; a user with no role in this app has `role` `null`. While the adapter hasn't answered, `status` is `loading`.",
       },
     },
   },

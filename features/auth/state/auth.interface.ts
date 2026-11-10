@@ -25,7 +25,7 @@ export interface AuthCredentials {
 }
 
 /**
- * What an auth provider (Supabase, …) must do for zljs. Each sign-in rejects
+ * What an auth provider must do for zljs. Each sign-in rejects
  * on failure, so the caller can show the error.
  */
 export interface AuthAdapter {
@@ -45,7 +45,7 @@ export interface AuthAdapter {
 
 /** What an app gives zljs to turn auth on. */
 export interface AuthConfig {
-  /** Connects zljs to an auth provider, such as Supabase. */
+  /** Connects zljs to the app's auth provider. */
   adapter: AuthAdapter;
   /** The key of this app in each user's `roles`. */
   appId: string;
