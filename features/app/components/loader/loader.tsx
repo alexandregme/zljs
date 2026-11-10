@@ -1,7 +1,7 @@
 "use client";
 
-import { useAppStore } from "../state/zustand/app";
-import { Spinner } from "../spinner";
+import { useAppStore } from "../../state";
+import { Spinner } from "../../../../core/spinner";
 import type { LoaderProps } from "./loader.interface";
 import { loader } from "./loader.styles";
 

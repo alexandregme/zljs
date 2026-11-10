@@ -1,13 +1,12 @@
 "use client";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation.js";
-import { Loader } from "../../loader";
+import { ZustandProviders } from "../../../features/providers";
 import { ReduxProvider } from "../../state/redux";
 import { useRouterStore } from "../../state/zustand/router";
-import { Toaster } from "../../toaster";
 import type { AppProvidersProps } from "./app-providers.interface";
 
-export const AppProviders = ({ children, ...store }: AppProvidersProps) => {
+const RouteSync = () => {
   const pathname = usePathname();
   const setRoute = useRouterStore((s) => s.setRoute);
 
@@ -17,11 +16,12 @@ export const AppProviders = ({ children, ...store }: AppProvidersProps) => {
     }
   }, [pathname, setRoute]);
 
-  return (
-    <ReduxProvider {...store}>
-      <Loader />
-      <Toaster />
-      {children}
-    </ReduxProvider>
-  );
+  return null;
 };
+
+export const AppProviders = ({ children, ...store }: AppProvidersProps) => (
+  <ReduxProvider {...store}>
+    <RouteSync />
+    <ZustandProviders>{children}</ZustandProviders>
+  </ReduxProvider>
+);
