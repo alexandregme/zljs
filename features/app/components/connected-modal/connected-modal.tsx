@@ -1,7 +1,7 @@
 "use client";
 
-import { Modal } from "../modal";
-import { useModalStore } from "../state/zustand/modal";
+import { Modal } from "../../../../core/modal";
+import { useAppStore } from "../../state";
 import type { ConnectedModalProps } from "./connected-modal.interface";
 
 export const ConnectedModal = ({
@@ -11,13 +11,17 @@ export const ConnectedModal = ({
   size,
   children,
 }: ConnectedModalProps) => {
-  const isOpen = useModalStore((s) => s.isOpen(modalId));
-  const closeModal = useModalStore((s) => s.closeModal);
+  const open = useAppStore((s) => s.isModalOpen(modalId));
+  const closeModal = useAppStore((s) => s.closeModal);
+
+  const close = () => {
+    closeModal(modalId);
+  };
 
   return (
     <Modal
-      open={isOpen}
-      onClose={() => closeModal(modalId)}
+      open={open}
+      onClose={close}
       title={title}
       description={description}
       size={size}

@@ -1,9 +1,10 @@
+import { appInitialState } from "@test-utils";
 import { act, render, screen } from "@testing-library/react";
 import { useAppStore, useToastStore, ZustandProviders } from "@zljs/core";
 
 afterEach(() => {
   act(() => {
-    useAppStore.setState({ fetchingCalls: 0, fetching: false });
+    useAppStore.setState(appInitialState);
   });
 });
 

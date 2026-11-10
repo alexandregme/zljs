@@ -1,3 +1,4 @@
+export { appInitialState } from "./app";
 export {
   ANDROID_USER_AGENT,
   DESKTOP_USER_AGENT,

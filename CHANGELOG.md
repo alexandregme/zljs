@@ -8,6 +8,22 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- Modals on `useAppStore`: `openModal`, `openModalWithPayload`, `closeModal`, `isModalOpen` and `getModalPayload`, each by the id of the modal, which is unique in the app. `modals` has the open ones, by id
+
+### Changed
+
+- `ConnectedModal` reads `useAppStore`, the same store as `Loader`. It works as before
+
+### Removed
+
+- `useModalStore` and the types `ModalState` and `ModalEntry`. The modals are on `useAppStore`
+
+#### Migration
+
+Search the app for `useModalStore`. Replace it with `useAppStore`, `isOpen` with `isModalOpen` and `getPayload` with `getModalPayload`. `openModal`, `openModalWithPayload` and `closeModal` keep their names. `modals` is no longer a list: it is an object with the open modals by id, so code that reads it directly uses `isModalOpen`.
+
 ## [2.3.0] - 2026-11-10
 
 ### Added

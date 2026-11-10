@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { Loader } from "./loader";
+import { appInitialState } from "@test-utils";
 import { useAppStore } from "@zljs/core";
 
-const reset = () => useAppStore.setState({ fetchingCalls: 0, fetching: false });
+const reset = () => useAppStore.setState(appInitialState);
 
 describe("<Loader />", () => {
   beforeEach(() => reset());

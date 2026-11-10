@@ -1,3 +1,4 @@
+import { appInitialState } from "@test-utils";
 import mockAxios from "axios";
 import { HTTPClient } from "./http.client";
 import { useAppStore } from "../../features/app/state";
@@ -14,7 +15,7 @@ vi.mock("axios", () => ({
 }));
 
 const resetStores = () => {
-  useAppStore.setState({ fetchingCalls: 0, fetching: false });
+  useAppStore.setState(appInitialState);
   useToastStore.setState({ toasts: [] });
 };
 

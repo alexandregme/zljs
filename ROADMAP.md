@@ -62,7 +62,7 @@ Goal: every story passes axe with `a11y.test: "error"`, which is on in `.storybo
 Known problems:
 
 1. `Loader` mounts only while loading, and some screen readers don't announce a `role="status"` inserted that way
-2. No stories, so no axe coverage: `ConnectedModal`, `FormInput`, `FormProvider`
+2. No stories, so no axe coverage: `FormInput`, `FormProvider`
 3. `Checkbox` and `Modal` still use a `box-shadow` focus ring, which disappears in forced colors mode and has no contrast check. Move them to a real `focus-visible` outline and check it with `focusOutlineContrast` from `test-utils/contrast.ts`, as `Button` and `Input` do. Hover is only checked on `Button`: add `hoverTextContrast` to the others that change color on hover
 4. `Button` colored outlines are checked on a white page only: on a dark surface, `primary` and the others can fall under 3:1
 5. After the color tokens PR: the focus outlines should use `outline-zl-primary`

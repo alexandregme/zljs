@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useSelector } from "react-redux";
 import { expect, waitFor } from "storybook/test";
-import { MOCK_REDUCERS, MockRouteProvider } from "@test-utils";
+import { appInitialState, MOCK_REDUCERS, MockRouteProvider } from "@test-utils";
 import {
   Button,
   Text,
@@ -122,7 +122,7 @@ export const States: Story = {
       await canvas.findByRole("status", { name: "Loading" }),
     ).toBeVisible();
 
-    useAppStore.setState({ fetchingCalls: 0, fetching: false });
+    useAppStore.setState(appInitialState);
   },
   render: () => (
     <AppProviders>
