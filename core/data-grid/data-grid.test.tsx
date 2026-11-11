@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  configure,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { restoreBrowserStubs, stubElementRect } from "@test-utils";
 import { DataGrid } from "@zljs/core";
 import type { DataGridColumn } from "@zljs/core";
@@ -33,7 +39,9 @@ const applyNameFilter = async () => {
 };
 
 // A real AG Grid in jsdom takes seconds when the whole suite runs in parallel.
+// The findBy queries need the time too: their default is 1s, and the test fails on the first one that runs out.
 vi.setConfig({ testTimeout: 15_000 });
+configure({ asyncUtilTimeout: 10_000 });
 
 afterEach(restoreBrowserStubs);
 
