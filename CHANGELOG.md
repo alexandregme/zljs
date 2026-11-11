@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Authorized`, the wall in front of an app: a signed-out user sees `Login`, a signed-in user without access to this app (`hasAccess` on `AuthUser`, set by the adapter, such as after an admin approves) sees `AccessPending`, and a user with access sees the app. `login` and `accessPending` take the props of the two screens. Roles are a separate check: with `roles`, the user also needs one of them in this app. The type `AuthorizedProps` types what an app passes to it
+
 ## [3.6.0] - 2026-11-11
 
 ### Added
