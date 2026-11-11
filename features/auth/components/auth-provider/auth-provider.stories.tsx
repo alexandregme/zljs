@@ -55,7 +55,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "Keeps the session of an auth provider and gives it to its children through `useAuth` and `getAuthSession`. It renders no markup of its own. An app has one, around everything that needs the user. The adapter in these stories keeps the session in memory.",
+          "Keeps the session of an auth provider and gives it to its children through `useAuth`, `Authorized` and `getAuthSession`. It renders no markup of its own. An app has one, around everything that needs the user. The adapter in these stories keeps the session in memory.",
       },
     },
   },

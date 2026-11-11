@@ -7,7 +7,7 @@ export interface AuthUser {
   avatarUrl?: string;
   /**
    * Whether the user may use this app, such as approved by an admin. It is
-   * separate from the role: a user can have access and no role.
+   * the only thing `Authorized` checks unless it gets `roles`.
    */
   hasAccess: boolean;
   /** The user's role in each app, by app id: `{ entregas: "admin" }`. */

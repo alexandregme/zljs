@@ -50,8 +50,6 @@ export type {
   ConnectedModalProps,
   LoaderProps,
 } from "../features/app";
-export { ZustandProviders } from "../features/providers";
-export type { ZustandProvidersProps } from "../features/providers";
 export { ReduxProvider } from "./state/redux";
 export type { ReduxProviderProps, ReduxStore } from "./state/redux";
 export { useRouterStore, splitURLasPath } from "./state/zustand/router";
@@ -67,6 +65,7 @@ export type { HttpClientConfig, HttpRequestConfig } from "./http";
 export {
   AccessPending,
   AuthProvider,
+  Authorized,
   getAuthSession,
   Login,
   SignOutButton,
@@ -74,8 +73,11 @@ export {
 } from "../features/auth";
 export type {
   AuthAdapter,
+  AuthorizedProps,
   AuthSession,
   LoginProvider,
   LoginVendor,
 } from "../features/auth";
+export { ZustandProviders } from "../features/providers";
+export type { ZustandProvidersProps } from "../features/providers";
 export type { SemanticColor, DataColor, AuxiliaryColor, Size } from "./types";
