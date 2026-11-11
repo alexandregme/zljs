@@ -18,11 +18,15 @@ export const AccessPending = ({
   const { user } = useAuth();
   const { account } = accessPending();
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <Card title={title} titleLevel={1} message={message}>
       <div className={account()}>
         <Text variant="caption" color="muted">
-          {user?.email ?? ""}
+          {user.email}
         </Text>
         <SignOutButton
           label={signOutLabel}

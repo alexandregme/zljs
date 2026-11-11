@@ -44,17 +44,11 @@ describe("<AccessPending /> - Default Props", () => {
     expect(signOut).toBeInTheDocument();
   });
 
-  it("renders <AccessPending /> without the email when nobody is signed in", () => {
+  it("renders nothing when nobody is signed in to <AccessPending />", () => {
     renderAccessPending(<AccessPending />, createMockAuthAdapter());
-    const title = screen.getByRole("heading", {
-      level: 1,
-      name: "Waiting for approval",
-    });
 
-    expect(title).toBeInTheDocument();
-    expect(
-      screen.queryByText(MOCK_AUTH_SESSION.user.email),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 
   it("asks before signing out when the button of <AccessPending /> is clicked", () => {
