@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.6.0] - 2026-11-11
+
 ### Added
 
 - `AccessPending`, the screen of a user who signed in and has no access to the app yet. It shows the email of the account and a `SignOutButton`. Every text has an English default: `title`, `message`, `signOutLabel`, and the `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage` of the sign-out
@@ -451,7 +453,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.5.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.6.0...HEAD
+[3.6.0]: https://github.com/alexandregme/zljs/compare/v3.5.0...v3.6.0
 [3.5.0]: https://github.com/alexandregme/zljs/compare/v3.3.0...v3.5.0
 [3.3.0]: https://github.com/alexandregme/zljs/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/alexandregme/zljs/compare/v3.1.0...v3.2.0
