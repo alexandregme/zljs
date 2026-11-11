@@ -65,6 +65,7 @@ export type { SpinnerProps, SpinnerVariant } from "./spinner";
 export { HTTPClient } from "./http";
 export type { HttpClientConfig, HttpRequestConfig } from "./http";
 export {
+  AccessPending,
   AuthProvider,
   getAuthSession,
   Login,

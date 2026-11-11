@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `AccessPending`, the screen of a user who signed in and has no access to the app yet. It shows the email of the account and a `SignOutButton`. Every text has an English default: `title`, `message`, `signOutLabel`, and the `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage` of the sign-out
+
 ## [3.5.0] - 2026-11-11
 
 ### Added
