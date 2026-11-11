@@ -67,8 +67,14 @@ export type { HttpClientConfig, HttpRequestConfig } from "./http";
 export {
   AuthProvider,
   getAuthSession,
+  Login,
   SignOutButton,
   useAuth,
 } from "../features/auth";
-export type { AuthAdapter, AuthSession } from "../features/auth";
+export type {
+  AuthAdapter,
+  AuthSession,
+  LoginProvider,
+  LoginVendor,
+} from "../features/auth";
 export type { SemanticColor, DataColor, AuxiliaryColor, Size } from "./types";
