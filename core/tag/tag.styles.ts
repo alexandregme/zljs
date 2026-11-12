@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants";
 
 export const tag = tv({
-  base: "inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium",
+  base: "inline-flex items-center gap-1 rounded font-medium",
   variants: {
     color: {
       primary: "bg-zl-primary/15 text-zl-primary-strong",
@@ -14,8 +14,14 @@ export const tag = tv({
       pink: "bg-zl-pink/15 text-zl-pink-strong",
       purple: "bg-zl-purple/15 text-zl-purple-strong",
     },
+    size: {
+      sm: "px-2 py-0.5 text-xs",
+      md: "px-2.5 py-1 text-sm",
+      lg: "px-3 py-1.5 text-base",
+    },
   },
   defaultVariants: {
     color: "primary",
+    size: "sm",
   },
 });

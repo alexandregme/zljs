@@ -103,6 +103,51 @@ export const Colors: Story = {
   ),
 };
 
+export const Sizes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`sm` is the default and the smallest: 12px text. `md` is 14px and `lg` is 16px, each with more padding, for a tag that stands next to larger text, such as a count. The remove button follows the size of the tag.",
+      },
+    },
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Heading level={2}>Text only</Heading>
+      <div className="flex flex-wrap items-center gap-2">
+        <Tag size="sm">Small</Tag>
+        <Tag size="md">Medium</Tag>
+        <Tag size="lg">Large</Tag>
+      </div>
+      <Heading level={2}>With remove button</Heading>
+      <div className="flex flex-wrap items-center gap-2">
+        <Tag
+          size="sm"
+          onRemove={() => alert("Removed!")}
+          removeLabel="Remove small"
+        >
+          Small
+        </Tag>
+        <Tag
+          size="md"
+          onRemove={() => alert("Removed!")}
+          removeLabel="Remove medium"
+        >
+          Medium
+        </Tag>
+        <Tag
+          size="lg"
+          onRemove={() => alert("Removed!")}
+          removeLabel="Remove large"
+        >
+          Large
+        </Tag>
+      </div>
+    </div>
+  ),
+};
+
 export const States: Story = {
   parameters: {
     docs: {
