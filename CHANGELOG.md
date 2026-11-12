@@ -10,6 +10,14 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ### Added
 
+- `TopNav`, the navigation of a small screen, where `Sidebar` doesn't fit: a bar at the top of the page with a menu button on the left, the home link in the middle and an account button on the right. The menu button opens the links, and the account button opens the name and the email of the user with the logout button. It takes the same `sections`, `user`, `activeHref`, `homeHref`, `homeLabel`, `navLabel`, `logout` and `onLogout` as `Sidebar`, and `menuLabel` and `accountLabel` name its two buttons
+- The type `TopNavProps`
+- `Navigation`, the navigation of an app from one set of values: it shows `Sidebar` on a screen from 768px wide and `TopNav` under that, follows the screen as it is resized, and renders only one of the two. It takes the props of both. `mode` is for an app made for one kind of screen: `desktop` always shows `Sidebar` and `mobile` always shows `TopNav`. The app places it: its wrapper is a row from 768px and a column under it
+- The types `NavigationProps` and `NavigationMode`
+- `useIsDesktop`, the hook `Navigation` decides with: `true` on a screen from 768px wide, the `md` breakpoint of Tailwind, and `false` under that. It follows the screen as it is resized or turned, and is `null` on the server, where there is no screen
+- `aria-expanded` on `Button`, for a button that opens and closes something, such as a menu
+- `onClick` on `Link`, called on a click, before the navigation, such as to close the menu the link is in
+- `size` on `SignOutButton`, the size of the button: `lg` is for a touch screen
 - `variant` on `Link`: `inline`, the default, is the link as it was, and `nav` is a row of a menu, 40px tall, with no underline and a translucent background on hover that works on a light or a dark surface
 - `active` on `Link`, which marks the link to the current page with `aria-current="page"`, and gives a `nav` link a background
 - `aria-label` on `Link`, the name of a link whose children have no text, such as only an icon

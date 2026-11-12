@@ -37,6 +37,8 @@ export type {
 } from "./sidebar";
 export { Tabs } from "./tabs";
 export type { TabsItem, TabsProps } from "./tabs";
+export { TopNav } from "./top-nav";
+export type { TopNavProps } from "./top-nav";
 export { Tag } from "./tag";
 export type { TagColor, TagProps } from "./tag";
 export { toast, Toaster, useToastStore } from "../features/toaster";
@@ -45,12 +47,16 @@ export {
   appInitialState,
   ConnectedModal,
   Loader,
+  Navigation,
   useAppStore,
+  useIsDesktop,
 } from "../features/app";
 export type {
   AppState,
   ConnectedModalProps,
   LoaderProps,
+  NavigationMode,
+  NavigationProps,
 } from "../features/app";
 export { ReduxProvider } from "./state/redux";
 export type { ReduxProviderProps, ReduxStore } from "./state/redux";

@@ -93,7 +93,7 @@ export const Variants: Story = {
     docs: {
       description: {
         story:
-          '`inline`, the default, is a link in a text. `nav` is a row of a menu: 40px tall, as wide as its parent, with no underline, an icon and a label side by side, and a translucent background on hover that works on a light or a dark surface. `active` marks the link to the current page: it sets `aria-current="page"` on both variants, and a `nav` link also gets a background. A `nav` link whose children have no text, such as only an icon, takes its name from `aria-label`. `Sidebar` is built from these.',
+          '`inline`, the default, is a link in a text. `nav` is a row of a menu: 40px tall, as wide as its parent, with no underline, an icon and a label side by side, and a translucent background on hover that works on a light or a dark surface. `active` marks the link to the current page: it sets `aria-current="page"` on both variants, and a `nav` link also gets a background. A `nav` link whose children have no text, such as only an icon, takes its name from `aria-label`. `onClick` is called on a click, before the navigation, such as to close the menu the link is in. `Sidebar` and `TopNav` are built from these.',
       },
     },
   },

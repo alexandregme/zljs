@@ -20,6 +20,34 @@ export const stubElementRect = () =>
     .spyOn(Element.prototype, "getBoundingClientRect")
     .mockReturnValue(new DOMRect(0, 0, 100, 40));
 
+// jsdom has no `matchMedia`. Every query answers `matches`, and `change` of
+// the result flips the answer and tells the listeners, as a resized window does.
+export const stubMatchMedia = (matches: boolean) => {
+  const listeners = new Set<() => void>();
+  let current = matches;
+
+  vi.stubGlobal("matchMedia", (media: string) => ({
+    media,
+    get matches() {
+      return current;
+    },
+    addEventListener: (_type: string, listener: () => void) => {
+      listeners.add(listener);
+    },
+    removeEventListener: (_type: string, listener: () => void) => {
+      listeners.delete(listener);
+    },
+  }));
+
+  return {
+    change: (next: boolean) => {
+      current = next;
+      listeners.forEach((listener) => listener());
+    },
+    listeners,
+  };
+};
+
 export const restoreBrowserStubs = () => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();

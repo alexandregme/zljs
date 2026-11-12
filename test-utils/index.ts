@@ -5,6 +5,7 @@ export {
   restoreBrowserStubs,
   stubElementRect,
   stubLocation,
+  stubMatchMedia,
   stubUserAgent,
   stubWindowOpen,
 } from "./browser";

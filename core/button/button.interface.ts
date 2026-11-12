@@ -17,5 +17,7 @@ export interface ButtonProps {
   iconPosition?: "left" | "right";
   disabled?: boolean;
   "aria-label"?: string;
+  /** For a button that opens and closes something, such as a menu. */
+  "aria-expanded"?: boolean;
   onClick?: () => void;
 }
