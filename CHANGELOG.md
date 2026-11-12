@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.13.0] - 2026-11-12
+
 ### Changed
 
 - `TopNav` doesn't show the menu button when no section has a link, such as with `sections={[]}`: there was nothing for it to open. The home link stays in the middle of the bar. It is for an app that reaches its pages another way, such as tabs at the bottom, and wants only the name of the app and the account at the top. `Navigation` on a small screen follows it
@@ -520,7 +522,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.11.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.13.0...HEAD
+[3.13.0]: https://github.com/alexandregme/zljs/compare/v3.11.0...v3.13.0
 [3.11.0]: https://github.com/alexandregme/zljs/compare/v3.10.0...v3.11.0
 [3.10.0]: https://github.com/alexandregme/zljs/compare/v3.9.0...v3.10.0
 [3.9.0]: https://github.com/alexandregme/zljs/compare/v3.8.0...v3.9.0
