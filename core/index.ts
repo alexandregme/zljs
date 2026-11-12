@@ -35,6 +35,8 @@ export type {
   SidebarSection,
   SidebarUser,
 } from "./sidebar";
+export { Tabs } from "./tabs";
+export type { TabsItem, TabsProps } from "./tabs";
 export { Tag } from "./tag";
 export type { TagColor, TagProps } from "./tag";
 export { toast, Toaster, useToastStore } from "../features/toaster";
