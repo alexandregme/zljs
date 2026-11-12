@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.10.0] - 2026-11-12
+
 ### Added
 
 - `Tabs`, which splits a page into panels and shows one at a time. It takes `tabs`, each with an `id`, a `label`, its panel in `children`, and optionally a `subtitle` under the label and a `count` at the right edge of the tab, and an `aria-label` that names the list. `defaultTab` picks the tab selected at first, and `onChange` is called with the `id` of the tab the user selects. A border goes around the tabs and the panel. Only the selected panel is rendered, and the URL doesn't change. In a parent with a height, the panel fills what the list of tabs leaves
@@ -477,7 +479,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.9.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.10.0...HEAD
+[3.10.0]: https://github.com/alexandregme/zljs/compare/v3.9.0...v3.10.0
 [3.9.0]: https://github.com/alexandregme/zljs/compare/v3.8.0...v3.9.0
 [3.8.0]: https://github.com/alexandregme/zljs/compare/v3.7.0...v3.8.0
 [3.7.0]: https://github.com/alexandregme/zljs/compare/v3.6.0...v3.7.0
