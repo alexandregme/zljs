@@ -262,6 +262,42 @@ describe("<TopNav /> - Custom Props", () => {
     expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
   });
 
+  it("closes the open panel of <TopNav /> when the page around it is pressed", () => {
+    render(<TopNav {...REQUIRED_PROPS} />);
+    const menu = screen.getByRole("button", { name: "Menu" });
+    const account = screen.getByRole("button", { name: "Account" });
+
+    fireEvent.click(menu);
+    fireEvent.pointerDown(document.body);
+
+    expect(menu).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
+
+    fireEvent.click(account);
+    fireEvent.pointerDown(document.body);
+
+    expect(account).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
+  });
+
+  it("keeps the open panel of <TopNav /> when it or its logout modal is pressed", () => {
+    render(<TopNav {...REQUIRED_PROPS} />);
+
+    openMenu();
+    fireEvent.pointerDown(screen.getByRole("link", { name: "Orders" }));
+
+    expect(screen.getByRole("navigation")).toBeInTheDocument();
+
+    openAccount();
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    fireEvent.pointerDown(screen.getByRole("button", { name: "Cancel" }));
+
+    expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
+    expect(
+      screen.getByRole("dialog", { name: "Sign out?" }),
+    ).toBeInTheDocument();
+  });
+
   it("asks before calling onLogout when the logout button of <TopNav /> is clicked", () => {
     const handleLogout = vi.fn();
     render(<TopNav {...REQUIRED_PROPS} onLogout={handleLogout} />);

@@ -87,7 +87,7 @@ export const Menus: Story = {
     docs: {
       description: {
         story:
-          'The menu button opens the links under the bar, over the page, one group per section. It turns into a close button, and `aria-expanded` tells a screen reader it is open. A click on a link closes the menu. The link whose `href` equals `activeHref` gets a lighter background and `aria-current="page"`. The list scrolls when it is taller than the screen. This story opens the menu, so axe checks it.',
+          'The menu button opens the links under the bar, over the page, one group per section. It turns into a close button, and `aria-expanded` tells a screen reader it is open. A click on a link, or anywhere outside the bar and its panel, closes the menu. The link whose `href` equals `activeHref` gets a lighter background and `aria-current="page"`. The list scrolls when it is taller than the screen. This story opens the menu, so axe checks it.',
       },
     },
   },
@@ -159,6 +159,36 @@ export const Accounts: Story = {
       canvas.getByRole("button", { name: "Sign out" }),
     ).toBeVisible();
     await expectControlsToHoldContrast(canvasElement);
+  },
+};
+
+export const OutsideClicks: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A click anywhere outside the bar and its open panel closes the panel, the menu or the account alike. The logout modal counts as inside: a click on it leaves the account panel open under it.",
+      },
+    },
+  },
+  args: requiredProps,
+  play: async ({ canvas, userEvent }) => {
+    const menu = canvas.getByRole("button", { name: "Menu" });
+    const account = canvas.getByRole("button", { name: "Account" });
+
+    await userEvent.click(menu);
+    await userEvent.click(document.body);
+
+    await expect(menu).toHaveAttribute("aria-expanded", "false");
+    await expect(canvas.queryByRole("navigation")).not.toBeInTheDocument();
+
+    await userEvent.click(account);
+    await userEvent.click(document.body);
+
+    await expect(account).toHaveAttribute("aria-expanded", "false");
+    await expect(
+      canvas.queryByRole("button", { name: "Sign out" }),
+    ).not.toBeInTheDocument();
   },
 };
 
