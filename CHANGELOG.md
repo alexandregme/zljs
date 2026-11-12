@@ -8,6 +8,12 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Tabs`, which splits a page into panels and shows one at a time. It takes `tabs`, each with an `id`, a `label`, its panel in `children`, and optionally a `subtitle` under the label and a `count` at the right edge of the tab, and an `aria-label` that names the list. `defaultTab` picks the tab selected at first, and `onChange` is called with the `id` of the tab the user selects. A border goes around the tabs and the panel. Only the selected panel is rendered, and the URL doesn't change. In a parent with a height, the panel fills what the list of tabs leaves
+- The types `TabsProps` and `TabsItem`
+- `@radix-ui/react-tabs` as a dependency
+
 ### Changed
 
 - `DataGrid` takes what is left of a flex column when it is a direct child of one, such as under a page header, so an app needs no wrapper with a height around it. In a parent with a height it fills it, as before
