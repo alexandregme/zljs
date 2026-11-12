@@ -9,4 +9,10 @@ export interface SignOutButtonProps {
   cancelLabel?: string;
   /** The toast when signing out fails. */
   errorMessage?: string;
+  /**
+   * Signs the user out, for an app with no `AuthProvider`. It is called when
+   * the user confirms in the modal. Without it, the button signs out through
+   * the adapter of `AuthProvider`.
+   */
+  onSignOut?: () => void | Promise<void>;
 }

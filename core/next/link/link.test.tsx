@@ -12,9 +12,29 @@ describe("<Link /> - Default Props", () => {
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute("href", HREF);
   });
+
+  it("renders <Link /> without its optional props by default", () => {
+    render(<Link href={HREF}>Orders</Link>);
+    const link = screen.getByRole("link", { name: "Orders" });
+
+    expect(link).not.toHaveAttribute("aria-current");
+    expect(link).not.toHaveAttribute("aria-label");
+  });
 });
 
 describe("<Link /> - Custom Props", () => {
+  it("renders <Link /> with all its props", () => {
+    render(
+      <Link href={HREF} variant="nav" color="none" active aria-label="Orders">
+        <Icon name="Package" />
+      </Link>,
+    );
+    const link = screen.getByRole("link", { name: "Orders" });
+
+    expect(link).toHaveAttribute("href", HREF);
+    expect(link).toHaveAttribute("aria-current", "page");
+  });
+
   it("renders <Link /> with children as an element", () => {
     render(
       <Link href={HREF}>
@@ -78,5 +98,41 @@ describe("<Link /> - Styles", () => {
 
     expect(link).toHaveClass("focus-visible:outline-2");
     expect(link).not.toHaveClass("focus:outline-none");
+  });
+
+  it("renders <Link /> with variant nav as a block with no underline", () => {
+    render(
+      <Link href={HREF} variant="nav">
+        Orders
+      </Link>,
+    );
+    const link = screen.getByRole("link", { name: "Orders" });
+
+    expect(link).toHaveClass("flex", "focus-visible:outline-2");
+    expect(link).not.toHaveClass("underline");
+    expect(link).not.toHaveClass("after:h-11");
+    expect(link).not.toHaveClass("bg-neutral-500/30");
+  });
+
+  it("renders <Link /> with variant nav and active with the active background", () => {
+    render(
+      <Link href={HREF} variant="nav" active>
+        Orders
+      </Link>,
+    );
+    const link = screen.getByRole("link", { name: "Orders" });
+
+    expect(link).toHaveClass("bg-neutral-500/30");
+  });
+
+  it("renders an inline <Link /> with active without the active background", () => {
+    render(
+      <Link href={HREF} active>
+        Orders
+      </Link>,
+    );
+    const link = screen.getByRole("link", { name: "Orders" });
+
+    expect(link).not.toHaveClass("bg-neutral-500/30");
   });
 });

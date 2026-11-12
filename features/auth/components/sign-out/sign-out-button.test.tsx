@@ -78,4 +78,27 @@ describe("<SignOutButton /> - Custom Props", () => {
       within(dialog).getByRole("button", { name: "Sair agora" }),
     ).toBeInTheDocument();
   });
+
+  it("calls onSignOut when the modal of <SignOutButton /> is confirmed, with no <AuthProvider />", () => {
+    const handleSignOut = vi.fn();
+    render(<SignOutButton onSignOut={handleSignOut} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+
+    expect(handleSignOut).not.toHaveBeenCalled();
+
+    const dialog = screen.getByRole("dialog", { name: "Sign out?" });
+    fireEvent.click(within(dialog).getByRole("button", { name: "Sign out" }));
+
+    expect(handleSignOut).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("<SignOutButton /> - Styles", () => {
+  it("renders <SignOutButton /> in the color of the text around it", () => {
+    renderSignOut(<SignOutButton />);
+    const button = screen.getByRole("button", { name: "Sign out" });
+
+    expect(button).toHaveClass("text-current");
+  });
 });

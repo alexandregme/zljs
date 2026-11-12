@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SemanticColor } from "@zljs/core";
-import { Heading } from "@zljs/core";
+import { Heading, Icon, Text } from "@zljs/core";
 import {
   focusOutlineContrast,
   hoverTextContrast,
@@ -84,6 +84,76 @@ export const Colors: Story = {
           none
         </Link>
       </div>
+    </div>
+  ),
+};
+
+export const Variants: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`inline`, the default, is a link in a text. `nav` is a row of a menu: 40px tall, as wide as its parent, with no underline, an icon and a label side by side, and a translucent background on hover that works on a light or a dark surface. `active` marks the link to the current page: it sets `aria-current="page"` on both variants, and a `nav` link also gets a background. A `nav` link whose children have no text, such as only an icon, takes its name from `aria-label`. `Sidebar` is built from these.',
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    const links = canvas.getAllByRole("link");
+    const nameOf = (link: HTMLElement) =>
+      link.getAttribute("aria-label") || link.textContent;
+
+    await expect(
+      links.filter((link) => focusOutlineContrast(link) < 3).map(nameOf),
+    ).toEqual([]);
+    await expect(
+      links
+        .filter((link) => !link.hasAttribute("aria-current"))
+        .filter((link) => hoverTextContrast(link) < 4.5)
+        .map(nameOf),
+    ).toEqual([]);
+    await expect(canvas.getByRole("link", { name: "Orders" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Heading level={2}>Inline</Heading>
+      <div className="flex gap-4">
+        <Link href="/">Home</Link>
+        <Link href="/current" active>
+          Current page
+        </Link>
+      </div>
+      <Heading level={2}>Nav</Heading>
+      <nav aria-label="On white" className="grid w-64 gap-1">
+        <Link href="/products" variant="nav" color="none">
+          <Icon name="Store" />
+          <Text as="span" variant="caption">
+            Products
+          </Text>
+        </Link>
+        <Link href="/orders" variant="nav" color="none" active>
+          <Icon name="ShoppingCart" />
+          <Text as="span" variant="caption">
+            Orders
+          </Text>
+        </Link>
+      </nav>
+      <nav
+        aria-label="On a dark background"
+        className="grid w-64 gap-1 bg-neutral-800 p-2 text-neutral-300"
+      >
+        <Link href="/reports" variant="nav" color="none">
+          <Icon name="BarChart3" />
+          <Text as="span" variant="caption">
+            Reports
+          </Text>
+        </Link>
+        <Link href="/clients" variant="nav" color="none" aria-label="Clients">
+          <Icon name="Users" />
+        </Link>
+      </nav>
     </div>
   ),
 };

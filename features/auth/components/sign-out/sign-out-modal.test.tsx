@@ -135,6 +135,50 @@ describe("<SignOutModal /> - Custom Props", () => {
 
     expect(toast?.message).toBe("Não deu pra sair");
   });
+
+  it("calls onSignOut instead of the adapter when <SignOutModal /> gets one", () => {
+    const adapter = createMockAuthAdapter(MOCK_AUTH_SESSION);
+    const signOut = vi.spyOn(adapter, "signOut");
+    const handleSignOut = vi.fn();
+    renderOpenModal(<SignOutModal onSignOut={handleSignOut} />, adapter);
+
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+
+    expect(handleSignOut).toHaveBeenCalledTimes(1);
+    expect(signOut).not.toHaveBeenCalled();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("needs no <AuthProvider /> when <SignOutModal /> gets onSignOut", () => {
+    const handleSignOut = vi.fn();
+    useAppStore.getState().openModal(SIGN_OUT_MODAL_ID);
+    render(<SignOutModal onSignOut={handleSignOut} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+
+    expect(handleSignOut).toHaveBeenCalledTimes(1);
+  });
+
+  it.each([
+    ["rejects", () => Promise.reject(new Error("offline"))],
+    [
+      "throws",
+      () => {
+        throw new Error("offline");
+      },
+    ],
+  ])(
+    "sends an error toast when the onSignOut of <SignOutModal /> %s",
+    async (_how, handleSignOut) => {
+      renderOpenModal(<SignOutModal onSignOut={handleSignOut} />);
+
+      fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+
+      await waitFor(() => {
+        expect(useToastStore.getState().toasts).toHaveLength(1);
+      });
+    },
+  );
 });
 
 describe("<SignOutModal /> - Styles", () => {

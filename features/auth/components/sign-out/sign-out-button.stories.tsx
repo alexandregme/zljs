@@ -1,7 +1,8 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
+import { expect, fn, within } from "storybook/test";
 import {
   focusOutlineContrast,
+  hoverTextContrast,
   MOCK_AUTH_SESSION,
   MockAuthProvider,
 } from "@test-utils";
@@ -36,7 +37,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "An icon button that signs the user out through the adapter of `AuthProvider`, so it goes inside it. `label` is its accessible name. A click never signs out right away: it opens a modal that asks first, which the button already renders, because a wrong tap costs a whole new sign-in.",
+          "An icon button that signs the user out through the adapter of `AuthProvider`, so it goes inside it. `label` is its accessible name. It takes the color of the text around it, so it works on a light or a dark surface. A click never signs out right away: it opens a modal that asks first, which the button already renders, because a wrong tap costs a whole new sign-in.",
       },
     },
   },
@@ -85,5 +86,42 @@ export const Texts: Story = {
     confirmLabel: "Sair",
     cancelLabel: "Cancelar",
     errorMessage: "Não deu pra sair. Tente de novo.",
+  },
+};
+
+export const OnSignOut: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "With `onSignOut`, the button calls the app's own function when the user confirms, instead of the adapter, so it needs no `AuthProvider`: use it in an app whose auth doesn't come from zljs. A function that throws or rejects shows the `errorMessage` toast. This story also shows the button on a dark surface.",
+      },
+    },
+  },
+  args: { onSignOut: fn() },
+  decorators: [
+    (Story) => (
+      <div className="bg-neutral-800 p-4 text-neutral-300">
+        <Story />
+      </div>
+    ),
+  ],
+  play: async ({ args, canvas, userEvent }) => {
+    const button = canvas.getByRole("button", { name: "Sign out" });
+
+    await expect(focusOutlineContrast(button)).toBeGreaterThanOrEqual(3);
+    await expect(hoverTextContrast(button)).toBeGreaterThanOrEqual(3);
+
+    await userEvent.click(button);
+
+    const dialog = await within(document.body).findByRole("dialog", {
+      name: "Sign out?",
+    });
+
+    await userEvent.click(
+      within(dialog).getByRole("button", { name: "Sign out" }),
+    );
+
+    await expect(args.onSignOut).toHaveBeenCalledTimes(1);
   },
 };

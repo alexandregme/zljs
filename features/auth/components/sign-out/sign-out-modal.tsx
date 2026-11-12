@@ -13,6 +13,7 @@ export const SignOutModal = ({
   confirmLabel = "Sign out",
   cancelLabel = "Cancel",
   errorMessage = "Could not sign out. Try again.",
+  onSignOut,
 }: SignOutModalProps) => {
   const { signOut } = useAuth();
   const closeModal = useAppStore((s) => s.closeModal);
@@ -22,11 +23,24 @@ export const SignOutModal = ({
     closeModal(SIGN_OUT_MODAL_ID);
   };
 
+  // The app's own function when it passed one, or else the adapter of
+  // `AuthProvider`. It is async so a function that throws fails the same way
+  // as one that rejects.
+  const signOutOfApp = async (): Promise<void> => {
+    if (onSignOut) {
+      await onSignOut();
+    } else {
+      await signOut();
+    }
+  };
+
+  const showError = (): void => {
+    useToastStore.getState().error(errorMessage);
+  };
+
   const leave = () => {
     closeModal(SIGN_OUT_MODAL_ID);
-    signOut().catch(() => {
-      useToastStore.getState().error(errorMessage);
-    });
+    signOutOfApp().catch(showError);
   };
 
   return (

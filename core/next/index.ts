@@ -8,7 +8,7 @@ export { PageWrapper } from "./page-wrapper";
 export type { PageWrapperProps } from "./page-wrapper";
 
 export { Link } from "./link";
-export type { LinkProps } from "./link";
+export type { LinkProps, LinkVariant } from "./link";
 
 export { AppProviders } from "./app-providers";
 export type { AppProvidersProps } from "./app-providers";

@@ -8,6 +8,33 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `variant` on `Link`: `inline`, the default, is the link as it was, and `nav` is a row of a menu, 40px tall, with no underline and a translucent background on hover that works on a light or a dark surface
+- `active` on `Link`, which marks the link to the current page with `aria-current="page"`, and gives a `nav` link a background
+- `aria-label` on `Link`, the name of a link whose children have no text, such as only an icon
+- The type `LinkVariant`
+- `onSignOut` on `SignOutButton`: the app's own function, called when the user confirms in the modal, instead of the adapter of `AuthProvider`. With it the button needs no `AuthProvider`, so an app whose auth doesn't come from zljs can use it. A function that throws or rejects shows the `errorMessage` toast
+- `logout` on `Sidebar`, the texts of its logout button and of the modal it opens: `label`, `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`, all with English defaults
+- `navLabel` and `expandLabel` on `Sidebar`, the accessible names of the navigation and of the collapse button while collapsed. They were fixed in English, and those are now the defaults: `Main navigation` and `Expand sidebar`
+
+### Changed
+
+- The logout button of `Sidebar` is a `SignOutButton`. A click opens a modal that asks first, and `onLogout` is called only when the user confirms. `onLogout` may return a promise, and one that rejects shows an error toast, so the app needs a `Toaster`. The default name of the button is `Sign out`, it was `Logout`
+- The links of `Sidebar` are `Link` with `variant="nav"`. Their text takes the color of the sidebar, also on hover and when active, where it was gray and turned white. Collapsed, the labels are no longer rendered, where they faded out, and each link keeps its name
+- `SignOutButton` takes the color of the text around it, so it works on a dark surface. It was gray
+- The collapse button of `Sidebar` always has an `aria-label`: `collapseLabel` while expanded, `expandLabel` while collapsed
+
+#### Migration
+
+- A test of the app that finds the logout button of `Sidebar` by the name `Logout`: the name is now `Sign out`, or what the app passes in `logout.label`. To keep the old name, pass `logout={{ label: "Logout" }}`
+- A test that clicks the logout button and expects `onLogout` to be called: also click the confirm button of the modal, named `Sign out` by default
+- An `onLogout` that asks for confirmation on its own, such as with `window.confirm`: remove the question, the modal already asks
+
+### Fixed
+
+- `Sidebar` is as tall as the visible part of the screen (`100dvh`). It was `100vh`, which on a phone is taller than what the browser shows, so the collapse button ended up under the browser's bar
+
 ## [3.10.0] - 2026-11-12
 
 ### Added
