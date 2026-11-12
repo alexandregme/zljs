@@ -108,6 +108,27 @@ export const Menus: Story = {
   },
 };
 
+export const WithoutLinks: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "With no link in any section, such as `sections={[]}`, there is nothing to open, so the menu button isn't shown. The home link stays in the middle and the account button at the right end. It is for an app whose pages are reached another way, such as a bar of tabs at the bottom, and that only needs the name of the app and the account at the top.",
+      },
+    },
+  },
+  args: { ...requiredProps, sections: [], homeLabel: "Enterprise" },
+  play: async ({ canvas, canvasElement }) => {
+    await expect(
+      canvas.queryByRole("button", { name: "Menu" }),
+    ).not.toBeInTheDocument();
+    await expect(
+      canvas.getByRole("button", { name: "Account" }),
+    ).toBeInTheDocument();
+    await expectControlsToHoldContrast(canvasElement);
+  },
+};
+
 export const Accounts: Story = {
   parameters: {
     docs: {
