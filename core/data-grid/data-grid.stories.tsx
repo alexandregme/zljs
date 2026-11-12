@@ -117,7 +117,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "Only `columns` and `data` are required. The grid fills a parent with a height and has a minimum height of 320px when the parent has none, so it never collapses. Past that, its rows scroll inside it.",
+          "Only `columns` and `data` are required. The grid fills its parent on its own, so an app sets no height on it: it takes the height of a parent that has one, and what is left of a flex column, next to a header for example. It has a minimum height of 320px when the parent has no height, so it never collapses. Past that, its rows scroll inside it.",
       },
     },
   },
