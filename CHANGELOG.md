@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.8.0] - 2026-11-12
+
 ### Added
 
 - `size` on `Tag`: `sm`, the default, is the tag as it was, and `md` and `lg` have larger text and more padding. The remove button follows the size
@@ -463,7 +465,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.7.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.8.0...HEAD
+[3.8.0]: https://github.com/alexandregme/zljs/compare/v3.7.0...v3.8.0
 [3.7.0]: https://github.com/alexandregme/zljs/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/alexandregme/zljs/compare/v3.5.0...v3.6.0
 [3.5.0]: https://github.com/alexandregme/zljs/compare/v3.3.0...v3.5.0
