@@ -28,7 +28,12 @@ describe("<Tag /> - Default Props", () => {
 describe("<Tag /> - Custom Props", () => {
   it("renders <Tag /> with all its props", () => {
     render(
-      <Tag color="pink" onRemove={vi.fn()} removeLabel="Remover filtro Nome">
+      <Tag
+        color="pink"
+        size="lg"
+        onRemove={vi.fn()}
+        removeLabel="Remover filtro Nome"
+      >
         Nome
       </Tag>,
     );
@@ -65,6 +70,21 @@ describe("<Tag /> - Styles", () => {
     const tag = screen.getByTestId("tag");
 
     expect(tag).toHaveClass("bg-zl-pink/15", "text-zl-pink-strong");
+  });
+
+  it("renders <Tag /> with size sm by default", () => {
+    render(<Tag>Status</Tag>);
+    const tag = screen.getByTestId("tag");
+
+    expect(tag).toHaveClass("text-xs");
+  });
+
+  it("renders <Tag /> with size lg", () => {
+    render(<Tag size="lg">Status</Tag>);
+    const tag = screen.getByTestId("tag");
+
+    expect(tag).toHaveClass("text-base");
+    expect(tag).not.toHaveClass("text-xs");
   });
 
   it("renders <Tag /> remove button in the color of the tag", () => {

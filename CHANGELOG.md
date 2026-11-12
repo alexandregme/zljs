@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `size` on `Tag`: `sm`, the default, is the tag as it was, and `md` and `lg` have larger text and more padding. The remove button follows the size
+
 ## [3.7.0] - 2026-11-11
 
 ### Added
