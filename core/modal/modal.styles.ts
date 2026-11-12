@@ -1,11 +1,13 @@
 import { tv } from "tailwind-variants";
 
+// `z-50` on both: a modal covers everything on the page, the panels of the
+// navigation included, and only the toasts stay over it.
 export const overlay = tv({
-  base: "fixed inset-0 bg-black/50",
+  base: "fixed inset-0 z-50 bg-black/50",
 });
 
 export const content = tv({
-  base: "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg p-6 w-full focus:outline-none max-h-[90vh] overflow-y-auto",
+  base: "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg p-6 w-full focus:outline-none max-h-[90vh] overflow-y-auto",
   variants: {
     size: {
       xs: "max-w-xs",
