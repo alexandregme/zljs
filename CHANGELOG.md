@@ -8,6 +8,12 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Fixed
+
+- The open panels of `TopNav`, the menu and the account, showed under what a page layers on itself, such as a filter over a map. They are now `z-40`, so a page can layer its own content up to `z-30` under them
+- `Modal` showed under anything with a `z-index`, such as the account panel of `TopNav` the logout modal opens from. It is now `z-50`, over the page and the panels
+- `Loader` is now `z-60`, so it still covers an open modal
+
 ## [3.13.0] - 2026-11-12
 
 ### Changed

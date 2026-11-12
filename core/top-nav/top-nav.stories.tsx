@@ -167,7 +167,7 @@ export const Logouts: Story = {
     docs: {
       description: {
         story:
-          "`logout` takes the texts of the logout button and of its modal: `label`, `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`, all with English defaults. This story logs out, so axe checks the modal.",
+          "`logout` takes the texts of the logout button and of its modal: `label`, `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`, all with English defaults. The modal opens over the account panel. This story logs out, so axe checks the modal.",
       },
     },
   },
@@ -184,12 +184,20 @@ export const Logouts: Story = {
   },
   play: async ({ args, canvas, userEvent }) => {
     await userEvent.click(canvas.getByRole("button", { name: "Conta" }));
-    await userEvent.click(canvas.getByRole("button", { name: "Sair" }));
+
+    const logout = canvas.getByRole("button", { name: "Sair" });
+    const panel = logout.parentElement!;
+
+    await userEvent.click(logout);
 
     const dialog = await within(document.body).findByRole("dialog", {
       name: "Sair da conta?",
     });
 
+    // The modal covers the account panel it was opened from.
+    await expect(Number(getComputedStyle(dialog).zIndex)).toBeGreaterThan(
+      Number(getComputedStyle(panel).zIndex),
+    );
     await expect(args.onLogout).not.toHaveBeenCalled();
 
     await userEvent.click(
