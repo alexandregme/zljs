@@ -2,7 +2,10 @@ import type { SignOutButtonProps } from "../../features/auth/components/sign-out
 import type { SidebarSection, SidebarUser } from "../sidebar";
 
 export interface TopNavProps {
-  /** The same sections `Sidebar` takes. The menu button opens them. */
+  /**
+   * The same sections `Sidebar` takes. The menu button opens them. With no
+   * link in any section, the menu button isn't shown.
+   */
   sections: SidebarSection[];
   /** The same user `Sidebar` takes. The account button shows it. */
   user: SidebarUser;

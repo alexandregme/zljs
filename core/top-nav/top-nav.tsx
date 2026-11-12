@@ -25,6 +25,8 @@ export const TopNav = ({
   const [open, setOpen] = useState<Panel>(null);
   const styles = topNav();
 
+  // With no link there is nothing to open, so the menu button isn't shown.
+  const hasLinks = sections.some((section) => section.items.length > 0);
   const menuOpen = open === "menu";
   const accountOpen = open === "account";
   const menuIcon = menuOpen ? "X" : "Menu";
@@ -44,14 +46,18 @@ export const TopNav = ({
   return (
     <header className={styles.base()}>
       <div className={styles.bar()}>
-        <Button
-          color="ghost"
-          size="lg"
-          icon={menuIcon}
-          aria-label={menuLabel}
-          aria-expanded={menuOpen}
-          onClick={toggleMenu}
-        />
+        {hasLinks ? (
+          <Button
+            color="ghost"
+            size="lg"
+            icon={menuIcon}
+            aria-label={menuLabel}
+            aria-expanded={menuOpen}
+            onClick={toggleMenu}
+          />
+        ) : (
+          <span aria-hidden="true" className={styles.spacer()} />
+        )}
         <div className={styles.home()}>
           {homeHref && (
             <Link

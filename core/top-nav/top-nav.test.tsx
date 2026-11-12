@@ -160,6 +160,21 @@ describe("<TopNav /> - Custom Props", () => {
     expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
   });
 
+  it("renders <TopNav /> without the menu button when no section has a link", () => {
+    render(
+      <TopNav {...REQUIRED_PROPS} sections={[{ items: [] }]} homeLabel="App" />,
+    );
+    const bar = screen.getByRole("banner");
+    const buttons = within(bar).getAllByRole("button");
+
+    expect(screen.getByRole("link", { name: "App" })).toBeInTheDocument();
+    expect(buttons.map((button) => button.getAttribute("aria-label"))).toEqual([
+      "Account",
+    ]);
+    expect(bar.querySelectorAll('[aria-hidden="true"]:empty')).toHaveLength(1);
+    expect(screen.queryByTestId("Menu")).not.toBeInTheDocument();
+  });
+
   it("opens and closes the links when the menu button of <TopNav /> is clicked", () => {
     render(<TopNav {...REQUIRED_PROPS} />);
     const menu = screen.getByRole("button", { name: "Menu" });

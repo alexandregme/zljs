@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Changed
+
+- `TopNav` doesn't show the menu button when no section has a link, such as with `sections={[]}`: there was nothing for it to open. The home link stays in the middle of the bar. It is for an app that reaches its pages another way, such as tabs at the bottom, and wants only the name of the app and the account at the top. `Navigation` on a small screen follows it
+
 ## [3.11.0] - 2026-11-12
 
 ### Added

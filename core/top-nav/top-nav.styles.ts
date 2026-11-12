@@ -6,6 +6,9 @@ export const topNav = tv({
     // bar under the notch of a phone.
     base: "relative shrink-0 bg-neutral-800 pt-[env(safe-area-inset-top)] text-neutral-300",
     bar: "flex h-14 items-center gap-1 px-2",
+    // As wide as the menu button it stands in for, so the home link stays in
+    // the middle of the bar.
+    spacer: "size-10 shrink-0",
     // Takes what the two buttons leave, with the home link in the middle of it.
     home: "flex min-w-0 flex-1 justify-center",
     // Over the page, under the bar, as wide as the screen. It scrolls when the
