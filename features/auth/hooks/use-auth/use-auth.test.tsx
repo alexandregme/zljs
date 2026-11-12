@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { renderHook } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { createMockAuthAdapter, MOCK_APP_ID } from "@test-utils";
 import { AuthProvider, useAuth } from "@zljs/core";
 
@@ -41,10 +41,12 @@ describe("useAuth", () => {
     );
     const { result } = renderHook(() => useAuth(), { wrapper });
 
-    await result.current.signInWithOAuth("google");
-    await result.current.signInWithPassword(CREDENTIALS);
-    await result.current.signInWithMagicLink(CREDENTIALS.email);
-    await result.current.signOut();
+    await act(async () => {
+      await result.current.signInWithOAuth("google");
+      await result.current.signInWithPassword(CREDENTIALS);
+      await result.current.signInWithMagicLink(CREDENTIALS.email);
+      await result.current.signOut();
+    });
 
     expect(signInWithOAuth).toHaveBeenCalledWith("google");
     expect(signInWithPassword).toHaveBeenCalledWith(CREDENTIALS);

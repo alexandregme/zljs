@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import {
   createMockAuthAdapter,
   MOCK_APP_ID,
@@ -22,7 +22,9 @@ const renderSignOut = (
   );
 
 afterEach(() => {
-  useAppStore.setState(appInitialState);
+  act(() => {
+    useAppStore.setState(appInitialState);
+  });
 });
 
 describe("<SignOutButton /> - Default Props", () => {

@@ -1,4 +1,5 @@
 import {
+  act,
   render,
   screen,
   fireEvent,
@@ -44,8 +45,10 @@ const REQUIRED_PROPS = {
 
 // The logout modal opens through `useAppStore`, which every test shares.
 afterEach(() => {
-  useAppStore.setState(appInitialState);
-  useToastStore.setState({ toasts: [] });
+  act(() => {
+    useAppStore.setState(appInitialState);
+    useToastStore.setState({ toasts: [] });
+  });
 });
 
 describe("<Sidebar /> - Default Props", () => {

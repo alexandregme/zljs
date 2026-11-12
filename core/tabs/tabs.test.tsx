@@ -1,10 +1,4 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  within,
-} from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { Tabs, Text } from "@zljs/core";
 import type { TabsItem } from "@zljs/core";
 
@@ -111,10 +105,12 @@ describe("<Tabs /> - Custom Props", () => {
     const open = screen.getByRole("tab", { name: "Open" });
     const sent = screen.getByRole("tab", { name: "Sent" });
 
-    open.focus();
+    act(() => open.focus());
     fireEvent.keyDown(open, { key: "ArrowRight" });
+    // Radix moves the focus in a timeout.
+    await act(() => new Promise((resolve) => setTimeout(resolve)));
 
-    await waitFor(() => expect(sent).toHaveFocus());
+    expect(sent).toHaveFocus();
     expect(sent).toHaveAttribute("aria-selected", "true");
   });
 });

@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Form } from "./form";
 import { Input, Checkbox, Radio, Select, Button } from "@zljs/core";
+import { fn } from "storybook/test";
+
+// A field with `value` needs `onChange`, also when the form disables it.
+const onChange = fn();
 
 const meta: Meta<typeof Form> = {
   title: "Forms/Form",
@@ -40,8 +44,13 @@ export const Disabled: Story = {
     disabled: true,
     children: (
       <div className="flex flex-col gap-4">
-        <Input label="Username" value="john_doe" />
-        <Input label="Email" type="email" value="john@example.com" />
+        <Input label="Username" value="john_doe" onChange={onChange} />
+        <Input
+          label="Email"
+          type="email"
+          value="john@example.com"
+          onChange={onChange}
+        />
         <Button type="submit">Submit</Button>
       </div>
     ),

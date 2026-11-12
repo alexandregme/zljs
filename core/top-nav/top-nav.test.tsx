@@ -1,10 +1,12 @@
 import {
+  act,
   render,
   screen,
   fireEvent,
   waitFor,
   within,
 } from "@testing-library/react";
+import { MockRouteProvider } from "@test-utils";
 import {
   appInitialState,
   TopNav,
@@ -46,8 +48,10 @@ const openAccount = (name = "Account"): void => {
 
 // The logout modal opens through `useAppStore`, which every test shares.
 afterEach(() => {
-  useAppStore.setState(appInitialState);
-  useToastStore.setState({ toasts: [] });
+  act(() => {
+    useAppStore.setState(appInitialState);
+    useToastStore.setState({ toasts: [] });
+  });
 });
 
 describe("<TopNav /> - Default Props", () => {
@@ -183,7 +187,11 @@ describe("<TopNav /> - Custom Props", () => {
   });
 
   it("closes the links of <TopNav /> when one of them is clicked", () => {
-    render(<TopNav {...REQUIRED_PROPS} />);
+    render(
+      <MockRouteProvider>
+        <TopNav {...REQUIRED_PROPS} />
+      </MockRouteProvider>,
+    );
 
     openMenu();
     fireEvent.click(screen.getByRole("link", { name: "Orders" }));
@@ -192,7 +200,11 @@ describe("<TopNav /> - Custom Props", () => {
   });
 
   it("closes the links of <TopNav /> when the home link is clicked", () => {
-    render(<TopNav {...REQUIRED_PROPS} />);
+    render(
+      <MockRouteProvider>
+        <TopNav {...REQUIRED_PROPS} />
+      </MockRouteProvider>,
+    );
 
     openMenu();
     fireEvent.click(screen.getByRole("link", { name: "Home" }));

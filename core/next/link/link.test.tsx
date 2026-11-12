@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { MockRouteProvider } from "@test-utils";
 import { Icon } from "@zljs/core";
 import { Link } from "./link";
 
@@ -14,7 +15,11 @@ describe("<Link /> - Default Props", () => {
   });
 
   it("renders <Link /> without its optional props by default", () => {
-    render(<Link href={HREF}>Orders</Link>);
+    render(
+      <MockRouteProvider>
+        <Link href={HREF}>Orders</Link>
+      </MockRouteProvider>,
+    );
     const link = screen.getByRole("link", { name: "Orders" });
 
     expect(link).not.toHaveAttribute("aria-current");
@@ -49,9 +54,11 @@ describe("<Link /> - Custom Props", () => {
   it("calls onClick when <Link /> is clicked", () => {
     const handleClick = vi.fn();
     render(
-      <Link href={HREF} onClick={handleClick}>
-        Orders
-      </Link>,
+      <MockRouteProvider>
+        <Link href={HREF} onClick={handleClick}>
+          Orders
+        </Link>
+      </MockRouteProvider>,
     );
 
     fireEvent.click(screen.getByRole("link", { name: "Orders" }));
