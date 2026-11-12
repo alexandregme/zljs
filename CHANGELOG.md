@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.14.0] - 2026-11-12
+
 ### Added
 
 - `RootLayout` counts the page views with [Vercel Web Analytics](https://vercel.com/docs/analytics): it renders `Analytics` from `@vercel/analytics/next`, which zljs now installs, so an app has nothing to install or import. It adds a script to the document and nothing to the page. It is always on. In development it sends nothing and stays silent in the console
@@ -541,7 +543,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.13.1...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.14.0...HEAD
+[3.14.0]: https://github.com/alexandregme/zljs/compare/v3.13.1...v3.14.0
 [3.13.1]: https://github.com/alexandregme/zljs/compare/v3.13.0...v3.13.1
 [3.13.0]: https://github.com/alexandregme/zljs/compare/v3.11.0...v3.13.0
 [3.11.0]: https://github.com/alexandregme/zljs/compare/v3.10.0...v3.11.0
