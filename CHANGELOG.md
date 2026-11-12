@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.11.0] - 2026-11-12
+
 ### Added
 
 - `variant` on `Link`: `inline`, the default, is the link as it was, and `nav` is a row of a menu, 40px tall, with no underline and a translucent background on hover that works on a light or a dark surface
@@ -506,7 +508,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.10.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.11.0...HEAD
+[3.11.0]: https://github.com/alexandregme/zljs/compare/v3.10.0...v3.11.0
 [3.10.0]: https://github.com/alexandregme/zljs/compare/v3.9.0...v3.10.0
 [3.9.0]: https://github.com/alexandregme/zljs/compare/v3.8.0...v3.9.0
 [3.8.0]: https://github.com/alexandregme/zljs/compare/v3.7.0...v3.8.0
