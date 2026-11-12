@@ -43,6 +43,23 @@ import { FormProvider, FormInput } from "@alexandregme/zljs/rhf";
 <Button onClick={handleClick}>Submit</Button>;
 ```
 
+`RootLayout` goes in the root layout of a Next.js app, around its content. It renders the page's `<main>` and counts the page views with [Vercel Web Analytics](https://vercel.com/docs/analytics), so the app installs nothing for it: enable Web Analytics in the project on Vercel and deploy.
+
+```tsx
+// app/layout.tsx
+import { RootLayout } from "@alexandregme/zljs/next";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <RootLayout>{children}</RootLayout>
+      </body>
+    </html>
+  );
+}
+```
+
 ## Colors
 
 The components work with no setup, using the default colors. To use your own, redefine the values you want after importing the styles:
