@@ -95,6 +95,13 @@ describe("<SignOutButton /> - Custom Props", () => {
 });
 
 describe("<SignOutButton /> - Styles", () => {
+  it("renders <SignOutButton /> with size lg", () => {
+    renderSignOut(<SignOutButton size="lg" />);
+    const button = screen.getByRole("button", { name: "Sign out" });
+
+    expect(button).toHaveClass("p-2");
+  });
+
   it("renders <SignOutButton /> in the color of the text around it", () => {
     renderSignOut(<SignOutButton />);
     const button = screen.getByRole("button", { name: "Sign out" });

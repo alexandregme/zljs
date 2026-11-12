@@ -9,11 +9,13 @@ export const Link = ({
   color = "primary",
   active = false,
   "aria-label": ariaLabel,
+  onClick,
 }: LinkProps) => {
   return (
     <NextLink
       href={href}
       aria-label={ariaLabel}
+      onClick={onClick}
       className={link({ variant, color, active })}
       {...(active && { "aria-current": "page" })}
     >

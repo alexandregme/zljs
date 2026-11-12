@@ -1,6 +1,10 @@
+import type { Size } from "../../../../core/types";
+
 export interface SignOutButtonProps {
   /** The accessible name of the icon button. */
   label?: string;
+  /** The size of the icon button. `lg` is for a touch screen. */
+  size?: Size;
   /** The question of the modal a click opens. */
   confirmTitle?: string;
   /** The button of the modal that signs out. */

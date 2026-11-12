@@ -83,6 +83,18 @@ describe("<Button /> - Default Props", () => {
     const button = screen.getByRole("button");
 
     expect(button).not.toHaveAttribute("aria-label");
+    expect(button).not.toHaveAttribute("aria-expanded");
+  });
+
+  it("renders <Button /> with aria-expanded", () => {
+    const { rerender } = render(<Button aria-expanded>Menu</Button>);
+    const button = screen.getByRole("button", { name: "Menu" });
+
+    expect(button).toHaveAttribute("aria-expanded", "true");
+
+    rerender(<Button aria-expanded={false}>Menu</Button>);
+
+    expect(button).toHaveAttribute("aria-expanded", "false");
   });
 
   it("renders <Button /> without onClick by default", () => {

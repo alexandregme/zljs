@@ -13,6 +13,7 @@ export const Button = ({
   iconPosition = "left",
   disabled = false,
   "aria-label": ariaLabel,
+  "aria-expanded": ariaExpanded,
   onClick,
 }: ButtonProps) => {
   const isIconOnly = icon && !children;
@@ -48,6 +49,7 @@ export const Button = ({
       disabled={disabled}
       onClick={onClick}
       aria-label={ariaLabel}
+      aria-expanded={ariaExpanded}
       className={button({
         variant,
         color: variant === "icon" && color !== "ghost" ? "none" : color,

@@ -251,7 +251,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`disabled` dims the button and blocks `onClick`. `fullWidth` stretches it to the width of its container. `aria-label` names the button for screen readers: it is required on icon-only buttons, and when the button has visible text the label must contain that text.",
+          "`disabled` dims the button and blocks `onClick`. `fullWidth` stretches it to the width of its container. `aria-label` names the button for screen readers: it is required on icon-only buttons, and when the button has visible text the label must contain that text. `aria-expanded` is for a button that opens and closes something, such as a menu: it tells a screen reader whether it is open.",
       },
     },
   },
@@ -267,6 +267,11 @@ export const States: Story = {
       <Heading level={2}>Accessible name</Heading>
       <div className="flex gap-2">
         <Button icon="X" aria-label="Close" />
+      </div>
+      <Heading level={2}>Expanded</Heading>
+      <div className="flex gap-2">
+        <Button icon="Menu" aria-label="Menu" aria-expanded={false} />
+        <Button icon="X" aria-label="Menu, open" aria-expanded />
       </div>
     </div>
   ),

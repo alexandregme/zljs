@@ -7,6 +7,7 @@ import type { SignOutButtonProps } from "./sign-out-button.interface";
 
 export const SignOutButton = ({
   label = "Sign out",
+  size = "md",
   confirmTitle,
   confirmLabel,
   cancelLabel,
@@ -21,7 +22,13 @@ export const SignOutButton = ({
 
   return (
     <>
-      <Button color="ghost" icon="LogOut" aria-label={label} onClick={ask} />
+      <Button
+        color="ghost"
+        size={size}
+        icon="LogOut"
+        aria-label={label}
+        onClick={ask}
+      />
       <SignOutModal
         title={confirmTitle}
         confirmLabel={confirmLabel}

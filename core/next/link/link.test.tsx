@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Icon } from "@zljs/core";
 import { Link } from "./link";
 
@@ -19,6 +19,7 @@ describe("<Link /> - Default Props", () => {
 
     expect(link).not.toHaveAttribute("aria-current");
     expect(link).not.toHaveAttribute("aria-label");
+    expect(() => fireEvent.click(link)).not.toThrow();
   });
 });
 
@@ -44,6 +45,18 @@ describe("<Link /> - Custom Props", () => {
     const link = screen.getByRole("link", { name: "Orders" });
 
     expect(link.querySelector("svg")).toBeInTheDocument();
+  });
+  it("calls onClick when <Link /> is clicked", () => {
+    const handleClick = vi.fn();
+    render(
+      <Link href={HREF} onClick={handleClick}>
+        Orders
+      </Link>,
+    );
+
+    fireEvent.click(screen.getByRole("link", { name: "Orders" }));
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });
 

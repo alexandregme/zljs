@@ -37,7 +37,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "An icon button that signs the user out through the adapter of `AuthProvider`, so it goes inside it. `label` is its accessible name. It takes the color of the text around it, so it works on a light or a dark surface. A click never signs out right away: it opens a modal that asks first, which the button already renders, because a wrong tap costs a whole new sign-in.",
+          "An icon button that signs the user out through the adapter of `AuthProvider`, so it goes inside it. `label` is its accessible name. It takes the color of the text around it, so it works on a light or a dark surface. `size` is the size of the button, `md` by default: use `lg` on a touch screen. A click never signs out right away: it opens a modal that asks first, which the button already renders, because a wrong tap costs a whole new sign-in.",
       },
     },
   },

@@ -13,4 +13,6 @@ export interface LinkProps {
   active?: boolean;
   /** The accessible name, for a link whose children have no text. */
   "aria-label"?: string;
+  /** Called on a click, before the navigation, such as to close a menu. */
+  onClick?: () => void;
 }
