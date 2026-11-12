@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Changed
+
+- `DataGrid` takes what is left of a flex column when it is a direct child of one, such as under a page header, so an app needs no wrapper with a height around it. In a parent with a height it fills it, as before
+
 ## [3.8.0] - 2026-11-12
 
 ### Added
