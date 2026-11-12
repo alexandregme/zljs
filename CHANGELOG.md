@@ -8,6 +8,17 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `RootLayout` counts the page views with [Vercel Web Analytics](https://vercel.com/docs/analytics): it renders `Analytics` from `@vercel/analytics/next`, which zljs now installs, so an app has nothing to install or import. It adds a script to the document and nothing to the page. It is always on. In development it sends nothing and stays silent in the console
+
+#### Migration
+
+An app that uses `RootLayout` starts loading the analytics script when it updates:
+
+- Enable Web Analytics in the project on Vercel (Analytics tab), then deploy. Until it is enabled the script answers 404 and nothing is counted
+- An app that already renders `<Analytics />` from `@vercel/analytics` itself: remove its own, or the views are counted by two components. Find it with `grep -rn "@vercel/analytics" app src pages`
+
 ## [3.13.1] - 2026-11-12
 
 ### Fixed
