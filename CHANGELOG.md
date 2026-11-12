@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.13.1] - 2026-11-12
+
 ### Fixed
 
 - The open panels of `TopNav`, the menu and the account, showed under what a page layers on itself, such as a filter over a map. They are now `z-40`, so a page can layer its own content up to `z-30` under them
@@ -528,7 +530,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.13.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.13.1...HEAD
+[3.13.1]: https://github.com/alexandregme/zljs/compare/v3.13.0...v3.13.1
 [3.13.0]: https://github.com/alexandregme/zljs/compare/v3.11.0...v3.13.0
 [3.11.0]: https://github.com/alexandregme/zljs/compare/v3.10.0...v3.11.0
 [3.10.0]: https://github.com/alexandregme/zljs/compare/v3.9.0...v3.10.0
