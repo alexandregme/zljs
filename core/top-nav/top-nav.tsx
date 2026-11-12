@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SignOutButton } from "../../features/auth/components/sign-out";
 import { Button } from "../button";
 import { Icon } from "../icon";
@@ -23,7 +23,39 @@ export const TopNav = ({
 }: TopNavProps) => {
   // One panel at a time: opening one closes the other.
   const [open, setOpen] = useState<Panel>(null);
+  // Set by a press inside the bar. React events bubble through portals, so the
+  // logout modal, which renders in `<body>`, counts as inside: a tap on it
+  // must not close the account panel, which would take the modal with it.
+  const pressedInside = useRef(false);
   const styles = topNav();
+
+  // A press anywhere else on the page closes the open panel. React handles the
+  // press at the root before it reaches `document`, so `pressedInside` is
+  // already set when this runs.
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    pressedInside.current = false;
+
+    const closeOnPressOutside = (): void => {
+      if (!pressedInside.current) {
+        setOpen(null);
+      }
+      pressedInside.current = false;
+    };
+
+    document.addEventListener("pointerdown", closeOnPressOutside);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnPressOutside);
+    };
+  }, [open]);
+
+  const markPressInside = (): void => {
+    pressedInside.current = true;
+  };
 
   // With no link there is nothing to open, so the menu button isn't shown.
   const hasLinks = sections.some((section) => section.items.length > 0);
@@ -44,7 +76,7 @@ export const TopNav = ({
   };
 
   return (
-    <header className={styles.base()}>
+    <header className={styles.base()} onPointerDown={markPressInside}>
       <div className={styles.bar()}>
         {hasLinks ? (
           <Button
