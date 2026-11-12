@@ -1,5 +1,16 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { Sidebar } from "@zljs/core";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  within,
+} from "@testing-library/react";
+import {
+  appInitialState,
+  Sidebar,
+  useAppStore,
+  useToastStore,
+} from "@zljs/core";
 import type { SidebarSection, SidebarUser } from "@zljs/core";
 
 const SECTIONS: SidebarSection[] = [
@@ -30,6 +41,12 @@ const REQUIRED_PROPS = {
   collapseLabel: COLLAPSE_LABEL,
   onLogout: () => {},
 };
+
+// The logout modal opens through `useAppStore`, which every test shares.
+afterEach(() => {
+  useAppStore.setState(appInitialState);
+  useToastStore.setState({ toasts: [] });
+});
 
 describe("<Sidebar /> - Default Props", () => {
   it("renders <Sidebar /> correctly", () => {
@@ -63,8 +80,10 @@ describe("<Sidebar /> - Default Props", () => {
     expect(screen.getByText("AM")).toHaveAttribute("aria-hidden", "true");
     expect(
       screen.getByRole("button", { name: COLLAPSE_LABEL }),
-    ).not.toHaveAttribute("aria-label");
-    expect(screen.getByRole("button", { name: "Logout" })).toBeInTheDocument();
+    ).toHaveTextContent(COLLAPSE_LABEL);
+    expect(
+      screen.getByRole("button", { name: "Sign out" }),
+    ).toBeInTheDocument();
   });
 
   it("renders <Sidebar /> without its optional props by default", () => {
@@ -78,6 +97,7 @@ describe("<Sidebar /> - Default Props", () => {
     expect(
       screen.queryByRole("button", { name: "Expand sidebar" }),
     ).not.toBeInTheDocument();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });
 
@@ -89,10 +109,14 @@ describe("<Sidebar /> - Custom Props", () => {
         activeHref="/dashboard"
         homeHref="/start"
         homeLabel="Enterprise"
+        navLabel="Menu principal"
       />,
     );
     const homeLink = screen.getByRole("link", { name: "Enterprise" });
 
+    expect(
+      screen.getByRole("navigation", { name: "Menu principal" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Dashboard" })).toHaveAttribute(
       "aria-current",
       "page",
@@ -122,7 +146,9 @@ describe("<Sidebar /> - Custom Props", () => {
     render(
       <Sidebar {...REQUIRED_PROPS} user={{ name: "", email: "a@test.com" }} />,
     );
-    const footer = screen.getByRole("button", { name: "Logout" }).parentElement;
+    const footer = screen.getByRole("button", {
+      name: "Sign out",
+    }).parentElement;
 
     expect(footer?.querySelector('[aria-hidden="true"]')).toHaveTextContent("");
   });
@@ -142,12 +168,28 @@ describe("<Sidebar /> - Custom Props", () => {
     expect(
       screen.getByRole("button", { name: "Expand sidebar" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Logout" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Sign out" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Dashboard" })).toBeInTheDocument();
+    expect(screen.queryByText("Dashboard")).not.toBeInTheDocument();
     expect(screen.queryByText(COLLAPSE_LABEL)).not.toBeInTheDocument();
     expect(screen.queryByText("AM")).not.toBeInTheDocument();
     expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
     expect(screen.queryByText("user@example.com")).not.toBeInTheDocument();
+  });
+
+  it("renders <Sidebar /> with expandLabel", () => {
+    render(
+      <Sidebar {...REQUIRED_PROPS} defaultCollapsed expandLabel="Abrir menu" />,
+    );
+
+    expect(
+      screen.getByRole("button", { name: "Abrir menu" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Expand sidebar" }),
+    ).not.toBeInTheDocument();
   });
 
   it("renders <Sidebar /> without the home link when homeHref is false", () => {
@@ -175,36 +217,108 @@ describe("<Sidebar /> - Custom Props", () => {
     ).toBeInTheDocument();
   });
 
-  it("calls onLogout when the logout button of <Sidebar /> is clicked", () => {
+  it("asks before calling onLogout when the logout button of <Sidebar /> is clicked", () => {
     const handleLogout = vi.fn();
     render(<Sidebar {...REQUIRED_PROPS} onLogout={handleLogout} />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Logout" }));
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    const dialog = screen.getByRole("dialog", { name: "Sign out?" });
+
+    expect(
+      within(dialog).getByRole("button", { name: "Cancel" }),
+    ).toBeInTheDocument();
+    expect(handleLogout).not.toHaveBeenCalled();
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Sign out" }));
 
     expect(handleLogout).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
-  it("calls onLogout when the logout button of a collapsed <Sidebar /> is clicked", () => {
+  it("does not call onLogout when the logout of <Sidebar /> is cancelled", () => {
+    const handleLogout = vi.fn();
+    render(<Sidebar {...REQUIRED_PROPS} onLogout={handleLogout} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+
+    expect(handleLogout).not.toHaveBeenCalled();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("calls onLogout from a collapsed <Sidebar />", () => {
     const handleLogout = vi.fn();
     render(
       <Sidebar {...REQUIRED_PROPS} defaultCollapsed onLogout={handleLogout} />,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Logout" }));
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    fireEvent.click(
+      within(screen.getByRole("dialog")).getByRole("button", {
+        name: "Sign out",
+      }),
+    );
 
     expect(handleLogout).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders the logout question of <Sidebar /> with its custom texts", () => {
+    render(
+      <Sidebar
+        {...REQUIRED_PROPS}
+        logout={{
+          label: "Sair",
+          confirmTitle: "Sair da conta?",
+          confirmLabel: "Sair agora",
+          cancelLabel: "Ficar",
+        }}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Sair" }));
+    const dialog = screen.getByRole("dialog", { name: "Sair da conta?" });
+
+    expect(
+      within(dialog).getByRole("button", { name: "Sair agora" }),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByRole("button", { name: "Ficar" }),
+    ).toBeInTheDocument();
+  });
+  it("sends the logout error toast when the onLogout of <Sidebar /> rejects", async () => {
+    const handleLogout = vi.fn().mockRejectedValue(new Error("offline"));
+    render(
+      <Sidebar
+        {...REQUIRED_PROPS}
+        logout={{ errorMessage: "Não deu pra sair" }}
+        onLogout={handleLogout}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    fireEvent.click(
+      within(screen.getByRole("dialog")).getByRole("button", {
+        name: "Sign out",
+      }),
+    );
+
+    await waitFor(() => {
+      expect(useToastStore.getState().toasts).toHaveLength(1);
+    });
+    expect(useToastStore.getState().toasts[0]?.message).toBe(
+      "Não deu pra sair",
+    );
   });
 });
 
 describe("<Sidebar /> - Styles", () => {
   it("renders <Sidebar /> expanded by default", () => {
     const { container } = render(<Sidebar {...REQUIRED_PROPS} />);
-    const footer = screen.getByRole("button", { name: "Logout" }).parentElement;
+    const footer = screen.getByRole("button", {
+      name: "Sign out",
+    }).parentElement;
 
     expect(container.querySelector("aside")).toHaveClass("w-64");
-    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
-      "[&>*+*]:opacity-100",
-    );
     expect(footer).not.toHaveClass("justify-center");
   });
 
@@ -212,12 +326,11 @@ describe("<Sidebar /> - Styles", () => {
     const { container } = render(
       <Sidebar {...REQUIRED_PROPS} defaultCollapsed />,
     );
-    const footer = screen.getByRole("button", { name: "Logout" }).parentElement;
+    const footer = screen.getByRole("button", {
+      name: "Sign out",
+    }).parentElement;
 
     expect(container.querySelector("aside")).toHaveClass("w-14");
-    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
-      "[&>*+*]:opacity-0",
-    );
     expect(footer).toHaveClass("justify-center");
   });
 
@@ -225,13 +338,13 @@ describe("<Sidebar /> - Styles", () => {
     render(<Sidebar {...REQUIRED_PROPS} activeHref="/dashboard" />);
 
     expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
-      "bg-neutral-700",
+      "bg-neutral-500/30",
     );
     expect(screen.getByRole("link", { name: "Messenger" })).not.toHaveClass(
-      "bg-neutral-700",
+      "bg-neutral-500/30",
     );
     expect(screen.getByRole("link", { name: "Home" })).not.toHaveClass(
-      "bg-neutral-700",
+      "bg-neutral-500/30",
     );
   });
 
@@ -239,7 +352,7 @@ describe("<Sidebar /> - Styles", () => {
     render(<Sidebar {...REQUIRED_PROPS} activeHref="/" />);
 
     expect(screen.getByRole("link", { name: "Home" })).toHaveClass(
-      "bg-neutral-700",
+      "bg-neutral-500/30",
     );
   });
 

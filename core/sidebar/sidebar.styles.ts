@@ -1,15 +1,12 @@
 import { tv } from "tailwind-variants";
 
 export const sidebar = tv({
-  base: "h-screen bg-neutral-800 text-neutral-300 flex flex-col overflow-hidden transition-all duration-200 divide-y divide-neutral-600/50",
+  base: "h-dvh bg-neutral-800 text-neutral-300 flex flex-col overflow-hidden transition-[width] duration-200 divide-y divide-neutral-600/50",
   variants: {
     collapsed: {
       true: "w-14",
       false: "w-64",
     },
-  },
-  defaultVariants: {
-    collapsed: false,
   },
 });
 
@@ -23,25 +20,6 @@ export const header = tv({
 
 export const section = tv({
   base: "grid gap-1 p-2",
-});
-
-export const item = tv({
-  // [&>*+*] is the label: Text takes no className, and the icon comes first, so a link with no label has nothing to hide.
-  base: "flex items-center rounded-md transition-colors h-10 px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current [&>*+*]:truncate [&>*+*]:transition-all [&>*+*]:duration-200",
-  variants: {
-    active: {
-      true: "bg-neutral-700 text-white",
-      false: "text-neutral-400 hover:bg-neutral-700/50 hover:text-white",
-    },
-    collapsed: {
-      true: "[&>*+*]:w-0 [&>*+*]:opacity-0",
-      false: "[&>*+*]:ml-2 [&>*+*]:opacity-100",
-    },
-  },
-  defaultVariants: {
-    active: false,
-    collapsed: false,
-  },
 });
 
 export const footer = tv({

@@ -7,4 +7,9 @@ export interface SignOutModalProps {
   cancelLabel?: string;
   /** The toast when signing out fails. */
   errorMessage?: string;
+  /**
+   * Signs the user out, for an app with no `AuthProvider`. Without it, the
+   * modal signs out through the adapter of `AuthProvider`.
+   */
+  onSignOut?: () => void | Promise<void>;
 }

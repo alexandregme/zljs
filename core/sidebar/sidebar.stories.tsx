@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SidebarProps, SidebarSection } from "@zljs/core";
+import { appInitialState, useAppStore } from "@zljs/core";
 import { focusOutlineContrast, hoverTextContrast } from "@test-utils";
-import { expect } from "storybook/test";
+import { expect, fn, within } from "storybook/test";
 import { Sidebar } from "./sidebar";
 
 export default {
@@ -11,6 +12,10 @@ export default {
   parameters: {
     layout: "fullscreen",
     docs: { toc: true },
+  },
+  // The logout modal opens through `useAppStore`, which every story shares.
+  beforeEach: () => {
+    useAppStore.setState(appInitialState);
   },
 } satisfies Meta<typeof Sidebar>;
 
@@ -202,7 +207,7 @@ export const ActiveHrefs: Story = {
     docs: {
       description: {
         story:
-          'The link whose `href` equals `activeHref` gets a lighter background and `aria-current="page"`, also on the home link. Pass the current route. With no `activeHref`, no link is active.',
+          'Each link is a `Link` with `variant="nav"`. The one whose `href` equals `activeHref` gets a lighter background and `aria-current="page"`, also on the home link. Pass the current route. With no `activeHref`, no link is active.',
       },
     },
   },
@@ -217,11 +222,78 @@ export const CollapseLabels: Story = {
     docs: {
       description: {
         story:
-          "The text of the collapse button, and its accessible name while expanded. Collapsed, the button shows only its icon and is named `Expand sidebar`.",
+          "The text of the collapse button, and its accessible name while expanded. Collapsed, the button shows only its icon and is named by `expandLabel`, `Expand sidebar` by default.",
       },
     },
   },
   args: { ...requiredProps, collapseLabel: "Hide navigation" },
+};
+
+export const Labels: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The accessible names with no visible text have English defaults, and an app in another language sets them: `navLabel` names the navigation (`Main navigation`), `logout.label` the logout button (`Sign out`) and `expandLabel` the collapse button while collapsed (`Expand sidebar`). This story is collapsed, so all three are in use.",
+      },
+    },
+  },
+  args: {
+    ...requiredProps,
+    defaultCollapsed: true,
+    navLabel: "Menu principal",
+    logout: { label: "Sair" },
+    expandLabel: "Abrir menu",
+  },
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByRole("navigation", { name: "Menu principal" }),
+    ).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Sair" })).toBeVisible();
+    await expect(
+      canvas.getByRole("button", { name: "Abrir menu" }),
+    ).toBeVisible();
+  },
+};
+
+export const Logouts: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The logout button is a `SignOutButton`. A click never logs out right away: it opens a modal that asks first, and `onLogout` is called when the user confirms. The app passes the function, so the sidebar works with any auth. When it returns a promise that rejects, an error toast shows, so the app needs a `Toaster`. `logout` takes the texts: `label`, `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`, all with English defaults. This story opens the modal and confirms, so axe checks it.",
+      },
+      story: { inline: false, height: "480px" },
+    },
+  },
+  args: {
+    ...requiredProps,
+    logout: {
+      label: "Sair",
+      confirmTitle: "Sair da conta?",
+      confirmLabel: "Sair agora",
+      cancelLabel: "Ficar",
+    },
+    onLogout: fn(),
+  },
+  play: async ({ args, canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Sair" }));
+
+    const dialog = await within(document.body).findByRole("dialog", {
+      name: "Sair da conta?",
+    });
+
+    await expect(args.onLogout).not.toHaveBeenCalled();
+    await expect(
+      within(dialog).getByRole("button", { name: "Ficar" }),
+    ).toBeVisible();
+
+    await userEvent.click(
+      within(dialog).getByRole("button", { name: "Sair agora" }),
+    );
+
+    await expect(args.onLogout).toHaveBeenCalledTimes(1);
+  },
 };
 
 export const HomeHrefs: Story = {
@@ -253,7 +325,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`defaultCollapsed` starts it at 56px, with only the icons and the logout button: the links keep their accessible names, and the avatar, name and email come back when it expands. The user can toggle it either way, and `onLogout` is called from both states. The home link is active here, so axe also checks that state.",
+          "`defaultCollapsed` starts it at 56px, with only the icons and the logout button: the links keep their accessible names, and the avatar, name and email come back when it expands. The user can toggle it either way, and can log out from both states. The home link is active here, so axe also checks that state.",
       },
     },
   },

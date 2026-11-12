@@ -11,6 +11,7 @@ export const SignOutButton = ({
   confirmLabel,
   cancelLabel,
   errorMessage,
+  onSignOut,
 }: SignOutButtonProps) => {
   const openModal = useAppStore((s) => s.openModal);
 
@@ -20,18 +21,13 @@ export const SignOutButton = ({
 
   return (
     <>
-      <Button
-        variant="icon"
-        color="none"
-        icon="LogOut"
-        aria-label={label}
-        onClick={ask}
-      />
+      <Button color="ghost" icon="LogOut" aria-label={label} onClick={ask} />
       <SignOutModal
         title={confirmTitle}
         confirmLabel={confirmLabel}
         cancelLabel={cancelLabel}
         errorMessage={errorMessage}
+        onSignOut={onSignOut}
       />
     </>
   );
