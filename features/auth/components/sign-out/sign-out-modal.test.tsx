@@ -1,4 +1,5 @@
 import {
+  act,
   fireEvent,
   render,
   screen,
@@ -33,8 +34,10 @@ const renderOpenModal = (
 };
 
 afterEach(() => {
-  useAppStore.setState(appInitialState);
-  useToastStore.setState({ toasts: [] });
+  act(() => {
+    useAppStore.setState(appInitialState);
+    useToastStore.setState({ toasts: [] });
+  });
 });
 
 describe("<SignOutModal /> - Default Props", () => {

@@ -26,7 +26,9 @@ const topNav = () => screen.queryByRole("banner");
 
 afterEach(() => {
   restoreBrowserStubs();
-  useAppStore.setState(appInitialState);
+  act(() => {
+    useAppStore.setState(appInitialState);
+  });
 });
 
 describe("<Navigation /> - Default Props", () => {

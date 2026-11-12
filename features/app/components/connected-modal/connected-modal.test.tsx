@@ -4,7 +4,9 @@ import { appInitialState, ConnectedModal, useAppStore } from "@zljs/core";
 const MODAL_ID = "test";
 
 afterEach(() => {
-  useAppStore.setState(appInitialState);
+  act(() => {
+    useAppStore.setState(appInitialState);
+  });
 });
 
 describe("<ConnectedModal /> - Default Props", () => {
