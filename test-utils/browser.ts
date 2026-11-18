@@ -48,6 +48,21 @@ export const stubMatchMedia = (matches: boolean) => {
   };
 };
 
+// jsdom never offers to install the app. This sends the offer a browser sends
+// when the app can be installed, and returns the `prompt` that would show its
+// dialog. It changes the state of who listens, so call it inside `act`.
+export const offerInstall = () => {
+  const prompt = vi.fn(() => Promise.resolve());
+
+  window.dispatchEvent(
+    Object.assign(new Event("beforeinstallprompt", { cancelable: true }), {
+      prompt,
+    }),
+  );
+
+  return prompt;
+};
+
 export const restoreBrowserStubs = () => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();

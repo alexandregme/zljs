@@ -32,6 +32,7 @@ export const iconNames = [
   "Brain",
   "Send",
   "LogOut",
+  "Download",
   "User",
   "Key",
   "Contact",

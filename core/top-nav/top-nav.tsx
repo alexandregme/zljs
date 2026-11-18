@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { InstallAppButton } from "../../features/app/components/install-app-button";
+import { useInstallApp } from "../../features/app/hooks";
 import { SignOutButton } from "../../features/auth/components/sign-out";
 import { Button } from "../button";
 import { Icon } from "../icon";
@@ -18,6 +20,7 @@ export const TopNav = ({
   navLabel = "Main navigation",
   menuLabel = "Menu",
   accountLabel = "Account",
+  install = {},
   logout = {},
   onLogout,
 }: TopNavProps) => {
@@ -27,6 +30,9 @@ export const TopNav = ({
   // logout modal, which renders in `<body>`, counts as inside: a tap on it
   // must not close the account panel, which would take the modal with it.
   const pressedInside = useRef(false);
+  // Called here, not in the account panel: the browser may offer the install
+  // while the panel is closed, and the offer isn't sent again.
+  const installApp = useInstallApp();
   const styles = topNav();
 
   // A press anywhere else on the page closes the open panel. React handles the
@@ -129,6 +135,16 @@ export const TopNav = ({
               {user.email}
             </Text>
           </div>
+          {installApp.way && (
+            <InstallAppButton
+              way={installApp.way}
+              size="lg"
+              label={install.label}
+              instructionsTitle={install.instructionsTitle}
+              instructions={install.instructions}
+              onPrompt={installApp.prompt}
+            />
+          )}
           <SignOutButton
             size="lg"
             label={logout.label}

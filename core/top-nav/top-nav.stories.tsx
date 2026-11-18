@@ -238,6 +238,36 @@ export const Logouts: Story = {
   },
 };
 
+export const Installs: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "On a phone, the account panel gets an install button before the logout button: it puts the app on the home screen, to open like an installed app. It only shows when the browser can do it. Where the browser offers the install, as Chrome on Android does for an app with a web app manifest, a tap shows the install dialog of the browser. On an iPhone, which has no dialog, a tap opens a modal with the steps. Opened from the home screen, or in a browser that can't install, there is no button. `install` takes its texts: `label`, `instructionsTitle` and `instructions`, all with English defaults. This story sends the offer a browser sends and opens the account, so axe checks the button.",
+      },
+    },
+  },
+  args: { ...requiredProps, install: { label: "Instalar app" } },
+  play: async ({ canvas, canvasElement, userEvent }) => {
+    const prompt = fn();
+
+    window.dispatchEvent(
+      Object.assign(new Event("beforeinstallprompt"), { prompt }),
+    );
+    await userEvent.click(canvas.getByRole("button", { name: "Account" }));
+
+    const install = await canvas.findByRole("button", { name: "Instalar app" });
+
+    await expect(install).toBeVisible();
+    await expectControlsToHoldContrast(canvasElement);
+
+    await userEvent.click(install);
+
+    await expect(prompt).toHaveBeenCalledTimes(1);
+    await expect(install).not.toBeInTheDocument();
+  },
+};
+
 export const Homes: Story = {
   parameters: {
     docs: {

@@ -17,6 +17,7 @@ export const Navigation = ({
   navLabel,
   menuLabel,
   accountLabel,
+  install,
   logout,
   onLogout,
 }: NavigationProps) => {
@@ -57,6 +58,7 @@ export const Navigation = ({
       navLabel={navLabel}
       menuLabel={menuLabel}
       accountLabel={accountLabel}
+      install={install}
       logout={logout}
       onLogout={onLogout}
     />

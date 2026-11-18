@@ -1,3 +1,4 @@
+import type { InstallAppButtonProps } from "../../features/app/components/install-app-button";
 import type { SignOutButtonProps } from "../../features/auth/components/sign-out";
 import type { SidebarSection, SidebarUser } from "../sidebar";
 
@@ -18,6 +19,15 @@ export interface TopNavProps {
   menuLabel?: string;
   /** The accessible name of the account button. */
   accountLabel?: string;
+  /**
+   * The texts of the install button and of the modal with its steps: `label`,
+   * `instructionsTitle` and `instructions`. The button shows before the logout
+   * button, only in a browser that can put the app on the home screen.
+   */
+  install?: Pick<
+    InstallAppButtonProps,
+    "label" | "instructionsTitle" | "instructions"
+  >;
   /**
    * The texts of the logout button and of the modal it opens: `label`,
    * `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`.

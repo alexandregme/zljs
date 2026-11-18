@@ -2,6 +2,7 @@ export {
   ANDROID_USER_AGENT,
   DESKTOP_USER_AGENT,
   IPHONE_USER_AGENT,
+  offerInstall,
   restoreBrowserStubs,
   stubElementRect,
   stubLocation,

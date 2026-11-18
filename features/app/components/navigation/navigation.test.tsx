@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
-import { restoreBrowserStubs, stubMatchMedia } from "@test-utils";
+import { offerInstall, restoreBrowserStubs, stubMatchMedia } from "@test-utils";
 import { appInitialState, Navigation, useAppStore } from "@zljs/core";
 import type { NavigationProps } from "@zljs/core";
 
@@ -106,9 +106,14 @@ describe("<Navigation /> - Custom Props", () => {
         navLabel="Menu principal"
         menuLabel="Abrir menu"
         accountLabel="Conta"
+        install={{ label: "Instalar app" }}
         logout={{ label: "Sair" }}
       />,
     );
+
+    act(() => {
+      offerInstall();
+    });
 
     expect(screen.getByRole("link", { name: "Enterprise" })).toHaveAttribute(
       "href",
@@ -127,6 +132,9 @@ describe("<Navigation /> - Custom Props", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Conta" }));
 
+    expect(
+      screen.getByRole("button", { name: "Instalar app" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sair" })).toBeInTheDocument();
   });
 
