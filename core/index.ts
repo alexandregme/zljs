@@ -46,14 +46,19 @@ export type { Toast, ToastType, ToastState } from "../features/toaster";
 export {
   appInitialState,
   ConnectedModal,
+  InstallAppButton,
   Loader,
   Navigation,
   useAppStore,
+  useInstallApp,
   useIsDesktop,
 } from "../features/app";
 export type {
   AppState,
   ConnectedModalProps,
+  InstallApp,
+  InstallAppButtonProps,
+  InstallAppWay,
   LoaderProps,
   NavigationMode,
   NavigationProps,

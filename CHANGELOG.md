@@ -8,6 +8,20 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `TopNav`, and so `Navigation` on a small screen, shows an install button before the logout button in the account panel: it puts the app on the home screen of the phone, to open like an installed app. It only shows when the browser can do it. Where the browser offers the install (Chrome on Android), a tap shows its install dialog. On an iPhone a tap opens a modal with the steps. Opened from the home screen, or in a browser that can't install, there is no button. `install` takes its texts: `label`, `instructionsTitle` and `instructions`
+- `useInstallApp` and `InstallAppButton`, the hook and the button `TopNav` uses, for an app that puts the install somewhere else
+- `Icon` has the `Download` icon
+
+#### Migration
+
+An app that uses `TopNav` or `Navigation` gets the install button when it updates:
+
+- An app in another language passes `install={{ label, instructionsTitle, instructions }}`, or the button and its modal are in English. Find where with `grep -rnE "<(TopNav|Navigation)" app src pages`
+- Chrome on Android only offers the install to an app with a web app manifest, so without one the button never shows there. In Next.js, add `app/manifest.ts` with `name`, `icons` (192px and 512px), `start_url` and `display: "standalone"`
+- On an iPhone the button shows with or without a manifest. Without one, the app opens from the home screen inside the browser
+
 ## [3.14.0] - 2026-11-12
 
 ### Added

@@ -6,7 +6,14 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
-import { MockRouteProvider } from "@test-utils";
+import {
+  IPHONE_USER_AGENT,
+  MockRouteProvider,
+  offerInstall,
+  restoreBrowserStubs,
+  stubMatchMedia,
+  stubUserAgent,
+} from "@test-utils";
 import {
   appInitialState,
   TopNav,
@@ -48,6 +55,7 @@ const openAccount = (name = "Account"): void => {
 
 // The logout modal opens through `useAppStore`, which every test shares.
 afterEach(() => {
+  restoreBrowserStubs();
   act(() => {
     useAppStore.setState(appInitialState);
     useToastStore.setState({ toasts: [] });
@@ -240,11 +248,65 @@ describe("<TopNav /> - Custom Props", () => {
       screen.getByRole("button", { name: "Sign out" }),
     ).toBeInTheDocument();
     expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Install app" }),
+    ).not.toBeInTheDocument();
 
     fireEvent.click(account);
 
     expect(account).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
+  });
+
+  it("shows the install button of <TopNav /> before the logout button when the browser offers the install", () => {
+    render(<TopNav {...REQUIRED_PROPS} />);
+    let prompt = vi.fn();
+
+    // The offer comes while the account is still closed.
+    act(() => {
+      prompt = offerInstall();
+    });
+    openAccount();
+    const install = screen.getByRole("button", { name: "Install app" });
+    const logout = screen.getByRole("button", { name: "Sign out" });
+
+    expect(
+      install.compareDocumentPosition(logout) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+
+    fireEvent.click(install);
+
+    expect(prompt).toHaveBeenCalledTimes(1);
+    expect(
+      screen.queryByRole("button", { name: "Install app" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
+  });
+
+  it("renders <TopNav /> with install on an iPhone, where the install button opens the steps", () => {
+    stubUserAgent(IPHONE_USER_AGENT);
+    stubMatchMedia(false);
+    render(
+      <TopNav
+        {...REQUIRED_PROPS}
+        install={{
+          label: "Instalar app",
+          instructionsTitle: "Instale este app",
+          instructions: "Toque em Compartilhar.",
+        }}
+      />,
+    );
+
+    openAccount();
+    fireEvent.click(screen.getByRole("button", { name: "Instalar app" }));
+    const dialog = screen.getByRole("dialog", { name: "Instale este app" });
+
+    expect(dialog).toHaveAccessibleDescription("Toque em Compartilhar.");
+
+    fireEvent.pointerDown(dialog);
+
+    expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
   });
 
   it("shows one panel of <TopNav /> at a time", () => {

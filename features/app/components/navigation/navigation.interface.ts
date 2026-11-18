@@ -12,6 +12,8 @@ export type NavigationMode = "auto" | "desktop" | "mobile";
  * the one that shows, and the rest only to its owner.
  */
 export interface NavigationProps
-  extends SidebarProps, Pick<TopNavProps, "menuLabel" | "accountLabel"> {
+  extends
+    SidebarProps,
+    Pick<TopNavProps, "menuLabel" | "accountLabel" | "install"> {
   mode?: NavigationMode;
 }
