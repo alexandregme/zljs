@@ -6,8 +6,13 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { Toaster, toast, useToastStore } from "@zljs/core";
+import { restoreBrowserStubs, stubClipboard } from "@test-utils";
 
 const MESSAGE = "Saved";
+const ERROR_MESSAGE = "Couldn't save";
+const ERROR_DESCRIPTION = "The server answered 500.";
+
+afterEach(restoreBrowserStubs);
 
 describe("<Toaster /> - Default Props", () => {
   it("renders <Toaster /> correctly", () => {
@@ -45,6 +50,76 @@ describe("<Toaster /> - Custom Props", () => {
     expect(screen.getByText("Error message")).toBeInTheDocument();
     expect(screen.getByText("Info message")).toBeInTheDocument();
     expect(screen.getByText("Warning message")).toBeInTheDocument();
+    expect(
+      screen
+        .getAllByRole("button", { name: "Copy" })
+        .map((button) =>
+          button.closest("[data-type]")?.getAttribute("data-type"),
+        )
+        .sort(),
+    ).toEqual(["error", "warning"]);
+  });
+
+  it("renders <Toaster /> without a copy button on a toast whose message is not text", async () => {
+    render(<Toaster />);
+
+    toast.error(<strong>{ERROR_MESSAGE}</strong>);
+    await screen.findByText(ERROR_MESSAGE);
+
+    expect(
+      screen.queryByRole("button", { name: "Copy" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("copies the message and description when the copy button in <Toaster /> is clicked", async () => {
+    const writeText = stubClipboard();
+    render(<Toaster />);
+
+    toast.error(ERROR_MESSAGE, { description: ERROR_DESCRIPTION });
+    const copy = await screen.findByRole("button", { name: "Copy" });
+
+    fireEvent.click(copy);
+
+    expect(
+      await screen.findByRole("button", { name: "Copied" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(ERROR_MESSAGE)).toBeInTheDocument();
+    expect(writeText).toHaveBeenCalledWith(
+      `${ERROR_MESSAGE}\n${ERROR_DESCRIPTION}`,
+    );
+  });
+
+  it("copies only the message when the toast in <Toaster /> has no text description", async () => {
+    const writeText = stubClipboard();
+    render(<Toaster />);
+
+    toast.warning(ERROR_MESSAGE, {
+      description: <em>{ERROR_DESCRIPTION}</em>,
+    });
+    const copy = await screen.findByRole("button", { name: "Copy" });
+
+    fireEvent.click(copy);
+
+    expect(
+      await screen.findByRole("button", { name: "Copied" }),
+    ).toBeInTheDocument();
+    expect(writeText).toHaveBeenCalledWith(ERROR_MESSAGE);
+  });
+
+  it("keeps the copy button of <Toaster /> on Copy when the clipboard refuses", async () => {
+    const writeText = stubClipboard("reject");
+    render(<Toaster />);
+
+    toast.error(ERROR_MESSAGE);
+    const copy = await screen.findByRole("button", { name: "Copy" });
+
+    fireEvent.click(copy);
+    await waitFor(() => expect(writeText).toHaveBeenCalledTimes(1));
+
+    expect(copy).toHaveAccessibleName("Copy");
+    expect(
+      screen.queryByRole("button", { name: "Copied" }),
+    ).not.toBeInTheDocument();
   });
 
   it("renders <Toaster /> with a store toast next to a direct toast of the same id", async () => {

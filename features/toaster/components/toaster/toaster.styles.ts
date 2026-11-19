@@ -9,6 +9,8 @@ export const toaster = tv({
   slots: {
     toast: focusOutline,
     closeButton: focusOutline,
+    // Sonner pushes its own action button to the end; this does the same for ours.
+    copyButton: "ms-auto shrink-0",
   },
 });
 

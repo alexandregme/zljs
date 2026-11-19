@@ -4,6 +4,7 @@ export {
   IPHONE_USER_AGENT,
   offerInstall,
   restoreBrowserStubs,
+  stubClipboard,
   stubElementRect,
   stubLocation,
   stubMatchMedia,
