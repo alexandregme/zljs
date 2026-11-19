@@ -30,6 +30,13 @@ const shownToasts = () =>
 const closeButtons = () =>
   Array.from(document.querySelectorAll<HTMLElement>("[data-close-button]"));
 
+const copyButtons = () =>
+  shownToasts().flatMap((item) =>
+    Array.from(
+      item.querySelectorAll<HTMLElement>("button:not([data-close-button])"),
+    ),
+  );
+
 const waitForToasts = (count: number) =>
   waitFor(() => expect(shownToasts()).toHaveLength(count));
 
@@ -75,11 +82,15 @@ export const Types: Story = {
     }
     await waitForToasts(typeNames.length);
 
-    const lowText = shownToasts().filter((item) => textContrast(item) < 4.5);
-    const lowFocus = [...shownToasts(), ...closeButtons()].filter(
-      (element) => focusOutlineContrast(element) < 3,
+    const lowText = [...shownToasts(), ...copyButtons()].filter(
+      (element) => textContrast(element) < 4.5,
     );
-    const lowHover = closeButtons().filter(
+    const lowFocus = [
+      ...shownToasts(),
+      ...closeButtons(),
+      ...copyButtons(),
+    ].filter((element) => focusOutlineContrast(element) < 3);
+    const lowHover = [...closeButtons(), ...copyButtons()].filter(
       (button) => hoverTextContrast(button) < 3,
     );
 
@@ -151,6 +162,47 @@ export const Descriptions: Story = {
           }
         >
           Success
+        </Button>
+      </div>
+    </>
+  ),
+};
+
+export const Copy: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`toast.error` and `toast.warning` get a `Copy` button when the message is text, so the user can send the error to whoever fixes it. It copies the message and, when it is text, the `description` on the line below, then reads `Copied` and keeps the toast open. The toasts of `useToastStore` get it too. An `action` passed by the app replaces it.",
+      },
+    },
+  },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Error" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Warning" }));
+    await waitForToasts(2);
+
+    await expect(copyButtons().map(typeOf)).toEqual(["warning", "error"]);
+  },
+  render: () => (
+    <>
+      <Toaster />
+      <div className="flex flex-wrap gap-2">
+        <Button
+          color="danger"
+          onClick={() =>
+            toast.error("Couldn't save the order", {
+              description: "The server answered 500.",
+            })
+          }
+        >
+          Error
+        </Button>
+        <Button
+          color="warning"
+          onClick={() => toast.warning("The route has a stop with no address")}
+        >
+          Warning
         </Button>
       </div>
     </>

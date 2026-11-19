@@ -63,7 +63,24 @@ export const offerInstall = () => {
   return prompt;
 };
 
+// jsdom has no `navigator.clipboard`. This gives it one whose `writeText`
+// resolves, or rejects as a browser does without permission, and returns it.
+export const stubClipboard = (result: "resolve" | "reject" = "resolve") => {
+  const writeText = vi.fn(() =>
+    result === "resolve" ? Promise.resolve() : Promise.reject(new Error()),
+  );
+
+  Object.defineProperty(navigator, "clipboard", {
+    value: { writeText },
+    configurable: true,
+  });
+
+  return writeText;
+};
+
 export const restoreBrowserStubs = () => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
+  // Only the own property that stubClipboard adds; a browser's lives on the prototype.
+  Reflect.deleteProperty(navigator, "clipboard");
 };

@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Toaster`: `toast.error` and `toast.warning` (and the `useToastStore` toasts of those types) show a `Copy` button when the message is text. It copies the message and its text `description`, then reads `Copied` and keeps the toast open. An `action` passed by the app replaces it
+
 ## [3.17.0] - 2026-11-19
 
 ### Added
