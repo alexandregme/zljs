@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import type { SemanticColor } from "../../types";
 
 export type LinkVariant = "inline" | "nav";
@@ -6,6 +6,11 @@ export type LinkVariant = "inline" | "nav";
 export interface LinkProps {
   children: ReactNode;
   href: string;
+  /**
+   * Where the link opens, as on an HTML link: `_blank` is a new tab, for a
+   * link that leaves the app.
+   */
+  target?: HTMLAttributeAnchorTarget;
   /** `inline` is a link in a text. `nav` is a row of a menu, with no underline. */
   variant?: LinkVariant;
   color?: SemanticColor;

@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `target` on `Link`, as on an HTML link: `_blank` opens a new tab, for a link that leaves the app
+
 ## [3.15.0] - 2026-11-18
 
 ### Added

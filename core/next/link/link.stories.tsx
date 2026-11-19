@@ -157,3 +157,30 @@ export const Variants: Story = {
     </div>
   ),
 };
+
+export const States: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`target` works as on an HTML link. `_blank` opens a new tab, for a link that leaves the app, such as to GitHub. Without `target`, the link opens in the same tab.",
+      },
+    },
+  },
+  play: async ({ canvas }) => {
+    const external = canvas.getByRole("link", { name: "zljs on GitHub" });
+
+    await expect(external).toHaveAttribute("target", "_blank");
+    await expect(
+      canvas.getByRole("link", { name: "Same tab" }),
+    ).not.toHaveAttribute("target");
+  },
+  render: () => (
+    <div className="flex gap-4">
+      <Link href="https://github.com/alexandregme/zljs" target="_blank">
+        zljs on GitHub
+      </Link>
+      <Link href="/">Same tab</Link>
+    </div>
+  ),
+};
