@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.17.0] - 2026-11-19
+
 ### Added
 
 - `Icon` has the `Settings` (gear) and `SiGithub` icons
@@ -569,7 +571,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.16.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.17.0...HEAD
+[3.17.0]: https://github.com/alexandregme/zljs/compare/v3.16.0...v3.17.0
 [3.16.0]: https://github.com/alexandregme/zljs/compare/v3.15.0...v3.16.0
 [3.15.0]: https://github.com/alexandregme/zljs/compare/v3.14.0...v3.15.0
 [3.14.0]: https://github.com/alexandregme/zljs/compare/v3.13.1...v3.14.0
