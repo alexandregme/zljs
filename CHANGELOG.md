@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Icon` has the `Settings` (gear) and `SiGithub` icons
+
 ## [3.16.0] - 2026-11-19
 
 ### Added
