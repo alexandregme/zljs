@@ -9,6 +9,7 @@ This list tracks potential improvements. Agents must review and update it when n
 5. Modal enhancements (size prop, footer slot, closeOnOverlayClick)
 6. Notification hooks (`useToast` with typed variants + preset `Toaster`)
 7. `RadioGroup` (`label`, `name`, `error` and `options` as on `Select`), so an error shows once and is linked to the whole group. Until then `Radio` has no `error`: apps use `fieldset`, `legend` and `Error`
+8. `Link` with `target="_blank"`: validate whether it should set `rel`. `noopener` keeps the opened page from reaching the app's tab through `window.opener`, but browsers already apply it to every `_blank` since about 2021, so it only covers old ones. `noreferrer` hides the app's URL from the destination, which is a choice, not a protection, and gets in the way of an app that wants the destination to see where the visit came from. Options: set nothing (today), set `noopener` only, or take a `rel` prop
 
 ---
 

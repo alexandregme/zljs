@@ -10,7 +10,7 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ### Added
 
-- `target` on `Link`, as on an HTML link: `_blank` opens a new tab, for a link that leaves the app, and also gets `rel="noopener noreferrer"`, so the page it opens can't reach back into the app
+- `target` on `Link`, as on an HTML link: `_blank` opens a new tab, for a link that leaves the app
 
 ## [3.15.0] - 2026-11-18
 

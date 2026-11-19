@@ -8,8 +8,7 @@ export interface LinkProps {
   href: string;
   /**
    * Where the link opens, as on an HTML link: `_blank` is a new tab, for a
-   * link that leaves the app. `_blank` also gets `rel="noopener noreferrer"`,
-   * so the page it opens can't reach back into the app.
+   * link that leaves the app.
    */
   target?: HTMLAttributeAnchorTarget;
   /** `inline` is a link in a text. `nav` is a row of a menu, with no underline. */

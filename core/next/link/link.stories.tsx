@@ -163,7 +163,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          '`target` works as on an HTML link. `_blank` opens a new tab, for a link that leaves the app, such as to GitHub, and also gets `rel="noopener noreferrer"`, so the page it opens can\'t reach back into the app. Without `target`, the link opens in the same tab.',
+          "`target` works as on an HTML link. `_blank` opens a new tab, for a link that leaves the app, such as to GitHub. Without `target`, the link opens in the same tab.",
       },
     },
   },
@@ -171,7 +171,6 @@ export const States: Story = {
     const external = canvas.getByRole("link", { name: "zljs on GitHub" });
 
     await expect(external).toHaveAttribute("target", "_blank");
-    await expect(external).toHaveAttribute("rel", "noopener noreferrer");
     await expect(
       canvas.getByRole("link", { name: "Same tab" }),
     ).not.toHaveAttribute("target");

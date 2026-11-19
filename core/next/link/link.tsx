@@ -19,7 +19,6 @@ export const Link = ({
       onClick={onClick}
       className={link({ variant, color, active })}
       target={target}
-      {...(target === "_blank" && { rel: "noopener noreferrer" })}
       {...(active && { "aria-current": "page" })}
     >
       {children}
