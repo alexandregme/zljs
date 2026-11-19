@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.18.0] - 2026-11-19
+
 ### Added
 
 - `Toaster`: `toast.error` and `toast.warning` (and the `useToastStore` toasts of those types) show a `Copy` button when the message is text. It copies the message and its text `description`, then reads `Copied` and keeps the toast open. An `action` passed by the app replaces it
@@ -575,7 +577,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.17.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.18.0...HEAD
+[3.18.0]: https://github.com/alexandregme/zljs/compare/v3.17.0...v3.18.0
 [3.17.0]: https://github.com/alexandregme/zljs/compare/v3.16.0...v3.17.0
 [3.16.0]: https://github.com/alexandregme/zljs/compare/v3.15.0...v3.16.0
 [3.15.0]: https://github.com/alexandregme/zljs/compare/v3.14.0...v3.15.0
