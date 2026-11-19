@@ -5,6 +5,7 @@ import { link } from "./link.styles";
 export const Link = ({
   children,
   href,
+  target,
   variant = "inline",
   color = "primary",
   active = false,
@@ -17,6 +18,8 @@ export const Link = ({
       aria-label={ariaLabel}
       onClick={onClick}
       className={link({ variant, color, active })}
+      target={target}
+      {...(target === "_blank" && { rel: "noopener noreferrer" })}
       {...(active && { "aria-current": "page" })}
     >
       {children}

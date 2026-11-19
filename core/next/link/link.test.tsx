@@ -4,6 +4,7 @@ import { Icon } from "@zljs/core";
 import { Link } from "./link";
 
 const HREF = "/orders";
+const EXTERNAL_HREF = "https://github.com/alexandregme/zljs";
 
 describe("<Link /> - Default Props", () => {
   it("renders <Link /> correctly", () => {
@@ -22,6 +23,8 @@ describe("<Link /> - Default Props", () => {
     );
     const link = screen.getByRole("link", { name: "Orders" });
 
+    expect(link).not.toHaveAttribute("target");
+    expect(link).not.toHaveAttribute("rel");
     expect(link).not.toHaveAttribute("aria-current");
     expect(link).not.toHaveAttribute("aria-label");
     expect(() => fireEvent.click(link)).not.toThrow();
@@ -31,14 +34,35 @@ describe("<Link /> - Default Props", () => {
 describe("<Link /> - Custom Props", () => {
   it("renders <Link /> with all its props", () => {
     render(
-      <Link href={HREF} variant="nav" color="none" active aria-label="Orders">
+      <Link
+        href={EXTERNAL_HREF}
+        target="_blank"
+        variant="nav"
+        color="none"
+        active
+        aria-label="Orders"
+      >
         <Icon name="Package" />
       </Link>,
     );
     const link = screen.getByRole("link", { name: "Orders" });
 
-    expect(link).toHaveAttribute("href", HREF);
+    expect(link).toHaveAttribute("href", EXTERNAL_HREF);
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
     expect(link).toHaveAttribute("aria-current", "page");
+  });
+
+  it("renders <Link /> with target _self, without rel", () => {
+    render(
+      <Link href={HREF} target="_self">
+        Orders
+      </Link>,
+    );
+    const link = screen.getByRole("link", { name: "Orders" });
+
+    expect(link).toHaveAttribute("target", "_self");
+    expect(link).not.toHaveAttribute("rel");
   });
 
   it("renders <Link /> with children as an element", () => {
