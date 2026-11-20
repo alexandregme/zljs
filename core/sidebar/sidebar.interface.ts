@@ -34,7 +34,7 @@ export interface SidebarProps {
    * `errorMessage`) and what goes with the address of the app (`title` and
    * `text`).
    */
-  share?: Omit<ShareAppButtonProps, "showLabel" | "size">;
+  share?: Partial<Omit<ShareAppButtonProps, "iconOnly" | "size">>;
   /**
    * The texts of the logout button and of the modal it opens: `label`,
    * `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`.

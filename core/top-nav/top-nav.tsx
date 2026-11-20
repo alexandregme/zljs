@@ -131,8 +131,7 @@ export const TopNav = ({
         <div className={styles.account()}>
           <div className={styles.actions()}>
             <ShareAppButton
-              showLabel
-              label={share.label}
+              label={share.label ?? "Share app"}
               title={share.title}
               text={share.text}
               copiedMessage={share.copiedMessage}
@@ -141,8 +140,7 @@ export const TopNav = ({
             {installApp.way && (
               <InstallAppButton
                 way={installApp.way}
-                showLabel
-                label={install.label}
+                label={install.label ?? "Install app"}
                 instructionsTitle={install.instructionsTitle}
                 instructions={install.instructions}
                 onPrompt={installApp.prompt}

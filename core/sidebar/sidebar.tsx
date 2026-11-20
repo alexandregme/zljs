@@ -96,8 +96,8 @@ export const Sidebar = ({
 
       <div className={actions()}>
         <ShareAppButton
-          showLabel={!collapsed}
-          label={share.label}
+          label={share.label ?? "Share app"}
+          iconOnly={collapsed}
           title={share.title}
           text={share.text}
           copiedMessage={share.copiedMessage}

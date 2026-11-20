@@ -5,8 +5,8 @@ import { SHARE_APP_CANCELLED } from "./share-app-button.const";
 import type { ShareAppButtonProps } from "./share-app-button.interface";
 
 export const ShareAppButton = ({
-  label = "Share app",
-  showLabel = false,
+  label,
+  iconOnly = false,
   size = "md",
   title,
   text,
@@ -57,10 +57,10 @@ export const ShareAppButton = ({
       color="ghost"
       size={size}
       icon="Share2"
-      aria-label={showLabel ? undefined : label}
+      aria-label={iconOnly ? label : undefined}
       onClick={share}
     >
-      {showLabel && label}
+      {!iconOnly && label}
     </Button>
   );
 };

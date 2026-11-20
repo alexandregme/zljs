@@ -8,6 +8,8 @@ import {
 import { restoreBrowserStubs, stubClipboard, stubShare } from "@test-utils";
 import { ShareAppButton, useToastStore } from "@zljs/core";
 
+const REQUIRED_PROPS = { label: "Share app" };
+
 // Lets the share or the copy that a click started finish.
 const settle = (): Promise<void> => act(async () => {});
 
@@ -17,21 +19,21 @@ afterEach(() => {
   useToastStore.setState({ toasts: [] });
 });
 
-describe("<ShareAppButton /> - Default Props", () => {
-  it("renders <ShareAppButton /> correctly", () => {
-    render(<ShareAppButton />);
+describe("<ShareAppButton {...REQUIRED_PROPS} /> - Default Props", () => {
+  it("renders <ShareAppButton {...REQUIRED_PROPS} /> correctly", () => {
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute("aria-label", "Share app");
-    expect(button).toHaveTextContent("");
+    expect(button).toHaveTextContent("Share app");
+    expect(button).not.toHaveAttribute("aria-label");
     expect(button.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("shares the origin and the title of the page when <ShareAppButton /> is clicked", async () => {
+  it("shares the origin and the title of the page when <ShareAppButton {...REQUIRED_PROPS} /> is clicked", async () => {
     const share = stubShare();
     const writeText = stubClipboard();
-    render(<ShareAppButton />);
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -47,9 +49,9 @@ describe("<ShareAppButton /> - Default Props", () => {
     expect(useToastStore.getState().toasts).toHaveLength(0);
   });
 
-  it("copies the origin of the page when <ShareAppButton /> is clicked in a browser with no share dialog", async () => {
+  it("copies the origin of the page when <ShareAppButton {...REQUIRED_PROPS} /> is clicked in a browser with no share dialog", async () => {
     const writeText = stubClipboard();
-    render(<ShareAppButton />);
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -64,8 +66,8 @@ describe("<ShareAppButton /> - Default Props", () => {
     });
   });
 
-  it("sends the error toast when <ShareAppButton /> can neither share nor copy", async () => {
-    render(<ShareAppButton />);
+  it("sends the error toast when <ShareAppButton {...REQUIRED_PROPS} /> can neither share nor copy", async () => {
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -80,13 +82,13 @@ describe("<ShareAppButton /> - Default Props", () => {
   });
 });
 
-describe("<ShareAppButton /> - Custom Props", () => {
-  it("renders <ShareAppButton /> with all its props", async () => {
+describe("<ShareAppButton {...REQUIRED_PROPS} /> - Custom Props", () => {
+  it("renders <ShareAppButton {...REQUIRED_PROPS} /> with all its props", async () => {
     const share = stubShare();
     render(
       <ShareAppButton
         label="Compartilhar app"
-        showLabel
+        iconOnly
         size="lg"
         title="Entregas"
         text="Entre e peça acesso"
@@ -96,8 +98,8 @@ describe("<ShareAppButton /> - Custom Props", () => {
     );
     const button = screen.getByRole("button", { name: "Compartilhar app" });
 
-    expect(button).toHaveTextContent("Compartilhar app");
-    expect(button).not.toHaveAttribute("aria-label");
+    expect(button).toHaveAttribute("aria-label", "Compartilhar app");
+    expect(button).toHaveTextContent("");
 
     fireEvent.click(button);
     await settle();
@@ -109,9 +111,9 @@ describe("<ShareAppButton /> - Custom Props", () => {
     });
   });
 
-  it("renders <ShareAppButton /> with copiedMessage in a browser with no share dialog", async () => {
+  it("renders <ShareAppButton {...REQUIRED_PROPS} /> with copiedMessage in a browser with no share dialog", async () => {
     const writeText = stubClipboard();
-    render(<ShareAppButton copiedMessage="Link copiado" />);
+    render(<ShareAppButton {...REQUIRED_PROPS} copiedMessage="Link copiado" />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -123,9 +125,14 @@ describe("<ShareAppButton /> - Custom Props", () => {
     expect(useToastStore.getState().toasts[0]?.message).toBe("Link copiado");
   });
 
-  it("renders <ShareAppButton /> with errorMessage when the clipboard refuses", async () => {
+  it("renders <ShareAppButton {...REQUIRED_PROPS} /> with errorMessage when the clipboard refuses", async () => {
     stubClipboard("reject");
-    render(<ShareAppButton errorMessage="Não deu pra compartilhar" />);
+    render(
+      <ShareAppButton
+        {...REQUIRED_PROPS}
+        errorMessage="Não deu pra compartilhar"
+      />,
+    );
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -138,10 +145,10 @@ describe("<ShareAppButton /> - Custom Props", () => {
     );
   });
 
-  it("copies the address when the browser refuses the share of <ShareAppButton />", async () => {
+  it("copies the address when the browser refuses the share of <ShareAppButton {...REQUIRED_PROPS} />", async () => {
     const share = stubShare("reject");
     const writeText = stubClipboard();
-    render(<ShareAppButton />);
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -153,10 +160,10 @@ describe("<ShareAppButton /> - Custom Props", () => {
     expect(writeText).toHaveBeenCalledWith(window.location.origin);
   });
 
-  it("does nothing more when the user closes the share dialog of <ShareAppButton />", async () => {
+  it("does nothing more when the user closes the share dialog of <ShareAppButton {...REQUIRED_PROPS} />", async () => {
     const share = stubShare("cancel");
     const writeText = stubClipboard();
-    render(<ShareAppButton />);
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     fireEvent.click(button);
@@ -168,16 +175,16 @@ describe("<ShareAppButton /> - Custom Props", () => {
   });
 });
 
-describe("<ShareAppButton /> - Styles", () => {
-  it("renders <ShareAppButton /> with size lg", () => {
-    render(<ShareAppButton size="lg" />);
+describe("<ShareAppButton {...REQUIRED_PROPS} /> - Styles", () => {
+  it("renders <ShareAppButton {...REQUIRED_PROPS} /> with size lg", () => {
+    render(<ShareAppButton {...REQUIRED_PROPS} size="lg" />);
     const button = screen.getByRole("button", { name: "Share app" });
 
-    expect(button).toHaveClass("p-2");
+    expect(button).toHaveClass("text-base");
   });
 
-  it("renders <ShareAppButton /> in the color of the text around it, with a visible focus outline", () => {
-    render(<ShareAppButton />);
+  it("renders <ShareAppButton {...REQUIRED_PROPS} /> in the color of the text around it, with a visible focus outline", () => {
+    render(<ShareAppButton {...REQUIRED_PROPS} />);
     const button = screen.getByRole("button", { name: "Share app" });
 
     expect(button).toHaveClass("text-current");

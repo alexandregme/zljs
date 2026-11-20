@@ -11,15 +11,21 @@ A change that needs action in an app has a **Migration** note. When updating, re
 ### Added
 
 - `Sidebar` and `TopNav`, and so `Navigation`, show a share button: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. On a phone a tap opens the share dialog of the browser. In a browser with no share dialog a click copies the address and a success toast says so. In `Sidebar` it has its own line over the user, and collapsed it shows only its icon. In `TopNav` it is the first line of the account panel. `share` takes its texts (`label`, `copiedMessage` and `errorMessage`) and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself
-- `ShareAppButton`, the button `Sidebar` and `TopNav` use, for an app that puts the share somewhere else, and the type `ShareAppButtonProps`
-- `showLabel` on `InstallAppButton` and `ShareAppButton`: it shows `label` beside the icon, for a button that is a row of a menu
+- `ShareAppButton`, the button `Sidebar` and `TopNav` use, for an app that puts the share somewhere else, and the type `ShareAppButtonProps`. `label` is its text and is required
+- `iconOnly` on `InstallAppButton` and `ShareAppButton`: it shows the icon alone, with `label` as the accessible name, for a place with no room for the text, such as a collapsed sidebar
 - `Icon` has the `Share2` icon
 
 ### Changed
 
+- `InstallAppButton` shows its `label` beside the icon, and `label` is now required: it had the default `Install app` and was only the accessible name of an icon button. `iconOnly` gives the icon alone back
 - The account panel of `TopNav` has two rows. The install button left the row of the user and the logout button: it now has its own line over them, after the share button, and shows its `label` beside the icon
 
 #### Migration
+
+An app that renders `InstallAppButton` itself, outside `TopNav` and `Navigation`:
+
+- Pass `label`, or `tsc` fails on the missing prop: `<InstallAppButton label="Install app" … />`. Find where with `grep -rn "<InstallAppButton" app src pages`
+- The button now shows the text. Where only the icon fits, also pass `iconOnly`
 
 An app that uses `Sidebar`, `TopNav` or `Navigation` gets the share button when it updates:
 

@@ -7,10 +7,13 @@ export interface InstallAppButtonProps {
    * `onPrompt` on a click, and `instructions` opens a modal with the steps.
    */
   way: InstallAppWay;
-  /** The text of the button. While `showLabel` is off, its accessible name. */
-  label?: string;
-  /** Shows `label` beside the icon, for a button that is a row of a menu. */
-  showLabel?: boolean;
+  /** The text of the button. With `iconOnly`, its accessible name. */
+  label: string;
+  /**
+   * Shows the icon alone, for a place with no room for the text, such as a
+   * collapsed sidebar.
+   */
+  iconOnly?: boolean;
   /** The size of the button. `lg` is for a touch screen. */
   size?: Size;
   /** The title of the modal with the steps. */

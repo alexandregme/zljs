@@ -48,10 +48,11 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "A button that shares the address of the app, so the user can send it to someone who then logs in and asks for access. Where the browser has a share dialog, as a phone does, a click opens it. Where it has none, a click copies the address and a toast says so, so the app needs a `Toaster`. `label` is its accessible name. It takes the color of the text around it, so it works on a light or a dark surface.",
+          "A button that shares the address of the app, so the user can send it to someone who then logs in and asks for access. Where the browser has a share dialog, as a phone does, a click opens it. Where it has none, a click copies the address and a toast says so, so the app needs a `Toaster`. `label` is its text. It takes the color of the text around it, so it works on a light or a dark surface.",
       },
     },
   },
+  args: { label: "Share app" },
   play: async ({ canvas }) => {
     const button = canvas.getByRole("button", { name: "Share app" });
 
@@ -59,19 +60,20 @@ export const Playground: Story = {
   },
 };
 
-export const Labels: Story = {
+export const States: Story = {
   parameters: {
     docs: {
       description: {
         story:
-          "`showLabel` shows `label` beside the icon, for a button that is a row of a menu. Without it the button is the icon alone and `label` is only its accessible name. This story shows both on a dark surface.",
+          "`iconOnly` shows the icon alone, for a place with no room for the text, such as a collapsed sidebar: `label` is then only the accessible name of the button. Without it the button shows `label` beside the icon. This story shows both on a dark surface.",
       },
     },
   },
+  args: { label: "Share app" },
   render: (args) => (
     <div className="flex items-center gap-2 bg-neutral-800 p-4 text-neutral-300">
-      <ShareAppButton {...args} label="Share" />
-      <ShareAppButton {...args} label="Share app" showLabel />
+      <ShareAppButton {...args} label="Share app" />
+      <ShareAppButton {...args} label="Share" iconOnly />
     </div>
   ),
   play: async ({ canvas }) => {
@@ -79,6 +81,7 @@ export const Labels: Story = {
     const withLabel = canvas.getByRole("button", { name: "Share app" });
 
     await expect(withLabel).toHaveTextContent("Share app");
+    await expect(iconOnly).toHaveTextContent("");
     await expect(focusOutlineContrast(iconOnly)).toBeGreaterThanOrEqual(3);
     await expect(focusOutlineContrast(withLabel)).toBeGreaterThanOrEqual(3);
     await expect(hoverTextContrast(iconOnly)).toBeGreaterThanOrEqual(3);
@@ -95,6 +98,7 @@ export const Sizes: Story = {
       },
     },
   },
+  args: { label: "Share app" },
   render: (args) => (
     <div className="flex items-center gap-2">
       {sizes.map((size) => (
@@ -119,6 +123,7 @@ export const Shares: Story = {
     },
   },
   args: {
+    label: "Share app",
     title: "Enterprise",
     text: "Log in and ask for access.",
   },
@@ -143,7 +148,7 @@ export const Texts: Story = {
     docs: {
       description: {
         story:
-          "Every text has an English default, so an app in another language passes them all: `label`, `copiedMessage`, the toast shown when the address is copied (`Link copied`), and `errorMessage`, the toast shown when it could be neither shared nor copied (`Could not share the link`), as on a page without https. This story takes the share dialog from the browser and clicks, so the address is copied and axe checks the toast.",
+          "`label` is required. The other texts have English defaults, so an app in another language passes them too: `copiedMessage`, the toast shown when the address is copied (`Link copied`), and `errorMessage`, the toast shown when it could be neither shared nor copied (`Could not share the link`), as on a page without https. This story takes the share dialog from the browser and clicks, so the address is copied and axe checks the toast.",
       },
       story: { inline: false, height: "200px" },
     },

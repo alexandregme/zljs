@@ -25,16 +25,15 @@ export interface TopNavProps {
    * `copiedMessage` and `errorMessage`) and what goes with the address of the
    * app (`title` and `text`).
    */
-  share?: Omit<ShareAppButtonProps, "showLabel" | "size">;
+  share?: Partial<Omit<ShareAppButtonProps, "iconOnly" | "size">>;
   /**
    * The texts of the install button and of the modal with its steps: `label`,
    * `instructionsTitle` and `instructions`. The button has its own line over the
    * user and the logout button, only in a browser that can put the app on the
    * home screen.
    */
-  install?: Pick<
-    InstallAppButtonProps,
-    "label" | "instructionsTitle" | "instructions"
+  install?: Partial<
+    Pick<InstallAppButtonProps, "label" | "instructionsTitle" | "instructions">
   >;
   /**
    * The texts of the logout button and of the modal it opens: `label`,
