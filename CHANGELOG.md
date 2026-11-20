@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.19.0] - 2026-11-20
+
 ### Added
 
 - `Sidebar` and `TopNav`, and so `Navigation`, show a share button: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. On a phone a tap opens the share dialog of the browser. In a browser with no share dialog a click copies the address and a success toast says so. In `Sidebar` it has its own line over the user, and collapsed it shows only its icon. In `TopNav` it is the first line of the account panel. `share` takes its texts (`label`, `copiedMessage` and `errorMessage`) and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself
@@ -602,7 +604,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.18.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.19.0...HEAD
+[3.19.0]: https://github.com/alexandregme/zljs/compare/v3.18.0...v3.19.0
 [3.18.0]: https://github.com/alexandregme/zljs/compare/v3.17.0...v3.18.0
 [3.17.0]: https://github.com/alexandregme/zljs/compare/v3.16.0...v3.17.0
 [3.16.0]: https://github.com/alexandregme/zljs/compare/v3.15.0...v3.16.0
