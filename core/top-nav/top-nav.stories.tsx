@@ -134,7 +134,7 @@ export const Accounts: Story = {
     docs: {
       description: {
         story:
-          "The account button opens the name and the email of `user`, with the logout button beside them. A long name or email is cut with an ellipsis. Only one of the two panels is open at a time. The logout button is a `SignOutButton`: a tap opens a modal that asks first, and `onLogout` is called when the user confirms. When it returns a promise that rejects, an error toast shows, so the app needs a `Toaster`. This story opens the account, so axe checks it.",
+          "The account button opens two rows. The first has what the user can do with the app, one per line: the share button and, where the browser can install the app, the install button. The second has the name and the email of `user`, with the logout button beside them. A long name or email is cut with an ellipsis. Only one of the two panels is open at a time. The logout button is a `SignOutButton`: a tap opens a modal that asks first, and `onLogout` is called when the user confirms. When it returns a promise that rejects, an error toast shows, so the app needs a `Toaster`. This story opens the account, so axe checks it.",
       },
     },
   },
@@ -216,7 +216,8 @@ export const Logouts: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Conta" }));
 
     const logout = canvas.getByRole("button", { name: "Sair" });
-    const panel = logout.parentElement!;
+    // The row of the user, then the panel that holds the rows.
+    const panel = logout.parentElement!.parentElement!;
 
     await userEvent.click(logout);
 
@@ -243,7 +244,7 @@ export const Installs: Story = {
     docs: {
       description: {
         story:
-          "On a phone, the account panel gets an install button before the logout button: it puts the app on the home screen, to open like an installed app. It only shows when the browser can do it. Where the browser offers the install, as Chrome on Android does for an app with a web app manifest, a tap shows the install dialog of the browser. On an iPhone, which has no dialog, a tap opens a modal with the steps. Opened from the home screen, or in a browser that can't install, there is no button. `install` takes its texts: `label`, `instructionsTitle` and `instructions`, all with English defaults. This story sends the offer a browser sends and opens the account, so axe checks the button.",
+          "On a phone, the account panel gets an install button on its own line, after the share button and over the user and the logout button: it puts the app on the home screen, to open like an installed app. It only shows when the browser can do it. Where the browser offers the install, as Chrome on Android does for an app with a web app manifest, a tap shows the install dialog of the browser. On an iPhone, which has no dialog, a tap opens a modal with the steps. Opened from the home screen, or in a browser that can't install, there is no button. `install` takes its texts: `label`, `instructionsTitle` and `instructions`, all with English defaults. This story sends the offer a browser sends and opens the account, so axe checks the button.",
       },
     },
   },
@@ -265,6 +266,49 @@ export const Installs: Story = {
 
     await expect(prompt).toHaveBeenCalledTimes(1);
     await expect(install).not.toBeInTheDocument();
+  },
+};
+
+export const Shares: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The first line of the account panel is the share button, a `ShareAppButton`: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. On a phone a tap opens the share dialog of the browser. In a browser with no share dialog a tap copies the address and a toast says so, so the app needs a `Toaster`. `share` takes its texts, `label`, `copiedMessage` and `errorMessage`, all with English defaults, and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself. This story gives the browser a share dialog, opens the account and taps.",
+      },
+    },
+  },
+  args: {
+    ...requiredProps,
+    share: {
+      label: "Compartilhar app",
+      title: "Enterprise",
+      text: "Entre e peça acesso.",
+    },
+  },
+  play: async ({ canvas, canvasElement, userEvent }) => {
+    const share = fn(() => Promise.resolve());
+
+    Object.defineProperty(navigator, "share", {
+      value: share,
+      configurable: true,
+    });
+    await userEvent.click(canvas.getByRole("button", { name: "Account" }));
+
+    const button = canvas.getByRole("button", { name: "Compartilhar app" });
+
+    await expect(button).toBeVisible();
+    await expectControlsToHoldContrast(canvasElement);
+
+    await userEvent.click(button);
+
+    await expect(share).toHaveBeenCalledWith({
+      url: window.location.origin,
+      title: "Enterprise",
+      text: "Entre e peça acesso.",
+    });
+
+    Reflect.deleteProperty(navigator, "share");
   },
 };
 

@@ -8,6 +8,25 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Sidebar` and `TopNav`, and so `Navigation`, show a share button: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. On a phone a tap opens the share dialog of the browser. In a browser with no share dialog a click copies the address and a success toast says so. In `Sidebar` it has its own line over the user, and collapsed it shows only its icon. In `TopNav` it is the first line of the account panel. `share` takes its texts (`label`, `copiedMessage` and `errorMessage`) and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself
+- `ShareAppButton`, the button `Sidebar` and `TopNav` use, for an app that puts the share somewhere else, and the type `ShareAppButtonProps`
+- `showLabel` on `InstallAppButton` and `ShareAppButton`: it shows `label` beside the icon, for a button that is a row of a menu
+- `Icon` has the `Share2` icon
+
+### Changed
+
+- The account panel of `TopNav` has two rows. The install button left the row of the user and the logout button: it now has its own line over them, after the share button, and shows its `label` beside the icon
+
+#### Migration
+
+An app that uses `Sidebar`, `TopNav` or `Navigation` gets the share button when it updates:
+
+- An app in another language passes `share={{ label, copiedMessage, errorMessage }}`, or the button and its toasts are in English. Find where with `grep -rnE "<(Sidebar|TopNav|Navigation)" app src pages`
+- The toasts need a `Toaster` in the app, the same one the logout error already needs
+- The address shared is the origin of the page, the app itself. An app that wants a text to go with it, such as how to ask for access, passes `share={{ text }}`
+
 ## [3.18.0] - 2026-11-19
 
 ### Added

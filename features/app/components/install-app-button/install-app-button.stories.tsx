@@ -85,6 +85,31 @@ export const Ways: Story = {
   },
 };
 
+export const Labels: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`showLabel` shows `label` beside the icon, for a button that is a row of a menu. Without it the button is the icon alone and `label` is only its accessible name. This story shows both on a dark surface.",
+      },
+    },
+  },
+  args: { way: "prompt", onPrompt: fn() },
+  render: (args) => (
+    <div className="flex items-center gap-2 bg-neutral-800 p-4 text-neutral-300">
+      <InstallAppButton {...args} label="Install" />
+      <InstallAppButton {...args} label="Install app" showLabel />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    const withLabel = canvas.getByRole("button", { name: "Install app" });
+
+    await expect(withLabel).toHaveTextContent("Install app");
+    await expect(focusOutlineContrast(withLabel)).toBeGreaterThanOrEqual(3);
+    await expect(hoverTextContrast(withLabel)).toBeGreaterThanOrEqual(4.5);
+  },
+};
+
 export const Sizes: Story = {
   parameters: {
     docs: {

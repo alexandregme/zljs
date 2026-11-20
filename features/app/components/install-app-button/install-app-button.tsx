@@ -8,6 +8,7 @@ import type { InstallAppButtonProps } from "./install-app-button.interface";
 export const InstallAppButton = ({
   way,
   label = "Install app",
+  showLabel = false,
   size = "md",
   instructionsTitle = "Install this app",
   instructions = "Tap the Share button of the browser, then Add to Home Screen.",
@@ -29,9 +30,11 @@ export const InstallAppButton = ({
         color="ghost"
         size={size}
         icon="Download"
-        aria-label={label}
+        aria-label={showLabel ? undefined : label}
         onClick={install}
-      />
+      >
+        {showLabel && label}
+      </Button>
       {way === "instructions" && (
         <ConnectedModal
           modalId={INSTALL_APP_MODAL_ID}

@@ -78,9 +78,36 @@ export const stubClipboard = (result: "resolve" | "reject" = "resolve") => {
   return writeText;
 };
 
+// jsdom has no `navigator.share`. This gives it one that resolves, as when the
+// user picks where to send, rejects as when the user closes the dialog
+// (`cancel`), or rejects as when the browser refuses (`reject`), and returns it.
+export const stubShare = (
+  result: "resolve" | "cancel" | "reject" = "resolve",
+) => {
+  const share = vi.fn(() =>
+    result === "resolve"
+      ? Promise.resolve()
+      : Promise.reject(
+          new DOMException(
+            "",
+            result === "cancel" ? "AbortError" : "NotAllowedError",
+          ),
+        ),
+  );
+
+  Object.defineProperty(navigator, "share", {
+    value: share,
+    configurable: true,
+  });
+
+  return share;
+};
+
 export const restoreBrowserStubs = () => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
   // Only the own property that stubClipboard adds; a browser's lives on the prototype.
   Reflect.deleteProperty(navigator, "clipboard");
+  // The same for the one stubShare adds.
+  Reflect.deleteProperty(navigator, "share");
 };

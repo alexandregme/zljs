@@ -74,6 +74,7 @@ describe("<Navigation /> - Custom Props", () => {
         homeHref="/start"
         homeLabel="Enterprise"
         navLabel="Menu principal"
+        share={{ label: "Compartilhar app" }}
         logout={{ label: "Sair" }}
       />,
     );
@@ -92,6 +93,9 @@ describe("<Navigation /> - Custom Props", () => {
     expect(
       screen.getByRole("navigation", { name: "Menu principal" }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Compartilhar app" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sair" })).toBeInTheDocument();
   });
 
@@ -106,6 +110,7 @@ describe("<Navigation /> - Custom Props", () => {
         navLabel="Menu principal"
         menuLabel="Abrir menu"
         accountLabel="Conta"
+        share={{ label: "Compartilhar app" }}
         install={{ label: "Instalar app" }}
         logout={{ label: "Sair" }}
       />,
@@ -132,6 +137,9 @@ describe("<Navigation /> - Custom Props", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Conta" }));
 
+    expect(
+      screen.getByRole("button", { name: "Compartilhar app" }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "Instalar app" }),
     ).toBeInTheDocument();

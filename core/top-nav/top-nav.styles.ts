@@ -16,8 +16,13 @@ export const topNav = tv({
     // the page layers on itself (a filter over a map), and under a modal.
     menu: "absolute inset-x-0 top-full z-40 max-h-[calc(100dvh-3.5rem)] divide-y divide-neutral-600/50 overflow-y-auto border-t border-neutral-600/50 bg-neutral-800 shadow-lg",
     section: "grid gap-1 p-2",
+    // Two rows: what the user can do with the app, then who is logged in.
     account:
-      "absolute inset-x-0 top-full z-40 flex items-center gap-3 border-t border-neutral-600/50 bg-neutral-800 p-3 shadow-lg",
+      "absolute inset-x-0 top-full z-40 divide-y divide-neutral-600/50 border-t border-neutral-600/50 bg-neutral-800 shadow-lg",
+    // One action per line, each as tall and as far from the edge as a link of the menu.
+    actions:
+      "grid gap-1 p-2 [&>button]:h-10 [&>button]:justify-start [&>button]:px-3",
+    profile: "flex items-center gap-3 p-3",
     // Text takes no className, so the cut of a long name or email is set from here.
     user: "flex min-w-0 flex-1 flex-col text-white [&>*]:truncate",
   },

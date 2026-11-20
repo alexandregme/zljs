@@ -1,4 +1,5 @@
 import type { InstallAppButtonProps } from "../../features/app/components/install-app-button";
+import type { ShareAppButtonProps } from "../../features/app/components/share-app-button";
 import type { SignOutButtonProps } from "../../features/auth/components/sign-out";
 import type { SidebarSection, SidebarUser } from "../sidebar";
 
@@ -20,9 +21,16 @@ export interface TopNavProps {
   /** The accessible name of the account button. */
   accountLabel?: string;
   /**
+   * The share button, the first line of the account panel: its texts (`label`,
+   * `copiedMessage` and `errorMessage`) and what goes with the address of the
+   * app (`title` and `text`).
+   */
+  share?: Omit<ShareAppButtonProps, "showLabel" | "size">;
+  /**
    * The texts of the install button and of the modal with its steps: `label`,
-   * `instructionsTitle` and `instructions`. The button shows before the logout
-   * button, only in a browser that can put the app on the home screen.
+   * `instructionsTitle` and `instructions`. The button has its own line over the
+   * user and the logout button, only in a browser that can put the app on the
+   * home screen.
    */
   install?: Pick<
     InstallAppButtonProps,

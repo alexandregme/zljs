@@ -49,6 +49,7 @@ export {
   InstallAppButton,
   Loader,
   Navigation,
+  ShareAppButton,
   useAppStore,
   useInstallApp,
   useIsDesktop,
@@ -62,6 +63,7 @@ export type {
   LoaderProps,
   NavigationMode,
   NavigationProps,
+  ShareAppButtonProps,
 } from "../features/app";
 export { ReduxProvider } from "./state/redux";
 export type { ReduxProviderProps, ReduxStore } from "./state/redux";

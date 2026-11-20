@@ -22,6 +22,11 @@ export const section = tv({
   base: "grid gap-1 p-2",
 });
 
+// A row like the collapse button: the icon stays in place when the text goes.
+export const actions = tv({
+  base: "shrink-0 grid p-2 [&>button]:h-10 [&>button]:justify-start [&>button]:px-3 [&>button]:overflow-hidden [&>button]:whitespace-nowrap",
+});
+
 export const footer = tv({
   base: "shrink-0 h-16 p-3 flex items-center gap-3",
   variants: {

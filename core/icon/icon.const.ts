@@ -39,6 +39,7 @@ export const iconNames = [
   "Send",
   "LogOut",
   "Download",
+  "Share2",
   "User",
   "Key",
   "Contact",

@@ -19,6 +19,8 @@ describe("<InstallAppButton /> - Default Props", () => {
     const button = screen.getByRole("button", { name: "Install app" });
 
     expect(button).toBeInTheDocument();
+    expect(button).toHaveAttribute("aria-label", "Install app");
+    expect(button).toHaveTextContent("");
     expect(button.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
@@ -59,6 +61,7 @@ describe("<InstallAppButton /> - Custom Props", () => {
       <InstallAppButton
         way="instructions"
         label="Instalar app"
+        showLabel
         size="lg"
         instructionsTitle="Instale este app"
         instructions="Toque em Compartilhar e depois em Adicionar à Tela de Início."
@@ -66,6 +69,9 @@ describe("<InstallAppButton /> - Custom Props", () => {
       />,
     );
     const button = screen.getByRole("button", { name: "Instalar app" });
+
+    expect(button).toHaveTextContent("Instalar app");
+    expect(button).not.toHaveAttribute("aria-label");
 
     fireEvent.click(button);
     const dialog = screen.getByRole("dialog", { name: "Instale este app" });
