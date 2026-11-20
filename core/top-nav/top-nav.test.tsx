@@ -11,7 +11,9 @@ import {
   MockRouteProvider,
   offerInstall,
   restoreBrowserStubs,
+  stubClipboard,
   stubMatchMedia,
+  stubShare,
   stubUserAgent,
 } from "@test-utils";
 import {
@@ -117,6 +119,7 @@ describe("<TopNav /> - Custom Props", () => {
         navLabel="Menu principal"
         menuLabel="Abrir menu"
         accountLabel="Conta"
+        share={{ label: "Compartilhar app" }}
         logout={{
           label: "Sair",
           confirmTitle: "Sair da conta?",
@@ -141,6 +144,11 @@ describe("<TopNav /> - Custom Props", () => {
     ).not.toHaveAttribute("aria-current");
 
     openAccount("Conta");
+
+    expect(
+      screen.getByRole("button", { name: "Compartilhar app" }),
+    ).toHaveTextContent("Compartilhar app");
+
     fireEvent.click(screen.getByRole("button", { name: "Sair" }));
     const dialog = screen.getByRole("dialog", { name: "Sair da conta?" });
 
@@ -244,6 +252,9 @@ describe("<TopNav /> - Custom Props", () => {
     expect(account).toHaveAttribute("aria-expanded", "true");
     expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
     expect(screen.getByText("user@example.com")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Share app" })).toHaveTextContent(
+      "Share app",
+    );
     expect(
       screen.getByRole("button", { name: "Sign out" }),
     ).toBeInTheDocument();
@@ -258,7 +269,58 @@ describe("<TopNav /> - Custom Props", () => {
     expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
   });
 
-  it("shows the install button of <TopNav /> before the logout button when the browser offers the install", () => {
+  it("shares the app with the values of share when the share button of <TopNav /> is clicked", async () => {
+    const share = stubShare();
+    render(
+      <TopNav
+        {...REQUIRED_PROPS}
+        share={{
+          title: "Entregas",
+          text: "Entre e peça acesso",
+        }}
+      />,
+    );
+
+    openAccount();
+    fireEvent.click(screen.getByRole("button", { name: "Share app" }));
+    await act(async () => {});
+
+    expect(share).toHaveBeenCalledWith({
+      title: "Entregas",
+      text: "Entre e peça acesso",
+      url: window.location.origin,
+    });
+    expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
+  });
+
+  it("sends the toasts of share when the share button of <TopNav /> copies the address", async () => {
+    stubClipboard();
+    render(
+      <TopNav {...REQUIRED_PROPS} share={{ copiedMessage: "Link copiado" }} />,
+    );
+
+    openAccount();
+    fireEvent.click(screen.getByRole("button", { name: "Share app" }));
+
+    await waitFor(() => {
+      expect(useToastStore.getState().toasts).toHaveLength(1);
+    });
+    expect(useToastStore.getState().toasts[0]?.message).toBe("Link copiado");
+  });
+
+  it("sends the error toast of share when the share button of <TopNav /> can't share", async () => {
+    render(<TopNav {...REQUIRED_PROPS} share={{ errorMessage: "Não deu" }} />);
+
+    openAccount();
+    fireEvent.click(screen.getByRole("button", { name: "Share app" }));
+
+    await waitFor(() => {
+      expect(useToastStore.getState().toasts).toHaveLength(1);
+    });
+    expect(useToastStore.getState().toasts[0]?.message).toBe("Não deu");
+  });
+
+  it("shows the install button of <TopNav /> on its own line, after the share button and over the user, when the browser offers the install", () => {
     render(<TopNav {...REQUIRED_PROPS} />);
     let prompt = vi.fn();
 
@@ -267,13 +329,21 @@ describe("<TopNav /> - Custom Props", () => {
       prompt = offerInstall();
     });
     openAccount();
+    const share = screen.getByRole("button", { name: "Share app" });
     const install = screen.getByRole("button", { name: "Install app" });
     const logout = screen.getByRole("button", { name: "Sign out" });
+    const user = screen.getByText("Alexandre Mendes");
 
+    expect(install).toHaveTextContent("Install app");
     expect(
-      install.compareDocumentPosition(logout) &
-        Node.DOCUMENT_POSITION_FOLLOWING,
+      share.compareDocumentPosition(install) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
+    expect(
+      install.compareDocumentPosition(user) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(install.parentElement).toBe(share.parentElement);
+    expect(install.parentElement).not.toContainElement(user);
+    expect(install.parentElement).not.toContainElement(logout);
 
     fireEvent.click(install);
 

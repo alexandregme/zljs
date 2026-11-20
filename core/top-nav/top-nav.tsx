@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { InstallAppButton } from "../../features/app/components/install-app-button";
+import { ShareAppButton } from "../../features/app/components/share-app-button";
 import { useInstallApp } from "../../features/app/hooks";
 import { SignOutButton } from "../../features/auth/components/sign-out";
 import { Button } from "../button";
@@ -20,6 +21,7 @@ export const TopNav = ({
   navLabel = "Main navigation",
   menuLabel = "Menu",
   accountLabel = "Account",
+  share = {},
   install = {},
   logout = {},
   onLogout,
@@ -127,33 +129,43 @@ export const TopNav = ({
 
       {accountOpen && (
         <div className={styles.account()}>
-          <div className={styles.user()}>
-            <Text as="span" variant="caption">
-              {user.name}
-            </Text>
-            <Text as="span" variant="caption">
-              {user.email}
-            </Text>
-          </div>
-          {installApp.way && (
-            <InstallAppButton
-              way={installApp.way}
-              size="lg"
-              label={install.label}
-              instructionsTitle={install.instructionsTitle}
-              instructions={install.instructions}
-              onPrompt={installApp.prompt}
+          <div className={styles.actions()}>
+            <ShareAppButton
+              label={share.label ?? "Share app"}
+              title={share.title}
+              text={share.text}
+              copiedMessage={share.copiedMessage}
+              errorMessage={share.errorMessage}
             />
-          )}
-          <SignOutButton
-            size="lg"
-            label={logout.label}
-            confirmTitle={logout.confirmTitle}
-            confirmLabel={logout.confirmLabel}
-            cancelLabel={logout.cancelLabel}
-            errorMessage={logout.errorMessage}
-            onSignOut={onLogout}
-          />
+            {installApp.way && (
+              <InstallAppButton
+                way={installApp.way}
+                label={install.label ?? "Install app"}
+                instructionsTitle={install.instructionsTitle}
+                instructions={install.instructions}
+                onPrompt={installApp.prompt}
+              />
+            )}
+          </div>
+          <div className={styles.profile()}>
+            <div className={styles.user()}>
+              <Text as="span" variant="caption">
+                {user.name}
+              </Text>
+              <Text as="span" variant="caption">
+                {user.email}
+              </Text>
+            </div>
+            <SignOutButton
+              size="lg"
+              label={logout.label}
+              confirmTitle={logout.confirmTitle}
+              confirmLabel={logout.confirmLabel}
+              cancelLabel={logout.cancelLabel}
+              errorMessage={logout.errorMessage}
+              onSignOut={onLogout}
+            />
+          </div>
         </div>
       )}
 

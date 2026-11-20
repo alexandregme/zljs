@@ -91,9 +91,10 @@ const expectControlsToStayInView = async (canvasElement: HTMLElement) => {
 };
 
 const footerLayoutOf = (canvasElement: HTMLElement) => {
+  // The last two buttons: the share button comes before them.
   const [logout, toggle] = Array.from(
     canvasElement.querySelectorAll<HTMLElement>("aside button"),
-  ) as [HTMLElement, HTMLElement];
+  ).slice(-2) as [HTMLElement, HTMLElement];
 
   return {
     footerHeight: logout.parentElement?.offsetHeight,
@@ -116,7 +117,10 @@ const expectIconsToBeCentered = async (canvasElement: HTMLElement) => {
 
 // Clicks the toggle and waits for the width and fade to end, so axe doesn't run on a half-faded label.
 const toggleSidebar = async (canvasElement: HTMLElement) => {
-  const toggle = canvasElement.querySelectorAll<HTMLElement>("aside button")[1];
+  // The last button: the share and the logout buttons come before it.
+  const [toggle] = Array.from(
+    canvasElement.querySelectorAll<HTMLElement>("aside button"),
+  ).slice(-1);
 
   toggle?.click();
   await new Promise(requestAnimationFrame);
@@ -293,6 +297,46 @@ export const Logouts: Story = {
     );
 
     await expect(args.onLogout).toHaveBeenCalledTimes(1);
+  },
+};
+
+export const Shares: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The share button has its own line over the user. It is a `ShareAppButton`: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. Where the browser has a share dialog a click opens it, and where it has none a click copies the address and a toast says so, so the app needs a `Toaster`. Collapsed, only its icon shows. `share` takes its texts, `label`, `copiedMessage` and `errorMessage`, all with English defaults, and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself. This story gives the browser a share dialog and clicks.",
+      },
+    },
+  },
+  args: {
+    ...requiredProps,
+    share: {
+      label: "Compartilhar app",
+      title: "Enterprise",
+      text: "Entre e peça acesso.",
+    },
+  },
+  play: async ({ canvas, canvasElement, userEvent }) => {
+    const share = fn(() => Promise.resolve());
+
+    Object.defineProperty(navigator, "share", {
+      value: share,
+      configurable: true,
+    });
+
+    const button = canvas.getByRole("button", { name: "Compartilhar app" });
+
+    await userEvent.click(button);
+
+    await expect(share).toHaveBeenCalledWith({
+      url: window.location.origin,
+      title: "Enterprise",
+      text: "Entre e peça acesso.",
+    });
+    await expectControlsToHoldContrast(canvasElement);
+
+    Reflect.deleteProperty(navigator, "share");
   },
 };
 

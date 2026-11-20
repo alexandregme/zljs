@@ -6,6 +6,7 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
+import { restoreBrowserStubs, stubClipboard, stubShare } from "@test-utils";
 import {
   appInitialState,
   Sidebar,
@@ -45,6 +46,7 @@ const REQUIRED_PROPS = {
 
 // The logout modal opens through `useAppStore`, which every test shares.
 afterEach(() => {
+  restoreBrowserStubs();
   act(() => {
     useAppStore.setState(appInitialState);
     useToastStore.setState({ toasts: [] });
@@ -84,6 +86,9 @@ describe("<Sidebar /> - Default Props", () => {
     expect(
       screen.getByRole("button", { name: COLLAPSE_LABEL }),
     ).toHaveTextContent(COLLAPSE_LABEL);
+    expect(screen.getByRole("button", { name: "Share app" })).toHaveTextContent(
+      "Share app",
+    );
     expect(
       screen.getByRole("button", { name: "Sign out" }),
     ).toBeInTheDocument();
@@ -113,9 +118,17 @@ describe("<Sidebar /> - Custom Props", () => {
         homeHref="/start"
         homeLabel="Enterprise"
         navLabel="Menu principal"
+        share={{ label: "Compartilhar app" }}
       />,
     );
     const homeLink = screen.getByRole("link", { name: "Enterprise" });
+    const share = screen.getByRole("button", { name: "Compartilhar app" });
+
+    expect(share).toHaveTextContent("Compartilhar app");
+    expect(
+      share.compareDocumentPosition(screen.getByText("Alexandre Mendes")) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
 
     expect(
       screen.getByRole("navigation", { name: "Menu principal" }),
@@ -171,6 +184,9 @@ describe("<Sidebar /> - Custom Props", () => {
     expect(
       screen.getByRole("button", { name: "Expand sidebar" }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Share app" })).toHaveTextContent(
+      "",
+    );
     expect(
       screen.getByRole("button", { name: "Sign out" }),
     ).toBeInTheDocument();
@@ -218,6 +234,53 @@ describe("<Sidebar /> - Custom Props", () => {
     expect(
       screen.getByRole("button", { name: COLLAPSE_LABEL }),
     ).toBeInTheDocument();
+  });
+
+  it("shares the app with the values of share when the share button of <Sidebar /> is clicked", async () => {
+    const share = stubShare();
+    render(
+      <Sidebar
+        {...REQUIRED_PROPS}
+        share={{
+          title: "Entregas",
+          text: "Entre e peça acesso",
+        }}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Share app" }));
+    await act(async () => {});
+
+    expect(share).toHaveBeenCalledWith({
+      title: "Entregas",
+      text: "Entre e peça acesso",
+      url: window.location.origin,
+    });
+  });
+
+  it("sends the toasts of share when the share button of <Sidebar /> copies the address", async () => {
+    stubClipboard();
+    render(
+      <Sidebar {...REQUIRED_PROPS} share={{ copiedMessage: "Link copiado" }} />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Share app" }));
+
+    await waitFor(() => {
+      expect(useToastStore.getState().toasts).toHaveLength(1);
+    });
+    expect(useToastStore.getState().toasts[0]?.message).toBe("Link copiado");
+  });
+
+  it("sends the error toast of share when the share button of <Sidebar /> can't share", async () => {
+    render(<Sidebar {...REQUIRED_PROPS} share={{ errorMessage: "Não deu" }} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Share app" }));
+
+    await waitFor(() => {
+      expect(useToastStore.getState().toasts).toHaveLength(1);
+    });
+    expect(useToastStore.getState().toasts[0]?.message).toBe("Não deu");
   });
 
   it("asks before calling onLogout when the logout button of <Sidebar /> is clicked", () => {

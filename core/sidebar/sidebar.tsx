@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { SidebarProps } from "./sidebar.interface";
+import { ShareAppButton } from "../../features/app/components/share-app-button";
 import { SignOutButton } from "../../features/auth/components/sign-out";
 import { Icon } from "../icon";
 import { Button } from "../button";
@@ -10,6 +11,7 @@ import {
   header,
   nav,
   section as sectionStyle,
+  actions,
   footer,
   avatar,
   userInfo,
@@ -34,6 +36,7 @@ export const Sidebar = ({
   homeHref = "/",
   homeLabel,
   navLabel = "Main navigation",
+  share = {},
   logout = {},
   onLogout,
 }: SidebarProps) => {
@@ -90,6 +93,17 @@ export const Sidebar = ({
           </div>
         ))}
       </nav>
+
+      <div className={actions()}>
+        <ShareAppButton
+          label={share.label ?? "Share app"}
+          iconOnly={collapsed}
+          title={share.title}
+          text={share.text}
+          copiedMessage={share.copiedMessage}
+          errorMessage={share.errorMessage}
+        />
+      </div>
 
       <div className={footer({ collapsed })}>
         {!collapsed && (

@@ -8,6 +8,7 @@ export {
   stubElementRect,
   stubLocation,
   stubMatchMedia,
+  stubShare,
   stubUserAgent,
   stubWindowOpen,
 } from "./browser";

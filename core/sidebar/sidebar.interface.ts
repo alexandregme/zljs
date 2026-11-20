@@ -1,3 +1,4 @@
+import type { ShareAppButtonProps } from "../../features/app/components/share-app-button";
 import type { SignOutButtonProps } from "../../features/auth/components/sign-out";
 import type { IconName } from "../icon/icon.interface";
 
@@ -28,6 +29,12 @@ export interface SidebarProps {
   homeLabel?: string;
   /** The accessible name of the navigation. */
   navLabel?: string;
+  /**
+   * The share button, over the user: its texts (`label`, `copiedMessage` and
+   * `errorMessage`) and what goes with the address of the app (`title` and
+   * `text`).
+   */
+  share?: Partial<Omit<ShareAppButtonProps, "iconOnly" | "size">>;
   /**
    * The texts of the logout button and of the modal it opens: `label`,
    * `confirmTitle`, `confirmLabel`, `cancelLabel` and `errorMessage`.

@@ -3,6 +3,7 @@ import { appInitialState, InstallAppButton, useAppStore } from "@zljs/core";
 
 const REQUIRED_PROPS = {
   way: "prompt",
+  label: "Install app",
   onPrompt: () => {},
 } as const;
 
@@ -19,6 +20,8 @@ describe("<InstallAppButton /> - Default Props", () => {
     const button = screen.getByRole("button", { name: "Install app" });
 
     expect(button).toBeInTheDocument();
+    expect(button).toHaveTextContent("Install app");
+    expect(button).not.toHaveAttribute("aria-label");
     expect(button.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
@@ -38,7 +41,13 @@ describe("<InstallAppButton /> - Default Props", () => {
 describe("<InstallAppButton /> - Custom Props", () => {
   it("renders <InstallAppButton /> with way instructions", () => {
     const handlePrompt = vi.fn();
-    render(<InstallAppButton way="instructions" onPrompt={handlePrompt} />);
+    render(
+      <InstallAppButton
+        {...REQUIRED_PROPS}
+        way="instructions"
+        onPrompt={handlePrompt}
+      />,
+    );
     const button = screen.getByRole("button", { name: "Install app" });
 
     fireEvent.click(button);
@@ -59,6 +68,7 @@ describe("<InstallAppButton /> - Custom Props", () => {
       <InstallAppButton
         way="instructions"
         label="Instalar app"
+        iconOnly
         size="lg"
         instructionsTitle="Instale este app"
         instructions="Toque em Compartilhar e depois em Adicionar à Tela de Início."
@@ -66,6 +76,9 @@ describe("<InstallAppButton /> - Custom Props", () => {
       />,
     );
     const button = screen.getByRole("button", { name: "Instalar app" });
+
+    expect(button).toHaveAttribute("aria-label", "Instalar app");
+    expect(button).toHaveTextContent("");
 
     fireEvent.click(button);
     const dialog = screen.getByRole("dialog", { name: "Instale este app" });
@@ -81,7 +94,7 @@ describe("<InstallAppButton /> - Styles", () => {
     render(<InstallAppButton {...REQUIRED_PROPS} size="lg" />);
     const button = screen.getByRole("button", { name: "Install app" });
 
-    expect(button).toHaveClass("p-2");
+    expect(button).toHaveClass("text-base");
   });
 
   it("renders <InstallAppButton /> in the color of the text around it", () => {

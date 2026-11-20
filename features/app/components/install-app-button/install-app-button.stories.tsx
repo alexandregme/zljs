@@ -27,11 +27,11 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "An icon button that puts the app on the home screen of the device, to open like an installed app. It gets `way` and `onPrompt` from `useInstallApp`, which knows what the browser can do: render the button only while its `way` isn't `null`. `label` is its accessible name. It takes the color of the text around it, so it works on a light or a dark surface. The browser only offers the install to an app that has a web app manifest.",
+          "A button that puts the app on the home screen of the device, to open like an installed app. It gets `way` and `onPrompt` from `useInstallApp`, which knows what the browser can do: render the button only while its `way` isn't `null`. `label` is its text. It takes the color of the text around it, so it works on a light or a dark surface. The browser only offers the install to an app that has a web app manifest.",
       },
     },
   },
-  args: { way: "prompt", onPrompt: fn() },
+  args: { way: "prompt", label: "Install app", onPrompt: fn() },
   play: async ({ canvas }) => {
     const button = canvas.getByRole("button", { name: "Install app" });
 
@@ -48,7 +48,7 @@ export const Ways: Story = {
       },
     },
   },
-  args: { way: "prompt", onPrompt: fn() },
+  args: { way: "prompt", label: "Install app", onPrompt: fn() },
   render: (args) => (
     <div className="flex gap-2 bg-neutral-800 p-4 text-neutral-300">
       <InstallAppButton {...args} way="prompt" label="Install app by prompt" />
@@ -68,7 +68,7 @@ export const Ways: Story = {
     });
 
     await expect(focusOutlineContrast(byPrompt)).toBeGreaterThanOrEqual(3);
-    await expect(hoverTextContrast(byPrompt)).toBeGreaterThanOrEqual(3);
+    await expect(hoverTextContrast(byPrompt)).toBeGreaterThanOrEqual(4.5);
 
     await userEvent.click(byPrompt);
 
@@ -85,6 +85,35 @@ export const Ways: Story = {
   },
 };
 
+export const States: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`iconOnly` shows the icon alone, for a place with no room for the text, such as a collapsed sidebar: `label` is then only the accessible name of the button. Without it the button shows `label` beside the icon. This story shows both on a dark surface.",
+      },
+    },
+  },
+  args: { way: "prompt", label: "Install app", onPrompt: fn() },
+  render: (args) => (
+    <div className="flex items-center gap-2 bg-neutral-800 p-4 text-neutral-300">
+      <InstallAppButton {...args} label="Install app" />
+      <InstallAppButton {...args} label="Install" iconOnly />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    const withLabel = canvas.getByRole("button", { name: "Install app" });
+    const iconOnly = canvas.getByRole("button", { name: "Install" });
+
+    await expect(withLabel).toHaveTextContent("Install app");
+    await expect(iconOnly).toHaveTextContent("");
+    await expect(focusOutlineContrast(withLabel)).toBeGreaterThanOrEqual(3);
+    await expect(focusOutlineContrast(iconOnly)).toBeGreaterThanOrEqual(3);
+    await expect(hoverTextContrast(withLabel)).toBeGreaterThanOrEqual(4.5);
+    await expect(hoverTextContrast(iconOnly)).toBeGreaterThanOrEqual(3);
+  },
+};
+
 export const Sizes: Story = {
   parameters: {
     docs: {
@@ -94,7 +123,7 @@ export const Sizes: Story = {
       },
     },
   },
-  args: { way: "prompt", onPrompt: fn() },
+  args: { way: "prompt", label: "Install app", onPrompt: fn() },
   render: (args) => (
     <div className="flex items-center gap-2">
       {sizes.map((size) => (
@@ -114,7 +143,7 @@ export const Texts: Story = {
     docs: {
       description: {
         story:
-          "Every text has an English default, so an app in another language passes them all: `label`, and `instructionsTitle` and `instructions`, the title and the text of the modal. The default steps are the ones of Safari on an iPhone. This story opens the modal.",
+          "`label` is required. The other texts have English defaults, so an app in another language passes them too: `instructionsTitle` and `instructions`, the title and the text of the modal. The default steps are the ones of Safari on an iPhone. This story opens the modal.",
       },
     },
   },

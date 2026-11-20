@@ -47,7 +47,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "The navigation of an app, from one set of values: `Sidebar` on a screen from 768px wide, and `TopNav` under that. It follows the screen as it is resized or turned, and only one of the two is ever rendered. It takes the props of both: what they share goes to the one that shows, `collapseLabel`, `expandLabel` and `defaultCollapsed` only to `Sidebar`, and `menuLabel`, `accountLabel` and `install` only to `TopNav`. The app places it: `Sidebar` goes beside the page and `TopNav` over it, so the wrapper is a row from 768px and a column under it (`flex flex-col md:flex-row`). On the server it renders nothing, because the width of the screen isn't known there. Resize this frame to see it swap.",
+          "The navigation of an app, from one set of values: `Sidebar` on a screen from 768px wide, and `TopNav` under that. It follows the screen as it is resized or turned, and only one of the two is ever rendered. It takes the props of both: what they share, such as `share`, goes to the one that shows, `collapseLabel`, `expandLabel` and `defaultCollapsed` only to `Sidebar`, and `menuLabel`, `accountLabel` and `install` only to `TopNav`. The app places it: `Sidebar` goes beside the page and `TopNav` over it, so the wrapper is a row from 768px and a column under it (`flex flex-col md:flex-row`). On the server it renders nothing, because the width of the screen isn't known there. Resize this frame to see it swap.",
       },
     },
   },
