@@ -8,6 +8,11 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `size="xl"` on `Icon`: 32px, for an icon that stands alone, such as a shortcut. The type `IconSize` is the sizes `Icon` takes: `Size` and `xl`
+- `Icon` has the `SiVercel` icon
+
 ## [3.19.0] - 2026-11-20
 
 ### Added
