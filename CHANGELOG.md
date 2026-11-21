@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.21.0] - 2026-11-21
+
 ### Added
 
 - `Disclosure`: a line that opens and closes what is under it, made with the native `details` element. `summary` is the line that always shows and `children` is what it hides. `defaultOpen` starts it open, and `variant="outlined"` draws a border around it, for an item of a list. The types `DisclosureProps` and `DisclosureVariant` come with it
@@ -615,7 +617,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.20.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.21.0...HEAD
+[3.21.0]: https://github.com/alexandregme/zljs/compare/v3.20.0...v3.21.0
 [3.20.0]: https://github.com/alexandregme/zljs/compare/v3.19.0...v3.20.0
 [3.19.0]: https://github.com/alexandregme/zljs/compare/v3.18.0...v3.19.0
 [3.18.0]: https://github.com/alexandregme/zljs/compare/v3.17.0...v3.18.0
