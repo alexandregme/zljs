@@ -14,6 +14,8 @@ export type {
   SelectProps,
   TextAreaProps,
 } from "./forms";
+export { Disclosure } from "./disclosure";
+export type { DisclosureProps, DisclosureVariant } from "./disclosure";
 export { Icon } from "./icon";
 export type { IconName, IconProps, IconSize } from "./icon";
 export { FormProvider, FormInput } from "./rhf";

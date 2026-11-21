@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Disclosure`: a line that opens and closes what is under it, made with the native `details` element. `summary` is the line that always shows and `children` is what it hides. `defaultOpen` starts it open, and `variant="outlined"` draws a border around it, for an item of a list. The types `DisclosureProps` and `DisclosureVariant` come with it
+
 ## [3.20.0] - 2026-11-21
 
 ### Added
