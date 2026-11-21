@@ -57,6 +57,13 @@ describe("<Icon /> - Custom Props", () => {
     expect(icon.querySelector("svg")).toHaveAttribute("width", "12");
   });
 
+  it("renders <Icon /> with size xl", () => {
+    render(<Icon name="X" size="xl" />);
+    const icon = screen.getByTestId("X");
+
+    expect(icon.querySelector("svg")).toHaveAttribute("width", "32");
+  });
+
   it("renders <Icon /> with aria-label", () => {
     render(<Icon name="SiWhatsapp" aria-label="WhatsApp" />);
     const icon = screen.getByRole("img", { name: "WhatsApp" });

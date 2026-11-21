@@ -99,7 +99,8 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: "`sm` is 12px, `md` is 16px (the default) and `lg` is 24px.",
+        story:
+          "`sm` is 12px, `md` is 16px (the default), `lg` is 24px and `xl` is 32px. `xl` is only of the icon, for one that stands alone, such as a shortcut: a component that takes a `size`, as `Button` does, goes up to `lg`.",
       },
     },
   },
@@ -108,6 +109,7 @@ export const Sizes: Story = {
       <Icon name="Check" size="sm" />
       <Icon name="Check" size="md" />
       <Icon name="Check" size="lg" />
+      <Icon name="Check" size="xl" />
     </div>
   ),
 };
