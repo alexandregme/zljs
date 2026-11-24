@@ -8,7 +8,6 @@ import {
   SiVercel,
   SiSupabase,
 } from "react-icons/si";
-import { SiInfisical } from "./icon-infisical";
 import type { IconSize } from "./icon.interface";
 
 // UI icons: https://lucide.dev/icons
@@ -77,7 +76,6 @@ export const iconNames = [
   "SiGithub",
   "SiVercel",
   "SiSupabase",
-  "SiInfisical",
 ] as const;
 
 export const iconBrands: Record<string, ElementType> = {
@@ -88,7 +86,6 @@ export const iconBrands: Record<string, ElementType> = {
   SiGithub,
   SiVercel,
   SiSupabase,
-  SiInfisical,
 };
 
 export const iconSizes: Record<IconSize, number> = {

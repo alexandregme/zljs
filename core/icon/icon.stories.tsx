@@ -67,7 +67,7 @@ export const Names: Story = {
     docs: {
       description: {
         story:
-          "Every available icon. UI icons come from `lucide-react` and brand icons (`Si*`) from `react-icons`. `SiInfisical` is the one drawn here, because `react-icons` doesn't have it.",
+          "Every available icon. UI icons come from `lucide-react` and brand icons (`Si*`) from `react-icons`.",
       },
     },
   },
