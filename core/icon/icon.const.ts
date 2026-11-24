@@ -6,6 +6,7 @@ import {
   SiShopify,
   SiGithub,
   SiVercel,
+  SiSupabase,
 } from "react-icons/si";
 import type { IconSize } from "./icon.interface";
 
@@ -74,6 +75,7 @@ export const iconNames = [
   "SiShopify",
   "SiGithub",
   "SiVercel",
+  "SiSupabase",
 ] as const;
 
 export const iconBrands: Record<string, ElementType> = {
@@ -83,6 +85,7 @@ export const iconBrands: Record<string, ElementType> = {
   SiShopify,
   SiGithub,
   SiVercel,
+  SiSupabase,
 };
 
 export const iconSizes: Record<IconSize, number> = {
