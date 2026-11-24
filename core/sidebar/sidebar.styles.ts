@@ -1,7 +1,10 @@
 import { tv } from "tailwind-variants";
 
 export const sidebar = tv({
-  base: "h-dvh bg-neutral-800 text-neutral-300 flex flex-col overflow-hidden transition-[width] duration-200 divide-y divide-neutral-600/50",
+  // A surface beside the page, with a line between the two: white in the light
+  // theme and dark in the dark one. The line is an inset shadow, which takes no
+  // width: a border would move what is centered in the collapsed sidebar.
+  base: "h-dvh shadow-[inset_-1px_0_0_var(--color-zl-border)] bg-zl-surface text-zl-text-soft flex flex-col overflow-hidden transition-[width] duration-200 divide-y divide-zl-border",
   variants: {
     collapsed: {
       true: "w-14",
@@ -11,7 +14,7 @@ export const sidebar = tv({
 });
 
 export const nav = tv({
-  base: "flex-1 min-h-0 overflow-y-auto overflow-x-hidden divide-y divide-neutral-600/50",
+  base: "flex-1 min-h-0 overflow-y-auto overflow-x-hidden divide-y divide-zl-border",
 });
 
 export const header = tv({
@@ -24,7 +27,7 @@ export const section = tv({
 
 // A row like the collapse button: the icon stays in place when the text goes.
 export const actions = tv({
-  base: "shrink-0 grid p-2 [&>button]:h-10 [&>button]:justify-start [&>button]:px-3 [&>button]:overflow-hidden [&>button]:whitespace-nowrap",
+  base: "shrink-0 grid gap-1 p-2 [&>button]:h-10 [&>button]:justify-start [&>button]:px-3 [&>button]:overflow-hidden [&>button]:whitespace-nowrap",
 });
 
 export const footer = tv({
@@ -37,11 +40,11 @@ export const footer = tv({
 });
 
 export const avatar = tv({
-  base: "shrink-0 size-8 rounded-full bg-neutral-600 text-white text-xs font-medium flex items-center justify-center",
+  base: "shrink-0 size-8 rounded-full bg-zl-surface-hover text-zl-text text-xs font-medium flex items-center justify-center",
 });
 
 export const userInfo = tv({
-  base: "flex flex-col min-w-0 text-white [&>*]:truncate [&>*:last-child]:text-xs [&>*:last-child]:text-neutral-400",
+  base: "flex flex-col min-w-0 text-zl-text [&>*]:truncate [&>*:last-child]:text-xs [&>*:last-child]:text-zl-muted",
 });
 
 export const toggleButton = tv({

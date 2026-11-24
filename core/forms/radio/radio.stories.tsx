@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heading } from "@zljs/core";
-import { colorContrast, focusOutlineContrast } from "@test-utils";
+import { colorContrast, focusOutlineContrast, themeColor } from "@test-utils";
 import { expect, fn } from "storybook/test";
 import { Radio } from "./radio";
 
@@ -71,7 +71,7 @@ export const Names: Story = {
   },
   render: () => (
     <fieldset className="flex flex-col gap-2">
-      <legend className="text-sm font-medium text-gray-700">Size</legend>
+      <legend className="text-sm font-medium text-zl-text-soft">Size</legend>
       <Radio label="Small" name="size" value="sm" />
       <Radio label="Medium" name="size" value="md" />
       <Radio label="Large" name="size" value="lg" />
@@ -84,7 +84,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`checked` needs `onChange` to stay controlled, and `disabled` blocks the choice and takes the option out of the tab order. A checked radio uses the theme's `primary` color, at 5.25:1 on white, and keyboard focus draws an outline in the same color. This story checks both on every enabled radio shown here, which axe doesn't do. Three props have no visual effect. `required` tells assistive technology and the browser that the group is mandatory, so say it in the `legend` too, for people who only see the screen. `onBlur` runs when the radio loses focus: use it to validate after the user leaves the group. `onKeyDown` runs on each key press: use it for a shortcut, and leave the arrow keys to the browser.",
+          "`checked` needs `onChange` to stay controlled, and `disabled` blocks the choice and takes the option out of the tab order. A checked radio uses the theme's `primary` color, at 5.25:1 on a surface, and keyboard focus draws an outline in the same color. This story checks both on every enabled radio shown here, which axe doesn't do. Three props have no visual effect. `required` tells assistive technology and the browser that the group is mandatory, so say it in the `legend` too, for people who only see the screen. `onBlur` runs when the radio loses focus: use it to validate after the user leaves the group. `onKeyDown` runs on each key press: use it for a shortcut, and leave the arrow keys to the browser.",
       },
     },
   },
@@ -101,7 +101,10 @@ export const States: Story = {
       .filter((field) => {
         const { accentColor } = getComputedStyle(field);
 
-        return accentColor === "auto" || colorContrast(accentColor, "#fff") < 3;
+        return (
+          accentColor === "auto" ||
+          colorContrast(accentColor, themeColor("surface")) < 3
+        );
       })
       .map(nameOf);
     const disabledLabel = canvas

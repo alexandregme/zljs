@@ -134,7 +134,7 @@ export const Accounts: Story = {
     docs: {
       description: {
         story:
-          "The account button opens two rows. The first has what the user can do with the app, one per line: the share button and, where the browser can install the app, the install button. The second has the name and the email of `user`, with the logout button beside them. A long name or email is cut with an ellipsis. Only one of the two panels is open at a time. The logout button is a `SignOutButton`: a tap opens a modal that asks first, and `onLogout` is called when the user confirms. When it returns a promise that rejects, an error toast shows, so the app needs a `Toaster`. This story opens the account, so axe checks it.",
+          "The account button opens two rows. The first has what the user can do with the app, one per line: the theme buttons, the share button and, where the browser can install the app, the install button. The second has the name and the email of `user`, with the logout button beside them. A long name or email is cut with an ellipsis. Only one of the two panels is open at a time. The logout button is a `SignOutButton`: a tap opens a modal that asks first, and `onLogout` is called when the user confirms. When it returns a promise that rejects, an error toast shows, so the app needs a `Toaster`. This story opens the account, so axe checks it.",
       },
     },
   },
@@ -269,12 +269,47 @@ export const Installs: Story = {
   },
 };
 
+export const Themes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The first line of the account panel has the theme buttons, a `ThemeToggle`: the system, the default, which follows the device, then light and dark, with the one in use marked. The choice is kept in the browser. The bar itself follows the theme: a white surface in the light one and a dark surface in the dark one. `theme` takes their texts, `label`, `systemLabel`, `lightLabel` and `darkLabel`, all with English defaults. This story opens the account, chooses the dark theme, checks the contrast of the controls in it and goes back to the system.",
+      },
+    },
+  },
+  args: {
+    ...requiredProps,
+    theme: {
+      label: "Tema",
+      systemLabel: "Sistema",
+      lightLabel: "Claro",
+      darkLabel: "Escuro",
+    },
+  },
+  play: async ({ canvas, canvasElement, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "Account" }));
+
+    const system = canvas.getByRole("button", { name: "Sistema" });
+    const dark = canvas.getByRole("button", { name: "Escuro" });
+
+    await userEvent.click(dark);
+
+    await expect(dark).toHaveAttribute("aria-pressed", "true");
+    await expectControlsToHoldContrast(canvasElement);
+
+    await userEvent.click(system);
+
+    await expect(system).toHaveAttribute("aria-pressed", "true");
+  },
+};
+
 export const Shares: Story = {
   parameters: {
     docs: {
       description: {
         story:
-          "The first line of the account panel is the share button, a `ShareAppButton`: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. On a phone a tap opens the share dialog of the browser. In a browser with no share dialog a tap copies the address and a toast says so, so the app needs a `Toaster`. `share` takes its texts, `label`, `copiedMessage` and `errorMessage`, all with English defaults, and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself. This story gives the browser a share dialog, opens the account and taps.",
+          "The second line of the account panel is the share button, a `ShareAppButton`: it shares the address of the app, so the user can send it to someone who then logs in and asks for access. On a phone a tap opens the share dialog of the browser. In a browser with no share dialog a tap copies the address and a toast says so, so the app needs a `Toaster`. `share` takes its texts, `label`, `copiedMessage` and `errorMessage`, all with English defaults, and what goes with the address: `title`, by default the title of the page, and `text`. The address is always the origin of the page, the app itself. This story gives the browser a share dialog, opens the account and taps.",
       },
     },
   },

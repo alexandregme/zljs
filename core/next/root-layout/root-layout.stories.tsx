@@ -17,7 +17,7 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "Goes in the app's root layout, around its content: `app/layout.tsx`, inside `<body>`, or `pages/_app.tsx`. It renders the page's `<main>` and takes the height of the visible screen, so pages and components like `NotFound` only provide the content and never render their own `<main>`.\n\nIt also counts the page views with Vercel Web Analytics, which shows them in the project on Vercel once Web Analytics is enabled there. It renders nothing on the page: it adds a script to the document, and in development that script sends nothing.",
+          "Goes in the app's root layout, around its content: `app/layout.tsx`, inside `<body>`, or `pages/_app.tsx`. It renders the page's `<main>` and takes the height of the visible screen, so pages and components like `NotFound` only provide the content and never render their own `<main>`. It paints the page in `--color-zl-page` with the text in `--color-zl-text`, so the page follows the theme: light, dark, or the one of the system.\n\nBefore the page, it renders a small script that applies the theme the user chose, kept in the browser by `useTheme`, so the page is never drawn in the wrong theme.\n\nIt also counts the page views with Vercel Web Analytics, which shows them in the project on Vercel once Web Analytics is enabled there. It renders nothing on the page: it adds a script to the document, and in development that script sends nothing.",
       },
     },
   },

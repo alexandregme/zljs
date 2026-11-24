@@ -186,4 +186,16 @@ describe("<Checkbox /> - Styles", () => {
     expect(label).toHaveClass("border", "rounded-lg", "items-center");
     expect(label).not.toHaveClass("w-fit");
   });
+
+  it("renders <Checkbox /> with the theme color and a real focus outline", () => {
+    render(<Checkbox label={LABEL} />);
+    const checkbox = screen.getByRole("checkbox");
+
+    expect(checkbox).toHaveClass(
+      "accent-zl-primary",
+      "focus-visible:outline-2",
+      "focus-visible:outline-zl-primary",
+    );
+    expect(checkbox).not.toHaveClass("focus:ring-2");
+  });
 });

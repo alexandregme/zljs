@@ -85,9 +85,9 @@ describe("<Modal /> - Styles", () => {
     const title = screen.getByRole("heading", { name: "Test Modal" });
 
     expect(dialog).toHaveClass(
-      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,white)]",
+      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,var(--color-zl-surface))]",
     );
-    expect(dialog).not.toHaveClass("bg-white");
+    expect(dialog).not.toHaveClass("bg-zl-surface");
     expect(title).toHaveClass("text-zl-danger-strong");
   });
 
@@ -96,7 +96,7 @@ describe("<Modal /> - Styles", () => {
     const dialog = screen.getByRole("dialog", { name: "Test Modal" });
     const title = screen.getByRole("heading", { name: "Test Modal" });
 
-    expect(dialog).toHaveClass("bg-white");
-    expect(title).toHaveClass("text-gray-900");
+    expect(dialog).toHaveClass("bg-zl-surface");
+    expect(title).toHaveClass("text-zl-text");
   });
 });

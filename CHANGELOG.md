@@ -8,6 +8,43 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- A dark theme. With no setup an app follows the theme of the device, and the user can choose another: the choice is kept in the browser and `RootLayout` applies it before the page is drawn, so the page never flashes in the wrong theme
+- `Sidebar` and `TopNav`, and so `Navigation`, show the theme buttons over the share button: the system, the light and the dark theme, with the one in use marked. In a collapsed `Sidebar` the three become one button that goes to the next theme on each click. `theme` takes their texts: `label`, `systemLabel`, `lightLabel` and `darkLabel`, all with English defaults
+- `ThemeToggle`, the buttons `Sidebar` and `TopNav` use, for an app that puts the theme somewhere else, and the type `ThemeToggleProps`. `label` is the accessible name of the group and is required, and `iconOnly` shows the one button
+- `useTheme`, the theme the user chose and the function that changes it, for an app that draws its own control, and `setTheme`, the same function for code outside a component. The types `Theme` (`system`, `light` or `dark`) and `UseTheme` come with them
+- The neutral colors, for the page and what sits on it: `--color-zl-page`, `--color-zl-surface`, `--color-zl-surface-muted`, `--color-zl-surface-hover`, `--color-zl-border`, `--color-zl-border-strong`, `--color-zl-text` and `--color-zl-text-soft`. An app uses them in its own pages (`bg-zl-surface`, `text-zl-text-soft`, `border-zl-border`) so they follow the theme
+- `aria-pressed` on `Button`, for a button that stays on, such as the chosen one of a group. `ghost` draws it with a background
+- `Icon` has the `Monitor`, `Sun` and `Moon` icons
+- Storybook has a theme switch in its toolbar
+
+### Changed
+
+- Every `--color-zl-*` value is a `light-dark()` pair: the first color for the light theme and the second for the dark. The light values are the ones the components had, so nothing changes on a device in the light theme. In the dark theme the colors are lighter, `-strong` and `-hover` get lighter instead of darker, and `-on` is near black instead of white
+- The components use the neutral colors where they had fixed grays, so `Card`, `Modal`, `Tabs`, `Disclosure`, `DataGrid`, the toasts, the fields and the neutral `Button` follow the theme. The tints of a colored `Modal` and of a toast are mixed with the surface instead of with white
+- `Sidebar` and `TopNav` follow the theme: a white surface with a line beside the page in the light theme, where they were dark, and a dark one in the dark theme
+- `RootLayout` paints the page: `--color-zl-page` (`gray-50`) behind and `--color-zl-text` (`gray-900`) as the text, where it had no color of its own. It covers a background the app sets on `body`
+- The scrollbar thumb uses the theme colors, so it shows on a light and on a dark page
+- The styles set `color-scheme: light dark` on `:root`, which also turns the scrollbars and the native fields of the browser with the theme
+- The dark theme needs a browser with the CSS `light-dark()` function: Chrome 123, Safari 17.5 and Firefox 120, or newer
+
+#### Migration
+
+After updating, the app follows the theme of the device, so on a device in the dark theme it is dark. Do one of the two:
+
+1. **Keep the app light until its pages are ready.** After the import of the styles, in the app's CSS, add `:root { color-scheme: light; }`. The system theme is then always the light one. The theme buttons still let the user choose the dark one.
+2. **Make the app's own pages follow the theme.**
+   - Find the fixed colors: search the app's source for `bg-white`, `bg-gray-`, `bg-slate-`, `bg-neutral-`, `text-gray-`, `text-slate-`, `text-black`, `border-gray-`, `border-slate-`, and for `background-color` and `color:` in its CSS. Replace each with the neutral value of the same role: `bg-zl-page`, `bg-zl-surface`, `bg-zl-surface-muted`, `text-zl-text`, `text-zl-text-soft`, `text-zl-muted`, `border-zl-border` or `border-zl-border-strong`. A color that is the same in both themes on purpose, such as white text on a photo, stays.
+   - Remove a `background-color` set on `html` or `body`: `RootLayout` now paints the page. To change the color of the page, set `--color-zl-page` in `@theme`.
+   - Find the colors the app redefines: search its CSS for `--color-zl-`. Give each a pair, `light-dark(<light>, <dark>)`, as in `--color-zl-primary: light-dark(#2e7d32, #81c784);`. A single color is used in both themes: one dark enough for text on a light page is too dark on a dark one, and as a button it gets near black text in the dark theme. Check the pair against the minimums in the `Foundations/Colors` page of the Storybook.
+
+An app in another language passes the texts of the theme buttons: `theme={{ label: "Tema", systemLabel: "Sistema", lightLabel: "Claro", darkLabel: "Escuro" }}` on `Navigation`, `Sidebar` or `TopNav`. What stays: the names of the existing values, the classes of the components and their props.
+
+### Fixed
+
+- `Checkbox` draws keyboard focus with an outline in the `primary` color, as `Radio` does. It had a ring in a fixed blue, which an app with its own `primary` didn't change and forced colors mode dropped
+
 ## [3.22.0] - 2026-11-24
 
 ### Added

@@ -17,6 +17,7 @@ export const Navigation = ({
   navLabel,
   menuLabel,
   accountLabel,
+  theme,
   share,
   install,
   logout,
@@ -43,6 +44,7 @@ export const Navigation = ({
         homeHref={homeHref}
         homeLabel={homeLabel}
         navLabel={navLabel}
+        theme={theme}
         share={share}
         logout={logout}
         onLogout={onLogout}
@@ -60,6 +62,7 @@ export const Navigation = ({
       navLabel={navLabel}
       menuLabel={menuLabel}
       accountLabel={accountLabel}
+      theme={theme}
       share={share}
       install={install}
       logout={logout}

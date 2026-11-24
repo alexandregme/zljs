@@ -1,3 +1,4 @@
+import type { ThemeToggleProps } from "../../features/app/components/theme-toggle";
 import type { ShareAppButtonProps } from "../../features/app/components/share-app-button";
 import type { SignOutButtonProps } from "../../features/auth/components/sign-out";
 import type { IconName } from "../icon/icon.interface";
@@ -29,6 +30,13 @@ export interface SidebarProps {
   homeLabel?: string;
   /** The accessible name of the navigation. */
   navLabel?: string;
+  /**
+   * The texts of the theme buttons, over the share button: `label`, the name
+   * of the group, and `systemLabel`, `lightLabel` and `darkLabel`, the name of
+   * each theme. Collapsed, the three become one button that goes to the next
+   * theme on each click.
+   */
+  theme?: Partial<Omit<ThemeToggleProps, "iconOnly" | "size">>;
   /**
    * The share button, over the user: its texts (`label`, `copiedMessage` and
    * `errorMessage`) and what goes with the address of the app (`title` and

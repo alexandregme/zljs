@@ -7,7 +7,7 @@ export const overlay = tv({
 });
 
 export const content = tv({
-  base: "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg p-6 w-full focus:outline-none max-h-[90vh] overflow-y-auto",
+  base: "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg p-6 text-zl-text w-full focus:outline-none max-h-[90vh] overflow-y-auto",
   variants: {
     size: {
       xs: "max-w-xs",
@@ -19,13 +19,18 @@ export const content = tv({
     },
     // An opaque tint: a translucent one, as Card has, would show the dark overlay behind the modal.
     color: {
-      primary: "bg-[color-mix(in_srgb,var(--color-zl-primary)_15%,white)]",
-      success: "bg-[color-mix(in_srgb,var(--color-zl-success)_15%,white)]",
-      danger: "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,white)]",
-      warning: "bg-[color-mix(in_srgb,var(--color-zl-warning)_15%,white)]",
-      info: "bg-[color-mix(in_srgb,var(--color-zl-info)_15%,white)]",
-      muted: "bg-[color-mix(in_srgb,var(--color-zl-muted)_15%,white)]",
-      none: "bg-white",
+      primary:
+        "bg-[color-mix(in_srgb,var(--color-zl-primary)_15%,var(--color-zl-surface))]",
+      success:
+        "bg-[color-mix(in_srgb,var(--color-zl-success)_15%,var(--color-zl-surface))]",
+      danger:
+        "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,var(--color-zl-surface))]",
+      warning:
+        "bg-[color-mix(in_srgb,var(--color-zl-warning)_15%,var(--color-zl-surface))]",
+      info: "bg-[color-mix(in_srgb,var(--color-zl-info)_15%,var(--color-zl-surface))]",
+      muted:
+        "bg-[color-mix(in_srgb,var(--color-zl-muted)_15%,var(--color-zl-surface))]",
+      none: "bg-zl-surface",
     },
   },
   defaultVariants: {
@@ -49,7 +54,7 @@ export const title = tv({
       warning: "text-zl-warning-strong",
       info: "text-zl-info-strong",
       muted: "text-zl-muted-strong",
-      none: "text-gray-900",
+      none: "text-zl-text",
     },
   },
   defaultVariants: {
@@ -58,7 +63,7 @@ export const title = tv({
 });
 
 export const description = tv({
-  base: "text-sm text-gray-600 mt-2",
+  base: "text-sm text-zl-text-soft mt-2",
 });
 
 export const body = tv({

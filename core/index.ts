@@ -51,10 +51,13 @@ export {
   InstallAppButton,
   Loader,
   Navigation,
+  setTheme,
   ShareAppButton,
+  ThemeToggle,
   useAppStore,
   useInstallApp,
   useIsDesktop,
+  useTheme,
 } from "../features/app";
 export type {
   AppState,
@@ -66,6 +69,9 @@ export type {
   NavigationMode,
   NavigationProps,
   ShareAppButtonProps,
+  Theme,
+  ThemeToggleProps,
+  UseTheme,
 } from "../features/app";
 export { ReduxProvider } from "./state/redux";
 export type { ReduxProviderProps, ReduxStore } from "./state/redux";

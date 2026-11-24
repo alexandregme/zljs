@@ -55,7 +55,7 @@ Goal: every story passes axe with `a11y.test: "error"`, which is on in `.storybo
 
 1. `Button` (checked, focus outline and story descriptions fixed)
    - Decide whether the type should require `aria-label` on icon-only buttons (changes the public API)
-2. `Checkbox` (next): `border-gray-300` does nothing on a native control, and it needs a real focus outline and the props of `Input`. `accent-zl-primary` is already in
+2. `Checkbox` (next): it needs the props of `Input`. `accent-zl-primary` and a real focus outline are already in, and the `border-gray-300` that did nothing is gone
 3. Not checked yet: `Heading`, `Spinner`, `Loader`
 4. In each PR: bring the tests and stories to the current `component-tests` and `component-check` shape
 5. Last PR: turn on the lint rule above
@@ -64,7 +64,7 @@ Known problems:
 
 1. `Loader` mounts only while loading, and some screen readers don't announce a `role="status"` inserted that way
 2. No stories, so no axe coverage: `FormInput`, `FormProvider`
-3. `Checkbox` and `Modal` still use a `box-shadow` focus ring, which disappears in forced colors mode and has no contrast check. Move them to a real `focus-visible` outline and check it with `focusOutlineContrast` from `test-utils/contrast.ts`, as `Button` and `Input` do. Hover is only checked on `Button`: add `hoverTextContrast` to the others that change color on hover
+3. `Modal` still uses a `box-shadow` focus ring (`Checkbox` has a real outline now, with no contrast check in a story yet), which disappears in forced colors mode and has no contrast check. Move it to a real `focus-visible` outline and check it with `focusOutlineContrast` from `test-utils/contrast.ts`, as `Button` and `Input` do. Hover is only checked on `Button`: add `hoverTextContrast` to the others that change color on hover
 4. `Button` colored outlines are checked on a white page only: on a dark surface, `primary` and the others can fall under 3:1
 5. After the color tokens PR: the focus outlines should use `outline-zl-primary`
 6. The border of an unchecked `Radio` is drawn by the browser, so no story can check its contrast
@@ -87,6 +87,16 @@ To review later:
    - They run in a real browser through `pnpm test:storybook`, inside each story's `play`, and not in `pnpm test`: jsdom has no CSS
 2. Go back to everything about axe: what it checks, how it runs on the stories (`a11y.test` in `.storybook/preview.ts`) and what it can't see
 3. Go back to everything about colors: the theme in `core/styles/colors.css`, the `Foundations/Colors` page and the color rules in the `component-check` skill
+
+---
+
+## Themes
+
+The light and the dark theme came with the theme buttons of `Sidebar` and `TopNav`. Left to check, with the theme switch of the Storybook toolbar:
+
+1. Shadows and borders in the dark theme, component by component. The shadows are still black (`shadow-black/12` on `Card`, `shadow-lg` on `Modal` and on the panels of `TopNav`), so they barely show on a dark page and the border does the work alone. A colored `Card` has a shadow in its own color (`shadow-zl-<color>/20`). Check whether each surface still stands out from the page (`neutral-900` on `neutral-950`), whether `--color-zl-border` (`neutral-700`) is enough between surfaces, and whether the line of `Sidebar` (an inset shadow) and of `TopNav` (a border) should be the same thing. Decide if the shadow needs a theme value of its own
+2. `StatsCard` uses `DataColor`, literal colors that don't change with the theme, so its cards stay light on a dark page. Decide whether they get a pair for the dark theme
+3. Axe checks the dark theme only where a story renders it: `Foundations/Colors` (`Themes`, `Contrast`, `Usage`, `Neutrals`), `DataGrid` `Playground` and the `Themes` stories of `Sidebar` and `TopNav`. The other stories run in the light theme
 
 ---
 

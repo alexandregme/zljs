@@ -68,6 +68,9 @@ export const iconNames = [
   "Map",
   "MapPinOff",
   "Settings",
+  "Monitor",
+  "Sun",
+  "Moon",
   // Brand icons (react-icons/si)
   "SiWhatsapp",
   "SiFacebook",

@@ -19,5 +19,10 @@ export interface ButtonProps {
   "aria-label"?: string;
   /** For a button that opens and closes something, such as a menu. */
   "aria-expanded"?: boolean;
+  /**
+   * For a button that stays on, such as the chosen one of a group. `ghost`
+   * draws it with a background.
+   */
+  "aria-pressed"?: boolean;
   onClick?: () => void;
 }

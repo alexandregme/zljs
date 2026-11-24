@@ -55,7 +55,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`primary` is the default. `success`, `danger`, `warning`, `info` and `muted` carry the same meaning as anywhere else in the library. `orange`, `pink` and `purple` carry none: use them to tell categories apart when those meanings don't apply. The background is the color at 15% and the text is its `-strong` value, so a `Tag` follows the `--color-zl-*` theme values, and an app that changes them checks the contrast of its own choice: only the defaults are checked here. The defaults hold on a white page. The remove button takes the text color of the `Tag`. This story checks 4.5:1 on the text at its real size, and on the remove button 3:1 for hover and for the focus outline, because axe sees neither of those.",
+          "`primary` is the default. `success`, `danger`, `warning`, `info` and `muted` carry the same meaning as anywhere else in the library. `orange`, `pink` and `purple` carry none: use them to tell categories apart when those meanings don't apply. The background is the color at 15% and the text is its `-strong` value, so a `Tag` follows the `--color-zl-*` theme values, and an app that changes them checks the contrast of its own choice: only the defaults are checked here. The defaults hold on the page and on a surface, in both themes. The remove button takes the text color of the `Tag`. This story checks 4.5:1 on the text at its real size, and on the remove button 3:1 for hover and for the focus outline, because axe sees neither of those.",
       },
     },
   },

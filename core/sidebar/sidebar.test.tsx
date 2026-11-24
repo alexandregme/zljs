@@ -86,6 +86,15 @@ describe("<Sidebar /> - Default Props", () => {
     expect(
       screen.getByRole("button", { name: COLLAPSE_LABEL }),
     ).toHaveTextContent(COLLAPSE_LABEL);
+    expect(
+      within(screen.getByRole("group", { name: "Theme" })).getAllByRole(
+        "button",
+      ),
+    ).toHaveLength(3);
+    expect(screen.getByRole("button", { name: "System" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
     expect(screen.getByRole("button", { name: "Share app" })).toHaveTextContent(
       "Share app",
     );
@@ -118,12 +127,31 @@ describe("<Sidebar /> - Custom Props", () => {
         homeHref="/start"
         homeLabel="Enterprise"
         navLabel="Menu principal"
+        theme={{
+          label: "Tema",
+          systemLabel: "Sistema",
+          lightLabel: "Claro",
+          darkLabel: "Escuro",
+        }}
         share={{ label: "Compartilhar app" }}
       />,
     );
     const homeLink = screen.getByRole("link", { name: "Enterprise" });
+    const theme = screen.getByRole("group", { name: "Tema" });
     const share = screen.getByRole("button", { name: "Compartilhar app" });
 
+    expect(
+      within(theme).getByRole("button", { name: "Sistema" }),
+    ).toBeInTheDocument();
+    expect(
+      within(theme).getByRole("button", { name: "Claro" }),
+    ).toBeInTheDocument();
+    expect(
+      within(theme).getByRole("button", { name: "Escuro" }),
+    ).toBeInTheDocument();
+    expect(
+      theme.compareDocumentPosition(share) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
     expect(share).toHaveTextContent("Compartilhar app");
     expect(
       share.compareDocumentPosition(screen.getByText("Alexandre Mendes")) &
@@ -184,6 +212,10 @@ describe("<Sidebar /> - Custom Props", () => {
     expect(
       screen.getByRole("button", { name: "Expand sidebar" }),
     ).toBeInTheDocument();
+    expect(screen.queryByRole("group")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Theme: System" }),
+    ).toHaveTextContent("");
     expect(screen.getByRole("button", { name: "Share app" })).toHaveTextContent(
       "",
     );

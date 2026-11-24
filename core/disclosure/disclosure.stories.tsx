@@ -37,7 +37,7 @@ export const Variants: Story = {
     docs: {
       description: {
         story:
-          "`plain`, the default, has no border: use it for a section of a page, where the content under it already has its own look. `outlined` draws a border and a white background around the summary and the content, for an item of a list that opens in place.",
+          "`plain`, the default, has no border: use it for a section of a page, where the content under it already has its own look. `outlined` draws a border and a surface background around the summary and the content, for an item of a list that opens in place.",
       },
     },
   },

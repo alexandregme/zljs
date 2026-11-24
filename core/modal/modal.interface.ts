@@ -11,6 +11,6 @@ export interface ModalProps {
   children?: ReactNode;
   /** The width. `xs` is the smallest, for a short question and its buttons. */
   size?: ModalSize;
-  /** The color of the title and a light background in that color. `none`, the default, is white. */
+  /** The color of the title and a light background in that color. `none`, the default, is the surface color. */
   color?: SemanticColor;
 }

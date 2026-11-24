@@ -9,5 +9,5 @@ export const radio = tv({
 });
 
 export const label = tv({
-  base: "text-sm text-gray-700 select-none",
+  base: "text-sm text-zl-text-soft select-none",
 });

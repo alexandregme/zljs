@@ -44,7 +44,7 @@ export const States: Story = {
   },
   render: () => (
     <fieldset aria-describedby="size-error" className="flex flex-col gap-2">
-      <legend className="text-sm font-medium text-gray-700">Size</legend>
+      <legend className="text-sm font-medium text-zl-text-soft">Size</legend>
       <Radio label="Small" name="size" value="sm" />
       <Radio label="Large" name="size" value="lg" />
       <Error id="size-error" message="Please choose a size" />
