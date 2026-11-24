@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.23.0] - 2026-11-24
+
 ### Added
 
 - A dark theme. With no setup an app follows the theme of the device, and the user can choose another: the choice is kept in the browser and `RootLayout` applies it before the page is drawn, so the page never flashes in the wrong theme
@@ -660,7 +662,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.22.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.23.0...HEAD
+[3.23.0]: https://github.com/alexandregme/zljs/compare/v3.22.0...v3.23.0
 [3.22.0]: https://github.com/alexandregme/zljs/compare/v3.21.0...v3.22.0
 [3.21.0]: https://github.com/alexandregme/zljs/compare/v3.20.0...v3.21.0
 [3.20.0]: https://github.com/alexandregme/zljs/compare/v3.19.0...v3.20.0
