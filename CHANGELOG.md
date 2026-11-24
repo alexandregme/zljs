@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Added
+
+- `Icon` has the `SiSupabase` and `SiInfisical` icons. `SiInfisical` is drawn in the library, because `react-icons` doesn't have the Infisical mark
+
 ## [3.21.0] - 2026-11-21
 
 ### Added
