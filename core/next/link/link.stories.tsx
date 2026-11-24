@@ -50,7 +50,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`primary` is the default. `none` inherits the color around it, so it works on any background. The other colors are meant for white backgrounds, where text holds 4.5:1 and keyboard focus draws an outline with at least 3:1, also on hover. `muted` is for a secondary link. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. This story measures hover and focus because axe sees neither.",
+          "`primary` is the default. `none` inherits the color around it, so it works on any background. The other colors are meant for the page and for a surface, in both themes, where text holds 4.5:1 and keyboard focus draws an outline with at least 3:1, also on hover. `muted` is for a secondary link. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. This story measures hover and focus because axe sees neither.",
       },
     },
   },

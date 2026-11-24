@@ -119,7 +119,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "With no `color`, the icon inherits the color around it, and `none` does the same, so an icon inside a `Button` or a colored text follows it. The other colors are meant for white backgrounds, where they hold 3:1, the minimum for an icon. `muted` is for a supporting icon. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. This story measures the contrast because axe doesn't check icons.",
+          "With no `color`, the icon inherits the color around it, and `none` does the same, so an icon inside a `Button` or a colored text follows it. The other colors are meant for the page and for a surface, in both themes, where they hold 3:1, the minimum for an icon. `muted` is for a supporting icon. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. This story measures the contrast because axe doesn't check icons.",
       },
     },
   },

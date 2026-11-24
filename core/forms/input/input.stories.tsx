@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heading } from "@zljs/core";
-import { colorContrast, focusOutlineContrast } from "@test-utils";
+import { colorContrast, focusOutlineContrast, themeColor } from "@test-utils";
 import { expect, fn } from "storybook/test";
 import { Input } from "./input";
 
@@ -76,7 +76,7 @@ export const Placeholders: Story = {
     docs: {
       description: {
         story:
-          "An example of what to type, in `gray-500` for 4.84:1 on white, which this story checks. It disappears on typing, so it never replaces the `label`.",
+          "An example of what to type, in the `muted` color, which holds 4.5:1 on a surface in both themes. This story checks it in the theme in use. It disappears on typing, so it never replaces the `label`.",
       },
     },
   },
@@ -90,7 +90,9 @@ export const Placeholders: Story = {
       "::placeholder",
     );
 
-    await expect(colorContrast(color, "#fff")).toBeGreaterThanOrEqual(4.5);
+    await expect(
+      colorContrast(color, themeColor("surface")),
+    ).toBeGreaterThanOrEqual(4.5);
   },
 };
 
@@ -114,7 +116,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`value` needs `onChange` to stay controlled, and `disabled` blocks editing and takes the field out of the tab order. Keyboard focus draws an outline with 5.25:1 contrast on a white page. This story checks it on every enabled field shown here, along with the border (3:1), which axe doesn't check. Five props have no visual effect. `required` tells assistive technology and the browser that the field is mandatory, so say it in the `label` too, for people who only see the screen. `autoComplete` tells the browser what the field holds, so it can fill it in: use it on fields about the user, such as `email` or `current-password`. `name` identifies the value when the form is submitted. `onBlur` runs when the field loses focus: use it to validate after the user leaves the field, not on every key. `onKeyDown` runs on each key press: use it for a shortcut such as Enter to search, not to read the value, which is what `onChange` is for.",
+          "`value` needs `onChange` to stay controlled, and `disabled` blocks editing and takes the field out of the tab order. Keyboard focus draws an outline with 5.25:1 contrast on a surface. This story checks it on every enabled field shown here, along with the border (3:1), which axe doesn't check. Five props have no visual effect. `required` tells assistive technology and the browser that the field is mandatory, so say it in the `label` too, for people who only see the screen. `autoComplete` tells the browser what the field holds, so it can fill it in: use it on fields about the user, such as `email` or `current-password`. `name` identifies the value when the form is submitted. `onBlur` runs when the field loses focus: use it to validate after the user leaves the field, not on every key. `onKeyDown` runs on each key press: use it for a shortcut such as Enter to search, not to read the value, which is what `onChange` is for.",
       },
     },
   },
@@ -133,7 +135,10 @@ export const States: Story = {
     const lowBorderContrast = enabled
       .filter(
         (field) =>
-          colorContrast(getComputedStyle(field).borderTopColor, "#fff") < 3,
+          colorContrast(
+            getComputedStyle(field).borderTopColor,
+            themeColor("surface"),
+          ) < 3,
       )
       .map(nameOf);
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { SidebarProps } from "./sidebar.interface";
+import { ThemeToggle } from "../../features/app/components/theme-toggle";
 import { ShareAppButton } from "../../features/app/components/share-app-button";
 import { SignOutButton } from "../../features/auth/components/sign-out";
 import { Icon } from "../icon";
@@ -36,6 +37,7 @@ export const Sidebar = ({
   homeHref = "/",
   homeLabel,
   navLabel = "Main navigation",
+  theme = {},
   share = {},
   logout = {},
   onLogout,
@@ -95,6 +97,13 @@ export const Sidebar = ({
       </nav>
 
       <div className={actions()}>
+        <ThemeToggle
+          label={theme.label ?? "Theme"}
+          iconOnly={collapsed}
+          systemLabel={theme.systemLabel}
+          lightLabel={theme.lightLabel}
+          darkLabel={theme.darkLabel}
+        />
         <ShareAppButton
           label={share.label ?? "Share app"}
           iconOnly={collapsed}

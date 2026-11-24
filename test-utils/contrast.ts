@@ -21,6 +21,21 @@ const toRgba = (color: string): Rgba => {
   return [red, green, blue, alpha];
 };
 
+/**
+ * Returns a theme value, such as `surface` for `--color-zl-surface`, as the
+ * color it has in the theme in use. A check measures against it instead of a
+ * fixed white, which is only the surface of the light theme.
+ */
+export const themeColor = (name: string) => {
+  const probe = document.createElement("div");
+  probe.style.color = `var(--color-zl-${name})`;
+  document.body.append(probe);
+  const color = getComputedStyle(probe).color;
+  probe.remove();
+
+  return color;
+};
+
 const linear = (channel: number) => {
   const value = channel / 255;
 

@@ -84,6 +84,7 @@ describe("<Button /> - Default Props", () => {
 
     expect(button).not.toHaveAttribute("aria-label");
     expect(button).not.toHaveAttribute("aria-expanded");
+    expect(button).not.toHaveAttribute("aria-pressed");
   });
 
   it("renders <Button /> with aria-expanded", () => {
@@ -95,6 +96,17 @@ describe("<Button /> - Default Props", () => {
     rerender(<Button aria-expanded={false}>Menu</Button>);
 
     expect(button).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("renders <Button /> with aria-pressed", () => {
+    const { rerender } = render(<Button aria-pressed>Dark</Button>);
+    const button = screen.getByRole("button", { name: "Dark" });
+
+    expect(button).toHaveAttribute("aria-pressed", "true");
+
+    rerender(<Button aria-pressed={false}>Dark</Button>);
+
+    expect(button).toHaveAttribute("aria-pressed", "false");
   });
 
   it("renders <Button /> without onClick by default", () => {
@@ -257,7 +269,7 @@ describe("<Button /> - Custom Props", () => {
     );
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("text-slate-600");
+    expect(button).toHaveClass("text-zl-text-soft");
   });
 
   it("renders <Button /> with color warning", () => {
@@ -271,7 +283,7 @@ describe("<Button /> - Custom Props", () => {
     render(<Button color="none">Cancel</Button>);
     const button = screen.getByRole("button");
 
-    expect(button).toHaveClass("bg-gray-100", "text-gray-900");
+    expect(button).toHaveClass("bg-zl-surface-muted", "text-zl-text");
     expect(button).not.toHaveClass("text-white");
   });
 
@@ -288,8 +300,9 @@ describe("<Button /> - Custom Props", () => {
     const button = screen.getByRole("button", { name: "Logout" });
 
     expect(button).toHaveClass("p-1", "text-current", "hover:text-current");
-    expect(button).not.toHaveClass("text-gray-500");
-    expect(button).not.toHaveClass("hover:text-gray-700");
+    expect(button).toHaveClass("aria-pressed:bg-neutral-500/30");
+    expect(button).not.toHaveClass("text-zl-muted");
+    expect(button).not.toHaveClass("hover:text-zl-text-soft");
   });
 
   it("renders <Button /> with size sm", () => {

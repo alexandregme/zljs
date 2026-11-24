@@ -252,6 +252,11 @@ describe("<TopNav /> - Custom Props", () => {
     expect(account).toHaveAttribute("aria-expanded", "true");
     expect(screen.getByText("Alexandre Mendes")).toBeInTheDocument();
     expect(screen.getByText("user@example.com")).toBeInTheDocument();
+    expect(
+      within(screen.getByRole("group", { name: "Theme" })).getAllByRole(
+        "button",
+      ),
+    ).toHaveLength(3);
     expect(screen.getByRole("button", { name: "Share app" })).toHaveTextContent(
       "Share app",
     );
@@ -267,6 +272,37 @@ describe("<TopNav /> - Custom Props", () => {
 
     expect(account).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByText("Alexandre Mendes")).not.toBeInTheDocument();
+  });
+
+  it("shows the theme buttons of <TopNav /> with the texts of theme, before the share button", () => {
+    render(
+      <TopNav
+        {...REQUIRED_PROPS}
+        theme={{
+          label: "Tema",
+          systemLabel: "Sistema",
+          lightLabel: "Claro",
+          darkLabel: "Escuro",
+        }}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Account" }));
+    const theme = screen.getByRole("group", { name: "Tema" });
+    const share = screen.getByRole("button", { name: "Share app" });
+
+    expect(
+      within(theme).getByRole("button", { name: "Sistema" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(
+      within(theme).getByRole("button", { name: "Claro" }),
+    ).toBeInTheDocument();
+    expect(
+      within(theme).getByRole("button", { name: "Escuro" }),
+    ).toBeInTheDocument();
+    expect(
+      theme.compareDocumentPosition(share) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 
   it("shares the app with the values of share when the share button of <TopNav /> is clicked", async () => {

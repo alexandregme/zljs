@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn } from "storybook/test";
 import { Heading, Tag, Text } from "@zljs/core";
-import { colorContrast } from "@test-utils";
+import { colorContrast, themeColor } from "@test-utils";
 import { Checkbox } from "./checkbox";
 
 export default {
@@ -99,7 +99,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`checked` needs `onChange` to stay controlled, and `disabled` blocks the click on the box and on the label. A checked box uses the theme's `primary` color, at 5.25:1 on white, which this story checks. A `card` shows both on its whole area: a border in that same color when checked, a gray background when disabled. `aria-label` has no visual effect and replaces the name that comes from `label`: use it only to add what the text leaves out, and keep the visible text in it (`Notifications for new comments` for a label reading `Notifications`), because voice control users say what they see. A `card` already reads its whole content, so it doesn't need one.",
+          "`checked` needs `onChange` to stay controlled, and `disabled` blocks the click on the box and on the label. A checked box uses the theme's `primary` color, at 5.25:1 on a surface, which this story checks. A `card` shows both on its whole area: a border in that same color when checked, a gray background when disabled. `aria-label` has no visual effect and replaces the name that comes from `label`: use it only to add what the text leaves out, and keep the visible text in it (`Notifications for new comments` for a label reading `Notifications`), because voice control users say what they see. A `card` already reads its whole content, so it doesn't need one.",
       },
     },
   },
@@ -110,7 +110,9 @@ export const States: Story = {
 
     // "auto" is the browser's own color, and the contrast helper reads it as black, so it can't catch a missing class.
     await expect(accentColor).not.toBe("auto");
-    await expect(colorContrast(accentColor, "#fff")).toBeGreaterThanOrEqual(3);
+    await expect(
+      colorContrast(accentColor, themeColor("surface")),
+    ).toBeGreaterThanOrEqual(3);
   },
   render: () => (
     <div className="flex max-w-sm flex-col gap-4">

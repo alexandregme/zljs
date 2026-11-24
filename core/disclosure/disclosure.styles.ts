@@ -11,7 +11,9 @@ export const disclosure = tv({
   variants: {
     variant: {
       plain: {},
-      outlined: { base: "rounded-lg border border-gray-200 bg-white p-3" },
+      outlined: {
+        base: "rounded-lg border border-zl-border bg-zl-surface p-3",
+      },
     },
   },
   defaultVariants: {

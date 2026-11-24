@@ -191,7 +191,7 @@ describe("<SignOutModal /> - Styles", () => {
     const confirm = within(dialog).getByRole("button", { name: "Sign out" });
 
     expect(dialog).toHaveClass(
-      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,white)]",
+      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,var(--color-zl-surface))]",
     );
     expect(confirm).toHaveClass("bg-zl-danger-bg");
   });

@@ -69,22 +69,63 @@ The components work with no setup, using the default colors. To use your own, re
 @import "@alexandregme/zljs/styles.css";
 
 @theme {
-  --color-zl-primary: #2e7d32;
+  --color-zl-primary: light-dark(#2e7d32, #81c784);
 }
 ```
 
+Every value is a `light-dark()` pair: the first color is used in the light theme and the second in the dark one. A single color is used in both, and one dark enough for text on a light page is too dark on a dark one, so give a pair.
+
 `primary`, `success`, `danger`, `warning`, `info` and `muted` each take one value (`--color-zl-<color>`), used for text and the focus outline. The others follow it, and you can redefine them too:
 
-| Value                       | Used for                | Default                                    |
-| --------------------------- | ----------------------- | ------------------------------------------ |
-| `--color-zl-<color>-strong` | Link hover and Tag text | 30% darker                                 |
-| `--color-zl-<color>-bg`     | Button background       | The color itself (`warning`: `yellow-500`) |
-| `--color-zl-<color>-hover`  | Button hover            | The background, 15% darker                 |
-| `--color-zl-<color>-on`     | Text on the background  | White (`warning`: `gray-900`)              |
+| Value                       | Used for                | Default                                                                   |
+| --------------------------- | ----------------------- | ------------------------------------------------------------------------- |
+| `--color-zl-<color>-strong` | Link hover and Tag text | 30% further from the page: darker in the light theme, lighter in the dark |
+| `--color-zl-<color>-bg`     | Button background       | The color itself (`warning`: `yellow-500`)                                |
+| `--color-zl-<color>-hover`  | Button hover            | The background, 15% further from the page                                 |
+| `--color-zl-<color>-on`     | Text on the background  | White, and near black in the dark theme (`warning`: `gray-900`)           |
 
 A `Tag` also takes the auxiliary colors `orange`, `pink` and `purple`, which have no meaning of their own: use them to tell categories apart. Each has only `--color-zl-<color>` and `--color-zl-<color>-strong`. The first, at 15%, is the `Tag` background, and the second is its text.
 
-Only the defaults are checked for contrast. Check your own choice: 4.5:1 for text, on `--color-zl-<color>` against the page and on `-on` against `-bg`, and 3:1 for the focus outline. A value set on a nested element doesn't reach the values derived from it, so set them in `@theme` or `:root`.
+The neutral values are the page and what sits on it. Use them in your own pages (`bg-zl-surface`, `text-zl-text-soft`, `border-zl-border`), so they follow the theme too:
+
+| Value                      | Used for                                               | Light / dark               |
+| -------------------------- | ------------------------------------------------------ | -------------------------- |
+| `--color-zl-page`          | The page, behind everything. `RootLayout` paints it    | `gray-50` / `neutral-950`  |
+| `--color-zl-surface`       | What sits on the page: card, modal, field              | White / `neutral-900`      |
+| `--color-zl-surface-muted` | A surface that recedes: disabled field, neutral button | `gray-100` / `neutral-800` |
+| `--color-zl-surface-hover` | Hover of the neutral button                            | `gray-200` / `neutral-700` |
+| `--color-zl-border`        | A line between surfaces                                | `gray-200` / `neutral-700` |
+| `--color-zl-border-strong` | The border of a field                                  | `gray-500` / `neutral-400` |
+| `--color-zl-text`          | Text                                                   | `gray-900` / `neutral-100` |
+| `--color-zl-text-soft`     | A label or a description                               | `gray-700` / `neutral-300` |
+
+Only the defaults are checked for contrast. Check your own choice, in both themes: 4.5:1 for text, on `--color-zl-<color>` against the page and on `-on` against `-bg`, and 3:1 for the focus outline. A value set on a nested element doesn't reach the values derived from it, so set them in `@theme` or `:root`.
+
+## Themes
+
+The components have a light and a dark theme. With no setup an app follows the theme of the device, and the user changes it in the navigation: `Sidebar` and `TopNav` show a `ThemeToggle` over the share button, with the system, the light and the dark theme. The choice is kept in the browser (`localStorage`, under `zljs-theme`), and `RootLayout` applies it before the page is drawn.
+
+```tsx
+import { ThemeToggle, useTheme } from "@alexandregme/zljs";
+
+<ThemeToggle label="Theme" />;
+
+// Or your own control:
+const { theme, setTheme } = useTheme(); // "system" | "light" | "dark"
+```
+
+An app whose own pages aren't ready for the dark theme keeps the system theme light, and the user can still choose the dark one:
+
+```css
+@import "tailwindcss";
+@import "@alexandregme/zljs/styles.css";
+
+:root {
+  color-scheme: light;
+}
+```
+
+The themes use the CSS `light-dark()` function: Chrome 123, Safari 17.5 and Firefox 120, or newer.
 
 ## Updating
 

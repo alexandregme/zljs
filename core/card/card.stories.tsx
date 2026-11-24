@@ -59,7 +59,7 @@ export const Header: Story = {
   },
   render: () => (
     <div className="flex max-w-sm flex-col gap-4">
-      <Card title="Title and message" message="The message is muted on white.">
+      <Card title="Title and message" message="The message is muted.">
         <Text>Children</Text>
       </Card>
       <Card title="Title only">
@@ -77,7 +77,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`color` sets the border, a light background (the color at 15%) and the shadow (the color at 20%), from the `--color-zl-*` theme. The default, `none`, is white with a gray border and a gray shadow. On a color the message drops the muted text, which would be below 4.5:1 there. This story checks the contrast of the message on every color.",
+          "`color` sets the border, a light background (the color at 15%) and the shadow (the color at 20%), from the `--color-zl-*` theme. The default, `none`, is the surface color with a neutral border and shadow. On a color the message drops the muted text, which would be below 4.5:1 there. This story checks the contrast of the message on every color.",
       },
     },
   },

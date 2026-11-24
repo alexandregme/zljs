@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 export const card = tv({
   slots: {
     // A soft, wide shadow in the color of the card. shadow-sm only spreads 1 to
-    // 3px and reads as part of the border on a white page.
+    // 3px and reads as part of the border on a light page.
     base: "flex flex-col gap-6 w-full p-6 rounded-2xl border shadow-lg",
     header: "flex flex-col gap-1",
   },
@@ -21,7 +21,7 @@ export const card = tv({
       },
       info: { base: "border-zl-info bg-zl-info/15 shadow-zl-info/20" },
       muted: { base: "border-zl-muted bg-zl-muted/15 shadow-zl-muted/20" },
-      none: { base: "border-gray-200 bg-white shadow-black/12" },
+      none: { base: "border-zl-border bg-zl-surface shadow-black/12" },
     },
   },
   defaultVariants: {

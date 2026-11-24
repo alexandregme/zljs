@@ -12,6 +12,16 @@ const AUXILIARY_COLORS = [
   "purple",
 ] as const satisfies readonly AuxiliaryColor[];
 const AUXILIARY_TOKEN_SUFFIXES = ["", "-strong"];
+const NEUTRAL_TOKENS = [
+  "page",
+  "surface",
+  "surface-muted",
+  "surface-hover",
+  "border",
+  "border-strong",
+  "text",
+  "text-soft",
+];
 
 const usedTokens = readdirSync(CORE, { recursive: true, encoding: "utf8" })
   .filter((file) => /\.(styles|const)\.ts$/.test(file))
@@ -45,6 +55,26 @@ describe("semantic color tokens", () => {
       expect(missing).toEqual([]);
     },
   );
+
+  it.each(NEUTRAL_TOKENS)(
+    "declares the neutral token %s in the theme",
+    (token) => {
+      expect(THEME).toContain(`--color-zl-${token}:`);
+    },
+  );
+
+  it("gives every token a value for the light theme and one for the dark", () => {
+    const single = THEME.split("\n")
+      .filter((line) => /^\s*--color-zl-[a-z-]+:/.test(line))
+      .filter(
+        (line) =>
+          !line.includes("light-dark(") && !line.includes("var(--color-zl-"),
+      )
+      // A fixed pair that holds in both themes: a yellow button with dark text.
+      .filter((line) => !line.includes("--color-zl-warning-"));
+
+    expect(single).toEqual([]);
+  });
 
   it.each(themedColors)("points the text class of %s to its token", (color) => {
     const classes = semanticTextColors as Record<string, string>;

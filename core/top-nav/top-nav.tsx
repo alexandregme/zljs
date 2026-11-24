@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { InstallAppButton } from "../../features/app/components/install-app-button";
+import { ThemeToggle } from "../../features/app/components/theme-toggle";
 import { ShareAppButton } from "../../features/app/components/share-app-button";
 import { useInstallApp } from "../../features/app/hooks";
 import { SignOutButton } from "../../features/auth/components/sign-out";
@@ -21,6 +22,7 @@ export const TopNav = ({
   navLabel = "Main navigation",
   menuLabel = "Menu",
   accountLabel = "Account",
+  theme = {},
   share = {},
   install = {},
   logout = {},
@@ -130,6 +132,13 @@ export const TopNav = ({
       {accountOpen && (
         <div className={styles.account()}>
           <div className={styles.actions()}>
+            <ThemeToggle
+              size="lg"
+              label={theme.label ?? "Theme"}
+              systemLabel={theme.systemLabel}
+              lightLabel={theme.lightLabel}
+              darkLabel={theme.darkLabel}
+            />
             <ShareAppButton
               label={share.label ?? "Share app"}
               title={share.title}

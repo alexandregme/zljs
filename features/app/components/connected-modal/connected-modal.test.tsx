@@ -84,7 +84,7 @@ describe("<ConnectedModal /> - Styles", () => {
     const dialog = screen.getByRole("dialog", { name: "Test Modal" });
 
     expect(dialog).toHaveClass(
-      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,white)]",
+      "bg-[color-mix(in_srgb,var(--color-zl-danger)_15%,var(--color-zl-surface))]",
     );
   });
 });

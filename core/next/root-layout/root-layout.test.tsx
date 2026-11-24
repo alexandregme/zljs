@@ -7,6 +7,8 @@ import { RootLayout } from "./root-layout";
 const analyticsScript = () =>
   document.head.querySelector('script[data-sdkn^="@vercel/analytics"]');
 
+const themeScriptElement = () => document.body.querySelector("script");
+
 afterEach(() => {
   analyticsScript()?.remove();
 });
@@ -18,6 +20,9 @@ describe("<RootLayout /> - Default Props", () => {
 
     expect(main).toBeInTheDocument();
     expect(main).toHaveTextContent("Page content");
+    // The script that applies the stored theme comes before the page.
+    expect(main.previousElementSibling).toBe(themeScriptElement());
+    expect(themeScriptElement()).toHaveTextContent("zljs-theme");
     expect(analyticsScript()).toBeInTheDocument();
     // Outside production the script logs every view to the console: off.
     expect(analyticsScript()).toHaveAttribute("data-debug", "false");
@@ -36,5 +41,14 @@ describe("<RootLayout /> - Custom Props", () => {
     expect(
       within(main).getByRole("heading", { name: "Orders" }),
     ).toBeInTheDocument();
+  });
+});
+
+describe("<RootLayout /> - Styles", () => {
+  it("renders <RootLayout /> in the colors of the page, which follow the theme", () => {
+    render(<RootLayout>Page content</RootLayout>);
+    const main = screen.getByRole("main");
+
+    expect(main).toHaveClass("bg-zl-page", "text-zl-text");
   });
 });

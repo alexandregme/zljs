@@ -2,6 +2,11 @@
    color by redefining its --color-zl-* value in its own @theme, after importing
    the styles. Only the defaults are checked for contrast.
 
+   Every value is a pair, light-dark(<light>, <dark>): the first is used in the
+   light theme and the second in the dark one. The theme itself is set in
+   theme.css. An app that redefines a color with a single value gets that value
+   in both themes, so it gives a pair too, or checks its contrast in both.
+
    Each color has five values, and the others follow the first unless redefined:
      --color-zl-<color>         text, focus outline and tag background, at 15%
      --color-zl-<color>-strong  link hover and tag text
@@ -9,66 +14,90 @@
      --color-zl-<color>-hover   button hover
      --color-zl-<color>-on      text on the background
 
+   -strong and -hover move away from the page: darker in the light theme,
+   lighter in the dark one.
+
    The auxiliary colors (orange, pink, purple) have no meaning of their own. Tag
    is their only user, so they have two values:
      --color-zl-<color>         tag background, at 15%
      --color-zl-<color>-strong  tag text
+
+   The neutral colors are the page and what sits on it. They have no -strong,
+   -bg, -hover or -on of the kind above:
+     --color-zl-page            the page, behind everything, and a tab at rest
+     --color-zl-surface         what sits on the page: card, modal, field
+     --color-zl-surface-muted   a surface that recedes: disabled field, neutral button
+     --color-zl-surface-hover   hover of the neutral button
+     --color-zl-border          a line between surfaces
+     --color-zl-border-strong   the border of a field, which needs 3:1
+     --color-zl-text            text
+     --color-zl-text-soft       a label or a description
 
    Prettier is off for this block to keep one value per line. */
 
 /* prettier-ignore */
 @theme {
   /* Primary */
-  --color-zl-primary:        var(--color-blue-600);
-  --color-zl-primary-strong: color-mix(in oklab, var(--color-zl-primary), black 30%);
+  --color-zl-primary:        light-dark(var(--color-blue-600), var(--color-blue-400));
+  --color-zl-primary-strong: color-mix(in oklab, var(--color-zl-primary), light-dark(black, white) 30%);
   --color-zl-primary-bg:     var(--color-zl-primary);
-  --color-zl-primary-hover:  color-mix(in oklab, var(--color-zl-primary-bg), black 15%);
-  --color-zl-primary-on:     var(--color-white);
+  --color-zl-primary-hover:  color-mix(in oklab, var(--color-zl-primary-bg), light-dark(black, white) 15%);
+  --color-zl-primary-on:     light-dark(var(--color-white), var(--color-neutral-950));
 
   /* Success */
-  --color-zl-success:        var(--color-green-700);
-  --color-zl-success-strong: color-mix(in oklab, var(--color-zl-success), black 30%);
+  --color-zl-success:        light-dark(var(--color-green-700), var(--color-green-400));
+  --color-zl-success-strong: color-mix(in oklab, var(--color-zl-success), light-dark(black, white) 30%);
   --color-zl-success-bg:     var(--color-zl-success);
-  --color-zl-success-hover:  color-mix(in oklab, var(--color-zl-success-bg), black 15%);
-  --color-zl-success-on:     var(--color-white);
+  --color-zl-success-hover:  color-mix(in oklab, var(--color-zl-success-bg), light-dark(black, white) 15%);
+  --color-zl-success-on:     light-dark(var(--color-white), var(--color-neutral-950));
 
   /* Danger */
-  --color-zl-danger:        var(--color-red-600);
-  --color-zl-danger-strong: color-mix(in oklab, var(--color-zl-danger), black 30%);
+  --color-zl-danger:        light-dark(var(--color-red-600), var(--color-red-400));
+  --color-zl-danger-strong: color-mix(in oklab, var(--color-zl-danger), light-dark(black, white) 30%);
   --color-zl-danger-bg:     var(--color-zl-danger);
-  --color-zl-danger-hover:  color-mix(in oklab, var(--color-zl-danger-bg), black 15%);
-  --color-zl-danger-on:     var(--color-white);
+  --color-zl-danger-hover:  color-mix(in oklab, var(--color-zl-danger-bg), light-dark(black, white) 15%);
+  --color-zl-danger-on:     light-dark(var(--color-white), var(--color-neutral-950));
 
   /* Warning */
-  --color-zl-warning:        var(--color-yellow-700);
-  --color-zl-warning-strong: color-mix(in oklab, var(--color-zl-warning), black 30%);
+  --color-zl-warning:        light-dark(var(--color-yellow-700), var(--color-yellow-400));
+  --color-zl-warning-strong: color-mix(in oklab, var(--color-zl-warning), light-dark(black, white) 30%);
   --color-zl-warning-bg:     var(--color-yellow-500);
-  --color-zl-warning-hover:  color-mix(in oklab, var(--color-zl-warning-bg), black 15%);
+  --color-zl-warning-hover:  color-mix(in oklab, var(--color-zl-warning-bg), light-dark(black, white) 15%);
   --color-zl-warning-on:     var(--color-gray-900);
 
   /* Info */
-  --color-zl-info:        var(--color-cyan-700);
-  --color-zl-info-strong: color-mix(in oklab, var(--color-zl-info), black 30%);
+  --color-zl-info:        light-dark(var(--color-cyan-700), var(--color-cyan-400));
+  --color-zl-info-strong: color-mix(in oklab, var(--color-zl-info), light-dark(black, white) 30%);
   --color-zl-info-bg:     var(--color-zl-info);
-  --color-zl-info-hover:  color-mix(in oklab, var(--color-zl-info-bg), black 15%);
-  --color-zl-info-on:     var(--color-white);
+  --color-zl-info-hover:  color-mix(in oklab, var(--color-zl-info-bg), light-dark(black, white) 15%);
+  --color-zl-info-on:     light-dark(var(--color-white), var(--color-neutral-950));
 
   /* Muted */
-  --color-zl-muted:        var(--color-gray-500);
-  --color-zl-muted-strong: color-mix(in oklab, var(--color-zl-muted), black 30%);
+  --color-zl-muted:        light-dark(var(--color-gray-500), var(--color-gray-400));
+  --color-zl-muted-strong: color-mix(in oklab, var(--color-zl-muted), light-dark(black, white) 30%);
   --color-zl-muted-bg:     var(--color-zl-muted);
-  --color-zl-muted-hover:  color-mix(in oklab, var(--color-zl-muted-bg), black 15%);
-  --color-zl-muted-on:     var(--color-white);
+  --color-zl-muted-hover:  color-mix(in oklab, var(--color-zl-muted-bg), light-dark(black, white) 15%);
+  --color-zl-muted-on:     light-dark(var(--color-white), var(--color-neutral-950));
 
   /* Orange */
-  --color-zl-orange:        var(--color-orange-700);
-  --color-zl-orange-strong: color-mix(in oklab, var(--color-zl-orange), black 30%);
+  --color-zl-orange:        light-dark(var(--color-orange-700), var(--color-orange-400));
+  --color-zl-orange-strong: color-mix(in oklab, var(--color-zl-orange), light-dark(black, white) 30%);
 
   /* Pink */
-  --color-zl-pink:        var(--color-pink-700);
-  --color-zl-pink-strong: color-mix(in oklab, var(--color-zl-pink), black 30%);
+  --color-zl-pink:        light-dark(var(--color-pink-700), var(--color-pink-400));
+  --color-zl-pink-strong: color-mix(in oklab, var(--color-zl-pink), light-dark(black, white) 30%);
 
   /* Purple */
-  --color-zl-purple:        var(--color-purple-700);
-  --color-zl-purple-strong: color-mix(in oklab, var(--color-zl-purple), black 30%);
+  --color-zl-purple:        light-dark(var(--color-purple-700), var(--color-purple-400));
+  --color-zl-purple-strong: color-mix(in oklab, var(--color-zl-purple), light-dark(black, white) 30%);
+
+  /* Neutral */
+  --color-zl-page:           light-dark(var(--color-gray-50), var(--color-neutral-950));
+  --color-zl-surface:        light-dark(var(--color-white), var(--color-neutral-900));
+  --color-zl-surface-muted:  light-dark(var(--color-gray-100), var(--color-neutral-800));
+  --color-zl-surface-hover:  light-dark(var(--color-gray-200), var(--color-neutral-700));
+  --color-zl-border:         light-dark(var(--color-gray-200), var(--color-neutral-700));
+  --color-zl-border-strong:  light-dark(var(--color-gray-500), var(--color-neutral-400));
+  --color-zl-text:           light-dark(var(--color-gray-900), var(--color-neutral-100));
+  --color-zl-text-soft:      light-dark(var(--color-gray-700), var(--color-neutral-300));
 }

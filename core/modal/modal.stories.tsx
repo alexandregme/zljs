@@ -188,7 +188,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`color` paints the title and gives the modal a light background in that color, such as `danger` for a question that can't be undone. `none`, the default, has a dark title on white. The buttons inside take their own `color`. Each button opens the modal in its own color.",
+          "`color` paints the title and gives the modal a light background in that color, such as `danger` for a question that can't be undone. `none`, the default, has the title in the text color on a surface. The buttons inside take their own `color`. Each button opens the modal in its own color.",
       },
     },
   },

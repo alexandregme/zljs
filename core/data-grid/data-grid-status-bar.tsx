@@ -29,7 +29,7 @@ export const DataGridStatusBar = ({
     : `${totalRows} registros`;
 
   return (
-    <div className="flex items-center gap-3 px-2 py-1.5 bg-slate-100 border border-slate-200 rounded text-sm text-slate-600 mb-2">
+    <div className="flex items-center gap-3 px-2 py-1.5 bg-zl-surface-muted border border-zl-border rounded text-sm text-zl-text-soft mb-2">
       <span role="status" aria-label={count} className="font-medium">
         {isFiltered && (
           <>
@@ -51,7 +51,7 @@ export const DataGridStatusBar = ({
 
       {activeFilters.length > 0 && (
         <>
-          <div className="flex items-center gap-2 flex-wrap border-l border-slate-300 pl-3">
+          <div className="flex items-center gap-2 flex-wrap border-l border-zl-border pl-3">
             <Text as="span" variant="caption">
               Filtros:
             </Text>

@@ -17,15 +17,23 @@ export const toaster = tv({
 // The colors are written out so Tailwind finds these theme values in the source.
 export const toasterColors = {
   "--success-text": "var(--color-zl-success-strong)",
-  "--success-bg": "color-mix(in oklab, var(--color-zl-success) 15%, white)",
-  "--success-border": "color-mix(in oklab, var(--color-zl-success) 30%, white)",
+  "--success-bg":
+    "color-mix(in oklab, var(--color-zl-success) 15%, var(--color-zl-surface))",
+  "--success-border":
+    "color-mix(in oklab, var(--color-zl-success) 30%, var(--color-zl-surface))",
   "--info-text": "var(--color-zl-info-strong)",
-  "--info-bg": "color-mix(in oklab, var(--color-zl-info) 15%, white)",
-  "--info-border": "color-mix(in oklab, var(--color-zl-info) 30%, white)",
+  "--info-bg":
+    "color-mix(in oklab, var(--color-zl-info) 15%, var(--color-zl-surface))",
+  "--info-border":
+    "color-mix(in oklab, var(--color-zl-info) 30%, var(--color-zl-surface))",
   "--warning-text": "var(--color-zl-warning-strong)",
-  "--warning-bg": "color-mix(in oklab, var(--color-zl-warning) 15%, white)",
-  "--warning-border": "color-mix(in oklab, var(--color-zl-warning) 30%, white)",
+  "--warning-bg":
+    "color-mix(in oklab, var(--color-zl-warning) 15%, var(--color-zl-surface))",
+  "--warning-border":
+    "color-mix(in oklab, var(--color-zl-warning) 30%, var(--color-zl-surface))",
   "--error-text": "var(--color-zl-danger-strong)",
-  "--error-bg": "color-mix(in oklab, var(--color-zl-danger) 15%, white)",
-  "--error-border": "color-mix(in oklab, var(--color-zl-danger) 30%, white)",
+  "--error-bg":
+    "color-mix(in oklab, var(--color-zl-danger) 15%, var(--color-zl-surface))",
+  "--error-border":
+    "color-mix(in oklab, var(--color-zl-danger) 30%, var(--color-zl-surface))",
 } as CSSProperties;

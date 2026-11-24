@@ -300,6 +300,42 @@ export const Logouts: Story = {
   },
 };
 
+export const Themes: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The theme buttons have their own line over the share button. They are a `ThemeToggle`: the system, the default, which follows the device, then light and dark, with the one in use marked. The choice is kept in the browser. The sidebar itself follows the theme: a white surface in the light one and a dark surface in the dark one. Collapsed, the three become one button that goes to the next theme on each click. `theme` takes their texts, `label`, `systemLabel`, `lightLabel` and `darkLabel`, all with English defaults. This story chooses the dark theme, checks the contrast of the controls in it and goes back to the system.",
+      },
+    },
+  },
+  args: {
+    ...requiredProps,
+    theme: {
+      label: "Tema",
+      systemLabel: "Sistema",
+      lightLabel: "Claro",
+      darkLabel: "Escuro",
+    },
+  },
+  play: async ({ canvas, canvasElement, userEvent }) => {
+    const system = canvas.getByRole("button", { name: "Sistema" });
+    const dark = canvas.getByRole("button", { name: "Escuro" });
+
+    await userEvent.click(dark);
+
+    await expect(dark).toHaveAttribute("aria-pressed", "true");
+    await expect(getComputedStyle(document.documentElement).colorScheme).toBe(
+      "dark",
+    );
+    await expectControlsToHoldContrast(canvasElement);
+
+    await userEvent.click(system);
+
+    await expect(system).toHaveAttribute("aria-pressed", "true");
+  },
+};
+
 export const Shares: Story = {
   parameters: {
     docs: {

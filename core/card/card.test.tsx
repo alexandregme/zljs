@@ -85,7 +85,11 @@ describe("<Card /> - Styles", () => {
     const card = screen.getByTestId("card");
     const message = screen.getByText(MESSAGE);
 
-    expect(card).toHaveClass("border-gray-200", "bg-white", "shadow-black/12");
+    expect(card).toHaveClass(
+      "border-zl-border",
+      "bg-zl-surface",
+      "shadow-black/12",
+    );
     expect(message).toHaveClass("text-zl-muted");
   });
 
@@ -103,7 +107,7 @@ describe("<Card /> - Styles", () => {
       "bg-zl-warning/15",
       "shadow-zl-warning/20",
     );
-    expect(card).not.toHaveClass("bg-white");
+    expect(card).not.toHaveClass("bg-zl-surface");
     expect(card).not.toHaveClass("shadow-black/12");
     expect(message).not.toHaveClass("text-zl-muted");
   });

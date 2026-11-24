@@ -56,7 +56,7 @@ export const Colors: Story = {
     docs: {
       description: {
         story:
-          "`primary` is the default and `none` is the neutral option. `muted` is for a secondary action that shouldn't compete with the main one. `ghost` takes the text color of its parent, so it works on any background. An icon-only button ignores `color`, except for `ghost`. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. Keyboard focus draws an outline with at least 3:1 contrast on a white page, and `ghost` keeps it on any background. On hover, text keeps 4.5:1 and an icon alone keeps 3:1. This story checks both on every button shown here, because axe sees neither focus nor hover.",
+          "`primary` is the default and `none` is the neutral option. `muted` is for a secondary action that shouldn't compete with the main one. `ghost` takes the text color of its parent, so it works on any background. An icon-only button ignores `color`, except for `ghost`. An app changes these colors with the `--color-zl-*` theme values, and then checks the contrast of its own choice: only the defaults are checked here. Keyboard focus draws an outline with at least 3:1 contrast on the page and on a surface, in both themes, and `ghost` keeps it on any background. On hover, text keeps 4.5:1 and an icon alone keeps 3:1. This story checks both on every button shown here, because axe sees neither focus nor hover.",
       },
     },
   },
@@ -251,7 +251,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`disabled` dims the button and blocks `onClick`. `fullWidth` stretches it to the width of its container. `aria-label` names the button for screen readers: it is required on icon-only buttons, and when the button has visible text the label must contain that text. `aria-expanded` is for a button that opens and closes something, such as a menu: it tells a screen reader whether it is open.",
+          "`disabled` dims the button and blocks `onClick`. `fullWidth` stretches it to the width of its container. `aria-label` names the button for screen readers: it is required on icon-only buttons, and when the button has visible text the label must contain that text. `aria-expanded` is for a button that opens and closes something, such as a menu: it tells a screen reader whether it is open. `aria-pressed` is for a button that stays on, such as the chosen one of a group: it tells a screen reader which one is on, and `ghost` draws it with a background.",
       },
     },
   },
@@ -272,6 +272,16 @@ export const States: Story = {
       <div className="flex gap-2">
         <Button icon="Menu" aria-label="Menu" aria-expanded={false} />
         <Button icon="X" aria-label="Menu, open" aria-expanded />
+      </div>
+      <Heading level={2}>Pressed</Heading>
+      <div className="flex gap-2">
+        <Button color="ghost" icon="Sun" aria-label="Light" aria-pressed />
+        <Button
+          color="ghost"
+          icon="Moon"
+          aria-label="Dark"
+          aria-pressed={false}
+        />
       </div>
     </div>
   ),

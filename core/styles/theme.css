@@ -1,0 +1,17 @@
+/* The theme: light, dark, or the one of the system. Every color in colors.css
+   is a light-dark() pair, and `color-scheme` picks the side. With no choice
+   made, the page follows the system. The choice of the user is applied by
+   `useTheme`, in a <style id="zljs-theme"> that sets `color-scheme` on
+   :root:root, so it beats this rule and one of the app.
+
+   An app whose own pages aren't ready for the dark theme sets
+   `:root { color-scheme: light; }` after importing the styles: the system
+   theme is then always the light one, and the user can still choose the dark.
+
+   `color-scheme` also turns the scrollbars and the native fields of the
+   browser, and the page behind the app when nothing paints it. */
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+}

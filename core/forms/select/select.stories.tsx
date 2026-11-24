@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heading } from "@zljs/core";
-import { colorContrast, focusOutlineContrast } from "@test-utils";
+import { colorContrast, focusOutlineContrast, themeColor } from "@test-utils";
 import { expect, fn } from "storybook/test";
 import { Select } from "./select";
 
@@ -122,7 +122,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`value` needs `onChange` to stay controlled, and `disabled` blocks editing and takes the field out of the tab order. Keyboard focus draws an outline with 5.25:1 contrast on a white page. This story checks it on every enabled field shown here, along with the border (3:1), which axe doesn't check. Six props have no visual effect. `required` tells assistive technology and the browser that the field is mandatory, so say it in the `label` too, for people who only see the screen, and use it with a `placeholder`: a field that starts on an option is never empty. `autoComplete` tells the browser what the field holds, so it can fill it in: use it on fields about the user, such as `country`. `name` identifies the value when the form is submitted. `onChange` runs when the user picks an option, and `event.target.value` holds its `value`. `onBlur` runs when the field loses focus: use it to validate after the user leaves the field. `onKeyDown` runs on each key press: use it for a shortcut, not to read the value.",
+          "`value` needs `onChange` to stay controlled, and `disabled` blocks editing and takes the field out of the tab order. Keyboard focus draws an outline with 5.25:1 contrast on a surface. This story checks it on every enabled field shown here, along with the border (3:1), which axe doesn't check. Six props have no visual effect. `required` tells assistive technology and the browser that the field is mandatory, so say it in the `label` too, for people who only see the screen, and use it with a `placeholder`: a field that starts on an option is never empty. `autoComplete` tells the browser what the field holds, so it can fill it in: use it on fields about the user, such as `country`. `name` identifies the value when the form is submitted. `onChange` runs when the user picks an option, and `event.target.value` holds its `value`. `onBlur` runs when the field loses focus: use it to validate after the user leaves the field. `onKeyDown` runs on each key press: use it for a shortcut, not to read the value.",
       },
     },
   },
@@ -137,7 +137,10 @@ export const States: Story = {
     const lowBorderContrast = enabled
       .filter(
         (field) =>
-          colorContrast(getComputedStyle(field).borderTopColor, "#fff") < 3,
+          colorContrast(
+            getComputedStyle(field).borderTopColor,
+            themeColor("surface"),
+          ) < 3,
       )
       .map(nameOf);
 

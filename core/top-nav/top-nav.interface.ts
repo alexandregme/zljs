@@ -1,4 +1,5 @@
 import type { InstallAppButtonProps } from "../../features/app/components/install-app-button";
+import type { ThemeToggleProps } from "../../features/app/components/theme-toggle";
 import type { ShareAppButtonProps } from "../../features/app/components/share-app-button";
 import type { SignOutButtonProps } from "../../features/auth/components/sign-out";
 import type { SidebarSection, SidebarUser } from "../sidebar";
@@ -21,7 +22,13 @@ export interface TopNavProps {
   /** The accessible name of the account button. */
   accountLabel?: string;
   /**
-   * The share button, the first line of the account panel: its texts (`label`,
+   * The texts of the theme buttons, the first line of the account panel:
+   * `label`, the name of the group, and `systemLabel`, `lightLabel` and
+   * `darkLabel`, the name of each theme.
+   */
+  theme?: Partial<Omit<ThemeToggleProps, "iconOnly" | "size">>;
+  /**
+   * The share button, the second line of the account panel: its texts (`label`,
    * `copiedMessage` and `errorMessage`) and what goes with the address of the
    * app (`title` and `text`).
    */

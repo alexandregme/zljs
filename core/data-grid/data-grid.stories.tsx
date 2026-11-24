@@ -1,5 +1,10 @@
-import { focusOutlineContrast, hoverTextContrast } from "@test-utils";
-import { Heading, Tag } from "@zljs/core";
+import {
+  colorContrast,
+  focusOutlineContrast,
+  hoverTextContrast,
+  textContrast,
+} from "@test-utils";
+import { Heading, setTheme, Tag } from "@zljs/core";
 import type { DataGridColumn } from "@zljs/core";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
@@ -117,11 +122,54 @@ export const Playground: Story = {
     docs: {
       description: {
         story:
-          "Only `columns` and `data` are required. The grid fills its parent on its own, so an app sets no height on it: it takes the height of a parent that has one, and what is left of a flex column, next to a header for example. It has a minimum height of 320px when the parent has no height, so it never collapses. Past that, its rows scroll inside it.",
+          "Only `columns` and `data` are required. The grid follows the theme, light or dark, and this story checks its colors in both. The grid fills its parent on its own, so an app sets no height on it: it takes the height of a parent that has one, and what is left of a flex column, next to a header for example. It has a minimum height of 320px when the parent has no height, so it never collapses. Past that, its rows scroll inside it.",
       },
     },
   },
   args: { columns, data },
+  play: async ({ canvasElement }) => {
+    await waitForGrid(canvasElement);
+
+    const failures = (["light", "dark"] as const).flatMap((theme) => {
+      setTheme(theme);
+
+      const probe = document.createElement("div");
+      probe.style.color = "var(--color-zl-surface)";
+      document.body.append(probe);
+      const surface = getComputedStyle(probe).color;
+      probe.remove();
+
+      const grid = canvasElement.querySelector(".ag-root-wrapper")!;
+      const checks = [
+        // The grid sits on the surface of the theme in use, not on a fixed white.
+        {
+          label: "background",
+          ok:
+            colorContrast(getComputedStyle(grid).backgroundColor, surface) <
+            1.05,
+        },
+        {
+          label: "cell",
+          ok: textContrast(canvasElement.querySelector(".ag-cell")!) >= 4.5,
+        },
+        {
+          label: "header",
+          ok:
+            textContrast(
+              canvasElement.querySelector(".ag-header-cell-text")!,
+            ) >= 4.5,
+        },
+      ];
+
+      return checks
+        .filter(({ ok }) => !ok)
+        .map(({ label }) => `${theme}: ${label}`);
+    });
+
+    setTheme("system");
+
+    await expect(failures).toEqual([]);
+  },
 };
 
 export const Columns: Story = {

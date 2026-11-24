@@ -58,7 +58,7 @@ export const States: Story = {
     docs: {
       description: {
         story:
-          "`label` has no visual effect: it is the name screen readers announce for the status. Pass it when the app isn't in English, because the default is `Loading`. The spinner uses the `primary` color, which holds 3:1 over the overlay on a white page. An app that changes `primary`, or has a dark page, checks its own contrast.",
+          "`label` has no visual effect: it is the name screen readers announce for the status. Pass it when the app isn't in English, because the default is `Loading`. The spinner uses the `primary` color, which holds 3:1 over the overlay on a light page. An app that changes `primary`, or has a dark page, checks its own contrast.",
       },
     },
   },

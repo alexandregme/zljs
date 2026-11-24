@@ -6,7 +6,7 @@ export const button = tv({
   variants: {
     variant: {
       default: "px-4 py-2 text-sm gap-2 rounded-md",
-      icon: "p-1 bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md",
+      icon: "p-1 bg-transparent text-zl-muted hover:text-zl-text-soft hover:bg-zl-surface-muted rounded-md",
       // The invisible ::after grows the touch target to 44px without changing the layout.
       link: "relative text-xs hover:underline rounded-sm after:absolute after:top-1/2 after:left-1/2 after:h-11 after:w-full after:min-w-11 after:-translate-x-1/2 after:-translate-y-1/2",
     },
@@ -23,7 +23,7 @@ export const button = tv({
       muted:
         "bg-zl-muted-bg hover:bg-zl-muted-hover text-zl-muted-on focus-visible:outline-zl-muted",
       ghost:
-        "bg-transparent text-current hover:text-current hover:bg-neutral-500/20",
+        "bg-transparent text-current hover:text-current hover:bg-neutral-500/20 aria-pressed:bg-neutral-500/30",
       none: "",
     },
     size: {
@@ -39,7 +39,7 @@ export const button = tv({
     {
       variant: "default",
       color: "none",
-      class: "bg-gray-100 text-gray-900 hover:bg-gray-200",
+      class: "bg-zl-surface-muted text-zl-text hover:bg-zl-surface-hover",
     },
     {
       variant: "default",
@@ -94,7 +94,7 @@ export const button = tv({
     {
       variant: "link",
       color: "none",
-      class: "text-slate-600 hover:text-slate-800",
+      class: "text-zl-text-soft hover:text-zl-text",
     },
     {
       variant: "link",

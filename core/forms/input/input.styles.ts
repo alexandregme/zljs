@@ -5,9 +5,9 @@ export const wrapper = tv({
 });
 
 export const label = tv({
-  base: "text-sm font-medium text-gray-700",
+  base: "text-sm font-medium text-zl-text-soft",
 });
 
 export const input = tv({
-  base: "px-3 py-2 border border-gray-500 rounded-md text-sm placeholder:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zl-primary disabled:bg-gray-100 disabled:cursor-not-allowed",
+  base: "px-3 py-2 border border-zl-border-strong rounded-md text-sm placeholder:text-zl-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zl-primary disabled:bg-zl-surface-muted disabled:cursor-not-allowed",
 });
