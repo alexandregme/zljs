@@ -8,8 +8,12 @@ import {
   themeScript,
 } from "./use-theme.const";
 
-const DARK_RULE = ":root:root{color-scheme:dark}";
-const LIGHT_RULE = ":root:root{color-scheme:light}";
+// Each rule also switches the two variables a Lightning CSS build puts in
+// place of `light-dark()`, the way that build does for the theme of the system.
+const DARK_RULE =
+  ":root:root{color-scheme:dark;--lightningcss-light: ;--lightningcss-dark:initial}";
+const LIGHT_RULE =
+  ":root:root{color-scheme:light;--lightningcss-light:initial;--lightningcss-dark: }";
 
 const Probe = () => <p>{useTheme().theme}</p>;
 
@@ -186,6 +190,14 @@ describe("themeScript", () => {
 
     expect(themeStyle()).toHaveTextContent(DARK_RULE);
     expect(themeStyle()?.parentElement).toBe(document.head);
+  });
+
+  it("applies the light theme the browser keeps", () => {
+    localStorage.setItem(THEME_STORAGE_KEY, "light");
+
+    new Function(themeScript)();
+
+    expect(themeStyle()).toHaveTextContent(LIGHT_RULE);
   });
 
   it("leaves the page to the system when the browser keeps no theme", () => {
