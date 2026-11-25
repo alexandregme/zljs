@@ -1,5 +1,10 @@
 import { useSyncExternalStore } from "react";
-import { THEME_STORAGE_KEY, THEME_STYLE_ID, themes } from "./use-theme.const";
+import {
+  THEME_RULES,
+  THEME_STORAGE_KEY,
+  THEME_STYLE_ID,
+  themes,
+} from "./use-theme.const";
 import type { Theme, UseTheme } from "./use-theme.interface";
 
 const SYSTEM: Theme = "system";
@@ -34,15 +39,13 @@ const storeTheme = (theme: Theme): void => {
   }
 };
 
-// One `<style>` holds the choice. Empty, the page follows the system. `:root`
-// twice beats a `color-scheme` the app sets on `:root`, wherever its CSS loads.
+// One `<style>` holds the choice. Empty, the page follows the system.
 const applyTheme = (theme: Theme): void => {
   const existing = document.getElementById(THEME_STYLE_ID);
   const style = existing ?? document.createElement("style");
 
   style.id = THEME_STYLE_ID;
-  style.textContent =
-    theme === SYSTEM ? "" : `:root:root{color-scheme:${theme}}`;
+  style.textContent = theme === SYSTEM ? "" : THEME_RULES[theme];
 
   if (!existing) {
     document.head.append(style);

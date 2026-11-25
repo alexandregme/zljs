@@ -47,7 +47,7 @@ describe("<ThemeToggle {...REQUIRED_PROPS} /> - Default Props", () => {
 
     expect(dark).toHaveAttribute("aria-pressed", "true");
     expect(system).toHaveAttribute("aria-pressed", "false");
-    expect(document.head).toHaveTextContent(":root:root{color-scheme:dark}");
+    expect(document.head).toHaveTextContent(":root:root{color-scheme:dark;");
 
     fireEvent.click(system);
 
@@ -103,13 +103,13 @@ describe("<ThemeToggle {...REQUIRED_PROPS} /> - Custom Props", () => {
 
     expect(button).toHaveAccessibleName("Tema: Claro");
     expect(within(button).getByTestId("Sun")).toBeInTheDocument();
-    expect(document.head).toHaveTextContent(":root:root{color-scheme:light}");
+    expect(document.head).toHaveTextContent(":root:root{color-scheme:light;");
 
     fireEvent.click(button);
 
     expect(button).toHaveAccessibleName("Tema: Escuro");
     expect(within(button).getByTestId("Moon")).toBeInTheDocument();
-    expect(document.head).toHaveTextContent(":root:root{color-scheme:dark}");
+    expect(document.head).toHaveTextContent(":root:root{color-scheme:dark;");
 
     fireEvent.click(button);
 
