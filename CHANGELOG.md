@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.23.1] - 2026-11-25
+
 ### Fixed
 
 - Choosing the light or the dark theme changed nothing in an app built by Next.js for production: only the theme of the system worked. That build rewrites `light-dark()` into two variables it switches by itself, and the choice only set `color-scheme`. The choice now sets those variables too, so the theme buttons, `useTheme` and `setTheme` work there. Nothing to change in the app: update and build again
@@ -666,7 +668,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.23.0...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.23.1...HEAD
+[3.23.1]: https://github.com/alexandregme/zljs/compare/v3.23.0...v3.23.1
 [3.23.0]: https://github.com/alexandregme/zljs/compare/v3.22.0...v3.23.0
 [3.22.0]: https://github.com/alexandregme/zljs/compare/v3.21.0...v3.22.0
 [3.21.0]: https://github.com/alexandregme/zljs/compare/v3.20.0...v3.21.0
