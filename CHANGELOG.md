@@ -8,6 +8,8 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+## [3.23.2] - 2026-11-26
+
 ### Fixed
 
 - `Sidebar` and `TopNav`, and so `Navigation`, scrolled away with the page when the page was taller than the screen. They now stay in place, the `Sidebar` at the side and the `TopNav` at the top, while the content scrolls. Nothing to change in the app
@@ -672,7 +674,8 @@ Replace the shade with the class of the `color` being tested, for example `/(^|\
 
 The message of `Error` is `text-zl-danger`. `none` and `ghost` didn't change.
 
-[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.23.1...HEAD
+[Unreleased]: https://github.com/alexandregme/zljs/compare/v3.23.2...HEAD
+[3.23.2]: https://github.com/alexandregme/zljs/compare/v3.23.1...v3.23.2
 [3.23.1]: https://github.com/alexandregme/zljs/compare/v3.23.0...v3.23.1
 [3.23.0]: https://github.com/alexandregme/zljs/compare/v3.22.0...v3.23.0
 [3.22.0]: https://github.com/alexandregme/zljs/compare/v3.21.0...v3.22.0
