@@ -8,6 +8,10 @@ A change that needs action in an app has a **Migration** note. When updating, re
 
 ## [Unreleased]
 
+### Fixed
+
+- `Sidebar` and `TopNav`, and so `Navigation`, scrolled away with the page when the page was taller than the screen. They now stay in place, the `Sidebar` at the side and the `TopNav` at the top, while the content scrolls. Nothing to change in the app
+
 ## [3.23.1] - 2026-11-25
 
 ### Fixed

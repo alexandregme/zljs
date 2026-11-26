@@ -3,8 +3,9 @@ import { tv } from "tailwind-variants";
 export const topNav = tv({
   slots: {
     // The panels hang from it, so it is their anchor. The safe area keeps the
-    // bar under the notch of a phone.
-    base: "relative shrink-0 border-b border-zl-border bg-zl-surface pt-[env(safe-area-inset-top)] text-zl-text-soft",
+    // bar under the notch of a phone. It stays at the top while the page
+    // scrolls under it, over what the page layers on itself and under a modal.
+    base: "sticky top-0 z-40 shrink-0 border-b border-zl-border bg-zl-surface pt-[env(safe-area-inset-top)] text-zl-text-soft",
     bar: "flex h-14 items-center gap-1 px-2",
     // As wide as the menu button it stands in for, so the home link stays in
     // the middle of the bar.

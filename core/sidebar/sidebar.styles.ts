@@ -4,7 +4,9 @@ export const sidebar = tv({
   // A surface beside the page, with a line between the two: white in the light
   // theme and dark in the dark one. The line is an inset shadow, which takes no
   // width: a border would move what is centered in the collapsed sidebar.
-  base: "h-dvh shadow-[inset_-1px_0_0_var(--color-zl-border)] bg-zl-surface text-zl-text-soft flex flex-col overflow-hidden transition-[width] duration-200 divide-y divide-zl-border",
+  // It takes the height of the screen and stays in place while the page beside
+  // it scrolls.
+  base: "sticky top-0 shrink-0 h-dvh shadow-[inset_-1px_0_0_var(--color-zl-border)] bg-zl-surface text-zl-text-soft flex flex-col overflow-hidden transition-[width] duration-200 divide-y divide-zl-border",
   variants: {
     collapsed: {
       true: "w-14",
